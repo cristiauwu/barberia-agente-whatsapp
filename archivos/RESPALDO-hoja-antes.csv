@@ -1,0 +1,12 @@
+﻿ID,Estatus,Nombre,Servicio,Precio del servicio,Día ,Hora,Numero celular,Execution ID
+ie18j9a8g700dr282gpelrhd80,agendado,Maria Lopez,Corte desvanecido o tijera,150,2026-09-29,11:00:00,5214501111805@s.whatsapp.net,
+provisional,agendado,Cristia Ñ,Corte clásico,150,2026-09-25,15:00:00,5214521206246@s.whatsapp.net,
+0ras8pglkuvm7f9if2uvhigkg8,cancelado,Cristia Ñ,Corte clásico,150,2026-09-25,15:00:00,5214521206246@s.whatsapp.net,
+Cita-CristiaÑ-27Sep,agendado,Cristia Ñ,Corte desvanecido o tijera,150,2026-09-27,15:00:00,5214521206246@s.whatsapp.net,
+e757aifl75jd42402e284cq8d4,agendado,Cliente Prueba,Corte desvanecido o tijera,150,2026-09-25,19:30:00,5214521206246@s.whatsapp.net,
+2026-09-26-Corte-Cabello-Dama-Cliente-Prueba,agendado,Cliente Prueba,Corte de cabello dama,250,2026-09-26,16:00:00,5214501111805@s.whatsapp.net,
+dppjgq7cur7vv3alp12v63fkt0,agendado,Verif Prueba,Corte desvanecido o tijera,150,2026-09-25,19:00:00,5214521206246@s.whatsapp.net,
+f92r4t38qah176v1mi8m02prqo,agendado,Verif Prueba,Corte desvanecido o tijera,150,2026-09-28,11:00:00,5214501111805@s.whatsapp.net,
+gmmf5obr53hu973l2a6h9sja6k,agendado,Flujo2 Prueba,Corte desvanecido o tijera,150,2026-09-30,10:00:00,5214501111805@s.whatsapp.net,
+unique_id_placeholder,agendado,F.Peñin,Corte desvanecido o tijera,150,2026-09-26,12:00:00,5214521253750@s.whatsapp.net,
+Corte desvanecido o tijera — F2 Prueba,agendado,F2 Prueba,Corte desvanecido o tijera,150,2026-10-01,10:00:00,5214501111805@s.whatsapp.net,

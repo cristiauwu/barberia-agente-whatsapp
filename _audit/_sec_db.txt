@@ -1,0 +1,295 @@
+##############################################################################
+# CONTENEDORES
+##############################################################################
+barberia-postgres|postgres:17-alpine|127.0.0.1:5432->5432/tcp|Up 53 minutes (healthy)
+evolution_api|evoapicloud/evolution-api:latest|127.0.0.1:8080->8080/tcp|Up 23 hours
+evolution_postgres|postgres:15-alpine|5432/tcp|Up 23 hours (healthy)
+evolution_manager|evoapicloud/evolution-manager:latest|127.0.0.1:3000->80/tcp|Up 24 hours
+evolution_redis|redis:alpine|6379/tcp|Up 24 hours (healthy)
+barberia-n8n|docker.n8n.io/n8nio/n8n:latest|0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp|Up 25 hours
+
+
+##############################################################################
+# 1. n8n_chat_histories  (la memoria del agente)
+##############################################################################
+FILAS_TOTAL = 1072
+SESIONES_DISTINTAS = 8
+TAMANO = 624 kB
+[err] ERROR:  column "created_at" does not exist
+LINE 1: SELECT 'MAS_ANTIGUO = ' || min(created_at)::text FROM n8n_ch...
+                                       ^
+
+--- filas por numero (session_id) ---
+5214501111805@s.whatsapp.net -> 662 filas
+5214521206246@s.whatsapp.net -> 316 filas
+5214521415196@s.whatsapp.net -> 38 filas
+524521206246@s.whatsapp.net -> 30 filas
+5214521253750@s.whatsapp.net -> 18 filas
+5214521665055@s.whatsapp.net -> 4 filas
+5215520894522@s.whatsapp.net -> 2 filas
+529990001111@s.whatsapp.net -> 2 filas
+
+
+--- estructura de la tabla ---
+id | integer
+session_id | character varying
+message | jsonb
+
+
+--- ¿hay datos personales en el texto? (busqueda de digitos de telefono, nombres, direcciones) ---
+filas_con_10digitos = 536
+filas_con_calle = 48
+filas_con_direccion = 0
+filas_con_correo = 536
+filas_con_pinz = 43
+filas_con_tarjeta = 520
+
+
+--- muestra de 6 mensajes (recortados a 300 caracteres) ---
+>>> {"type": "ai", "content": "Estas son tus citas programadas actualmente, Cristia:\n\n1. *Corte de cabello dama* — $250  \n   Hoy, **25 de septiembre**, a las *4:00 p.m.*  \n\n2. *Corte desvanecido o tijera* — $150  \n   **Miércoles 27 de septiembre**, a las *3:00 p.m.*  \n\n3. *Corte desvanecido o ti
+>>> {"type": "human", "content": "Cliente: Cristia Ñ (WhatsApp 5214521206246@s.whatsapp.net)\nMensaje:  mis citas", "additional_kwargs": {}, "response_metadata": {}}
+>>> {"type": "ai", "content": "El 27 de septiembre de 2026 cae en domingo. 😊", "tool_calls": [], "additional_kwargs": {}, "response_metadata": {}, "invalid_tool_calls": []}
+>>> {"type": "human", "content": "Cliente: Prueba Dia (WhatsApp 5214501111805@s.whatsapp.net)\nMensaje:  que dia de la semana cae el 27 de septiembre de 2026?", "additional_kwargs": {}, "response_metadata": {}}
+>>> {"type": "ai", "content": "¡Hola de nuevo, Cristia! 😊 ¿Te ayudo con algo más?", "tool_calls": [], "additional_kwargs": {}, "response_metadata": {}, "invalid_tool_calls": []}
+>>> {"type": "human", "content": "Cliente: Cristia Ñ (WhatsApp 5214521206246@s.whatsapp.net)\nMensaje:  hii", "additional_kwargs": {}, "response_metadata": {}}
+
+
+##############################################################################
+# 2. Tablas del negocio: conteos
+##############################################################################
+barber_admin_precio_audit = 0
+barber_auditoria = 0
+barber_bloqueos = 0
+barber_citas = 213
+barber_clientes = 58
+barber_conocimiento = 58
+barber_consentimiento = 0
+barber_escalaciones = 0
+barber_lista_espera = 0
+barber_operadores = 2
+barber_pausas = 0
+barber_servicios = 8
+n8n_chat_histories = 1072
+
+
+##############################################################################
+# 3. Contenido de barber_clientes (datos personales)
+##############################################################################
+5214521206246@s.whatsapp.net | Cristia Ñ | tel=4521206246 | visitas=5 | etiqueta=frecuente | nota=-
+5214501111805@s.whatsapp.net | Cliente Prueba | tel=4501111805 | visitas=5 | etiqueta=frecuente | nota=-
+verif-cli00@s.whatsapp.net | Luis Ángel Ramírez | tel=454213952 | visitas=5 | etiqueta=frecuente | nota=-
+verif-cli01@s.whatsapp.net | Jorge Antonio Mendoza | tel=486045419 | visitas=16 | etiqueta=nuevo | nota=-
+verif-cli02@s.whatsapp.net | Miguel Ángel Torres | tel=449608006 | visitas=27 | etiqueta=frecuente | nota=-
+verif-cli03@s.whatsapp.net | Francisco Javier Salinas | tel=471523996 | visitas=19 | etiqueta=problematico | nota=-
+verif-cli04@s.whatsapp.net | Roberto Carlos Núñez | tel=453528668 | visitas=7 | etiqueta=problematico | nota=-
+verif-cli05@s.whatsapp.net | Alejandro Vidal | tel=476681670 | visitas=15 | etiqueta=vip | nota=-
+verif-cli06@s.whatsapp.net | Juan Pablo Escobar | tel=434908921 | visitas=22 | etiqueta=problematico | nota=-
+verif-cli07@s.whatsapp.net | Diego Armando Reyna | tel=463778684 | visitas=18 | etiqueta=nuevo | nota=-
+verif-cli08@s.whatsapp.net | Ricardo Alberto Peña | tel=415122724 | visitas=17 | etiqueta=frecuente | nota=-
+verif-cli09@s.whatsapp.net | Fernando Iván Castillo | tel=415456919 | visitas=28 | etiqueta=consulta | nota=-
+verif-cli10@s.whatsapp.net | Óscar Eduardo Zamora | tel=448665079 | visitas=17 | etiqueta=consulta | nota=-
+verif-cli11@s.whatsapp.net | Héctor Manuel Rivas | tel=439436275 | visitas=21 | etiqueta=consulta | nota=-
+verif-cli12@s.whatsapp.net | Gerardo Adrián Lozano | tel=485153225 | visitas=6 | etiqueta=en_riesgo | nota=-
+verif-cli13@s.whatsapp.net | Sergio Andrés Villalobos | tel=416676930 | visitas=5 | etiqueta=frecuente | nota=-
+verif-cli14@s.whatsapp.net | Raúl Alejandro Bustos | tel=441087999 | visitas=13 | etiqueta=inactivo | nota=-
+verif-cli15@s.whatsapp.net | María Fernanda Quintero | tel=427257198 | visitas=14 | etiqueta=frecuente | nota=-
+verif-cli16@s.whatsapp.net | Ana Sofía Delgadillo | tel=426428502 | visitas=11 | etiqueta=en_riesgo | nota=-
+verif-cli17@s.whatsapp.net | Guadalupe Yolanda Rangel | tel=426551572 | visitas=21 | etiqueta=nuevo | nota=-
+verif-cli18@s.whatsapp.net | Verónica Alejandra Ibarra | tel=439963908 | visitas=8 | etiqueta=frecuente | nota=-
+verif-cli19@s.whatsapp.net | Claudia Beatriz Maldonado | tel=455094892 | visitas=2 | etiqueta=vip | nota=-
+verif-cli20@s.whatsapp.net | María de los Ángeles Guzmán Barrera | tel=429259091 | visitas=15 | etiqueta=en_riesgo | nota=-
+verif-cli21@s.whatsapp.net | Ana Patricia Villaseñor y Robles | tel=464063478 | visitas=26 | etiqueta=inactivo | nota=-
+verif-cli22@s.whatsapp.net | Juan Carlos Domínguez Arellano III | tel=421990915 | visitas=28 | etiqueta=vip | nota=-
+verif-cli23@s.whatsapp.net | José María Fernández de Córdova y Alcántara | tel=431747485 | visitas=1 | etiqueta=en_riesgo | nota=-
+verif-cli24@s.whatsapp.net | Brenda Jazmín Huerta | tel=461264935 | visitas=23 | etiqueta=inactivo | nota=-
+verif-cli25@s.whatsapp.net | Pedro Iván Macías | tel=482461609 | visitas=7 | etiqueta=problematico | nota=-
+verif-cli26@s.whatsapp.net | Tomás Emilio Barragán | tel=419481293 | visitas=7 | etiqueta=frecuente | nota=-
+verif-cli27@s.whatsapp.net | Emiliano Zapata Ríos | tel=476654986 | visitas=23 | etiqueta=frecuente | nota=-
+verif-cli28@s.whatsapp.net | Nicolás Alejandro Buenrostro | tel=451946875 | visitas=13 | etiqueta=nuevo | nota=-
+verif-cli29@s.whatsapp.net | Adrián Felipe Quiroz | tel=445498497 | visitas=11 | etiqueta=frecuente | nota=-
+verif-cli30@s.whatsapp.net | Cristian Eduardo Nápoles | tel=430091234 | visitas=16 | etiqueta=en_riesgo | nota=-
+verif-cli31@s.whatsapp.net | Daniel Alberto Sepúlveda | tel=420039329 | visitas=20 | etiqueta=frecuente | nota=-
+verif-cli32@s.whatsapp.net | Iván de Jesús Carrillo | tel=429933866 | visitas=24 | etiqueta=consulta | nota=-
+verif-cli33@s.whatsapp.net | Marco Tulio Esparza | tel=424599234 | visitas=27 | etiqueta=frecuente | nota=-
+verif-cli34@s.whatsapp.net | Rodrigo Alonso Betancourt | tel=458701189 | visitas=14 | etiqueta=frecuente | nota=-
+verif-cli35@s.whatsapp.net | Israel de la Cruz Márquez | tel=421645288 | visitas=10 | etiqueta=vip | nota=-
+verif-cli36@s.whatsapp.net | Enrique Yamil Ponce | tel=485860279 | visitas=11 | etiqueta=problematico | nota=-
+verif-cli37@s.whatsapp.net | Gustavo Adolfo Lemus | tel=493501287 | visitas=7 | etiqueta=frecuente | nota=-
+verif-cli38@s.whatsapp.net | Octavio Ramiro Fuentes | tel=475915120 | visitas=26 | etiqueta=en_riesgo | nota=-
+verif-cli39@s.whatsapp.net | Bernardo Javier Delgado | tel=415894762 | visitas=26 | etiqueta=nuevo | nota=-
+verif-cli40@s.whatsapp.net | César Augusto Lomelí | tel=466420674 | visitas=2 | etiqueta=en_riesgo | nota=-
+verif-cli41@s.whatsapp.net | Ángel Gabriel Paredes | tel=415821082 | visitas=6 | etiqueta=problematico | nota=-
+verif-cli42@s.whatsapp.net | Salvador Uriel Ocampo | tel=412502556 | visitas=2 | etiqueta=frecuente | nota=-
+verif-cli43@s.whatsapp.net | Ramón Alberto Tiscareño | tel=496567060 | visitas=18 | etiqueta=frecuente | nota=-
+verif-cli44@s.whatsapp.net | Efraín Napoleón Guajardo | tel=467068345 | visitas=15 | etiqueta=frecuente | nota=-
+verif-cli45@s.whatsapp.net | Martín Ricardo Covarrubias | tel=444515164 | visitas=27 | etiqueta=consulta | nota=-
+verif-cli46@s.whatsapp.net | Israel Alejandro Villanueva | tel=426232857 | visitas=19 | etiqueta=inactivo | nota=-
+verif-cli47@s.whatsapp.net | Uriel Sebastián Anaya | tel=458857015 | visitas=27 | etiqueta=vip | nota=-
+verif-cli48@s.whatsapp.net | Brayan Alexis Moreno | tel=432151774 | visitas=9 | etiqueta=frecuente | nota=-
+verif-cli49@s.whatsapp.net | Kevin Yair Estrada | tel=446759136 | visitas=19 | etiqueta=en_riesgo | nota=-
+verif-cli50@s.whatsapp.net | Jonathan Emmanuel Salcedo | tel=410246934 | visitas=10 | etiqueta=inactivo | nota=-
+verif-cli51@s.whatsapp.net | Julio César Villalobos | tel=486353485 | visitas=13 | etiqueta=vip | nota=-
+verif-cli52@s.whatsapp.net | Aldo Fabián Zamudio | tel=483111327 | visitas=22 | etiqueta=nuevo | nota=-
+verif-cli53@s.whatsapp.net | Cristóbal Andrés Mejía | tel=495680561 | visitas=22 | etiqueta=vip | nota=-
+verif-cli54@s.whatsapp.net | Rubén Darío Escalante | tel=474731627 | visitas=27 | etiqueta=inactivo | nota=-
+verif-vip@s.whatsapp.net | Cliente de Gasto Altísimo (VIP histórico) | tel=4521234567 | visitas=64 | etiqueta=vip | nota=-
+
+
+--- datos sensibles en barber_clientes: fecha_nacimiento / marketing_ok ---
+5214521206246@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+5214501111805@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli00@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli01@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli02@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli03@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli04@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli05@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli06@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli07@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli08@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli09@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli10@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli11@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli12@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli13@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli14@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli15@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli16@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli17@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli18@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli19@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli20@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli21@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli22@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli23@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli24@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli25@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli26@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli27@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli28@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli29@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli30@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli31@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli32@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli33@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli34@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli35@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli36@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli37@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli38@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli39@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli40@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli41@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli42@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli43@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli44@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli45@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli46@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli47@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli48@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli49@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli50@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli51@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli52@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli53@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-cli54@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+verif-vip@s.whatsapp.net | nac=- | marketing_ok=false | nota_interna=(vacia)
+
+
+##############################################################################
+# 4. barber_consentimiento (¿se usa?)
+##############################################################################
+filas=0
+
+
+
+
+##############################################################################
+# 5. ¿Se borra algo? politicas de retencion / jobs
+##############################################################################
+barber_auditoria=0
+
+[cron.job] 
+[err] ERROR:  relation "cron.job" does not exist
+LINE 1: ...name || ' | ' || schedule || ' | ' || command FROM cron.job;
+                                                              ^
+
+##############################################################################
+# 6. Evolution: mensajes guardados en su Postgres
+##############################################################################
+Chat
+Chatwoot
+Contact
+Dify
+DifySetting
+Evoai
+EvoaiSetting
+EvolutionBot
+EvolutionBotSetting
+Flowise
+FlowiseSetting
+Instance
+IntegrationSession
+IsOnWhatsapp
+Kafka
+Label
+Media
+Message
+MessageUpdate
+N8n
+N8nSetting
+Nats
+OpenaiBot
+OpenaiCreds
+OpenaiSetting
+Proxy
+Pusher
+Rabbitmq
+Session
+Setting
+Sqs
+Template
+Typebot
+TypebotSetting
+Webhook
+Websocket
+_prisma_migrations
+[err] 
+[Message err] ERROR:  relation "evolution_api.message" does not exist
+LINE 1: SELECT 'Message = ' || count(*) FROM "evolution_api".Message...
+                                             ^
+"Message" = 849
+[Chat err] ERROR:  relation "evolution_api.chat" does not exist
+LINE 1: SELECT 'Chat = ' || count(*) FROM "evolution_api".Chat;
+                                          ^
+[Contact err] ERROR:  relation "evolution_api.contact" does not exist
+LINE 1: SELECT 'Contact = ' || count(*) FROM "evolution_api".Contact...
+                                             ^
+[IsOnWhatsapp err] ERROR:  relation "evolution_api.isonwhatsapp" does not exist
+LINE 1: SELECT 'IsOnWhatsapp = ' || count(*) FROM "evolution_api".Is...
+                                                  ^
+
+##############################################################################
+# 7. Tabla 'settings'/credenciales de n8n (¿secretos en claro?)
+##############################################################################
+credentials_entity filas = 7
+
+Evolution API | httpHeaderAuth | data_len=128
+Google Calendar account | googleCalendarOAuth2Api | data_len=1216
+Google Sheets Trigger account | googleSheetsTriggerOAuth2Api | data_len=1432
+Google Sheets account | googleSheetsOAuth2Api | data_len=1344
+Postgres account | postgres | data_len=216
+Uncensored AI (OpenAI-compatible) | openAiApi | data_len=364
+n8n API (local) | n8nApi | data_len=448
+
+[muestra cifrada] U2FsdGVkX1/7aC2sG7yeokoCKAdinkIvbK0vt0IpHEIw5tG3stPwGeGqsQm5
+
+
+##############################################################################
+# 8. execute data guardado por n8n (¿mensajes en execution_data?)
+##############################################################################
+execution_entity filas=565
+
+execution_data filas=565 | tamano=48 MB
+
+with chat text: 501

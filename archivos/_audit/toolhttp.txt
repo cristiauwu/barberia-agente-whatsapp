@@ -1,0 +1,35 @@
+=== tools dir ===
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolCalculator/ToolCalculator.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolSerpApi/ToolSerpApi.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolWorkflow/ToolWorkflow.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolWorkflow/constants.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolSearXng/ToolSearXng.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/ToolHttpRequest.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/interfaces.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/utils.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/descriptions.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolWikipedia/ToolWikipedia.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolWolframAlpha/ToolWolframAlpha.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolVectorStore/ToolVectorStore.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolCode/ToolCode.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolThink/ToolThink.node.js
+
+=== ToolHttpRequest refs ===
+19:            subtitle: '={{ $parameter.toolDescription }}',
+49:                    name: 'toolDescription',
+200:                    name: 'parametersBody',
+234:        const toolDescription = this.getNodeParameter('toolDescription', itemIndex);
+265:        const placeholdersDefinitions = this.getNodeParameter('placeholderDefinitions.values', itemIndex, []).map((p) => {
+284:                parametersPropertyName: 'parametersQuery.values',
+298:                parametersPropertyName: 'parametersHeaders.values',
+312:                parametersPropertyName: 'parametersBody.values',
+329:                description: toolDescription,
+335:            const description = (0, utils_1.prepareToolDescription)(toolDescription, toolParameters);
+
+=== valueProvider handling ===
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/descriptions.js:52:                    name: 'valueProvider',
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/descriptions.js:65:                            value: 'fieldValue',
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/descriptions.js:78:                            valueProvider: ['fieldValue'],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/utils.js:380:            valueProvider: 'modelRequired',
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/utils.js:408:            if (entry.valueProvider.includes('model')) {
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/tools/ToolHttpRequest/utils.js:412:                    required: entry.valueProvider === 'modelRequired',

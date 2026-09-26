@@ -1,0 +1,50 @@
+=== execution_entity cols ===
+id
+finished
+mode
+retryOf
+retrySuccessId
+startedAt
+stoppedAt
+waitTill
+status
+workflowId
+deletedAt
+createdAt
+storedAt
+tracingContext
+deduplicationKey
+jsonSizeBytes
+workflowVersionId
+binaryDataSizeBytes
+usedPrivateCredentials
+
+=== error executions ===
+770|error|barberiaAgenteUncensored
+763|error|barberiaAgenteUncensored
+759|error|barberiaAgenteUncensored
+758|error|barberiaAgenteUncensored
+733|error|barberiaRecordatorios
+732|error|barberiaRecordatorios
+731|error|barberiaRecordatorios
+722|error|barberiaRecordatorios
+720|error|barberiaRecordatorios
+703|error|barberiaRecordatorios
+687|error|barberiaRecordatorios
+680|error|barberiaRecordatorios
+660|error|barberiaAgenteUncensored
+611|error|barberiaRecordatorios
+603|error|barberiaAgenteUncensored
+596|error|barberiaRecordatorios
+ 
+=== running executions ===
+818|running|barberiaAgenteUncensored
+
+=== workflows errorWorkflow NULL check ===
+
+=== memory node params ===
+ ERROR:  function jsonb_path_query_first(json, unknown) does not exist
+LINE 1: SELECT jsonb_path_query_first(nodes, '$[*] ? (@.name == "Pos...
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+

@@ -1,0 +1,81 @@
+G:\Barberia\BarberiaAgenteFLUJO-1-UNCENSORED.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\BarberiaAgenteFLUJO-2-RECORDATORIOS.json: {'Chino': 2, 'Barber Chinos': 2}
+G:\Barberia\docker-compose.yml: {'Chino': 1, 'Barber Chinos': 1}
+G:\Barberia\features-roadmap-research.md: {'Chino': 2, 'Barber Chinos': 2, 'Pinzón': 2}
+G:\Barberia\Herramientas_APIs_Complementarias.md: {'Barbería Pinzón': 2, 'Pinzón': 2}
+G:\Barberia\Mejoras_Agente_Barberia_n8n.md: {'Paco': 1, 'Barbería Pinzón': 8, 'Pinzón': 11}
+G:\Barberia\prompt-sistema-agente-barberia.txt: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\Prompts_Optimizados_n8n.json: {'Paco': 1, 'Barbería Pinzón': 6, 'Pinzón': 10}
+G:\Barberia\README-AGENTE-BARBERIA.md: {'Chino': 2, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\transforms.py: {'Chino': 3, 'Barber Chinos': 3}
+G:\Barberia\verify.py: {'Chino': 1, 'Barber Chinos': 1}
+G:\Barberia\_audit_broad.py: {'Esteban': 1, 'Paco': 1}
+G:\Barberia\_audit_dump2.py: {'Esteban': 2, 'Paco': 2, 'Chino': 2, 'Pinzón': 2}
+G:\Barberia\_audit_extra.py: {'Esteban': 2, 'Aguilera': 1}
+G:\Barberia\_audit_names.py: {'Esteban': 1, 'Aguilera': 1, 'Paco': 1, 'Chino': 2, 'Barber Chinos': 1, 'Barbería Pinzón': 1, 'Pinzón': 2}
+G:\Barberia\_h_all_out.txt: {'Chino': 2, 'Barber Chinos': 2}
+G:\Barberia\_h_sys_out.txt: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\_h_wf_barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\_h_wf_barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\_t_insp.txt: {'Chino': 2, 'Barber Chinos': 1}
+G:\Barberia\_t_insp2.txt: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\ANTES-alwaysoutput.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-barberiaAgenteUncensored.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\ANTES-blindaje.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\ANTES-calendario-barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-comandos-agenda.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-comandos.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-credencial-barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-credencial-barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-destino-barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-destino-barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-evo-local.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-filtro-aviso.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-fix-fromai.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-gid-barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-gid-barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-hoja-f2.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-notificar.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-operador.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-pausa.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-prompt.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-prompt2.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-rango.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-reapuntar-barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-reapuntar-barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-resiliencia-barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\ANTES-resiliencia-barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-schema.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-switch-estados.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\ANTES-sync-BarberiaAgenteFLUJO-1-UNCENSORED.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\ANTES-sync-BarberiaAgenteFLUJO-2-RECORDATORIOS.json: {'Chino': 2, 'Barber Chinos': 2}
+G:\Barberia\archivos\ANTES-w2.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\aplicar-esquema.py: {'Chino': 1, 'Barber Chinos': 1}
+G:\Barberia\archivos\BarberiaAgenteFLUJO-1-UNCENSORED.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\BarberiaAgenteFLUJO-2-RECORDATORIOS.json: {'Chino': 2, 'Barber Chinos': 2}
+G:\Barberia\archivos\esquema-postgres.sql: {'Chino': 1, 'Barber Chinos': 1}
+G:\Barberia\archivos\FIX-barberiaAgenteUncensored.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\FIX-uno.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\MANUAL-DUENO.md: {'Chino': 2, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\mediciones-antes.json: {'Pinzón': 1}
+G:\Barberia\archivos\sync-barberiaAgenteUncensored.json: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\sync-barberiaRecordatorios.json: {'Chino': 2, 'Barber Chinos': 2}
+G:\Barberia\archivos\test-carga.py: {'Chino': 2, 'Barber Chinos': 2}
+G:\Barberia\archivos\test-formato-visual.py: {'Chino': 1}
+G:\Barberia\archivos\_run.json: {'Chino': 17, 'Barber Chinos': 13, 'Pinzón': 25}
+G:\Barberia\archivos\_salida-test-cancelar-reprogramar.txt: {'Pinzón': 1}
+G:\Barberia\archivos\_audit\barberiaAgenteUncensored.json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\archivos\_audit\barberiaRecordatorios.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\archivos\_audit\details.txt: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\archivos\_audit\dump.txt: {'Chino': 5, 'Barber Chinos': 4, 'Pinzón': 1}
+G:\Barberia\archivos\_audit\workflows_list.json: {'Chino': 10, 'Barber Chinos': 8, 'Pinzón': 2}
+G:\Barberia\mejoras\MEJORAS-BARBERIA.md: {'Chino': 2, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\_audit\NODE_PARAMS.txt: {'Chino': 5, 'Barber Chinos': 4, 'Pinzón': 1}
+G:\Barberia\_audit\SYSTEM_PROMPT_FULL.txt: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\_audit\wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json: {'Chino': 6, 'Barber Chinos': 4, 'Pinzón': 2}
+G:\Barberia\_audit\wf_Barberia_-_Recordatorios_de_cita.json: {'Chino': 4, 'Barber Chinos': 4}
+G:\Barberia\_audit\_broad.txt: {'Paco': 2}
+G:\Barberia\_audit\_dump1.txt: {'Chino': 3, 'Barber Chinos': 2, 'Pinzón': 1}
+G:\Barberia\_audit\_extra.txt: {'Esteban': 2, 'Aguilera': 1}
+G:\Barberia\_audit\_list.json: {'Chino': 10, 'Barber Chinos': 8, 'Pinzón': 2}
+G:\Barberia\_audit\_prompt_analysis.txt: {'Esteban': 1, 'Paco': 1, 'Chino': 1, 'Pinzón': 1}

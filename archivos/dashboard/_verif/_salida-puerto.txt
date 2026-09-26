@@ -1,0 +1,13 @@
+arrancando servidor 1 en 8111...
+  p1 vivo: True
+  p1 dijo:
+arrancando servidor 2 en 8111 (mismo puerto)...
+  p2 termino? rc = None  (None = SIGUE VIVO)
+  p2 dijo:
+
+  *** DIAGNOSTICO ***
+  allow_reuse_address = True en Windows deja que un SEGUNDO proceso
+  haga bind del MISMO puerto y quede vivo. El bloque 'except OSError'
+  que imprime 'no pude abrir el puerto' NUNCA se ejecuta.
+  p1 vivo: True  p2 vivo: True
+  HTTP 8111 -> 200 150198 bytes

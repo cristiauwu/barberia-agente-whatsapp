@@ -1,0 +1,222 @@
+RC=0
+---- STDOUT ----
+======================================================================
+VERIFICACION DE ENTREGABLES
+======================================================================
+
+[1] Archivos y parseo JSON
+  PASS  Existe prompt-sistema-agente-barberia.txt
+  PASS  Existe el workflow 1 generado
+  PASS  Existe el workflow 2 generado
+  PASS  Workflow 1 parsea y tiene nodos (45)
+  PASS  Workflow 2 parsea y tiene nodos (17)
+
+[2] Estructura de workflow n8n
+  PASS  W1 tiene las claves de nivel raiz requeridas
+  PASS  W1 todos los nodos tienen id
+  PASS  W1 los ids de nodo son unicos
+  PASS  W1 todos los nodos tienen type/position/parameters
+  PASS  W2 tiene las claves de nivel raiz requeridas
+  PASS  W2 todos los nodos tienen id
+  PASS  W2 los ids de nodo son unicos
+  PASS  W2 todos los nodos tienen type/position/parameters
+
+[3] Integridad de conexiones (sin nodos huerfanos)
+  PASS  W1 todas las conexiones apuntan a nodos existentes 
+  PASS  W2 todas las conexiones apuntan a nodos existentes 
+
+[4] Referencias $('Nodo') validas
+  PASS  W1 referencias resueltas (faltan: ninguna)
+  PASS  W2 referencias resueltas (faltan: ninguna)
+
+[5] System prompt del agente
+  PASS  Existe el nodo AI Agent
+  PASS  El system prompt incrustado es identico al archivo
+  PASS  Precio en el prompt: Corte desvanecido o tijera $150
+  PASS  Precio en el prompt: Arreglo de barba $100
+  PASS  Precio en el prompt: Ceja $30
+  PASS  Precio en el prompt: Mascarilla $50
+  PASS  Precio en el prompt: Corte de cabello dama $250
+  PASS  Precio en el prompt: Planchado express $150
+  PASS  Precio en el prompt: Peinado $300
+  PASS  Depilacion descrita como 'precio segun la zona'
+  PASS  Zona de depilacion listada: ceja
+  PASS  Zona de depilacion listada: bigote
+  PASS  Zona de depilacion listada: nariz
+  PASS  Zona de depilacion listada: orejas
+  PASS  Zona de depilacion listada: barba
+  PASS  Zona de depilacion listada: axilas
+  PASS  Zona de depilacion listada: piernas
+  PASS  Nombre del negocio en el prompt
+  PASS  Telefono de citas en el prompt
+  PASS  Domicilio en el prompt
+  PASS  Precio obsoleto eliminado: $350
+  PASS  Precio obsoleto eliminado: $500
+  PASS  Precio obsoleto eliminado: $600
+
+[6] Configuracion del modelo (Uncensored AI)
+  PASS  Existe el nodo OpenAI Chat Model
+  PASS  Modelo configurado: gpt-4o (existe en el catalogo)
+  PASS  Responses API desactivada (ausente = default false; solo /chat/completions)
+  PASS  Credencial apunta a Uncensored AI: Uncensored AI (OpenAI-compatible)
+  PASS  NO reutiliza el id de la credencial original de OpenAI
+  PASS  Notas del nodo documentan la Base URL
+  PASS  'Get Audio' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Convertir Audio' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Transcribe a recording' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Audio Content' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Audio Content1' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Get Image' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Convertir Imagen' eliminado (el usuario no quiere audio ni imagen)
+  PASS  'Describe imagen' eliminado (el usuario no quiere audio ni imagen)
+  PASS  Sin referencias huerfanas a 'Get Audio' en el JSON
+  PASS  Sin referencias huerfanas a 'Convertir Audio' en el JSON
+  PASS  Sin referencias huerfanas a 'Transcribe a recording' en el JSON
+  PASS  Sin referencias huerfanas a 'Audio Content' en el JSON
+  PASS  Sin referencias huerfanas a 'Audio Content1' en el JSON
+  PASS  Sin referencias huerfanas a 'Get Image' en el JSON
+  PASS  Sin referencias huerfanas a 'Convertir Imagen' en el JSON
+  PASS  Sin referencias huerfanas a 'Describe imagen' en el JSON
+  PASS  Sin la credencial de OpenAI rota (ya no se usa audio ni imagen)
+  PASS  El Switch tiene respaldo para mensajes no-texto
+
+[7] Herramientas del agente
+  PASS  Herramienta presente: Consultar agenda
+  PASS    'Consultar agenda' conectada al AI Agent como ai_tool
+  PASS  Herramienta presente: Agendar cita
+  PASS    'Agendar cita' conectada al AI Agent como ai_tool
+  PASS  Herramienta presente: Cancelar cita
+  PASS    'Cancelar cita' conectada al AI Agent como ai_tool
+  PASS  Herramienta presente: Reagendar
+  PASS    'Reagendar' conectada al AI Agent como ai_tool
+  PASS  Herramienta presente: Registrar en hoja de citas
+  PASS    'Registrar en hoja de citas' conectada al AI Agent como ai_tool
+  PASS  Herramienta presente: Notificar al encargado
+  PASS    'Notificar al encargado' conectada al AI Agent como ai_tool
+  PASS  Nombre viejo eliminado en W1: Obtener eventos
+  PASS  Nombre viejo eliminado en W1: Crear evento
+  PASS  Nombre viejo eliminado en W1: Eliminar eventos
+  PASS  Nombre viejo eliminado en W1: Append row in sheet in Google Sheets
+  PASS  Reagendar actualiza 'start'
+  PASS  Reagendar actualiza 'end'
+  PASS  Reagendar actualiza 'summary'
+  PASS  Reagendar actualiza 'description'
+  PASS  Consultar agenda usa rango acotado (returnAll ausente = default false)
+  PASS  Consultar agenda recibe rango de fechas del modelo
+  PASS  toolDescription descriptiva en 'Consultar agenda'
+  PASS  toolDescription descriptiva en 'Agendar cita'
+  PASS  toolDescription descriptiva en 'Cancelar cita'
+  PASS  toolDescription descriptiva en 'Reagendar'
+  PASS  toolDescription descriptiva en 'Notificar al encargado'
+  PASS  URL sin espacios/saltos en 'Mandar mensaje'
+  PASS  URL sin espacios/saltos en 'Notificar al encargado'
+  PASS  URL sin espacios/saltos en 'Responder al operador'
+
+[8] Flujo 2: recordatorios
+  PASS  El Code node tiene sintaxis valida
+  PASS  Linea suelta 'v' eliminada
+  PASS  Zona horaria America/Mexico_City fijada (-06:00)
+  PASS  El Code calcula si toca cada recordatorio
+  PASS  El Code produce ambos horarios de recordatorio
+  PASS  Existe el nodo: RECORDATORIO 24 H
+  PASS    'RECORDATORIO 24 H' pide confirmacion
+  PASS  Existe el nodo: RECORDATORIO 1 H
+  PASS    'RECORDATORIO 1 H' pide confirmacion
+  PASS  Switch con salida de respaldo 'Otro'
+
+[9] Orden temporal de los recordatorios (regresion)
+  PASS  El recordatorio de 24 h SOLO se alcanza via un Wait (llega desde: ['ESPERAR A 24 H'])
+  PASS  Existe el nodo 'ESPERAR A 24 H' de tipo wait
+  PASS  El Wait de 24 h espera hasta recordatorio24ISO
+  PASS  El recordatorio de 1 h SOLO se alcanza via un Wait (llega desde: ['ESPERAR A 1 H'])
+  PASS  El Wait de 1 h espera hasta recordatorio1ISO
+  PASS  Cadena: alta en hoja -> IF 24 h -> ESPERAR A 24 H
+  PASS  Cadena: ESPERAR A 24 H -> RECORDATORIO 24 H
+  PASS  Cadena: RECORDATORIO 24 H -> ESPERAR A 1 H
+  PASS  Cadena: ESPERAR A 1 H -> RECORDATORIO 1 H
+  PASS  El orden no se invierte (1 h no lleva al de 24 h)
+  PASS  'IF - Toca recordatorio 24 h' compara contra 'si' con operador equals
+  PASS  'IF - Toca recordatorio 1 h' compara contra 'si' con operador equals
+
+[10] Nodos sin entrada (regresion)
+  PASS  'Code' recibe datos de algun nodo
+  PASS  'Notificar cita nueva al encargado' recibe datos de algun nodo
+  PASS  'Code1' recibe datos de algun nodo
+  PASS  'Append or update row in sheet' recibe datos de algun nodo
+  PASS  'Switch' recibe datos de algun nodo
+  PASS  'ESPERAR A 1 H' recibe datos de algun nodo
+  PASS  'QUITAR RECORDATORIO' recibe datos de algun nodo
+  PASS  'OBTENER INFO DE CITA ELIMINADA' recibe datos de algun nodo
+  PASS  'RECORDATORIO 24 H' recibe datos de algun nodo
+  PASS  'RECORDATORIO 1 H' recibe datos de algun nodo
+  PASS  'IF - Toca recordatorio 24 h' recibe datos de algun nodo
+  PASS  'IF - Toca recordatorio 1 h' recibe datos de algun nodo
+  PASS  'ESPERAR A 24 H' recibe datos de algun nodo
+  PASS  'IF - Es cita agendada' recibe datos de algun nodo
+  PASS  'Registrar cliente (CRM)' recibe datos de algun nodo
+  PASS  'Registrar cita (Postgres)' recibe datos de algun nodo
+  PASS  El Switch recibe entrada (no queda huerfano)
+  PASS  Existe 'Notificar cita nueva al encargado'
+
+[11] Flujo 1: nodos sin entrada 'main' (regresion)
+  PASS  W1 sin nodos huerfanos reales (encontrados: ninguno)
+  PASS  'Notificar cita nueva al encargado' -> Switch (llega: ['Switch'])
+  PASS  Cadena: Trigger -> Code -> Notificar -> Switch
+  PASS  El Switch dirige a las ramas de recordatorio
+
+[12] Comandos del due�o (flujo 1)
+  PASS  Existe el nodo 'Router de comandos'
+  PASS  El router tiene 13 salidas (12 comandos + respaldo): 13
+  PASS  Salida 'HOY' del router -> Preparar rango de fechas (esperado Preparar rango de fechas)
+  PASS  Salida 'MA�ANA' del router -> Preparar rango de fechas (esperado Preparar rango de fechas)
+  PASS  Salida 'SEMANA' del router -> Preparar rango de fechas (esperado Preparar rango de fechas)
+  PASS  Salida 'LIBRE' del router -> Preparar rango de fechas (esperado Preparar rango de fechas)
+  PASS  Salida 'CLIENTE' del router -> Buscar cliente (esperado Buscar cliente)
+  PASS  Salida 'BLOQUEAR' del router -> Parsear bloqueo (esperado Parsear bloqueo)
+  PASS  Salida 'CERRAR' del router -> Parsear bloqueo (esperado Parsear bloqueo)
+  PASS  Salida 'ABRIR' del router -> Parsear bloqueo (esperado Parsear bloqueo)
+  PASS  Salida 'PRECIO' del router -> Parsear precio (esperado Parsear precio)
+  PASS  Salida 'PAUSA' del router -> Parsear pausa (esperado Parsear pausa)
+  PASS  Salida 'ESTADO' del router -> Leer estado del sistema (esperado Leer estado del sistema)
+  PASS  Salida 'COMANDOS' del router -> Armar respuesta COMANDOS (esperado Armar respuesta COMANDOS)
+  PASS  El respaldo del router va al flujo normal del agente: IF - No es del bot
+  PASS  Existe el nodo '�Es operador?'
+  PASS  El IF de operador usa el campo calculado 'es_operador'
+  PASS  El IF de operador NO tiene el numero del vendedor hardcodeado
+  PASS  Existe 'Leer operadores' (lee la tabla barber_operadores)
+  PASS  Existe 'Comprobar operador' (tolera 52+10 y 52+1+10)
+  PASS  Normalizacion alimenta a 'Leer operadores'
+  PASS  'Leer operadores' alimenta a 'Comprobar operador'
+  PASS  'Comprobar operador' alimenta a '�Es operador?'
+  PASS  'Leer agenda del rango' tiene alwaysOutputData (no corta la cadena sin datos)
+  PASS  'Leer ficha del cliente' tiene alwaysOutputData (no corta la cadena sin datos)
+  PASS  'Actualizar precio' tiene alwaysOutputData (no corta la cadena sin datos)
+  PASS  'Aplicar pausa' tiene alwaysOutputData (no corta la cadena sin datos)
+  PASS  'Leer operadores' tiene alwaysOutputData (no corta la cadena sin datos)
+  PASS  Cadena de 'Preparar rango de fechas' termina en el nodo que responde
+  PASS  Cadena de 'Buscar cliente' termina en el nodo que responde
+  PASS  Cadena de 'Parsear precio' termina en el nodo que responde
+  PASS  Cadena de 'Parsear pausa' termina en el nodo que responde
+  PASS  Cadena de 'Leer estado del sistema' termina en el nodo que responde
+  PASS  Existe 'IF - Bloqueo invalido' (valida antes de crear el evento)
+  PASS  Existe 'Crear bloqueo en calendario'
+  PASS  Flujo 1 sin el numero del vendedor
+  PASS  Flujo 1 avisa al numero del due�o
+  PASS  'Preparar rango de fechas' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Formatear agenda' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Parsear bloqueo' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Buscar cliente' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Formatear ficha' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Parsear pausa' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Formatear pausa' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Parsear precio' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Formatear precio' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Formatear estado' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Comprobar operador' no usa ** (WhatsApp solo lee un asterisco)
+  PASS  'Calcular pausa' no usa ** (WhatsApp solo lee un asterisco)
+RESULTADO: 187 de 187 verificaciones PASARON
+======================================================================
+
+======================================================================
+
+---- STDERR ----

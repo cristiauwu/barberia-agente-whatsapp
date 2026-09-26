@@ -1,0 +1,3 @@
+('My workflow', '1uIUWfNl36MpJ9V8', False, 0)
+('Barberia - Agente de citas (Uncensored AI)', 'barberiaAgenteUncensored', True, 52)
+('Barberia - Recordatorios de cita', 'barberiaRecordatorios', True, 15)

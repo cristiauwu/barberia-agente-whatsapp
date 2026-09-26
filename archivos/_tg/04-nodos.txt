@@ -1,0 +1,508 @@
+
+########## barberiaRecordatorios / Barberia - Recordatorios de cita (active=True) ##########
+--- connections (resumen) ---
+  Google Sheets Trigger: main->Code
+  Code: main->IF - Es cita agendada
+  Code1: main->Append or update row in sheet
+  Append or update row in sheet: main->IF - Toca recordatorio 24 h
+  Switch: main->Code1; main->OBTENER INFO DE CITA ELIMINADA; main->OBTENER INFO DE CITA ELIMINADA
+  OBTENER INFO DE CITA ELIMINADA: main->QUITAR RECORDATORIO
+  Notificar cita nueva al encargado: main->Switch
+  IF - Toca recordatorio 24 h: main->ESPERAR A 24 H; main->IF - Toca recordatorio 1 h
+  ESPERAR A 24 H: main->RECORDATORIO 24 H
+  RECORDATORIO 24 H: main->IF - Toca recordatorio 1 h
+  IF - Toca recordatorio 1 h: main->ESPERAR A 1 H; main->
+  RECORDATORIO 1 H: main->
+  ESPERAR A 1 H: main->RECORDATORIO 1 H
+  IF - Es cita agendada: main->Notificar cita nueva al encargado,Registrar cliente (CRM),Registrar cita (Postgres); main->
+
+=== NODO: Code [n8n-nodes-base.code] disabled=None ===
+{
+  "jsCode": "// Calcula las horas de la cita en zona horaria de Mexico y arma los\n// recordatorios de 24 h y 1 h. Las horas de la hoja se interpretan como\n// America/Mexico_City (UTC-06:00, sin horario de verano).\nconst TZ_OFFSET = \"-06:00\";\nconst DAY_MS = 24 * 60 * 60 * 1000;\nconst HOUR_MS = 60 * 60 * 1000;\n\nreturn items.map((item) => {\n  // La columna de la hoja se llama \"D\\u00eda \" (con acento).\n  const rawDate = item.json[\"D\\u00eda \"] || item.json[\"D\\u00eda\"] ||\n    item.json[\"Dia \"] || item.json[\"Fecha\"];\n  let rawTime = item.json[\"Hora\"] || \"00:00:00\";\n\n  if (typeof rawDate !== \"string\" || typeof rawTime !== \"string\") {\n    throw new Error(\"Fecha y hora deben ser texto: 'AAAA-MM-DD' y 'HH:MM:SS'\");\n  }\n\n  const timeParts = rawTime.split(\":\");\n  if (timeParts.length < 2 || timeParts.length > 3) {\n    throw new Error(`Hora invalida: ${rawTime}. Usa HH:MM o HH:MM:SS`);\n  }\n  while (timeParts.length < 3) timeParts.push(\"00\");\n  const [hh, mm, ss] = timeParts.map((p) => (p.length === 1 ? \"0\" + p : p));\n\n  const [year, month, day] = rawDate.trim().split(\"-\");\n  if (!year || !month || !day) {\n    throw new Error(`Fecha invalida: ${rawDate}. Usa AAAA-MM-DD`);\n  }\n\n  // La hora es local de Mexico: se fija el offset explicitamente.\n  const cita = new Date(\n    `${year}-${month.padStart(2, \"0\")}-${day.padStart(2, \"0\")}` +\n    `T${hh}:${mm}:${ss}${TZ_OFFSET}`\n  );\n  if (isNaN(cita.getTime())) {\n    throw new Error(`Fecha invalida: ${rawDate}T${rawTime}`);\n  }\n\n  const t = cita.getTime();\n  const r24 = new Date(t - DAY_MS);\n  const r1 = new Date(t - HOUR_MS);\n  const ahora = Date.now();\n\n  item.json.fechaISO = cita.toISOString();\n  item.json.fechaLegible = cita.toLocaleString(\"es-MX\", {\n    timeZone: \"America/Mexico_City\",\n  });\n  item.json.recordatorio24ISO = r24.toISOString();\n  item.json.recordatorio1ISO = r1.toISOString();\n  item.json.recordatorio24Legible = r24.toLocaleString(\"es-MX\", {\n    timeZone: \"America/Mexico_City\",\n  });\n\n  // Si la cita es en menos de 24 h ya no se manda el recordatorio de 24 h.\n  item.json.mandar24 = r24.getTime() > ahora;\n  item.json.mandar1 = r1.getTime() > ahora;\n\n  // Alias retrocompatible con el flujo original.\n  item.json.recordatorioISO = r1.toISOString();\n  item.json.recordatorioLegible = r1.toLocaleString(\"es-MX\", {\n    timeZone: \"America/Mexico_City\",\n  });\n\n  return item;\n});\n"
+}
+
+=== NODO: Notificar cita nueva al encargado [n8n-nodes-base.httpRequest] disabled=None ===
+{
+  "method": "POST",
+  "url": "http://evolution_api:8080/message/sendText/hector\n",
+  "authentication": "genericCredentialType",
+  "genericAuthType": "httpHeaderAuth",
+  "sendHeaders": true,
+  "headerParameters": {
+    "parameters": []
+  },
+  "sendBody": true,
+  "bodyParameters": {
+    "parameters": [
+      {
+        "name": "number",
+        "value": "524521206246@s.whatsapp.net"
+      },
+      {
+        "name": "text",
+        "value": "=Nueva cita agendada:\nCliente: {{ $json.Nombre }}\nServicio: {{ $json.Servicio }}\nPrecio: {{ $json['Precio del servicio'] }}\nHora y dia de la cita: {{ $json.fechaLegible }}"
+      },
+      {
+        "name": "delay",
+        "value": "={{ 1000 }}"
+      }
+    ]
+  },
+  "options": {}
+}
+
+=== NODO: Switch [n8n-nodes-base.switch] disabled=None ===
+{
+  "rules": {
+    "values": [
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "estado-agendado-0",
+              "leftValue": "={{ $('Code').item.json.Estatus }}",
+              "rightValue": "agendado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "renameOutput": true,
+        "outputKey": "Agendado"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "estado-cancelado-0",
+              "leftValue": "={{ $('Code').item.json.Estatus }}",
+              "rightValue": "cancelado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "estado-eliminado-1",
+              "leftValue": "={{ $('Code').item.json.Estatus }}",
+              "rightValue": "eliminado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "renameOutput": true,
+        "outputKey": "Cancelado"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "estado-actualizado-0",
+              "leftValue": "={{ $('Code').item.json.Estatus }}",
+              "rightValue": "actualizado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "estado-reprogramado-1",
+              "leftValue": "={{ $('Code').item.json.Estatus }}",
+              "rightValue": "reprogramado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "renameOutput": true,
+        "outputKey": "Actualizado"
+      }
+    ]
+  },
+  "options": {
+    "fallbackOutput": "extra",
+    "renameFallbackOutput": "Otro"
+  }
+}
+
+=== NODO: IF - Es cita agendada [n8n-nodes-base.if] disabled=None ===
+{
+  "conditions": {
+    "options": {
+      "caseSensitive": false,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+    },
+    "conditions": [
+      {
+        "id": "esagendado-0001",
+        "leftValue": "={{ $('Code').item.json.Estatus }}",
+        "rightValue": "agendado",
+        "operator": {
+          "type": "string",
+          "operation": "equals"
+        }
+      }
+    ],
+    "combinator": "and"
+  },
+  "options": {}
+}
+
+########## 5zd5go4TFKqIsgdT / barberiaVigilancia (active=True) ##########
+--- connections (resumen) ---
+  Cada 15 minutos: main->Leer calendario
+  Leer calendario: main->Buscar citas pasadas
+  Buscar citas pasadas: main->IF - Hay citas pasadas
+  IF - Hay citas pasadas: main->Avisar al dueño; main->
+
+=== NODO: Buscar citas pasadas [n8n-nodes-base.code] disabled=None ===
+{
+  "jsCode": "// Detecta citas agendadas en el PASADO (bug conocido: el modelo\n// puede elegir la ocurrencia del dia de la semana que ya paso).\nconst ahora = Date.now();\nconst sospechosas = [];\nfor (const item of $input.all()) {\n  const e = item.json;\n  const ini = (e.start && e.start.dateTime) || '';\n  if (!ini) continue;\n  const t = new Date(ini).getTime();\n  // Margen de 2 horas: una cita que empezo hace menos no es un bug,\n  // es una cita en curso.\n  if (t < ahora - 2 * 60 * 60 * 1000) {\n    const d = new Date(ini);\n    sospechosas.push({ json: {\n      id: e.id,\n      summary: e.summary || '',\n      inicio: e.start.dateTime,\n      cuando: d.toLocaleString('es-MX', {\n        timeZone: 'America/Mexico_City', dateStyle: 'full',\n        timeStyle: 'short' }),\n    } });\n  }\n}\nif (!sospechosas.length) {\n  return [{ json: { hay: false, texto: '' } }];\n}\nconst l = ['⚠️ *Citas en el PASADO detectadas*', ''];\nl.push('Revisa esto: el bot pudo haber agendado mal.');\nl.push('');\nfor (const s of sospechosas) {\n  l.push(`*${s.summary}*`);\n  l.push(`${s.cuando}`);\n  l.push('');\n}\nl.push(`Total: ${sospechosas.length}`);\nreturn [{ json: { hay: true, texto: l.join('\\n'),\n  cuantas: sospechosas.length } }];"
+}
+
+=== NODO: IF - Hay citas pasadas [n8n-nodes-base.if] disabled=None ===
+{
+  "conditions": {
+    "options": {
+      "caseSensitive": false,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+    },
+    "conditions": [
+      {
+        "id": "hay0001",
+        "leftValue": "={{ $json.hay }}",
+        "rightValue": true,
+        "operator": {
+          "type": "boolean",
+          "operation": "true",
+          "singleValue": true
+        }
+      }
+    ],
+    "combinator": "and"
+  },
+  "options": {}
+}
+
+=== NODO: Avisar al dueño [n8n-nodes-base.httpRequest] disabled=None ===
+{
+  "method": "POST",
+  "url": "http://evolution_api:8080/message/sendText/hector",
+  "authentication": "genericCredentialType",
+  "genericAuthType": "httpHeaderAuth",
+  "sendBody": true,
+  "specifyBody": "json",
+  "jsonBody": "={{ JSON.stringify({ number: '524521206246@s.whatsapp.net', text: $json.texto,\n  delay: 1000 }) }}",
+  "options": {}
+}
+
+########## barberiaAgenteUncensored / Barberia - Agente de citas (Uncensored AI) (active=True) ##########
+--- connections (resumen) ---
+  Webhook: main->Normalizacion
+  AI Agent: main->Mandar mensaje
+  OpenAI Chat Model: ai_languageModel->AI Agent
+  Switch: main->Get Audio; main->Get Image; main->Edit Fields2
+  Get Audio: main->Convertir Audio
+  Convertir Audio: main->Transcribe a recording
+  Transcribe a recording: main->Audio Content
+  Audio Content: main->Edit Fields
+  Audio Content1: main->Edit Fields
+  Get Image: main->Convertir Imagen
+  Convertir Imagen: main->Describe imagen
+  Describe imagen: main->Audio Content1
+  Edit Fields2: main->Edit Fields
+  Edit Fields: main->AI Agent
+  Normalizacion: main->Leer operadores
+  Reagendar: ai_tool->AI Agent
+  Postgres Chat Memory: ai_memory->AI Agent
+  Notificar al encargado: ai_tool->AI Agent
+  Consultar agenda: ai_tool->AI Agent
+  Agendar cita: ai_tool->AI Agent
+  Cancelar cita: ai_tool->AI Agent
+  Registrar en hoja de citas: ai_tool->AI Agent
+  IF - No es del bot: main->Leer pausa; main->
+  Router de comandos: main->Preparar rango de fechas; main->Preparar rango de fechas; main->Preparar rango de fechas; main->Preparar rango de fechas; main->Buscar cliente; main->Parsear bloqueo; main->Parsear bloqueo; main->Parsear bloqueo; main->Parsear precio; main->Parsear pausa; main->Leer estado del sistema; main->Armar respuesta COMANDOS; main->IF - No es del bot
+  ¿Es operador?: main->Router de comandos; main->IF - No es del bot
+  Armar respuesta COMANDOS: main->Responder al operador
+  Preparar rango de fechas: main->Leer agenda del rango
+  Leer agenda del rango: main->Formatear agenda
+  Formatear agenda: main->Responder al operador
+  Parsear bloqueo: main->IF - Bloqueo invalido
+  IF - Bloqueo invalido: main->Respuesta de bloqueo; main->Crear bloqueo en calendario
+  Respuesta de bloqueo: main->Responder al operador
+  Crear bloqueo en calendario: main->Confirmar bloqueo
+  Confirmar bloqueo: main->Responder al operador
+  Buscar cliente: main->Leer ficha del cliente
+  Leer ficha del cliente: main->Formatear ficha
+  Formatear ficha: main->Responder al operador
+  Parsear pausa: main->Aplicar pausa
+  Aplicar pausa: main->Formatear pausa
+  Formatear pausa: main->Responder al operador
+  Parsear precio: main->Actualizar precio
+  Actualizar precio: main->Formatear precio
+  Formatear precio: main->Responder al operador
+  Leer estado del sistema: main->Formatear estado
+  Formatear estado: main->Responder al operador
+  Leer operadores: main->Comprobar operador
+  Comprobar operador: main->¿Es operador?
+  Leer pausa: main->Calcular pausa
+  Calcular pausa: main->IF - Cliente pausado
+  IF - Cliente pausado: main->; main->Switch
+
+=== NODO: Notificar al encargado [@n8n/n8n-nodes-langchain.toolHttpRequest] disabled=None ===
+{
+  "toolDescription": "Avisa al encargado de la barberia por WhatsApp cuando el cliente pide hablar con una persona, pide un descuento o un precio que no esta en la lista, quiere un servicio que no ofrecemos, tiene una queja, o cuando no pudiste resolver su solicitud. El texto debe resumir quien es el cliente, que pidio y su numero de WhatsApp.",
+  "method": "POST",
+  "url": "http://evolution_api:8080/message/sendText/hector",
+  "authentication": "genericCredentialType",
+  "genericAuthType": "httpHeaderAuth",
+  "sendHeaders": true,
+  "parametersHeaders": {
+    "values": []
+  },
+  "sendBody": true,
+  "parametersBody": {
+    "values": [
+      {
+        "name": "number",
+        "valueProvider": "fieldValue",
+        "value": "524521206246@s.whatsapp.net"
+      },
+      {
+        "name": "text"
+      },
+      {
+        "name": "delay",
+        "valueProvider": "fieldValue",
+        "value": "1000"
+      }
+    ]
+  }
+}
+
+=== NODO: IF - No es del bot [n8n-nodes-base.if] disabled=None ===
+{
+  "conditions": {
+    "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+    },
+    "conditions": [
+      {
+        "id": "ifnotbot-0000-4000-8000-000000000001",
+        "leftValue": "={{ $json.from_me }}",
+        "rightValue": "no",
+        "operator": {
+          "type": "string",
+          "operation": "equals"
+        }
+      }
+    ],
+    "combinator": "and"
+  },
+  "options": {}
+}
+
+=== NODO: ¿Es operador? [n8n-nodes-base.if] disabled=None ===
+{
+  "conditions": {
+    "options": {
+      "caseSensitive": false,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+    },
+    "conditions": [
+      {
+        "id": "esoperador0001",
+        "leftValue": "={{ $json.es_operador }}",
+        "rightValue": true,
+        "operator": {
+          "type": "boolean",
+          "operation": "true",
+          "singleValue": true
+        }
+      }
+    ],
+    "combinator": "and"
+  },
+  "options": {}
+}
+
+=== NODO: Router de comandos [n8n-nodes-base.switch] disabled=None ===
+{
+  "rules": {
+    "values": [
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d8c05938-a99b-409b-8534-251643cb9be2",
+              "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+              "rightValue": "HOY",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "HOY"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b4cbf386-f511-4ea0-9ed8-4b9c855e0152",
+              "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+              "rightValue": "MAÑANA",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "MAÑANA"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "79c6298b-149f-4b26-8c54-ce9b75defc87",
+              "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+              "rightValue": "SEMANA",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "SEMANA"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb8b752d-47cf-4e20-b61c-900f81a64f89",
+              "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+              "rightValue": "LIBRE",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "LIBRE"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "494599ed-64a7-48f6-b94f-f4ba5c39c7a0",
+              "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+              "rightValue": "CLIENTE",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "CLIENTE"
+      },
+      {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "850025f6-47f4-4903-b6c0-fe2d308ec546",
+              "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+              "rightValue": "BLOQUEAR",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+    

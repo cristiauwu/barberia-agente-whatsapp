@@ -1,0 +1,71 @@
+{
+  "agendar_jueves": {
+    "pregunta": "quiero un corte el jueves a las 4",
+    "respuesta": "A la hora que pediste, el *jueves 1 de octubre a las 4:00 p.m.*, ya hay otra cita agendada. ¿Te serviría a las *4:40 p.m.* o prefieres otra hora? 😊",
+    "metricas": {
+      "caracteres": 147,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 2,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 147
+    },
+    "ejecucion": "961",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "precio_ceja": {
+    "pregunta": "cuanto cuesta la ceja?",
+    "respuesta": "La ceja cuesta *$30* y dura aproximadamente 10 minutos. ¿Te la aparto?",
+    "metricas": {
+      "caracteres": 70,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 0,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 70
+    },
+    "ejecucion": "968",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "gracias": {
+    "pregunta": "gracias",
+    "respuesta": "¡De nada! Si necesitas algo más, aquí estoy. 🙌",
+    "metricas": {
+      "caracteres": 46,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 0,
+      "max_largo_linea": 46
+    },
+    "ejecucion": "973",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  }
+}

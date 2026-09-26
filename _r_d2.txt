@@ -1,0 +1,60 @@
+status 200
+id=OfboyiTEpyl0r60x | _verif-e2e-lectura-calendario | active=True | nodes=3
+id=barberiaAgenteUncensored | Barberia - Agente de citas (Uncensored AI) | active=True | nodes=52
+id=barberiaRecordatorios | Barberia - Recordatorios de cita | active=True | nodes=15
+=== BUSCAR barberiaReportes ===
+no existe todavia
+agente status 200
+NOMBRE: Barberia - Agente de citas (Uncensored AI) active: True nodos: 52
+  n8n-nodes-base.webhook v2 | Webhook
+  @n8n/n8n-nodes-langchain.agent v2 | AI Agent
+  @n8n/n8n-nodes-langchain.lmChatOpenAi v1.2 | OpenAI Chat Model
+  n8n-nodes-base.switch v3.2 | Switch
+  n8n-nodes-base.httpRequest v4.2 | Get Audio
+  n8n-nodes-base.convertToFile v1.1 | Convertir Audio
+  @n8n/n8n-nodes-langchain.openAi v1.8 | Transcribe a recording
+  n8n-nodes-base.set v3.4 | Audio Content
+  n8n-nodes-base.set v3.4 | Audio Content1
+  n8n-nodes-base.httpRequest v4.2 | Get Image
+  n8n-nodes-base.convertToFile v1.1 | Convertir Imagen
+  @n8n/n8n-nodes-langchain.openAi v1.8 | Describe imagen
+  n8n-nodes-base.set v3.4 | Edit Fields2
+  n8n-nodes-base.set v3.4 | Edit Fields
+  n8n-nodes-base.set v3.4 | Normalizacion
+  n8n-nodes-base.httpRequest v4.2 | Mandar mensaje
+  n8n-nodes-base.googleCalendarTool v1.3 | Consultar agenda
+  n8n-nodes-base.googleCalendarTool v1.3 | Agendar cita
+  n8n-nodes-base.googleCalendarTool v1.3 | Cancelar cita
+  n8n-nodes-base.googleCalendarTool v1.3 | Reagendar
+  @n8n/n8n-nodes-langchain.memoryPostgresChat v1.3 | Postgres Chat Memory
+  n8n-nodes-base.googleSheetsTool v4.6 | Registrar en hoja de citas
+  @n8n/n8n-nodes-langchain.toolHttpRequest v1.1 | Notificar al encargado
+  n8n-nodes-base.if v2.2 | IF - No es del bot
+  n8n-nodes-base.if v2.2 | ¿Es operador?
+  n8n-nodes-base.switch v3.2 | Router de comandos
+  n8n-nodes-base.httpRequest v4.2 | Responder al operador
+  n8n-nodes-base.set v3.4 | Armar respuesta COMANDOS
+  n8n-nodes-base.code v2 | Preparar rango de fechas
+  n8n-nodes-base.googleCalendar v1.3 | Leer agenda del rango
+  n8n-nodes-base.code v2 | Formatear agenda
+  n8n-nodes-base.code v2 | Parsear bloqueo
+  n8n-nodes-base.googleCalendar v1.3 | Crear bloqueo en calendario
+  n8n-nodes-base.set v3.4 | Respuesta de bloqueo
+  n8n-nodes-base.code v2 | Buscar cliente
+  n8n-nodes-base.postgres v2.6 | Leer ficha del cliente
+  n8n-nodes-base.code v2 | Formatear ficha
+  n8n-nodes-base.code v2 | Parsear pausa
+  n8n-nodes-base.postgres v2.6 | Aplicar pausa
+  n8n-nodes-base.code v2 | Formatear pausa
+  n8n-nodes-base.code v2 | Parsear precio
+  n8n-nodes-base.postgres v2.6 | Actualizar precio
+  n8n-nodes-base.code v2 | Formatear precio
+  n8n-nodes-base.postgres v2.6 | Leer estado del sistema
+  n8n-nodes-base.code v2 | Formatear estado
+  n8n-nodes-base.if v2.2 | IF - Bloqueo invalido
+  n8n-nodes-base.set v3.4 | Confirmar bloqueo
+  n8n-nodes-base.postgres v2.6 | Leer operadores
+  n8n-nodes-base.code v2 | Comprobar operador
+  n8n-nodes-base.postgres v2.6 | Leer pausa
+  n8n-nodes-base.code v2 | Calcular pausa
+  n8n-nodes-base.if v2.2 | IF - Cliente pausado

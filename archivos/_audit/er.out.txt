@@ -1,0 +1,7 @@
+=== workflow settings ===
+5zd5go4TFKqIsgdT|barberiaVigilancia|{"timezone":"America/Mexico_City","executionOrder":"v1"}
+barberiaRecordatorios|Barberia - Recordatorios de cita|{"timezone":"America/Mexico_City","callerPolicy":"workflowsFromSameOwner","availableInMCP":true,"executionOrder":"v1","binaryMode":"separate"}
+barberiaAgenteUncensored|Barberia - Agente de citas (Uncensored AI)|{"timezone":"America/Mexico_City","callerPolicy":"workflowsFromSameOwner","availableInMCP":true,"executionOrder":"v1","binaryMode":"separate"}
+ 
+=== execution_data for errors (truncated) ===
+

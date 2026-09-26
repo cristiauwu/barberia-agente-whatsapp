@@ -1,0 +1,180 @@
+== CATALOGO REAL barber_servicios ==
+  barba        Arreglo de barba             $100   20 min
+  ceja         Ceja                         $30    10 min
+  corte        Corte desvanecido o tijera   $150   40 min
+  dama         Corte de cabello dama        $250   50 min
+  depilacion   Depilación                   $0     30 min
+  mascarilla   Mascarilla                   $50    20 min
+  peinado      Peinado                      $300   45 min
+  planchado    Planchado express            $150   30 min
+
+== PRECIO: ¿la respuesta de la FAQ TOP trae el precio del catalogo? ==
+  OK   'cuanto cuesta el barba'                   -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'cuanto cuesta la barba'                   -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'cuanto vale el barba'                     -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'precio del barba'                         -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'precio de la barba'                       -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'cuanto sale el barba'                     -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'q precio tiene el barba'                  -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'cuanto es el barba'                       -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'cuanto me cobran por el barba'            -> ¿Cuánto cuesta la barba?                       cifras=['100', '20'] real=$100
+  OK   'cuanto cuesta el ceja'                    -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'cuanto cuesta la ceja'                    -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'cuanto vale el ceja'                      -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'precio del ceja'                          -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'precio de la ceja'                        -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'cuanto sale el ceja'                      -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'q precio tiene el ceja'                   -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'cuanto es el ceja'                        -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'cuanto me cobran por el ceja'             -> ¿Cuánto cuesta la ceja?                        cifras=['30', '10'] real=$30
+  OK   'cuanto cuesta el corte'                   -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto cuesta la corte'                   -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto vale el corte'                     -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'precio del corte'                         -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'precio de la corte'                       -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto sale el corte'                     -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'q precio tiene el corte'                  -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto es el corte'                       -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto me cobran por el corte'            -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto cuesta el corte de dama'           -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'cuanto cuesta la corte de dama'           -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'cuanto vale el corte de dama'             -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'precio del corte de dama'                 -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'precio de la corte de dama'               -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'cuanto sale el corte de dama'             -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'q precio tiene el corte de dama'          -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'cuanto es el corte de dama'               -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  OK   'cuanto me cobran por el corte de dama'    -> ¿Cuánto cuesta el corte de dama?               cifras=['250', '50'] real=$250
+  MAL  'cuanto cuesta el depilacion'              -> ¿Cuánto cuesta la depilación?                  cifras=['30'] real=$0
+  MAL  'cuanto cuesta la depilacion'              -> ¿Cuánto cuesta la depilación?                  cifras=['30'] real=$0
+  MAL  'cuanto vale el depilacion'                -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$0
+  MAL  'precio del depilacion'                    -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$0
+  MAL  'precio de la depilacion'                  -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$0
+  MAL  'cuanto sale el depilacion'                -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$0
+  MAL  'q precio tiene el depilacion'             -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$0
+  MAL  'cuanto es el depilacion'                  -> ¿Cuánto cuesta la depilación?                  cifras=['30'] real=$0
+  MAL  'cuanto me cobran por el depilacion'       -> ¿Cuánto cuesta la depilación?                  cifras=['30'] real=$0
+  MAL  'cuanto cuesta el mascarilla'              -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$50
+  MAL  'cuanto cuesta la mascarilla'              -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$50
+  MAL  'cuanto vale el mascarilla'                -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$50
+  OK   'precio del mascarilla'                    -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$50
+  OK   'precio de la mascarilla'                  -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$50
+  MAL  'cuanto sale el mascarilla'                -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$50
+  OK   'q precio tiene el mascarilla'             -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$50
+  OK   'cuanto es el mascarilla'                  -> ¿Cuánto dura cada servicio?                    cifras=['40', '20', '10', '20', '50', '30', '45', '30'] real=$50
+  OK   'cuanto me cobran por el mascarilla'       -> ¿Cuánto dura cada servicio?                    cifras=['40', '20', '10', '20', '50', '30', '45', '30'] real=$50
+  MAL  'cuanto cuesta el peinado'                 -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$300
+  MAL  'cuanto cuesta la peinado'                 -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$300
+  MAL  'cuanto vale el peinado'                   -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$300
+  OK   'precio del peinado'                       -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$300
+  OK   'precio de la peinado'                     -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$300
+  MAL  'cuanto sale el peinado'                   -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$300
+  OK   'q precio tiene el peinado'                -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$300
+  MAL  'cuanto es el peinado'                     -> ¿Cuánto dura cada servicio?                    cifras=['40', '20', '10', '20', '50', '30', '45', '30'] real=$300
+  MAL  'cuanto me cobran por el peinado'          -> ¿Cuánto dura cada servicio?                    cifras=['40', '20', '10', '20', '50', '30', '45', '30'] real=$300
+  OK   'cuanto cuesta el planchado'               -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto cuesta la planchado'               -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'cuanto vale el planchado'                 -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'precio del planchado'                     -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$150
+  OK   'precio de la planchado'                   -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$150
+  OK   'cuanto sale el planchado'                 -> ¿Cuánto cuesta el corte?                       cifras=['150', '40'] real=$150
+  OK   'q precio tiene el planchado'              -> ¿Me dan la lista de precios completa?          cifras=['150', '100', '30', '50', '250', '150', '300'] real=$150
+  MAL  'cuanto es el planchado'                   -> ¿Cuánto dura cada servicio?                    cifras=['40', '20', '10', '20', '50', '30', '45', '30'] real=$150
+  MAL  'cuanto me cobran por el planchado'        -> ¿Cuánto dura cada servicio?                    cifras=['40', '20', '10', '20', '50', '30', '45', '30'] real=$150
+
+== FALLOS DE PRECIO ==
+  q='cuanto cuesta el depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Cuánto cuesta la depilación?
+     respuesta   : 'La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.'
+  q='cuanto cuesta la depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Cuánto cuesta la depilación?
+     respuesta   : 'La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.'
+  q='cuanto vale el depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='precio del depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Me dan la lista de precios completa?
+     respuesta   : 'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50, corte de dama $250, planchado express $150, peinado $300. La depilación depende de la zona. ¿Cuál te aparto?'
+  q='precio de la depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Me dan la lista de precios completa?
+     respuesta   : 'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50, corte de dama $250, planchado express $150, peinado $300. La depilación depende de la zona. ¿Cuál te aparto?'
+  q='cuanto sale el depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='q precio tiene el depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Me dan la lista de precios completa?
+     respuesta   : 'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50, corte de dama $250, planchado express $150, peinado $300. La depilación depende de la zona. ¿Cuál te aparto?'
+  q='cuanto es el depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Cuánto cuesta la depilación?
+     respuesta   : 'La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.'
+  q='cuanto me cobran por el depilacion'
+     servicio=depilacion  precio_real=$0
+     FAQ devuelta: ¿Cuánto cuesta la depilación?
+     respuesta   : 'La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.'
+  q='cuanto cuesta el mascarilla'
+     servicio=mascarilla  precio_real=$50
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto cuesta la mascarilla'
+     servicio=mascarilla  precio_real=$50
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto vale el mascarilla'
+     servicio=mascarilla  precio_real=$50
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto sale el mascarilla'
+     servicio=mascarilla  precio_real=$50
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto cuesta el peinado'
+     servicio=peinado  precio_real=$300
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto cuesta la peinado'
+     servicio=peinado  precio_real=$300
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto vale el peinado'
+     servicio=peinado  precio_real=$300
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto sale el peinado'
+     servicio=peinado  precio_real=$300
+     FAQ devuelta: ¿Cuánto cuesta el corte?
+     respuesta   : 'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+  q='cuanto es el peinado'
+     servicio=peinado  precio_real=$300
+     FAQ devuelta: ¿Cuánto dura cada servicio?
+     respuesta   : 'Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.'
+  q='cuanto me cobran por el peinado'
+     servicio=peinado  precio_real=$300
+     FAQ devuelta: ¿Cuánto dura cada servicio?
+     respuesta   : 'Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.'
+  q='cuanto es el planchado'
+     servicio=planchado  precio_real=$150
+     FAQ devuelta: ¿Cuánto dura cada servicio?
+     respuesta   : 'Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.'
+  q='cuanto me cobran por el planchado'
+     servicio=planchado  precio_real=$150
+     FAQ devuelta: ¿Cuánto dura cada servicio?
+     respuesta   : 'Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.'
+  TOTAL fallos: 21 de 72
+
+== ¿HAY FAQ DE PRECIO DEDICADA POR SERVICIO? ==
+  barba        -> ¿Cuánto cuesta la barba?
+  ceja         -> ¿Cuánto cuesta la ceja?
+  corte        -> ¿Cuánto cuesta el corte?
+  dama         -> ¿Cuánto cuesta el corte de dama?
+  depilacion   -> ¿Cuánto cuesta la depilación?
+  mascarilla   -> NINGUNA FAQ DE PRECIO
+  peinado      -> NINGUNA FAQ DE PRECIO
+  planchado    -> NINGUNA FAQ DE PRECIO

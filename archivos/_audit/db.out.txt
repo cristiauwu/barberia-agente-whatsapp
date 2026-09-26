@@ -1,0 +1,16 @@
+### n8n_chat_histories structure
+id integer
+session_id character varying
+message jsonb
+
+### row counts
+n8n_chat_histories total rows: rc=0 -> 676 
+distinct session_ids: rc=0 -> 8 
+table size: rc=0 -> 280 kB 
+executions total: rc=0 -> 175 
+barber_citas: rc=0 -> 0 
+barber_escalaciones: rc=0 -> 0 
+barber_operadores: rc=0 -> 2 
+barber_pausas: rc=0 -> 0 
+
+### n8n_chat_histories sample row (message shape)

@@ -1,0 +1,39 @@
+[
+ {
+  "id": "1319",
+  "status": null,
+  "startedAt": null,
+  "entrada": " ¿qué día de la semana cae el 27/12/2026?",
+  "respuesta": "El 27 de diciembre de 2026 cae en *domingo*. 😊",
+  "enviado": "El 27 de diciembre de 2026 cae en *domingo*. 😊",
+  "herramientas": {
+   "Que dia es": {
+    "response": "domingo 27 de septiembre de 2026 (2026-09-27)"
+   }
+  },
+  "error": "null",
+  "nodos": [
+   "Webhook",
+   "Normalizacion",
+   "Buscar cita para confirmar",
+   "Es confirmacion?",
+   "Switch confirmacion",
+   "Leer operadores",
+   "Comprobar operador",
+   "¿Es operador?",
+   "IF - No es del bot",
+   "Leer pausa",
+   "Calcular pausa",
+   "IF - Cliente pausado",
+   "Switch",
+   "Edit Fields2",
+   "Edit Fields",
+   "Postgres Chat Memory",
+   "OpenAI Chat Model",
+   "Que dia es",
+   "AI Agent",
+   "IF - Respuesta no vacia",
+   "Mandar mensaje"
+  ]
+ }
+]

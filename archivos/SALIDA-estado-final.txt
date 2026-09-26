@@ -1,0 +1,21 @@
+=== WORKFLOWS EN N8N (3) ===
+  barberiaAgenteUncensored     active=True  nodes=45  Barberia - Agente de citas (Uncensored AI)
+  barberiaRecordatorios        active=True  nodes=17  Barberia - Recordatorios de cita
+  5zd5go4TFKqIsgdT             active=True  nodes=5   barberiaVigilancia
+
+  solo los 3 workflows esperados: False
+  INESPERADOS: ['5zd5go4TFKqIsgdT']
+
+=== barberiaAgenteUncensored: 45 nodos, active=True ===
+  nodos de multimedia presentes: []
+  credencial rota GtV72MoANECFbNoX: 0 apariciones
+  nodo 'Aviso solo texto': True
+  Switch reglas: ['Texto']
+  Switch respaldo: {'fallbackOutput': 'extra', 'renameFallbackOutput': 'Solo texto'}
+  Switch conexiones: [[{"node": "Edit Fields2", "type": "main", "index": 0}], [{"node": "Aviso solo texto", "type": "main", "index": 0}]]
+  conexiones de 'Aviso solo texto': [[{"node": "Mandar mensaje", "type": "main", "index": 0}]]
+  camino de texto:
+    Switch -> ['Edit Fields2', 'Aviso solo texto']   (esperado Edit Fields2: True)
+    Edit Fields2 -> ['Edit Fields']   (esperado Edit Fields: True)
+    Edit Fields -> ['AI Agent']   (esperado AI Agent: True)
+    AI Agent -> ['Mandar mensaje']   (esperado Mandar mensaje: True)

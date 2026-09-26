@@ -1,0 +1,552 @@
+[
+ {
+  "id": "1269",
+  "status": null,
+  "startedAt": null,
+  "entrada": " Quiero un corte el viernes a las 4",
+  "respuesta": "Listo, tu cita quedó apartada:  \n\n*Corte desvanecido* — *$150*  \nViernes 25 de septiembre, *4:00 p.m.*  \nCalle Pinzón #574  \n\nTe esperamos. ✅",
+  "enviado": "Listo, tu cita quedó apartada:\n\n*Corte desvanecido* — *$150*\nViernes 25 de septiembre, *4:00 p.m.*\nCalle Pinzón #574\n\nTe esperamos. ✅",
+  "herramientas": {
+   "Consultar agenda": {
+    "response": [
+     {
+      "id": "7id628rpoav7n1hai9oidaj1n8",
+      "summary": "Corte desvanecido o tijera — Juan Perez",
+      "start": {
+       "dateTime": "2026-09-28T15:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-28T15:40:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Juan Perez, corte desvanecido o tijera, $150, WhatsApp 5214501111805@s.whatsapp.net",
+      "created": "2026-09-25T02:06:13.000Z",
+      "updated": "2026-09-25T02:06:13.922Z",
+      "etag": "\"3580603947845918\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=N2lkNjI4cnBvYXY3bjFoYWk5b2lkYWoxbjggYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "7id628rpoav7n1hai9oidaj1n8@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "ie18j9a8g700dr282gpelrhd80",
+      "summary": "Corte desvanecido o tijera — Maria Lopez",
+      "start": {
+       "dateTime": "2026-09-29T11:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-29T11:40:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Maria Lopez, corte desvanecido o tijera, $150, WhatsApp 5214501111805@s.whatsapp.net",
+      "created": "2026-09-25T02:13:15.000Z",
+      "updated": "2026-09-25T02:13:15.275Z",
+      "etag": "\"3580604790551646\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=aWUxOGo5YThnNzAwZHIyODJncGVscmhkODAgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "ie18j9a8g700dr282gpelrhd80@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "luqlc95atsql3j5aormhkqtk48",
+      "summary": "Corte desvanecido o tijera — Cristia Ñ",
+      "start": {
+       "dateTime": "2026-09-27T15:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-27T15:40:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia Ñ, corte desvanecido o tijera, $150, WhatsApp: 5214521206246",
+      "created": "2026-09-25T05:35:04.000Z",
+      "updated": "2026-09-25T05:35:04.631Z",
+      "etag": "\"3580629009263966\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=bHVxbGM5NWF0c3FsM2o1YW9ybWhrcXRrNDggYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "luqlc95atsql3j5aormhkqtk48@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "kn3hf7o3riq25glss5og244290",
+      "summary": "CERRADO",
+      "start": {
+       "dateTime": "2026-12-24T00:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-12-24T23:59:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Día cerrado desde WhatsApp",
+      "created": "2026-09-25T07:01:08.000Z",
+      "updated": "2026-09-25T07:01:08.977Z",
+      "etag": "\"3580639337954398\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=a24zaGY3bzNyaXEyNWdsc3M1b2cyNDQyOTAgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "kn3hf7o3riq25glss5og244290@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "2091luref026edl3oae0p4vqq8",
+      "summary": "CERRADO",
+      "start": {
+       "dateTime": "2026-12-24T00:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-12-24T23:59:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Día cerrado desde WhatsApp",
+      "created": "2026-09-25T07:05:20.000Z",
+      "updated": "2026-09-25T07:05:20.722Z",
+      "etag": "\"3580639841445758\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MjA5MWx1cmVmMDI2ZWRsM29hZTBwNHZxcTggYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "2091luref026edl3oae0p4vqq8@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "41onqhg8r8qv0g3pkgs9or5vko",
+      "summary": "Mascarilla — Cristia",
+      "start": {
+       "dateTime": "2026-10-08T16:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-10-08T16:20:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia, mascarilla, $50, WhatsApp: 5214521206246",
+      "created": "2026-09-25T13:01:04.000Z",
+      "updated": "2026-09-25T13:01:05.985Z",
+      "etag": "\"3580682531970206\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NDFvbnFoZzhyOHF2MGczcGtnczlvcjV2a28gYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "41onqhg8r8qv0g3pkgs9or5vko@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "knn1jtadgfdkkugv53b6oi1qg4",
+      "summary": "Mascarilla — Sondeo fecha",
+      "start": {
+       "dateTime": "2026-12-03T13:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-12-03T13:20:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Sondeo fecha, mascarilla, $50, WhatsApp 5214501111805@s.whatsapp.net",
+      "created": "2026-09-25T13:26:01.000Z",
+      "updated": "2026-09-25T13:26:01.295Z",
+      "etag": "\"3580685522590942\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=a25uMWp0YWRnZmRra3VndjUzYjZvaTFxZzQgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "knn1jtadgfdkkugv53b6oi1qg4@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "fne718ooe3tarccbd5mpbhqbts",
+      "summary": "Corte desvanecido o tijera — Cristia",
+      "start": {
+       "dateTime": "2026-10-01T16:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-10-01T16:40:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia, corte desvanecido o tijera, $150, 5214521206246@s.whatsapp.net",
+      "created": "2026-09-25T13:26:09.000Z",
+      "updated": "2026-09-25T13:26:09.163Z",
+      "etag": "\"3580685538327518\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=Zm5lNzE4b29lM3RhcmNjYmQ1bXBiaHFidHMgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "fne718ooe3tarccbd5mpbhqbts@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "388bo94j588qh2lq3qft69b4hs",
+      "summary": "Ceja — Cristia",
+      "start": {
+       "dateTime": "2026-10-05T11:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-10-05T11:10:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia, ceja, $30, 5214501111805, sin notas",
+      "created": "2026-09-25T13:30:13.000Z",
+      "updated": "2026-09-25T13:30:13.297Z",
+      "etag": "\"3580686026594238\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=Mzg4Ym85NGo1ODhxaDJscTNxZnQ2OWI0aHMgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "388bo94j588qh2lq3qft69b4hs@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "n7v69c3pautr9tmghu9m2n97mk",
+      "summary": "Mascarilla — Prueba Reprogramar",
+      "start": {
+       "dateTime": "2026-10-08T17:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-10-08T17:20:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Prueba Reprogramar, mascarilla, $50, WhatsApp: 5214521206246",
+      "created": "2026-09-25T13:29:31.000Z",
+      "updated": "2026-09-25T13:32:12.024Z",
+      "etag": "\"3580686264048094\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=bjd2NjljM3BhdXRyOXRtZ2h1OW0ybjk3bWsgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "n7v69c3pautr9tmghu9m2n97mk@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 1,
+      "status": "confirmed"
+     },
+     {
+      "id": "t5e1g3av0r7na129p71ft204kc",
+      "summary": "Peinado — Cristia",
+      "start": {
+       "dateTime": "2026-10-06T17:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-10-06T17:45:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia, peinado, $300, WhatsApp: 5214521206246",
+      "created": "2026-09-25T13:34:06.000Z",
+      "updated": "2026-09-25T13:34:06.518Z",
+      "etag": "\"3580686493037630\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=dDVlMWczYXYwcjduYTEyOXA3MWZ0MjA0a2MgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "t5e1g3av0r7na129p71ft204kc@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "m10umnpeteqqrob2n392jn0bu4",
+      "summary": "Corte desvanecido - Prueba Formato",
+      "start": {
+       "dateTime": "2026-11-03T17:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-11-03T17:40:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Prueba Formato, corte desvanecido, $150, WhatsApp 5214501111805@s.whatsapp.net",
+      "created": "2026-09-25T13:35:18.000Z",
+      "updated": "2026-09-25T13:35:18.904Z",
+      "etag": "\"3580686637809182\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=bTEwdW1ucGV0ZXFxcm9iMm4zOTJqbjBidTQgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "m10umnpeteqqrob2n392jn0bu4@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "9vf7pv2s9gdaeee7je3cs40i00",
+      "summary": "Corte desvanecido o tijera — Cristia Ñ",
+      "start": {
+       "dateTime": "2026-09-28T14:20:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-28T15:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia Ñ, corte desvanecido o tijera, $150, WhatsApp 5214521206246@s.whatsapp.net",
+      "created": "2026-09-25T14:57:10.000Z",
+      "updated": "2026-09-25T14:57:10.211Z",
+      "etag": "\"3580696460423870\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=OXZmN3B2MnM5Z2RhZWVlN2plM2NzNDBpMDAgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "9vf7pv2s9gdaeee7je3cs40i00@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     },
+     {
+      "id": "auvtij2npnoe844n3df289gp70",
+      "summary": "Corte de cabello dama — Cristia Ñ",
+      "start": {
+       "dateTime": "2026-09-25T16:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-25T16:50:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cristia Ñ, corte de cabello dama, $250, WhatsApp: 5214521206246",
+      "created": "2026-09-25T22:29:29.000Z",
+      "updated": "2026-09-25T22:29:29.786Z",
+      "etag": "\"3580750739572030\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=YXV2dGlqMm5wbm9lODQ0bjNkZjI4OWdwNzAgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "auvtij2npnoe844n3df289gp70@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     }
+    ]
+   },
+   "Agendar cita": {
+    "response": [
+     {
+      "id": "85e7vg5vkv3pbggu01j9fp2gtk",
+      "summary": "Corte — Cliente Prueba",
+      "start": {
+       "dateTime": "2026-09-25T16:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-25T16:20:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Cliente Prueba, corte desvanecido, $150, WhatsApp 5214501111805@s.whatsapp.net",
+      "created": "2026-09-26T00:36:20.000Z",
+      "updated": "2026-09-26T00:36:20.706Z",
+      "etag": "\"3580765961412478\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=ODVlN3ZnNXZrdjNwYmdndTAxajlmcDJndGsgYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "85e7vg5vkv3pbggu01j9fp2gtk@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     }
+    ]
+   },
+   "Registrar en hoja de citas": {
+    "response": [
+     {
+      "ID": "85e7vg5vkv3pbggu01j9fp2gtk",
+      "Estatus": "agendado",
+      "Nombre": "Cliente Prueba",
+      "Servicio": "Corte",
+      "Precio del servicio": "150",
+      "Día ": "2026-09-25",
+      "Hora": "16:00:00",
+      "Numero celular": "5214501111805@s.whatsapp.net"
+     }
+    ]
+   }
+  },
+  "error": "null",
+  "nodos": [
+   "Webhook",
+   "Normalizacion",
+   "Leer operadores",
+   "Comprobar operador",
+   "¿Es operador?",
+   "IF - No es del bot",
+   "Leer pausa",
+   "Calcular pausa",
+   "IF - Cliente pausado",
+   "Switch",
+   "Edit Fields2",
+   "Edit Fields",
+   "Postgres Chat Memory",
+   "OpenAI Chat Model",
+   "Consultar agenda",
+   "Agendar cita",
+   "Registrar en hoja de citas",
+   "AI Agent",
+   "IF - Respuesta no vacia",
+   "Mandar mensaje"
+  ]
+ }
+]

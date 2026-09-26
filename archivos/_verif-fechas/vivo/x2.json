@@ -1,0 +1,39 @@
+[
+ {
+  "id": "1320",
+  "status": null,
+  "startedAt": null,
+  "entrada": " ¿qué día cae el 05/01/2027?",
+  "respuesta": "El 5 de enero de 2027 cae en martes. 😊",
+  "enviado": "El 5 de enero de 2027 cae en martes. 😊",
+  "herramientas": {
+   "Que dia es": {
+    "response": "viernes 30 de abril de 2027 (2027-04-30)"
+   }
+  },
+  "error": "null",
+  "nodos": [
+   "Webhook",
+   "Normalizacion",
+   "Buscar cita para confirmar",
+   "Es confirmacion?",
+   "Switch confirmacion",
+   "Leer operadores",
+   "Comprobar operador",
+   "¿Es operador?",
+   "IF - No es del bot",
+   "Leer pausa",
+   "Calcular pausa",
+   "IF - Cliente pausado",
+   "Switch",
+   "Edit Fields2",
+   "Edit Fields",
+   "Postgres Chat Memory",
+   "OpenAI Chat Model",
+   "Que dia es",
+   "AI Agent",
+   "IF - Respuesta no vacia",
+   "Mandar mensaje"
+  ]
+ }
+]

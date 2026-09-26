@@ -1,0 +1,4 @@
+aws-0-us-east-2.pooler.supabase.com
+5432
+postgres.zucgrcyzofelmiorvxhb
+password=Chinos452@@

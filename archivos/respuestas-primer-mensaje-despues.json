@@ -1,0 +1,140 @@
+{
+  "hola": {
+    "pregunta": "hola",
+    "respuesta": "¡Hola! Estos son nuestros servicios 💈\n- Corte: $150 caballero, $250 dama\n- Barba: $100\n- Ceja: $30\n- Mascarilla: $50\n- Planchado express: $150\n- Peinado: $300\n- Depilación: precio según la zona\n\n¿Cuál te aparto?",
+    "metricas": {
+      "caracteres": 211,
+      "lineas": 10,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 37
+    },
+    "ejecucion": "950",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": true
+  },
+  "buenas_tardes": {
+    "pregunta": "buenas tardes",
+    "respuesta": "¡Hola! Estos son nuestros servicios 💈\n- Corte: $150 caballero, $250 dama\n- Barba: $100\n- Ceja: $30\n- Mascarilla: $50\n- Planchado express: $150\n- Peinado: $300\n- Depilación: precio según la zona\n\n¿Cuál te aparto?",
+    "metricas": {
+      "caracteres": 211,
+      "lineas": 10,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 37
+    },
+    "ejecucion": "954",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": true
+  },
+  "servicios": {
+    "pregunta": "que servicios tienen?",
+    "respuesta": "¡Hola! Estos son nuestros servicios 💈\n- Corte: $150 caballero, $250 dama\n- Barba: $100\n- Ceja: $30\n- Mascarilla: $50\n- Planchado express: $150\n- Peinado: $300\n- Depilación: precio según la zona\n\n¿Cuál te aparto?",
+    "metricas": {
+      "caracteres": 211,
+      "lineas": 10,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 37
+    },
+    "ejecucion": "955",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": true
+  },
+  "cita": {
+    "pregunta": "quiero una cita",
+    "respuesta": "¡Hola! Estos son nuestros servicios 💈\n- Corte: $150 caballero, $250 dama\n- Barba: $100\n- Ceja: $30\n- Mascarilla: $50\n- Planchado express: $150\n- Peinado: $300\n- Depilación: precio según la zona\n\n¿Cuál te aparto?",
+    "metricas": {
+      "caracteres": 211,
+      "lineas": 10,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 37
+    },
+    "ejecucion": "956",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": true
+  },
+  "precio_corte": {
+    "pregunta": "cuanto cuesta el corte?",
+    "respuesta": "¡Hola! El corte desvanecido o tijera cuesta *$150* y dura 40 minutos. ¿Te lo aparto?",
+    "metricas": {
+      "caracteres": 84,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 0,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 84
+    },
+    "ejecucion": "957",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "informes": {
+    "pregunta": "Buenos días, quisiera informes",
+    "respuesta": "¡Hola! Estos son nuestros servicios 💈\n- Corte: $150 caballero, $250 dama\n- Barba: $100\n- Ceja: $30\n- Mascarilla: $50\n- Planchado express: $150\n- Peinado: $300\n- Depilación: precio según la zona\n\n¿Cuál te aparto?",
+    "metricas": {
+      "caracteres": 211,
+      "lineas": 10,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 37
+    },
+    "ejecucion": "958",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": true
+  }
+}

@@ -1,0 +1,431 @@
+{
+ "id": "5zd5go4TFKqIsgdT",
+ "name": "barberiaVigilancia",
+ "description": null,
+ "active": true,
+ "activeVersionId": "47661416-6c56-4421-ba92-c040066fb0d4",
+ "createdAt": "2026-09-25T13:25:48.086Z",
+ "updatedAt": "2026-09-25T13:25:48.086Z",
+ "isArchived": false,
+ "versionId": "47661416-6c56-4421-ba92-c040066fb0d4",
+ "versionCounter": 1,
+ "sourceWorkflowId": null,
+ "triggerCount": 1,
+ "nodes": [
+  {
+   "id": "02d02089-347a-4e12-bdb0-e35f1f127bde",
+   "name": "Cada 15 minutos",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    0
+   ],
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 15
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "5a08d28e-7eab-4b6f-bed7-35d7939cfecf",
+   "name": "Leer calendario",
+   "type": "n8n-nodes-base.googleCalendar",
+   "typeVersion": 1.3,
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "position": [
+    220,
+    0
+   ],
+   "parameters": {
+    "operation": "getAll",
+    "calendar": {
+     "__rl": true,
+     "value": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+     "mode": "list",
+     "cachedResultName": "BARBER"
+    },
+    "returnAll": true,
+    "options": {
+     "singleEvents": true
+    }
+   },
+   "credentials": {
+    "googleCalendarOAuth2Api": {
+     "id": "I6TpcTTP1cn1tviR",
+     "name": "Google Calendar account"
+    }
+   }
+  },
+  {
+   "id": "f0469cc1-6ff4-4226-ada7-02e3e1a965a5",
+   "name": "Buscar citas pasadas",
+   "notesInFlow": true,
+   "notes": "Red de seguridad del bug de fechas: si el modelo\nagenda en el pasado, esto lo detecta en 15 min.",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    440,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// Detecta citas agendadas en el PASADO (bug conocido: el modelo\n// puede elegir la ocurrencia del dia de la semana que ya paso).\nconst ahora = Date.now();\nconst sospechosas = [];\nfor (const item of $input.all()) {\n  const e = item.json;\n  const ini = (e.start && e.start.dateTime) || '';\n  if (!ini) continue;\n  const t = new Date(ini).getTime();\n  // Margen de 2 horas: una cita que empezo hace menos no es un bug,\n  // es una cita en curso.\n  if (t < ahora - 2 * 60 * 60 * 1000) {\n    const d = new Date(ini);\n    sospechosas.push({ json: {\n      id: e.id,\n      summary: e.summary || '',\n      inicio: e.start.dateTime,\n      cuando: d.toLocaleString('es-MX', {\n        timeZone: 'America/Mexico_City', dateStyle: 'full',\n        timeStyle: 'short' }),\n    } });\n  }\n}\nif (!sospechosas.length) {\n  return [{ json: { hay: false, texto: '' } }];\n}\nconst l = ['⚠️ *Citas en el PASADO detectadas*', ''];\nl.push('Revisa esto: el bot pudo haber agendado mal.');\nl.push('');\nfor (const s of sospechosas) {\n  l.push(`*${s.summary}*`);\n  l.push(`${s.cuando}`);\n  l.push('');\n}\nl.push(`Total: ${sospechosas.length}`);\nreturn [{ json: { hay: true, texto: l.join('\\n'),\n  cuantas: sospechosas.length } }];"
+   }
+  },
+  {
+   "id": "dca03908-f584-41bf-b528-fd822c8b96e3",
+   "name": "IF - Hay citas pasadas",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    660,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": false,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "hay0001",
+       "leftValue": "={{ $json.hay }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "8eb4680d-3aa7-454a-8e1f-51fd129c0682",
+   "name": "Avisar al dueño",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "position": [
+    880,
+    0
+   ],
+   "parameters": {
+    "method": "POST",
+    "url": "http://evolution_api:8080/message/sendText/hector",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ number: '524521206246@s.whatsapp.net', text: $json.texto,\n  delay: 1000 }) }}",
+    "options": {}
+   },
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "qaGW1Tvt5BqPujJ1",
+     "name": "Evolution API"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Cada 15 minutos": {
+   "main": [
+    [
+     {
+      "node": "Leer calendario",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer calendario": {
+   "main": [
+    [
+     {
+      "node": "Buscar citas pasadas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Buscar citas pasadas": {
+   "main": [
+    [
+     {
+      "node": "IF - Hay citas pasadas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "IF - Hay citas pasadas": {
+   "main": [
+    [
+     {
+      "node": "Avisar al dueño",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  }
+ },
+ "nodeGroups": [],
+ "settings": {
+  "timezone": "America/Mexico_City",
+  "executionOrder": "v1"
+ },
+ "staticData": {
+  "node:Cada 15 minutos": {
+   "recurrenceRules": [
+    null
+   ],
+   "recurrenceRuleSignatures": [
+    null
+   ]
+  }
+ },
+ "pinData": null,
+ "meta": null,
+ "tags": [],
+ "shared": [
+  {
+   "role": "workflow:owner",
+   "workflowId": "5zd5go4TFKqIsgdT",
+   "projectId": "lVAFHh02lbNJLuzg",
+   "project": {
+    "id": "lVAFHh02lbNJLuzg",
+    "name": "Juan Tinoco <crir627@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "cbd5dd6b-972e-4eff-aee4-71039bf3a902",
+    "createdAt": "2026-09-24T23:36:47.874Z",
+    "updatedAt": "2026-09-24T23:41:11.384Z"
+   },
+   "createdAt": "2026-09-25T13:25:48.086Z",
+   "updatedAt": "2026-09-25T13:25:48.086Z"
+  }
+ ],
+ "activeVersion": {
+  "versionId": "47661416-6c56-4421-ba92-c040066fb0d4",
+  "workflowId": "5zd5go4TFKqIsgdT",
+  "nodes": [
+   {
+    "id": "02d02089-347a-4e12-bdb0-e35f1f127bde",
+    "name": "Cada 15 minutos",
+    "type": "n8n-nodes-base.scheduleTrigger",
+    "typeVersion": 1.2,
+    "position": [
+     0,
+     0
+    ],
+    "parameters": {
+     "rule": {
+      "interval": [
+       {
+        "field": "minutes",
+        "minutesInterval": 15
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "5a08d28e-7eab-4b6f-bed7-35d7939cfecf",
+    "name": "Leer calendario",
+    "type": "n8n-nodes-base.googleCalendar",
+    "typeVersion": 1.3,
+    "retryOnFail": true,
+    "maxTries": 3,
+    "waitBetweenTries": 2000,
+    "position": [
+     220,
+     0
+    ],
+    "parameters": {
+     "operation": "getAll",
+     "calendar": {
+      "__rl": true,
+      "value": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+      "mode": "list",
+      "cachedResultName": "BARBER"
+     },
+     "returnAll": true,
+     "options": {
+      "singleEvents": true
+     }
+    },
+    "credentials": {
+     "googleCalendarOAuth2Api": {
+      "id": "I6TpcTTP1cn1tviR",
+      "name": "Google Calendar account"
+     }
+    }
+   },
+   {
+    "id": "f0469cc1-6ff4-4226-ada7-02e3e1a965a5",
+    "name": "Buscar citas pasadas",
+    "notesInFlow": true,
+    "notes": "Red de seguridad del bug de fechas: si el modelo\nagenda en el pasado, esto lo detecta en 15 min.",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     440,
+     0
+    ],
+    "parameters": {
+     "jsCode": "// Detecta citas agendadas en el PASADO (bug conocido: el modelo\n// puede elegir la ocurrencia del dia de la semana que ya paso).\nconst ahora = Date.now();\nconst sospechosas = [];\nfor (const item of $input.all()) {\n  const e = item.json;\n  const ini = (e.start && e.start.dateTime) || '';\n  if (!ini) continue;\n  const t = new Date(ini).getTime();\n  // Margen de 2 horas: una cita que empezo hace menos no es un bug,\n  // es una cita en curso.\n  if (t < ahora - 2 * 60 * 60 * 1000) {\n    const d = new Date(ini);\n    sospechosas.push({ json: {\n      id: e.id,\n      summary: e.summary || '',\n      inicio: e.start.dateTime,\n      cuando: d.toLocaleString('es-MX', {\n        timeZone: 'America/Mexico_City', dateStyle: 'full',\n        timeStyle: 'short' }),\n    } });\n  }\n}\nif (!sospechosas.length) {\n  return [{ json: { hay: false, texto: '' } }];\n}\nconst l = ['⚠️ *Citas en el PASADO detectadas*', ''];\nl.push('Revisa esto: el bot pudo haber agendado mal.');\nl.push('');\nfor (const s of sospechosas) {\n  l.push(`*${s.summary}*`);\n  l.push(`${s.cuando}`);\n  l.push('');\n}\nl.push(`Total: ${sospechosas.length}`);\nreturn [{ json: { hay: true, texto: l.join('\\n'),\n  cuantas: sospechosas.length } }];"
+    }
+   },
+   {
+    "id": "dca03908-f584-41bf-b528-fd822c8b96e3",
+    "name": "IF - Hay citas pasadas",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     660,
+     0
+    ],
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": false,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "hay0001",
+        "leftValue": "={{ $json.hay }}",
+        "rightValue": true,
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    }
+   },
+   {
+    "id": "8eb4680d-3aa7-454a-8e1f-51fd129c0682",
+    "name": "Avisar al dueño",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "retryOnFail": true,
+    "maxTries": 3,
+    "waitBetweenTries": 2000,
+    "position": [
+     880,
+     0
+    ],
+    "parameters": {
+     "method": "POST",
+     "url": "http://evolution_api:8080/message/sendText/hector",
+     "authentication": "genericCredentialType",
+     "genericAuthType": "httpHeaderAuth",
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ number: '524521206246@s.whatsapp.net', text: $json.texto,\n  delay: 1000 }) }}",
+     "options": {}
+    },
+    "credentials": {
+     "httpHeaderAuth": {
+      "id": "qaGW1Tvt5BqPujJ1",
+      "name": "Evolution API"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Cada 15 minutos": {
+    "main": [
+     [
+      {
+       "node": "Leer calendario",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Leer calendario": {
+    "main": [
+     [
+      {
+       "node": "Buscar citas pasadas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Buscar citas pasadas": {
+    "main": [
+     [
+      {
+       "node": "IF - Hay citas pasadas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "IF - Hay citas pasadas": {
+    "main": [
+     [
+      {
+       "node": "Avisar al dueño",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     []
+    ]
+   }
+  },
+  "nodeGroups": [],
+  "authors": "Juan Tinoco",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "createdAt": "2026-09-25T13:25:48.086Z",
+  "updatedAt": "2026-09-25T13:25:48.086Z",
+  "workflowPublishHistory": [
+   {
+    "id": 135,
+    "workflowId": "5zd5go4TFKqIsgdT",
+    "versionId": "47661416-6c56-4421-ba92-c040066fb0d4",
+    "event": "activated",
+    "userId": "cbd5dd6b-972e-4eff-aee4-71039bf3a902",
+    "createdAt": "2026-09-25T13:25:48.168Z"
+   }
+  ]
+ }
+}

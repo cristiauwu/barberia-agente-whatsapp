@@ -1,0 +1,36 @@
+[
+ {
+  "id": "1277",
+  "status": null,
+  "startedAt": null,
+  "entrada": " ¿Qué día de la semana es mañana?",
+  "respuesta": "Mañana es *sábado, 26 de septiembre de 2026*. 😊 ¿Te agendo una cita?",
+  "enviado": "Mañana es *sábado, 26 de septiembre de 2026*. 😊 ¿Te agendo una cita?",
+  "herramientas": {
+   "Que dia es": {
+    "response": "sabado 26 de septiembre de 2026 (2026-09-26)"
+   }
+  },
+  "error": "null",
+  "nodos": [
+   "Webhook",
+   "Normalizacion",
+   "Leer operadores",
+   "Comprobar operador",
+   "¿Es operador?",
+   "IF - No es del bot",
+   "Leer pausa",
+   "Calcular pausa",
+   "IF - Cliente pausado",
+   "Switch",
+   "Edit Fields2",
+   "Edit Fields",
+   "Postgres Chat Memory",
+   "OpenAI Chat Model",
+   "Que dia es",
+   "AI Agent",
+   "IF - Respuesta no vacia",
+   "Mandar mensaje"
+  ]
+ }
+]

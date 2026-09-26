@@ -1,0 +1,6 @@
+evolution_api|Up 11 hours
+evolution_postgres|Up 11 hours (healthy)
+evolution_manager|Up 13 hours
+evolution_redis|Up 13 hours (healthy)
+barberia-n8n|Up 14 hours
+barberia-postgres|Up 14 hours (healthy)

@@ -1,0 +1,46 @@
+{
+ "id": "1uIUWfNl36MpJ9V8",
+ "name": "My workflow",
+ "description": null,
+ "active": false,
+ "activeVersionId": null,
+ "createdAt": "2026-09-24T23:43:12.696Z",
+ "updatedAt": "2026-09-24T23:43:12.696Z",
+ "isArchived": false,
+ "versionId": "8af25783-744e-4a92-b157-e7f3e39374f4",
+ "versionCounter": 1,
+ "sourceWorkflowId": null,
+ "triggerCount": 0,
+ "nodes": [],
+ "connections": {},
+ "nodeGroups": [],
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "staticData": null,
+ "pinData": {},
+ "meta": null,
+ "tags": [],
+ "shared": [
+  {
+   "role": "workflow:owner",
+   "workflowId": "1uIUWfNl36MpJ9V8",
+   "projectId": "lVAFHh02lbNJLuzg",
+   "project": {
+    "id": "lVAFHh02lbNJLuzg",
+    "name": "Juan Tinoco <crir627@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "customTelemetryTags": [],
+    "creatorId": "cbd5dd6b-972e-4eff-aee4-71039bf3a902",
+    "createdAt": "2026-09-24T23:36:47.874Z",
+    "updatedAt": "2026-09-24T23:41:11.384Z"
+   },
+   "createdAt": "2026-09-24T23:43:12.696Z",
+   "updatedAt": "2026-09-24T23:43:12.696Z"
+  }
+ ],
+ "activeVersion": null
+}

@@ -1,0 +1,7 @@
+=== files === /usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/cjs/workflow-data-proxy.js
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/cjs/node-helpers.js
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/cjs/telemetry-helpers.js
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/cjs/workflow.js
+
+=== NodeHelpers applyDefaults === 
+=== applyDefaults impl === 

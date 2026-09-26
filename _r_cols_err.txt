@@ -1,0 +1,15 @@
+psql: warning: extra command-line argument "table_name||'.'||column_name||'" ignored
+psql: warning: extra command-line argument "::" ignored
+psql: warning: extra command-line argument "'||data_type" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "information_schema.columns" ignored
+psql: warning: extra command-line argument "WHERE" ignored
+psql: warning: extra command-line argument "table_schema='public'" ignored
+psql: warning: extra command-line argument "AND" ignored
+psql: warning: extra command-line argument "table_name" ignored
+psql: warning: extra command-line argument "IN" ignored
+psql: warning: extra command-line argument "('barber_citas','barber_clientes','barber_servicios','barber_operadores')" ignored
+psql: warning: extra command-line argument "ORDER" ignored
+psql: warning: extra command-line argument "BY" ignored
+psql: warning: extra command-line argument "table_name," ignored
+psql: warning: extra command-line argument "ordinal_position;" ignored

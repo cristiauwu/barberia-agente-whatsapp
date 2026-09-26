@@ -1,0 +1,50 @@
+=== supply-data-context.js === 212 /usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/execution-engine/node-execution-context/supply-data-context.js
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SupplyDataContext = void 0;
+const deferred_promise_1 = require("@n8n/utils/promise/deferred-promise");
+const get_1 = __importDefault(require("lodash/get"));
+const n8n_workflow_1 = require("n8n-workflow");
+const base_execute_context_1 = require("./base-execute-context");
+const binary_helper_functions_1 = require("./utils/binary-helper-functions");
+const construct_execution_metadata_1 = require("./utils/construct-execution-metadata");
+const copy_input_items_1 = require("./utils/copy-input-items");
+const data_table_helper_functions_1 = require("./utils/data-table-helper-functions");
+const deduplication_helper_functions_1 = require("./utils/deduplication-helper-functions");
+const file_system_helper_functions_1 = require("./utils/file-system-helper-functions");
+const get_input_connection_data_1 = require("./utils/get-input-connection-data");
+const normalize_items_1 = require("./utils/normalize-items");
+const request_helper_functions_1 = require("./utils/request-helper-functions");
+const return_json_array_1 = require("./utils/return-json-array");
+const ssh_tunnel_helper_functions_1 = require("./utils/ssh-tunnel-helper-functions");
+class SupplyDataContext extends base_execute_context_1.BaseExecuteContext {
+    constructor(workflow, node, additionalData, mode, runExecutionData, runIndex, connectionInputData, inputData, connectionType, executeData, closeFunctions, abortSignal, parentNode) {
+        super(workflow, node, additionalData, mode, runExecutionData, runIndex, connectionInputData, inputData, executeData, abortSignal);
+        this.connectionType = connectionType;
+        this.closeFunctions = closeFunctions;
+        this.hints = [];
+        this.dynamicCredentialsFlagsAtInput = new Map();
+        this.parentNode = parentNode;
+        this.helpers = {
+            createDeferredPromise: deferred_promise_1.createDeferredPromise,
+            copyInputItems: copy_input_items_1.copyInputItems,
+            ...(0, request_helper_functions_1.getRequestHelperFunctions)(workflow, node, additionalData, runExecutionData, connectionInputData),
+            ...(0, ssh_tunnel_helper_functions_1.getSSHTunnelFunctions)(),
+            ...(0, file_system_helper_functions_1.getFileSystemHelperFunctions)(node),
+            ...(0, binary_helper_functions_1.getBinaryHelperFunctions)(additionalData, workflow.id),
+            ...(0, data_table_helper_functions_1.getDataTableHelperFunctions)(additionalData, workflow, node),
+            ...(0, deduplication_helper_functions_1.getDeduplicationHelperFunctions)(workflow, node),
+            assertBinaryData: (itemIndex, propertyName) => (0, binary_helper_functions_1.assertBinaryData)(inputData, node, itemIndex, propertyName, 0, workflow.settings.binaryMode),
+            getBinaryDataBuffer: async (itemIndex, propertyName) => await (0, binary_helper_functions_1.getBinaryDataBuffer)(inputData, itemIndex, propertyName, 0, workflow.settings.binaryMode),
+            detectBinaryEncoding: (buffer) => (0, binary_helper_functions_1.detectBinaryEncoding)(buffer),
+            returnJsonArray: return_json_array_1.returnJsonArray,
+            normalizeItems: normalize_items_1.normalizeItems,
+            constructExecutionMetaData: construct_execution_metadata_1.constructExecutionMetaData,
+        };
+        this.getNodeParameter = ((parameterName, itemIndex, fallbackValue, options) => this._getNodeParameter(parameterName, itemIndex, fallbackValue, options));
+    }
+    cloneWith(replacements) {
+        const context = new SupplyDataContext(this.workflow, this.node, this.additionalData, this.mode, this.runExecutionData, replacements.runIndex, this.connectionInputData, {}, this.co

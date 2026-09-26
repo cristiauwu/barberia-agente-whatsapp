@@ -1,0 +1,12 @@
+=== getNodeParameters refs ===
+
+=== NodeHelpers applyDefaults ===
+
+=== supply-data ===
+46:        this.getNodeParameter = ((parameterName, itemIndex, fallbackValue, options) => this._getNodeParameter(parameterName, itemIndex, fallbackValue, options));
+
+=== SupplyDataContext users ===
+/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/execution-engine/node-execution-context/index.js
+/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/execution-engine/node-execution-context/utils/get-input-connection-data.js
+/usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/execution-engine/node-execution-context/supply-data-context.js
+

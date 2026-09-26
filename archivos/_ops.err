@@ -1,0 +1,4 @@
+psql: warning: extra command-line argument "*" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "barber_operadores;" ignored
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  role "postgres" does not exist

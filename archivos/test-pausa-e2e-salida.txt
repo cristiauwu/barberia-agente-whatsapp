@@ -1,0 +1,241 @@
+TEST E2E DEL COMANDO PAUSA
+Fecha local: 2026-09-25 07:23:14
+Workflow: barberiaAgenteUncensored
+Cliente a pausar: 5214501111805@s.whatsapp.net
+Otro cliente (no pausado): 5214521206246@s.whatsapp.net
+Dueno (comandos): 524521206246@s.whatsapp.net
+
+==============================================================================
+ENTORNO
+==============================================================================
+docker ps rc=0
+evolution_api|Up 12 hours
+evolution_postgres|Up 12 hours (healthy)
+evolution_manager|Up 13 hours
+evolution_redis|Up 13 hours (healthy)
+barberia-n8n|Up 14 hours
+barberia-postgres|Up 14 hours (healthy)
+APIKEY Evolution: SI (40 chars)
+barber_clientes count = ['0']
+
+==============================================================================
+PASO 0 - LIMPIEZA PREVIA
+==============================================================================
+SQL: DELETE FROM barber_pausas WHERE jid IN ('5214501111805@s.whatsapp.net','5214521206246@s.whatsapp.net');
+rc=0 stdout='DELETE 0' stderr=''
+barber_pausas total = ['0']
+
+==============================================================================
+PASO 1 - LINEA BASE (SIN PAUSA): EL BOT DEBE RESPONDER
+==============================================================================
+  Enviando desde 5214501111805@s.whatsapp.net: 'hola, cuanto cuesta el corte?'
+  HTTP 200 | webhook: {"message":"Workflow was started"}
+  message_id: T194FBF1620
+  Esperando 40s...
+  Ejecucion id=798 status=success
+  Nodos: ["Webhook", "Normalizacion", "Leer operadores", "Comprobar operador", "¿Es operador?", "IF - No es del bot", "Leer pausa", "Calcular pausa", "IF - Cliente pausado", "Switch", "Edit Fields2", "Edit Fields", "Postgres Chat Memory", "OpenAI Chat Model", "AI Agent", "Mandar mensaje"]
+  message_content: '  hola, cuanto cuesta el corte?'
+  Rama 'IF - Cliente pausado' (0=true,1=false): 1
+  Leer pausa: {'pausado': '0', 'hasta': None, 'motivo': ''}
+  Respuesta del bot: 'El corte desvanecido o de tijera cuesta *$150* y dura 40 minutos. ¿Quieres agendar una cita? 😊'
+
+==============================================================================
+PASO 1 - RESULTADOS
+==============================================================================
+  [OK   ] El nodo 'IF - Cliente pausado' se ejecuto en la linea base
+  [OK   ] Tomo la rama false (no pausado)  ->  rama=1 (0=true,1=false)
+  [OK   ] El bot RESPONDIO sin pausa  ->  texto='El corte desvanecido o de tijera cuesta *$150* y dura 40 minutos. ¿Quieres agendar una cita? 😊'
+  Ejecucion linea base: id=798
+
+==============================================================================
+PASO 2 - APLICAR LA PAUSA (comando del DUENO)
+==============================================================================
+  Enviando comando desde el dueno 524521206246@s.whatsapp.net: 'PAUSA 5214501111805 2h'
+  HTTP 200 | webhook: {"message":"Workflow was started"}
+  Esperando 20s...
+  Ejecucion comando id=801 status=success
+  Nodos: ["Webhook", "Normalizacion", "Leer operadores", "Comprobar operador", "¿Es operador?", "Router de comandos", "Parsear pausa", "Aplicar pausa", "Formatear pausa", "Responder al operador"]
+  Parsear pausa: pausaOk=True numero='5214501111805' horas=2
+  Aplicar pausa main: [[{"json": {"success": true}, "pairedItem": [{"item": 0}]}]]
+  Respuesta al dueno: 'No encontré un cliente con el número *5214501111805*.\n\nLa pausa solo aplica a clientes que ya existen en el sistema.'
+  SQL: SELECT jid, hasta, motivo FROM barber_pausas WHERE jid='5214501111805@s.whatsapp.net';
+  STDOUT: ''
+  STDERR: ''
+
+==============================================================================
+PASO 2 - RESULTADOS
+==============================================================================
+  [FALLO] La pausa quedo guardada en Postgres (barber_pausas)  ->  fila='<vacia>'
+
+==============================================================================
+PASO 3 - PRUEBA CLAVE: CON PAUSA EL BOT DEBE CALLAR
+==============================================================================
+  Enviando desde 5214501111805@s.whatsapp.net: 'sigo esperando respuesta, cuanto cuesta el corte?'
+  HTTP 200 | webhook: {"message":"Workflow was started"}
+  message_id: T6079B1E01F
+  Esperando 40s...
+  Ejecucion id=802 status=success
+  Nodos: ["Webhook", "Normalizacion", "Leer operadores", "Comprobar operador", "¿Es operador?", "IF - No es del bot", "Leer pausa", "Calcular pausa", "IF - Cliente pausado", "Switch", "Edit Fields2", "Edit Fields", "Postgres Chat Memory", "OpenAI Chat Model", "AI Agent", "Mandar mensaje"]
+  message_content: '  sigo esperando respuesta, cuanto cuesta el corte?'
+  Rama 'IF - Cliente pausado': 1
+  Leer pausa: {'pausado': '0', 'hasta': None, 'motivo': ''}
+  Respuesta del bot: 'El corte desvanecido o de tijera cuesta *$150* y dura 40 minutos. ¿Te aparto una cita? 😊'
+
+==============================================================================
+PASO 3 - RESULTADOS
+==============================================================================
+  [OK   ] El nodo 'IF - Cliente pausado' se ejecuto
+  [FALLO] Tomo la rama true (pausado)  ->  rama=1
+  [FALLO] NO existe el nodo 'AI Agent'
+  [FALLO] NO existe el nodo 'Mandar mensaje'
+  [FALLO] 'Leer pausa' devolvio pausado = 1  ->  leer_pausa={'pausado': '0', 'hasta': None, 'motivo': ''}
+  => !! FALLO GRAVE: EL BOT RESPONDIO AUN CON LA PAUSA ACTIVA.
+     Texto enviado por el bot: 'El corte desvanecido o de tijera cuesta *$150* y dura 40 minutos. ¿Te aparto una cita? 😊'
+
+==============================================================================
+PASO 4 - OTRO CLIENTE (NO PAUSADO) DEBE RECIBIR RESPUESTA
+==============================================================================
+  Enviando desde 5214521206246@s.whatsapp.net: 'hola, buenas tardes, tienen cita disponible?'
+  HTTP 200 | webhook: {"message":"Workflow was started"}
+  message_id: TC24BD4F1AC
+  Esperando 40s...
+  Ejecucion id=804 status=success
+  Nodos: ["Webhook", "Normalizacion", "Leer operadores", "Comprobar operador", "¿Es operador?", "Router de comandos", "IF - No es del bot", "Leer pausa", "Calcular pausa", "IF - Cliente pausado", "Switch", "Edit Fields2", "Edit Fields", "Postgres Chat Memory", "OpenAI Chat Model", "AI Agent", "Mandar mensaje"]
+  Rama 'IF - Cliente pausado': 1
+  Respuesta del bot: '¡Hola! Claro, ¿qué servicio te gustaría agendar y para qué día y hora? 😊'
+
+==============================================================================
+PASO 4 - RESULTADOS
+==============================================================================
+  [OK   ] Otro cliente NO pausado SI recibe respuesta (pausa selectiva)  ->  texto='¡Hola! Claro, ¿qué servicio te gustaría agendar y para qué día y hora? 😊'
+
+==============================================================================
+PASO 5 - EXPIRACION DE LA PAUSA: EL BOT DEBE VOLVER A RESPONDER
+==============================================================================
+  SQL: UPDATE barber_pausas SET hasta = now() - interval '1 minute' WHERE jid='5214501111805@s.whatsapp.net';
+  rc=0 stdout='UPDATE 0' stderr=''
+  Fila ahora: []
+  Enviando desde 5214501111805@s.whatsapp.net: 'hola de nuevo, cuanto cuesta el corte?'
+  HTTP 200 | webhook: {"message":"Workflow was started"}
+  message_id: T1B46E7F89E
+  Esperando 40s...
+  Ejecucion id=816 status=success
+  Nodos: ["Webhook", "Normalizacion", "Leer operadores", "Comprobar operador", "¿Es operador?", "IF - No es del bot", "Leer pausa", "Calcular pausa", "IF - Cliente pausado", "Switch", "Edit Fields2", "Edit Fields", "Postgres Chat Memory", "OpenAI Chat Model", "AI Agent", "Mandar mensaje"]
+  Rama 'IF - Cliente pausado': 1
+  Leer pausa: {'pausado': '0', 'hasta': None, 'motivo': ''}
+  Respuesta del bot: '¡Hola de nuevo! El corte desvanecido o de tijera tiene un costo de *$150* y dura 40 minutos. ¿Te aparto una cita? 😊'
+
+==============================================================================
+PASO 5 - RESULTADOS
+==============================================================================
+  [OK   ] Al expirar la pausa el bot vuelve a responder  ->  texto='¡Hola de nuevo! El corte desvanecido o de tijera tiene un costo de *$150* y dura 40 minutos. ¿Te aparto una cita? 😊'
+
+==============================================================================
+PASO 6 - LIMPIEZA FINAL
+==============================================================================
+  SQL: DELETE FROM barber_pausas WHERE jid IN ('5214501111805@s.whatsapp.net','5214521206246@s.whatsapp.net');
+  rc=0 stdout='DELETE 0' stderr=''
+  Pausas restantes para los jids de prueba: ['0']
+  barber_pausas total (toda la tabla): ['0']
+
+==============================================================================
+PASO 6 - RESULTADOS
+==============================================================================
+  [OK   ] Tabla barber_pausas limpia para los jids de prueba  ->  restantes=['0'] | total tabla=['0']
+
+==============================================================================
+PASO 7 - ESTRUCTURA DE LOS NODOS DEL WORKFLOW
+==============================================================================
+  Nodo 'Leer pausa':          presente
+    alwaysOutputData = True
+    query contiene barber_pausas = True
+  Nodo 'Calcular pausa':      presente
+  Nodo 'IF - Cliente pausado':presente
+  Nodo 'IF - No es del bot':  presente
+  Cadena IF-No es del bot -> Leer pausa -> Calcular pausa -> IF-Cliente pausado: True
+    IF-No es del bot[0] -> ['Leer pausa']
+    Leer pausa[0]       -> ['Calcular pausa']
+    Calcular pausa[0]   -> ['IF - Cliente pausado']
+    IF-Cliente pausado[0]=true  -> []
+    IF-Cliente pausado[1]=false -> ['Switch']
+
+==============================================================================
+PASO 7 - RESULTADOS
+==============================================================================
+  [OK   ] 'Leer pausa' existe con alwaysOutputData: true  ->  alwaysOutputData=True
+  [OK   ] Existen 'Calcular pausa' e 'IF - Cliente pausado'
+  [OK   ] Cadena IF-No es del bot -> Leer pausa -> Calcular pausa -> IF-Cliente pausado
+  [OK   ] La rama true de 'IF - Cliente pausado' esta VACIA (sin salida)  ->  destinos=[]
+  [OK   ] La rama false va a 'Switch'  ->  destinos=['Switch']
+
+==============================================================================
+INFORME FINAL (OK / FALLO POR COMPROBACION)
+==============================================================================
+  [OK   ] Linea base: 'IF - Cliente pausado' se ejecuto
+  [OK   ] Linea base: tomo la rama false
+  [OK   ] Linea base: el bot responde SIN pausa
+  [FALLO] La pausa se guardo en Postgres
+  [OK   ] Con pausa: 'IF - Cliente pausado' se ejecuto
+  [FALLO] Con pausa: tomo la rama true
+  [FALLO] Con pausa: NO existe 'AI Agent'
+  [FALLO] Con pausa: NO existe 'Mandar mensaje'
+  [FALLO] Con pausa: 'Leer pausa' devolvio pausado = 1
+  [OK   ] Otro cliente NO pausado SI recibe respuesta
+  [OK   ] Al expirar la pausa el bot vuelve a responder
+  [OK   ] Tabla barber_pausas limpia al terminar
+  [OK   ] Paso 7: 'Leer pausa' con alwaysOutputData: true
+  [OK   ] Paso 7: existen 'Calcular pausa' e 'IF - Cliente pausado'
+  [OK   ] Paso 7: cadena IF-No es del bot -> Leer pausa -> Calcular pausa -> IF-Cliente pausado
+  [OK   ] Paso 7: rama true de 'IF - Cliente pausado' VACIA
+  [OK   ] Paso 7: rama false va a 'Switch'
+
+  Comprobaciones OK: 12/17
+
+==============================================================================
+VEREDICTO
+==============================================================================
+  El bot GUARDO SILENCIO con el cliente pausado: NO
+  FALLOS:
+    - La pausa se guardo en Postgres
+    - Con pausa: NO existe 'AI Agent'
+    - Con pausa: NO existe 'Mandar mensaje'
+
+  VEREDICTO GLOBAL: PAUSA **NO** FUNCIONA PUNTA A PUNTA (12/17)
+
+RESUMEN JSON: {
+  "1a_nodo_pausado_ejecutado": true,
+  "1b_rama_false": true,
+  "1c_bot_responde": true,
+  "2_pausa_guardada": false,
+  "3a_nodo_pausado_ejecutado": true,
+  "3b_rama_true": false,
+  "3c_sin_ai_agent": false,
+  "3d_sin_mandar_mensaje": false,
+  "3e_leer_pausa_1": false,
+  "4_otro_cliente_responde": true,
+  "5_expirada_responde": true,
+  "6_tabla_limpia": true,
+  "7a_leer_pausa_always_output": true,
+  "7b_nodos_existen": true,
+  "7c_cadena": true,
+  "7d_rama_true_vacia": true,
+  "7e_rama_false_switch": true,
+  "_bot_callo": false,
+  "_oks": 12,
+  "_total": 17,
+  "_fallos_criticos": [
+    "La pausa se guardo en Postgres",
+    "Con pausa: NO existe 'AI Agent'",
+    "Con pausa: NO existe 'Mandar mensaje'"
+  ],
+  "_exec_ids": {
+    "paso1_linea_base": "798",
+    "paso2_comando": "801",
+    "paso3_pausado": "802",
+    "paso4_otro_cliente": "804",
+    "paso5_expirada": "816"
+  }
+}
+
+LIMPIEZA DE SEGURIDAD (finally): borrando pausas de prueba...
+  Verificacion: filas restantes = '0' | stderr = ''

@@ -1,0 +1,56 @@
+=== supplyData ===
+    async supplyData(itemIndex) {
+        const credentials = await this.getCredentials('postgres');
+        const rawTableName = this.getNodeParameter('tableName', itemIndex, 'n8n_chat_histories') ||
+            'n8n_chat_histories';
+        if (!(0, sqlIdentifier_1.isSafeQualifiedSqlIdentifier)(rawTableName)) {
+            throw new n8n_workflow_1.NodeOperationError(this.getNode(), `Invalid table name "${rawTableName}"`, {
+                itemIndex,
+                description: 'Table names may only contain letters, numbers and underscores, with an optional "schema." prefix.',
+            });
+        }
+        const tableName = (0, sqlIdentifier_1.escapeQualifiedSqlIdentifier)(rawTableName);
+        const sessionId = (0, helpers_1.getSessionId)(this, itemIndex);
+        const pgConf = await index_1.configurePostgres.call(this, credentials);
+        const pool = pgConf.db.$pool;
+        const pgChatHistory = new postgres_1.PostgresChatMessageHistory({
+            pool,
+            sessionId,
+            tableName,
+        });
+        const memClass = this.getNode().typeVersion < 1.1 ? memory_1.BufferMemory : memory_1.BufferWindowMemory;
+        const kOptions = this.getNode().typeVersion < 1.1
+            ? {}
+            : { k: this.getNodeParameter('contextWindowLength', itemIndex) };
+        const memory = new memClass({
+            memoryKey: 'chat_history',
+            chatHistory: pgChatHistory,
+            returnMessages: true,
+            inputKey: 'input',
+            outputKey: 'output',
+            ...kOptions,
+        });
+        return {
+            response: (0, ai_utilities_1.logWrapper)(memory, this),
+        };
+    }
+}
+exports.MemoryPostgresChat = MemoryPostgresChat;
+
+=== responses api refs ===
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LmChatAzureOpenAi/LmChatAzureOpenAi.node.js:113:                useResponsesApi: false,
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:228:                    displayName: 'Use Responses API',
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:229:                    name: 'responsesApiEnabled',
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:232:                    description: 'Whether to use the Responses API to generate the response. <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.lmchatopenai/#use-responses-api">Learn more</a>.',
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:335:                            '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:390:                                    '/responsesApiEnabled': [false],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:491:                                    '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:578:                                    '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:591:                                    '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:604:                                    '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:623:                                    '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:636:                                    '/responsesApiEnabled': [true],
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/llms/LMChatOpenAi/LmChatOpenAi.node.js:653:                                    '/responsesApiEnable
+=== responsesApiEnabled global ===
+---
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/types/nodes.json:60:{"displayName":"OpenAI Chat Model","name":"lmChatOpenAi","group":["transform"],"version":[1,1.1,1.2,1.3],"description":"For advanced usage with an AI chain","defaults":{"name":"OpenAI Chat Model"},"codex":{"categories":["AI"],"subcategories":{"AI":["Language Models","Root Nodes"],"Language Models":["Chat Models (Recommended)"]},"resources":{"primaryDocumentation":[{"url":"https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.lmchatopenai/"}]}},"inputs":[],"outputs":["ai_languageModel"],"outputNames":["Model"],"credentials":[{"name":"openAiApi","required":true}],"requestDefaults":{"ignoreHttpStatusErrors":true,"baseURL":"={{ $parameter.options?.baseURL?.split(\"/\").slice(0,-1).join(\"/\") || $credentials?.url?.split(\"/\").slice(0,-1).join(\"/\") || \"https://api.openai.com\" }}"},"properties":[{"displayName":"This node must be connected to an AI chain. <a data-action='openSelectiveNodeCreator' data-action-parameter-creatorview='AI'>Insert one</a>","name":"notice","type":"notice","default":"","typeOptions":{"containerClass":"ndv-connection-hint-notice"}},{"displayName":"If using JSON response format, you must include word \"json\" in the prompt in your chain or agent. Also, make sure to select latest models released post November 2023.","name":"notice","type":"notice","default":"","displayOptions":{"show":{"/options.responseFormat":["json_object"]}}},{"displayName":"If using JSON response format, you must include word \"json\" in the prompt in your chain or agent. Also, make sure to select latest models released post November 2023.","name":"notice","type":"notice","default":"","displayOptions":{"show":{"/options.textFormat.textOptions.type":["json_object"]}}},{"displayName":"Model","name":"model","type":"options","description":"The model which will generate the completion. <a href=\"https://beta.openai.com/docs/models/overview\">Learn more</a>.","typeOptions":{"loadOptions":{"routing":{"request":{"method":"GET","url":"={{ $parameter.options?.baseURL?.split(\"/\").slice(-1).pop() || $credentials?.url?.split(\"/\").slice(-1).pop() || \"v1\" }}/models"},"output":{"postReceive":[{"type":"rootProperty","properties":{"property":"data"}},{"type":"filter","properties":{"pass":"={{\n\t\t\t\t\t\t\t\t\t\t\t\t($parameter.options?.baseURL && !$parameter.options?.baseURL?.startsWith('https://api.openai.com/')) ||\n\t\t\t\t\t\t\t\t\t\t\t\t($credentials?.url && !$credentials.url.startsWith('https://api.openai.com/')) ||\n\t\t\t\t\t\t\t\t\t\t\t\t$responseItem.id.startsWith('ft:') ||\n\t\t\t\t\t\t\t\t\t\t\t\t$responseItem.id.startsWith('o1') ||\n\t\t\t\t\t\t\t\t\t\t\t\t$responseItem.id.startsWith('o3') ||\n\t\t\t\t\t\t\t\t\t\t\t\t($responseItem.id.startsWith('gpt-') && !$responseItem.id.includes('instruct'))\n\t\t\t\t\t\t\t\t\t\t\t}}"}},{"type":"setKeyValue","properties":{"name":"={{$responseItem.id}}","value":"={{$responseItem.id}}"}},{"type":"sort","properties":{"key":"name"}}]}}}},"routing":{"send":{"type":"body","property":"model"}},"default":"gpt-5-mini","builderHint":{"propertyHint":"Prefer the GPT-5.4 family: the flagship variant (e.g. `gpt-5.4`) for general use, a `-mini` / `-nano` variant when the task explicitly calls for cost-efficiency, or `-pro` only when the user asks for maximum capability. Never use gpt-4o, gpt-4-turbo, gpt-4, gpt-3.5, or earlier — those are superseded by the GPT-5 family and are not valid choices."},"displayOptions":{"hide":{"@version":[{"_cnd":{"gte":1.2}}]}}},{"displayName":"Model","name":"model","type":"resourceLocator","default":{"mode":"list","value":"gpt-5-mini"},"builderHint":{"propertyHint":"Prefer the GPT-5.4 family: the flagship variant (e.g. `gpt-5.4`) for general use, a `-mini` / `-nano` variant when the task explicitly calls for cost-efficiency, or `-pro` only when

@@ -1,0 +1,165 @@
+==========================================================================
+barberiaVigilancia  (5 nodos)
+==========================================================================
+  Cada 15 minutos                            scheduleTrigger                   
+  Leer calendario                            googleCalendar                    Google Calendar account
+  Buscar citas pasadas                       code                              
+  IF - Hay citas pasadas                     if                                
+  Avisar al dueÃ±o                            httpRequest                       Evolution API
+
+  --- CONEXIONES ---
+  Cada 15 minutos                      -> Leer calendario                     
+  Leer calendario                      -> Buscar citas pasadas                
+  Buscar citas pasadas                 -> IF - Hay citas pasadas              
+  IF - Hay citas pasadas               -> Avisar al dueÃ±o                     
+
+==========================================================================
+Barberia - Agente de citas (Uncensored AI)  (45 nodos)
+==========================================================================
+  Webhook                                    webhook                           
+  AI Agent                                   LC.agent                          
+  OpenAI Chat Model                          LC.lmChatOpenAi                   Uncensored AI (OpenAI-comp
+  Switch                                     switch                            
+  Edit Fields2                               set                               
+  Edit Fields                                set                               
+  Normalizacion                              set                               
+  Mandar mensaje                             httpRequest                       
+  Consultar agenda                           googleCalendarTool                Google Calendar account
+  Agendar cita                               googleCalendarTool                Google Calendar account
+  Cancelar cita                              googleCalendarTool                Google Calendar account
+  Reagendar                                  googleCalendarTool                Google Calendar account
+  Postgres Chat Memory                       LC.memoryPostgresChat             Postgres account
+  Registrar en hoja de citas                 googleSheetsTool                  Google Sheets account
+  Notificar al encargado                     LC.toolHttpRequest                Evolution API
+  IF - No es del bot                         if                                
+  Â¿Es operador?                              if                                
+  Router de comandos                         switch                            
+  Responder al operador                      httpRequest                       Evolution API
+  Armar respuesta COMANDOS                   set                               
+  Preparar rango de fechas                   code                              
+  Leer agenda del rango                      googleCalendar                    Google Calendar account
+  Formatear agenda                           code                              
+  Parsear bloqueo                            code                              
+  Crear bloqueo en calendario                googleCalendar                    Google Calendar account
+  Respuesta de bloqueo                       set                               
+  Buscar cliente                             code                              
+  Leer ficha del cliente                     postgres                          Postgres account
+  Formatear ficha                            code                              
+  Parsear pausa                              code                              
+  Aplicar pausa                              postgres                          Postgres account
+  Formatear pausa                            code                              
+  Parsear precio                             code                              
+  Actualizar precio                          postgres                          Postgres account
+  Formatear precio                           code                              
+  Leer estado del sistema                    postgres                          Postgres account
+  Formatear estado                           code                              
+  IF - Bloqueo invalido                      if                                
+  Confirmar bloqueo                          set                               
+  Leer operadores                            postgres                          Postgres account
+  Comprobar operador                         code                              
+  Leer pausa                                 postgres                          Postgres account
+  Calcular pausa                             code                              
+  IF - Cliente pausado                       if                                
+  Aviso solo texto                           set                               
+
+  --- CONEXIONES ---
+  Webhook                              -> Normalizacion                       
+  AI Agent                             -> Mandar mensaje                      
+  OpenAI Chat Model                    -> AI Agent                             [ai_languageModel]
+  Switch                               -> Edit Fields2                        
+  Switch                               -> Aviso solo texto                     (salida 1)
+  Edit Fields2                         -> Edit Fields                         
+  Edit Fields                          -> AI Agent                            
+  Normalizacion                        -> Leer operadores                     
+  Reagendar                            -> AI Agent                             [ai_tool]
+  Postgres Chat Memory                 -> AI Agent                             [ai_memory]
+  Notificar al encargado               -> AI Agent                             [ai_tool]
+  Consultar agenda                     -> AI Agent                             [ai_tool]
+  Agendar cita                         -> AI Agent                             [ai_tool]
+  Cancelar cita                        -> AI Agent                             [ai_tool]
+  Registrar en hoja de citas           -> AI Agent                             [ai_tool]
+  IF - No es del bot                   -> Leer pausa                          
+  Router de comandos                   -> Preparar rango de fechas            
+  Router de comandos                   -> Preparar rango de fechas             (salida 1)
+  Router de comandos                   -> Preparar rango de fechas             (salida 2)
+  Router de comandos                   -> Preparar rango de fechas             (salida 3)
+  Router de comandos                   -> Buscar cliente                       (salida 4)
+  Router de comandos                   -> Parsear bloqueo                      (salida 5)
+  Router de comandos                   -> Parsear bloqueo                      (salida 6)
+  Router de comandos                   -> Parsear bloqueo                      (salida 7)
+  Router de comandos                   -> Parsear precio                       (salida 8)
+  Router de comandos                   -> Parsear pausa                        (salida 9)
+  Router de comandos                   -> Leer estado del sistema              (salida 10)
+  Router de comandos                   -> Armar respuesta COMANDOS             (salida 11)
+  Router de comandos                   -> IF - No es del bot                   (salida 12)
+  Â¿Es operador?                        -> Router de comandos                  
+  Â¿Es operador?                        -> IF - No es del bot                   (salida 1)
+  Armar respuesta COMANDOS             -> Responder al operador               
+  Preparar rango de fechas             -> Leer agenda del rango               
+  Leer agenda del rango                -> Formatear agenda                    
+  Formatear agenda                     -> Responder al operador               
+  Parsear bloqueo                      -> IF - Bloqueo invalido               
+  IF - Bloqueo invalido                -> Respuesta de bloqueo                
+  IF - Bloqueo invalido                -> Crear bloqueo en calendario          (salida 1)
+  Respuesta de bloqueo                 -> Responder al operador               
+  Crear bloqueo en calendario          -> Confirmar bloqueo                   
+  Confirmar bloqueo                    -> Responder al operador               
+  Buscar cliente                       -> Leer ficha del cliente              
+  Leer ficha del cliente               -> Formatear ficha                     
+  Formatear ficha                      -> Responder al operador               
+  Parsear pausa                        -> Aplicar pausa                       
+  Aplicar pausa                        -> Formatear pausa                     
+  Formatear pausa                      -> Responder al operador               
+  Parsear precio                       -> Actualizar precio                   
+  Actualizar precio                    -> Formatear precio                    
+  Formatear precio                     -> Responder al operador               
+  Leer estado del sistema              -> Formatear estado                    
+  Formatear estado                     -> Responder al operador               
+  Leer operadores                      -> Comprobar operador                  
+  Comprobar operador                   -> Â¿Es operador?                       
+  Leer pausa                           -> Calcular pausa                      
+  Calcular pausa                       -> IF - Cliente pausado                
+  IF - Cliente pausado                 -> Switch                               (salida 1)
+  Aviso solo texto                     -> Mandar mensaje                      
+
+==========================================================================
+Barberia - Recordatorios de cita  (17 nodos)
+==========================================================================
+  Google Sheets Trigger                      googleSheetsTrigger               Google Sheets Trigger acco
+  Code                                       code                              
+  Notificar cita nueva al encargado          httpRequest                       Evolution API
+  Code1                                      code                              
+  Append or update row in sheet              googleSheets                      Google Sheets account
+  Switch                                     switch                            
+  ESPERAR A 1 H                              wait                              
+  QUITAR RECORDATORIO                        n8n                               n8n API (local)
+  OBTENER INFO DE CITA ELIMINADA             googleSheets                      Google Sheets account
+  RECORDATORIO 24 H                          httpRequest                       Evolution API
+  RECORDATORIO 1 H                           httpRequest                       Evolution API
+  IF - Toca recordatorio 24 h                if                                
+  IF - Toca recordatorio 1 h                 if                                
+  ESPERAR A 24 H                             wait                              
+  IF - Es cita agendada                      if                                
+  Registrar cliente (CRM)                    postgres                          Postgres account
+  Registrar cita (Postgres)                  postgres                          Postgres account
+
+  --- CONEXIONES ---
+  Google Sheets Trigger                -> Code                                
+  Code                                 -> IF - Es cita agendada               
+  Code1                                -> Append or update row in sheet       
+  Append or update row in sheet        -> IF - Toca recordatorio 24 h         
+  Switch                               -> Code1                               
+  Switch                               -> OBTENER INFO DE CITA ELIMINADA       (salida 1)
+  Switch                               -> OBTENER INFO DE CITA ELIMINADA       (salida 2)
+  OBTENER INFO DE CITA ELIMINADA       -> QUITAR RECORDATORIO                 
+  Notificar cita nueva al encargado    -> Switch                              
+  IF - Toca recordatorio 24 h          -> ESPERAR A 24 H                      
+  IF - Toca recordatorio 24 h          -> IF - Toca recordatorio 1 h           (salida 1)
+  ESPERAR A 24 H                       -> RECORDATORIO 24 H                   
+  RECORDATORIO 24 H                    -> IF - Toca recordatorio 1 h          
+  IF - Toca recordatorio 1 h           -> ESPERAR A 1 H                       
+  ESPERAR A 1 H                        -> RECORDATORIO 1 H                    
+  IF - Es cita agendada                -> Notificar cita nueva al encargado   
+  IF - Es cita agendada                -> Registrar cliente (CRM)             
+  IF - Es cita agendada                -> Registrar cita (Postgres)           
+

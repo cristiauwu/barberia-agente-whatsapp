@@ -1,0 +1,56 @@
+### WORKFLOWS EN DB
+barberiaAgenteUncensored|Barberia - Agente de citas (Uncensored AI)|t
+barberiaRecordatorios|Barberia - Recordatorios de cita|t
+
+ERR:
+
+### 4th workflow nodes
+
+ERR:
+
+### x
+585|1
+
+ERR:
+
+### scheduleTrigger en exec data
+
+ERR:ERROR:  column "nodeType" does not exist
+LINE 1: SELECT string_agg(DISTINCT "nodeType", ', ') FROM execution_...
+                                   ^
+
+
+### count scheduleTrigger
+0
+
+ERR:
+
+### count interactive
+0
+
+ERR:
+
+### count revenue
+0
+
+ERR:
+
+### count barber_clientes refs
+141
+
+ERR:
+
+### count INSERT barber_clientes
+0
+
+ERR:
+
+### count INSERT barber_citas
+0
+
+ERR:
+
+### count barber_auditoria refs
+0
+
+ERR:

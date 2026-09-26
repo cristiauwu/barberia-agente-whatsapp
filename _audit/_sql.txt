@@ -1,0 +1,25 @@
+================================================================================
+Barberia - Agente de citas (Uncensored AI)
+================================================================================
+[Registrar en hoja de citas] operation=append sheet={'__rl': True, 'value': '941506024', 'mode': 'list', 'cachedResultName': 'Hoja 1'} doc={'__rl': True, 'value': '1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk', 'mode': 'list', 'cachedResultName': 'Citas barbería'}
+[Leer ficha del cliente] VERBO=SELECT
+   SELECT   cl.nombre,   cl.etiqueta,   cl.visitas,   cl.no_shows,   cl.ticket_promedio,   cl.servicio_habitual,   to_char(cl.ultima_visita AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY') AS ultima,   cl.nota_interna,   (SELECT count(*) FROM barber_citas c     WHERE c.jid = cl.jid AND c.inicio > now()       AND c.estado IN ('agendado','confirmado')) AS futuras FROM barber_clientes cl WHERE right(regexp_replace(split_part(cl.jid,'@',1),'\D','','g'),10)         = right('{{ $json.busqueda }}',10)    OR right(regexp_replace(cl.telefono,'\D','','g'),10)         = right('{{ $json.busqueda }}',10) LIM
+[Aplicar pausa] VERBO=INSERT
+   INSERT INTO barber_pausas (jid, hasta, motivo) SELECT jid, now() + interval '{{ $json.horas }} hours', 'comando del dueño' FROM barber_clientes WHERE right(regexp_replace(split_part(jid,'@',1),'\D','','g'),10)         = right('{{ $json.numero }}',10) ON CONFLICT (jid) DO UPDATE   SET hasta = excluded.hasta, motivo = excluded.motivo RETURNING jid, hasta;
+[Actualizar precio] VERBO=UPDATE
+   UPDATE barber_servicios    SET precio = {{ $json.precio }},        duracion_min = COALESCE({{ $json.duracion || 'NULL' }}, duracion_min),        actualizado_en = now()  WHERE clave = '{{ $json.clave }}' RETURNING clave, nombre, precio, duracion_min;
+[Leer estado del sistema] VERBO=SELECT
+   SELECT   (SELECT count(*) FROM barber_citas     WHERE inicio >= (now() AT TIME ZONE 'America/Mexico_City')::date       AND inicio <  (now() AT TIME ZONE 'America/Mexico_City')::date + interval '1 day'       AND estado IN ('agendado','confirmado')) AS citas_hoy,   (SELECT count(*) FROM barber_citas     WHERE inicio >= now() AND inicio < now() + interval '7 days'       AND estado IN ('agendado','confirmado')) AS citas_semana,   (SELECT count(*) FROM barber_escalaciones     WHERE coalesce(estado,'abierta') = 'abierta') AS escalaciones,   (SELECT count(*) FROM barber_pausas WHERE hasta > now()) AS
+[Leer operadores] VERBO=SELECT
+   SELECT jid FROM barber_operadores WHERE activo;
+[Leer pausa] VERBO=SELECT
+   SELECT count(*) AS pausado,        coalesce(max(hasta), null) AS hasta,        coalesce(max(motivo), '') AS motivo FROM barber_pausas WHERE jid = '{{ $json.user_number }}'   AND hasta > now();
+================================================================================
+Barberia - Recordatorios de cita
+================================================================================
+[Google Sheets Trigger] event=rowAdded pollTimes={'item': [{'mode': 'everyMinute'}]} sheet={'__rl': True, 'value': 941506024, 'mode': 'list', 'cachedResultName': 'Hoja 1', 'cachedResultUrl': 'https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit#gid=941506024'}
+[Append or update row in sheet] operation=appendOrUpdate sheet={'__rl': True, 'value': '941506024', 'mode': 'list', 'cachedResultName': 'Hoja 1'} doc={'__rl': True, 'value': '1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk', 'mode': 'list', 'cachedResultName': 'Citas barbería'}
+[OBTENER INFO DE CITA ELIMINADA] operation=None sheet={'__rl': True, 'value': '941506024', 'mode': 'list', 'cachedResultName': 'Hoja 1'} doc={'__rl': True, 'value': '1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk', 'mode': 'list', 'cachedResultName': 'Citas barbería'}
+================================================================================
+My workflow
+================================================================================

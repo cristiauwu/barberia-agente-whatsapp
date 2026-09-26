@@ -1,0 +1,695 @@
+[
+ {
+  "id": "1195",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "The connection cannot be established, this usually occurs due to an incorrect host (domain) value",
+    "desc": null,
+    "http": null,
+    "cause": "getaddrinfo ENOTFOUND sheets.googleapis.com"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1194",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "The connection cannot be established, this usually occurs due to an incorrect host (domain) value",
+    "desc": null,
+    "http": null,
+    "cause": "getaddrinfo ENOTFOUND sheets.googleapis.com"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1192",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "The connection cannot be established, this usually occurs due to an incorrect host (domain) value",
+    "desc": null,
+    "http": null,
+    "cause": "getaddrinfo ENOTFOUND sheets.googleapis.com"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1191",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "The connection cannot be established, this usually occurs due to an incorrect host (domain) value",
+    "desc": null,
+    "http": null,
+    "cause": "getaddrinfo ENOTFOUND sheets.googleapis.com"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1190",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "The DNS server returned an error, perhaps the server is offline",
+    "desc": null,
+    "http": null,
+    "cause": "getaddrinfo EAI_AGAIN sheets.googleapis.com"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1171",
+  "status": null,
+  "waitTill": "2026-09-26T18:00:00.000Z",
+  "last": "ESPERAR A 1 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "IF - Toca recordatorio 1 h",
+   "ESPERAR A 1 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1135",
+  "status": null,
+  "waitTill": null,
+  "last": "Registrar cita (Postgres)",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "IF - Toca recordatorio 1 h",
+   "Registrar cita (Postgres)"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "1075",
+  "status": null,
+  "waitTill": "2026-09-27T20:20:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "861",
+  "status": null,
+  "waitTill": null,
+  "last": "Registrar cita (Postgres)",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "IF - Toca recordatorio 1 h",
+   "ESPERAR A 1 H",
+   "RECORDATORIO 1 H",
+   "Registrar cita (Postgres)"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "852",
+  "status": null,
+  "waitTill": "2026-10-14T17:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "847",
+  "status": null,
+  "waitTill": "2026-10-05T23:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "838",
+  "status": null,
+  "waitTill": null,
+  "last": "IF - Es cita agendada",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "835",
+  "status": null,
+  "waitTill": "2026-10-04T17:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "829",
+  "status": null,
+  "waitTill": "2026-10-07T19:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Registrar cliente (CRM)",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "820",
+  "status": null,
+  "waitTill": "2026-12-02T19:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "800",
+  "status": null,
+  "waitTill": null,
+  "last": "IF - Toca recordatorio 1 h",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "IF - Toca recordatorio 1 h"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "779",
+  "status": null,
+  "waitTill": "2026-09-30T17:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "The execution was cancelled manually",
+    "desc": null,
+    "http": null,
+    "cause": "None"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "756",
+  "status": null,
+  "waitTill": "2026-10-07T22:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "747",
+  "status": null,
+  "waitTill": "2026-09-27T21:00:00.000Z",
+  "last": "ESPERAR A 24 H",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet",
+   "IF - Toca recordatorio 24 h",
+   "ESPERAR A 24 H"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "733",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "Could not retrieve the columns from key row",
+    "desc": null,
+    "http": null,
+    "cause": "Could not retrieve the columns from key row"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "732",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "Could not retrieve the columns from key row",
+    "desc": null,
+    "http": null,
+    "cause": "Could not retrieve the columns from key row"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "731",
+  "status": null,
+  "waitTill": null,
+  "last": "Google Sheets Trigger",
+  "nodes": [
+   "Google Sheets Trigger"
+  ],
+  "errors": [
+   {
+    "node": null,
+    "msg": "Could not retrieve the columns from key row",
+    "desc": null,
+    "http": null,
+    "cause": "Could not retrieve the columns from key row"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "722",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Column names were updated after the node's setup",
+    "desc": "Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID",
+    "http": null,
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Column names were updated after the node's setup",
+    "desc": "Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID",
+    "http": null
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "720",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Column names were updated after the node's setup",
+    "desc": "Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID",
+    "http": null,
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Column names were updated after the node's setup",
+    "desc": "Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID",
+    "http": null
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "703",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403",
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "687",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403",
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "680",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403",
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "611",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403",
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "599",
+  "status": null,
+  "waitTill": null,
+  "last": "IF - Es cita agendada",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada"
+  ],
+  "errors": [],
+  "stopped": null,
+  "started": null
+ },
+ {
+  "id": "596",
+  "status": null,
+  "waitTill": null,
+  "last": "Append or update row in sheet",
+  "nodes": [
+   "Google Sheets Trigger",
+   "Code",
+   "IF - Es cita agendada",
+   "Notificar cita nueva al encargado",
+   "Switch",
+   "Code1",
+   "Append or update row in sheet"
+  ],
+  "errors": [
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403",
+    "cause": "None"
+   },
+   {
+    "node": "Append or update row in sheet",
+    "msg": "Forbidden - perhaps check your credentials?",
+    "desc": "The caller does not have permission",
+    "http": "403"
+   }
+  ],
+  "stopped": null,
+  "started": null
+ }
+]

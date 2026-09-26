@@ -1,0 +1,72 @@
+{
+  "texto": {
+    "execution_id": "1006",
+    "status": "success",
+    "message_content_type": "text",
+    "message_content": " Hola, buenas tardes. Cuanto cuesta el corte?",
+    "respuesta_del_bot": "¡Hola! El corte desvanecido o tijera cuesta *$150* y dura 40 minutos. ¿Te gustaría agendarlo? 😊",
+    "errores": [],
+    "nodos_ejecutados": [
+      "AI Agent",
+      "Calcular pausa",
+      "Comprobar operador",
+      "Edit Fields",
+      "Edit Fields2",
+      "IF - Cliente pausado",
+      "IF - No es del bot",
+      "Leer operadores",
+      "Leer pausa",
+      "Mandar mensaje",
+      "Normalizacion",
+      "OpenAI Chat Model",
+      "Postgres Chat Memory",
+      "Switch",
+      "Webhook",
+      "¿Es operador?"
+    ]
+  },
+  "audio": {
+    "execution_id": "1008",
+    "status": "success",
+    "message_content_type": "",
+    "message_content": " ",
+    "respuesta_del_bot": "Por ahora solo puedo atender mensajes escritos. ¿Me escribes lo que necesitas? 🙏",
+    "errores": [],
+    "nodos_ejecutados": [
+      "Aviso solo texto",
+      "Calcular pausa",
+      "Comprobar operador",
+      "IF - Cliente pausado",
+      "IF - No es del bot",
+      "Leer operadores",
+      "Leer pausa",
+      "Mandar mensaje",
+      "Normalizacion",
+      "Switch",
+      "Webhook",
+      "¿Es operador?"
+    ]
+  },
+  "imagen": {
+    "execution_id": "1010",
+    "status": "success",
+    "message_content_type": "",
+    "message_content": " ",
+    "respuesta_del_bot": "Por ahora solo puedo atender mensajes escritos. ¿Me escribes lo que necesitas? 🙏",
+    "errores": [],
+    "nodos_ejecutados": [
+      "Aviso solo texto",
+      "Calcular pausa",
+      "Comprobar operador",
+      "IF - Cliente pausado",
+      "IF - No es del bot",
+      "Leer operadores",
+      "Leer pausa",
+      "Mandar mensaje",
+      "Normalizacion",
+      "Switch",
+      "Webhook",
+      "¿Es operador?"
+    ]
+  }
+}

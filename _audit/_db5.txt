@@ -1,0 +1,31 @@
+### EXEC -i echo
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe exec -i barberia-postgres echo hi
+OUT:
+hi
+
+ERR: 
+RC:0
+
+### EXEC psql 1
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe exec -i barberia-postgres psql -U barberia -d barberia -t -A -c SELECT 1;
+OUT:
+1
+
+ERR: 
+RC:0
+
+### COUNT citas
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe exec -i barberia-postgres psql -U barberia -d barberia -t -A -c SELECT count(*) FROM barber_citas;
+OUT:
+0
+
+ERR: 
+RC:0
+
+### COUNT clientes
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe exec -i barberia-postgres psql -U barberia -d barberia -t -A -c SELECT count(*) FROM barber_clientes;
+OUT:
+0
+
+ERR: 
+RC:0

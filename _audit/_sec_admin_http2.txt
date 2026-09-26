@@ -1,0 +1,51 @@
+################################################################################
+# 1. Rate limit de login (5 intentos por IP / 15 min)
+################################################################################
+  intento 1 -> HTTP 401  {"ok": false, "error": {"code": "AUTH_INVALID", "message": "Credenciales inválidas"}} | Set-Cookie=None
+  intento 2 -> HTTP 401  {"ok": false, "error": {"code": "AUTH_INVALID", "message": "Credenciales inválidas"}} | Set-Cookie=None
+  intento 3 -> HTTP 401  {"ok": false, "error": {"code": "AUTH_INVALID", "message": "Credenciales inválidas"}} | Set-Cookie=None
+  intento 4 -> HTTP 401  {"ok": false, "error": {"code": "AUTH_INVALID", "message": "Credenciales inválidas"}} | Set-Cookie=None
+  intento 5 -> HTTP 401  {"ok": false, "error": {"code": "AUTH_INVALID", "message": "Credenciales inválidas"}} | Set-Cookie=None
+  intento 6 -> HTTP 429  {"ok": false, "error": {"code": "LOGIN_LIMIT", "message": "Demasiados intentos; vuelve más tarde"}} | Set-Cookie=None
+  intento 7 -> HTTP 429  {"ok": false, "error": {"code": "LOGIN_LIMIT", "message": "Demasiados intentos; vuelve más tarde"}} | Set-Cookie=None
+
+################################################################################
+# 2. Coherencia del hash (SIN adivinar: se compara el hash guardado con la
+#    contrasena del archivo local .pwd-sitio.txt que el proyecto documenta)
+################################################################################
+  ADMIN_PASSWORD_HASH = scrypt:16384:8:1:8uCvN_XPUoi_0vgqYPTUUw=...
+  ADMIN_SESSION_SECRET longitud = 86 (minimo exigido: 64) -> True
+  ADMIN_DB_DSN usa rol = barber_admin_read
+  ADMIN_PRICE_DB_DSN usa rol = barber_admin_price
+  ADMIN_BIND = 127.0.0.1   ADMIN_PORT = 8765
+  ADMIN_PUBLIC_ORIGIN = http://localhost:8765
+  ADMIN_PRICE_UPDATES_ENABLED = true
+  scrypt(contenido de .pwd-sitio.txt) coincide con ADMIN_PASSWORD_HASH -> True
+
+################################################################################
+# 3. Cookie: flags (analisis estatico sobre codigo + respuesta real)
+################################################################################
+  issue() en servidor-admin.py:214 -> 'admin_session=<tok>; Path=/; HttpOnly; SameSite=Strict; Max-Age=28800'
+  + '; Secure' SOLO si self.secure (ADMIN_PUBLIC_ORIGIN https).
+  ADMIN_PUBLIC_ORIGIN actual = http://localhost:8765 -> self.secure = False -> Secure AUSENTE.
+  Justificacion en el codigo: HTTP solo se permite en localhost (App.__init__, linea 175).
+
+################################################################################
+# 4. Dashboard de produccion (puerto 8099): ¿tiene autenticacion?
+################################################################################
+  puerto 8099  GET /                            -> HTTP 200   len=2000
+  puerto 8099  GET /dashboard.html              -> HTTP 200   len=2000
+  puerto 8099  GET /archivos/admin/.env-admin   -> HTTP 404   len=348
+  puerto 8099  GET /../.env                     -> HTTP 404   len=348
+  puerto 8101  GET /                            -> HTTP 200   len=2000
+  puerto 8101  GET /dashboard.html              -> HTTP 200   len=2000
+  puerto 8101  GET /archivos/admin/.env-admin   -> HTTP 404   len=348
+  puerto 8101  GET /../.env                     -> HTTP 404   len=348
+
+  ¿El HTML servido en 8099 contiene datos personales de clientes?
+  muestra de nombres/telefonos encontrados en los primeros 2000 bytes: ['Barber Chinos', 'Barber Chinos', 'Inter Tight']
+  tamano completo del panel = 150176 bytes
+  apariciones de jid 'verif-cli*' = 0
+  apariciones de 'numero@s.whatsapp.net' = 0
+  ¿contiene la palabra 'telefono'/'celular'? si
+  cabeceras: {'Server': 'SimpleHTTP/0.6 Python/3.13.13', 'Content-type': 'text/html', 'Cache-Control': 'no-store, must-revalidate'}

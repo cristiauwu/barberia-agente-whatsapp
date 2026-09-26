@@ -1,0 +1,582 @@
+[
+ {
+  "id": 1,
+  "categoria": "ubicacion",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Dónde están ubicados?",
+  "respuesta": "Estamos en *Calle Pinzón #574*. Ahí mismo te atendemos. Si tienes duda para llegar, márcanos al *452-281-8144*.",
+  "sinonimos": "direccion domicilio donde queda ubicacion llegar como llego mapa"
+ },
+ {
+  "id": 2,
+  "categoria": "ubicacion",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Cuál es el teléfono?",
+  "respuesta": "El teléfono del local es *452-281-8144*. También puedes seguir por aquí, que contestamos igual.",
+  "sinonimos": "telefono numero marcar llamar contacto comunicarse"
+ },
+ {
+  "id": 3,
+  "categoria": "instalaciones",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Tienen estacionamiento?",
+  "respuesta": "No tenemos estacionamiento. Puedes dejar el coche sobre la misma calle, junto al local.",
+  "sinonimos": "estacionamiento parking coche carro auto lugar donde dejo mi carro"
+ },
+ {
+  "id": 4,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Se puede pasar sin cita?",
+  "respuesta": "Sí, puedes llegar directo. Pero como atiende *una sola persona*, si vienes sin cita puede que esperes. Lo más seguro es apartar tu lugar por aquí.",
+  "sinonimos": "sin cita walk in directo llegar sin apartar espontaneo turno"
+ },
+ {
+  "id": 5,
+  "categoria": "instalaciones",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Aceptan niños?",
+  "respuesta": "Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.",
+  "sinonimos": "ninos infantil hijos pequenos edad menor bebe"
+ },
+ {
+  "id": 6,
+  "categoria": "horarios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Cuál es el horario?",
+  "respuesta": "Abrimos de *lunes a sábado de 10:00 a 20:00*. El domingo estamos cerrados.",
+  "sinonimos": "horario abren cierran abierto cerrado a que hora atienden"
+ },
+ {
+  "id": 7,
+  "categoria": "horarios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Abren el domingo?",
+  "respuesta": "No, el domingo estamos cerrados. Atendemos de lunes a sábado de 10:00 a 20:00.",
+  "sinonimos": "domingo cerrado abierto domingos fin de semana"
+ },
+ {
+  "id": 8,
+  "categoria": "horarios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Hasta qué hora puedo agendar?",
+  "respuesta": "Puedes agendar hasta que el servicio *termine* antes de las 20:00. Por ejemplo, un corte de 40 minutos a las 19:00 todavía alcanza; a las 19:30 ya no.",
+  "sinonimos": "ultima cita hora limite hasta que hora tarde ultimo turno cierre"
+ },
+ {
+  "id": 9,
+  "categoria": "horarios",
+  "origen": "propuesta",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Atienden en días festivos?",
+  "respuesta": "Los días festivos trabajamos en horario normal si cae de lunes a sábado. Si el encargado cierra ese día, aquí te lo confirmamos al agendar.",
+  "sinonimos": "festivo feriado puente asueto dia de descanso"
+ },
+ {
+  "id": 10,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Qué servicios tienen?",
+  "respuesta": "Corte desvanecido o tijera $150, arreglo de barba $100, ceja $30, mascarilla $50, corte de cabello dama $250, planchado express $150, peinado $300 y depilación. ¿Cuál te aparto?",
+  "sinonimos": "servicios catalogo que hacen que ofrecen menu carta"
+ },
+ {
+  "id": 11,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Hacen corte para dama?",
+  "respuesta": "Sí, el corte de cabello dama cuesta *$250* y dura 50 minutos.",
+  "sinonimos": "dama mujer femenino corte de dama senora"
+ },
+ {
+  "id": 12,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Arreglan la barba?",
+  "respuesta": "Sí, el arreglo de barba cuesta *$100* y dura 20 minutos.",
+  "sinonimos": "barba afeitar rasurar bigote perfilado"
+ },
+ {
+  "id": 13,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Hacen las cejas?",
+  "respuesta": "Sí, la ceja cuesta *$30* y toma unos 10 minutos.",
+  "sinonimos": "ceja cejas perfilado de ceja"
+ },
+ {
+  "id": 14,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Qué es la mascarilla?",
+  "respuesta": "Es un tratamiento de *$50* que dura 20 minutos. Va muy bien para la piel después del corte.",
+  "sinonimos": "mascarilla facial tratamiento cara piel limpieza"
+ },
+ {
+  "id": 15,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Hacen planchado?",
+  "respuesta": "Sí, el planchado express cuesta *$150* y dura 30 minutos.",
+  "sinonimos": "planchado plancha alaciado liso alisar"
+ },
+ {
+  "id": 16,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Hacen peinado?",
+  "respuesta": "Sí, el peinado cuesta *$300* y dura 45 minutos. Es el servicio más completo para una ocasión especial.",
+  "sinonimos": "peinado peinar evento boda fiesta especial novia"
+ },
+ {
+  "id": 17,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Cuánto cuesta la depilación?",
+  "respuesta": "La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.",
+  "sinonimos": "depilacion cera depilar vello zona"
+ },
+ {
+  "id": 18,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Hacen tintes o color?",
+  "respuesta": "Ese servicio no lo tenemos en el catálogo. Déjame preguntarle al encargado y te confirmo en un momento.",
+  "sinonimos": "tinte tintes tenido teñir color pintar pintado canas mechas decoloracion rubio negro cabello"
+ },
+ {
+  "id": 19,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Trabajan con máquina o navaja?",
+  "respuesta": "Sí, el corte desvanecido o tijera cubre esos estilos y cuesta *$150*. Dime qué estilo buscas y te digo si te lo podemos hacer.",
+  "sinonimos": "maquina navaja desvanecido fade rasurado"
+ },
+ {
+  "id": 20,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Hacen corte para niño?",
+  "respuesta": "Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.",
+  "sinonimos": "nino bebe infantil escolar corte de nino"
+ },
+ {
+  "id": 21,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Tienen un corte llamado \"mod cut\" o \"corte clásico\"?",
+  "respuesta": "Esos nombres no están en nuestro catálogo. Lo que sí manejamos es el corte desvanecido o tijera de *$150*. Platícame qué estilo quieres y te digo si te lo podemos hacer.",
+  "sinonimos": "mod cut corte clasico corte laser buzz cut crew cut taper estilos nombres"
+ },
+ {
+  "id": 22,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Qué me recomiendan si es mi primera vez?",
+  "respuesta": "El más pedido es el *corte desvanecido o tijera*, $150. Queda bien con casi cualquier tipo de cabello y dura 40 minutos.",
+  "sinonimos": "recomiendas recomiendan mejor corte primera vez cual me queda sugerencia"
+ },
+ {
+  "id": 23,
+  "categoria": "precios",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Cuánto cuesta el corte?",
+  "respuesta": "El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.",
+  "sinonimos": "cuanto cuesta el corte precio corte de pelo cuanto sale vale"
+ },
+ {
+  "id": 24,
+  "categoria": "precios",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Cuánto cuesta el corte de dama?",
+  "respuesta": "El corte de cabello dama cuesta *$250* y dura 50 minutos.",
+  "sinonimos": "precio corte dama mujer cuanto cuesta dama"
+ },
+ {
+  "id": 25,
+  "categoria": "precios",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Me dan la lista de precios completa?",
+  "respuesta": "Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50, corte de dama $250, planchado express $150, peinado $300. La depilación depende de la zona. ¿Cuál te aparto?",
+  "sinonimos": "lista de precios tarifas cuanto cuestan todos costos precios"
+ },
+ {
+  "id": 26,
+  "categoria": "precios",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Cuánto cuesta la barba?",
+  "respuesta": "El arreglo de barba cuesta *$100* y dura 20 minutos.",
+  "sinonimos": "precio barba cuanto cuesta barba"
+ },
+ {
+  "id": 27,
+  "categoria": "precios",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Cuánto cuesta la ceja?",
+  "respuesta": "La ceja cuesta *$30* y dura unos 10 minutos.",
+  "sinonimos": "precio ceja cuanto cuesta ceja"
+ },
+ {
+  "id": 28,
+  "categoria": "pagos",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Hacen descuento?",
+  "respuesta": "Déjame preguntarle al encargado y te confirmo en un momento.",
+  "sinonimos": "descuento rebaja promocion oferta barato mas economico precio especial"
+ },
+ {
+  "id": 29,
+  "categoria": "pagos",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Cobran menos si me hago varios servicios juntos?",
+  "respuesta": "Déjame consultarlo con el encargado y te digo en un momento.",
+  "sinonimos": "varios servicios juntos combo paquete precio especial descuento"
+ },
+ {
+  "id": 30,
+  "categoria": "pagos",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Aceptan tarjeta?",
+  "respuesta": "Se puede pagar en efectivo o por *transferencia*. El pago se hace directo en el local.",
+  "sinonimos": "tarjeta credito debito pago efectivo terminal cobrar forma de pago"
+ },
+ {
+  "id": 31,
+  "categoria": "pagos",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Puedo pagar con transferencia?",
+  "respuesta": "Se puede pagar en efectivo o por *transferencia*. El pago se hace directo en el local.",
+  "sinonimos": "transferencia deposito spei banco pago electronico"
+ },
+ {
+  "id": 32,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Cómo agendo una cita?",
+  "respuesta": "Dime qué servicio quieres, qué día y a qué hora, y yo te la aparto aquí mismo.",
+  "sinonimos": "agendar apartar reservar cita como hago para una cita"
+ },
+ {
+  "id": 33,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Necesito dar mis datos para la cita?",
+  "respuesta": "Solo tu *nombre* y el número de WhatsApp desde el que escribes. No necesitas crear cuenta ni nada más.",
+  "sinonimos": "datos datos personales registro cuenta nombre telefono"
+ },
+ {
+  "id": 34,
+  "categoria": "citas",
+  "origen": "propuesta",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Cuánto tiempo antes debo llegar?",
+  "respuesta": "Con llegar unos 5 minutos antes es suficiente. Si vas a llegar tarde, avísanos por aquí.",
+  "sinonimos": "llegar antes anticipacion cuanto tiempo antes puntualidad"
+ },
+ {
+  "id": 35,
+  "categoria": "citas",
+  "origen": "propuesta",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Puedo apartar varias citas a la vez?",
+  "respuesta": "Sí, dime los servicios y los horarios que quieres y te los aparto. Si son muchos, mejor los vemos uno por uno para no equivocarnos.",
+  "sinonimos": "varias citas dos citas acompanante amigo familia juntos"
+ },
+ {
+  "id": 36,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Con cuánta anticipación puedo agendar?",
+  "respuesta": "Puedes agendar para cualquier día a partir de hoy. Si quieres una fecha muy lejana, dime el día exacto y la reviso.",
+  "sinonimos": "anticipacion dias de antelacion hasta cuando puedo agendar futuro"
+ },
+ {
+  "id": 37,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Atienden a domicilio?",
+  "respuesta": "No, la atención es solamente en el local, en Calle Pinzón #574.",
+  "sinonimos": "domicilio a domicilio ir a mi casa servicio a domicilio movil"
+ },
+ {
+  "id": 38,
+  "categoria": "politicas",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Puedo cancelar mi cita?",
+  "respuesta": "Sí. Avísame aquí y la cancelo. Lo único que pedimos es que nos avises con la mayor anticipación posible, para que ese lugar lo aproveche alguien más.",
+  "sinonimos": "cancelar cancelacion anular quitar cita ya no puedo ir"
+ },
+ {
+  "id": 39,
+  "categoria": "politicas",
+  "origen": "contexto",
+  "prioridad": 15,
+  "activo": true,
+  "pregunta": "¿Puedo cambiar mi cita de día u hora?",
+  "respuesta": "Sí, sin problema. Dime para qué día y hora la quieres mover y yo la reprogramo. Te confirmo si el nuevo horario está libre.",
+  "sinonimos": "reprogramar cambiar mover reagendar otra fecha posponer"
+ },
+ {
+  "id": 40,
+  "categoria": "politicas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Qué pasa si llego tarde?",
+  "respuesta": "Te esperamos de *5 a 10 minutos*. Si te vas a tardar más, avísame por aquí para ver si alcanza el tiempo o movemos tu cita.",
+  "sinonimos": "tarde llegar tarde retraso demora minutos"
+ },
+ {
+  "id": 42,
+  "categoria": "politicas",
+  "origen": "propuesta",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Cuál es la política de cancelación?",
+  "respuesta": "Puedes cancelar o mover tu cita cuando quieras, avisándonos por aquí. No hay penalización; solo te pedimos avisar con anticipación.",
+  "sinonimos": "politica de cancelacion reglas cancelar condiciones"
+ },
+ {
+  "id": 43,
+  "categoria": "politicas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Hay garantía si no me gusta el corte?",
+  "respuesta": "Déjame preguntarle al encargado y te confirmo en un momento.",
+  "sinonimos": "garantia no me gusto quedo mal reclamacion devolucion arreglo"
+ },
+ {
+  "id": 44,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Necesito cita para la ceja o la barba?",
+  "respuesta": "No es obligatorio, pero son servicios cortos de 10 y 20 minutos. Si vienes sin cita puede que te toque esperar. Apartar tu lugar por aquí te asegura la hora.",
+  "sinonimos": "ceja barba cita necesito cita servicio corto rapido"
+ },
+ {
+  "id": 45,
+  "categoria": "barbero",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Quién me va a atender?",
+  "respuesta": "Te atiende *Esteban Aguilera*. Es quien lleva la barbería.",
+  "sinonimos": "quien atiende barbero estilista peluquero nombre del barbero"
+ },
+ {
+  "id": 46,
+  "categoria": "barbero",
+  "origen": "contexto",
+  "prioridad": 10,
+  "activo": true,
+  "pregunta": "¿Puedo elegir a otro barbero?",
+  "respuesta": "No, en la barbería atiende *una sola persona*, Esteban Aguilera. No hay otros barberos.",
+  "sinonimos": "otro barbero elegir barbero diferentes barberos equipo"
+ },
+ {
+  "id": 47,
+  "categoria": "barbero",
+  "origen": "propuesta",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Tienen experiencia cortando este tipo de cabello?",
+  "respuesta": "Sí, Esteban tiene experiencia con distintos tipos de cabello. Platícame qué buscas y te dice si te lo puede hacer.",
+  "sinonimos": "experiencia sabe cortar especialidad capacitado tipo de cabello"
+ },
+ {
+  "id": 48,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Dan factura?",
+  "respuesta": "Por el momento no manejamos facturación. Si necesitas un comprobante, dímelo y le pregunto al encargado.",
+  "sinonimos": "factura comprobante fiscal rfc recibo"
+ },
+ {
+  "id": 49,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Venden productos para el cabello?",
+  "respuesta": "Por ahora lo que ofrecemos son los servicios de la barbería. Si te interesa algún producto en específico, pregúntale al encargado al llegar.",
+  "sinonimos": "productos venden shampoo cera pomada gel venta"
+ },
+ {
+  "id": 50,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Puedo dejar una propuesta o una queja?",
+  "respuesta": "Claro, cuéntame y se lo paso al encargado ahora mismo. Él te escribe en un momento.",
+  "sinonimos": "queja reclamo sugerencia propuesta comentario opinion"
+ },
+ {
+  "id": 51,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Tienen redes sociales?",
+  "respuesta": "Atendemos únicamente por WhatsApp. Aquí mismo puedes agendar y preguntar lo que necesites.",
+  "sinonimos": "instagram facebook redes sociales tiktok pagina"
+ },
+ {
+  "id": 52,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 5,
+  "activo": true,
+  "pregunta": "¿Puedo dejar reservado para una boda o un evento?",
+  "respuesta": "Déjame consultarlo con el encargado, porque depende del día y de cuántas personas sean. Te confirmo en un momento.",
+  "sinonimos": "boda evento grupo xv anos graduacion muchos invitados"
+ },
+ {
+  "id": 209,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Cuánto dura el corte?",
+  "respuesta": "El *corte desvanecido o tijera* dura *40 minutos*. Deja tiempo extra si vienes en hora pico.",
+  "sinonimos": "duracion dura tarda tiempo minutos cuanto tarda el corte"
+ },
+ {
+  "id": 210,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Cuánto dura cada servicio?",
+  "respuesta": "Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.",
+  "sinonimos": "duracion duraciones tiempo tarda minutos cada servicio cuanto"
+ },
+ {
+  "id": 211,
+  "categoria": "servicios",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Cuánto dura la barba?",
+  "respuesta": "El *arreglo de barba* dura *20 minutos*.",
+  "sinonimos": "duracion dura barba tarda tiempo minutos cuanto"
+ },
+ {
+  "id": 212,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Puedo agendar el mismo día?",
+  "respuesta": "Sí, si queda hueco. Dime la hora y lo reviso al momento.",
+  "sinonimos": "mismo dia hoy ahora urgente inmediato disponible hueco"
+ },
+ {
+  "id": 213,
+  "categoria": "citas",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Qué pasa si voy a llegar tarde?",
+  "respuesta": "Te esperamos de *5 a 10 minutos*. Si te vas a tardar más, avísame por aquí para ver si alcanza el tiempo o movemos tu cita.",
+  "sinonimos": "tarde retraso demora llegar puntualidad avisar"
+ },
+ {
+  "id": 214,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Puedo llevar a mi hijo?",
+  "respuesta": "Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.",
+  "sinonimos": "nino hijo menor edad acompanante"
+ },
+ {
+  "id": 215,
+  "categoria": "general",
+  "origen": "contexto",
+  "prioridad": 0,
+  "activo": true,
+  "pregunta": "¿Tienen wifi?",
+  "respuesta": "Sí, tenemos wifi. Pídelo al llegar y te damos la clave.",
+  "sinonimos": "wifi internet conexion"
+ }
+]

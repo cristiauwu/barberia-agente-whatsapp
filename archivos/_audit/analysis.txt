@@ -1,0 +1,229 @@
+####################################################################################################
+CONNECTIONS: barberiaAgenteUncensored
+  'Webhook' --main[0]--> ['Normalizacion[main:0]']
+  'AI Agent' --main[0]--> ['Mandar mensaje[main:0]']
+  'OpenAI Chat Model' --ai_languageModel[0]--> ['AI Agent[ai_languageModel:0]']
+  'Switch' --main[0]--> ['Get Audio[main:0]']
+  'Switch' --main[1]--> ['Get Image[main:0]']
+  'Switch' --main[2]--> ['Edit Fields2[main:0]']
+  'Get Audio' --main[0]--> ['Convertir Audio[main:0]']
+  'Convertir Audio' --main[0]--> ['Transcribe a recording[main:0]']
+  'Transcribe a recording' --main[0]--> ['Audio Content[main:0]']
+  'Audio Content' --main[0]--> ['Edit Fields[main:0]']
+  'Audio Content1' --main[0]--> ['Edit Fields[main:0]']
+  'Get Image' --main[0]--> ['Convertir Imagen[main:0]']
+  'Convertir Imagen' --main[0]--> ['Describe imagen[main:0]']
+  'Describe imagen' --main[0]--> ['Audio Content1[main:0]']
+  'Edit Fields2' --main[0]--> ['Edit Fields[main:0]']
+  'Edit Fields' --main[0]--> ['AI Agent[main:0]']
+  'Normalizacion' --main[0]--> ['Leer operadores[main:0]']
+  'Reagendar' --ai_tool[0]--> ['AI Agent[ai_tool:0]']
+  'Postgres Chat Memory' --ai_memory[0]--> ['AI Agent[ai_memory:0]']
+  'Notificar al encargado' --ai_tool[0]--> ['AI Agent[ai_tool:0]']
+  'Consultar agenda' --ai_tool[0]--> ['AI Agent[ai_tool:0]']
+  'Agendar cita' --ai_tool[0]--> ['AI Agent[ai_tool:0]']
+  'Cancelar cita' --ai_tool[0]--> ['AI Agent[ai_tool:0]']
+  'Registrar en hoja de citas' --ai_tool[0]--> ['AI Agent[ai_tool:0]']
+  'IF - No es del bot' --main[0]--> ['Leer pausa[main:0]']
+  'Router de comandos' --main[0]--> ['Preparar rango de fechas[main:0]']
+  'Router de comandos' --main[1]--> ['Preparar rango de fechas[main:0]']
+  'Router de comandos' --main[2]--> ['Preparar rango de fechas[main:0]']
+  'Router de comandos' --main[3]--> ['Preparar rango de fechas[main:0]']
+  'Router de comandos' --main[4]--> ['Buscar cliente[main:0]']
+  'Router de comandos' --main[5]--> ['Parsear bloqueo[main:0]']
+  'Router de comandos' --main[6]--> ['Parsear bloqueo[main:0]']
+  'Router de comandos' --main[7]--> ['Parsear bloqueo[main:0]']
+  'Router de comandos' --main[8]--> ['Parsear precio[main:0]']
+  'Router de comandos' --main[9]--> ['Parsear pausa[main:0]']
+  'Router de comandos' --main[10]--> ['Leer estado del sistema[main:0]']
+  'Router de comandos' --main[11]--> ['Armar respuesta COMANDOS[main:0]']
+  'Router de comandos' --main[12]--> ['IF - No es del bot[main:0]']
+  '¿Es operador?' --main[0]--> ['Router de comandos[main:0]']
+  '¿Es operador?' --main[1]--> ['IF - No es del bot[main:0]']
+  'Armar respuesta COMANDOS' --main[0]--> ['Responder al operador[main:0]']
+  'Preparar rango de fechas' --main[0]--> ['Leer agenda del rango[main:0]']
+  'Leer agenda del rango' --main[0]--> ['Formatear agenda[main:0]']
+  'Formatear agenda' --main[0]--> ['Responder al operador[main:0]']
+  'Parsear bloqueo' --main[0]--> ['IF - Bloqueo invalido[main:0]']
+  'IF - Bloqueo invalido' --main[0]--> ['Respuesta de bloqueo[main:0]']
+  'IF - Bloqueo invalido' --main[1]--> ['Crear bloqueo en calendario[main:0]']
+  'Respuesta de bloqueo' --main[0]--> ['Responder al operador[main:0]']
+  'Crear bloqueo en calendario' --main[0]--> ['Confirmar bloqueo[main:0]']
+  'Confirmar bloqueo' --main[0]--> ['Responder al operador[main:0]']
+  'Buscar cliente' --main[0]--> ['Leer ficha del cliente[main:0]']
+  'Leer ficha del cliente' --main[0]--> ['Formatear ficha[main:0]']
+  'Formatear ficha' --main[0]--> ['Responder al operador[main:0]']
+  'Parsear pausa' --main[0]--> ['Aplicar pausa[main:0]']
+  'Aplicar pausa' --main[0]--> ['Formatear pausa[main:0]']
+  'Formatear pausa' --main[0]--> ['Responder al operador[main:0]']
+  'Parsear precio' --main[0]--> ['Actualizar precio[main:0]']
+  'Actualizar precio' --main[0]--> ['Formatear precio[main:0]']
+  'Formatear precio' --main[0]--> ['Responder al operador[main:0]']
+  'Leer estado del sistema' --main[0]--> ['Formatear estado[main:0]']
+  'Formatear estado' --main[0]--> ['Responder al operador[main:0]']
+  'Leer operadores' --main[0]--> ['Comprobar operador[main:0]']
+  'Comprobar operador' --main[0]--> ['¿Es operador?[main:0]']
+  'Leer pausa' --main[0]--> ['Calcular pausa[main:0]']
+  'Calcular pausa' --main[0]--> ['IF - Cliente pausado[main:0]']
+  'IF - Cliente pausado' --main[1]--> ['Switch[main:0]']
+####################################################################################################
+CONNECTIONS: barberiaRecordatorios
+  'Google Sheets Trigger' --main[0]--> ['Code[main:0]']
+  'Code' --main[0]--> ['IF - Es cita agendada[main:0]']
+  'Code1' --main[0]--> ['Append or update row in sheet[main:0]']
+  'Append or update row in sheet' --main[0]--> ['IF - Toca recordatorio 24 h[main:0]']
+  'Switch' --main[0]--> ['Code1[main:0]']
+  'Switch' --main[1]--> ['OBTENER INFO DE CITA ELIMINADA[main:0]']
+  'Switch' --main[2]--> ['OBTENER INFO DE CITA ELIMINADA[main:0]']
+  'OBTENER INFO DE CITA ELIMINADA' --main[0]--> ['QUITAR RECORDATORIO[main:0]']
+  'Notificar cita nueva al encargado' --main[0]--> ['Switch[main:0]']
+  'IF - Toca recordatorio 24 h' --main[0]--> ['ESPERAR A 24 H[main:0]']
+  'IF - Toca recordatorio 24 h' --main[1]--> ['IF - Toca recordatorio 1 h[main:0]']
+  'ESPERAR A 24 H' --main[0]--> ['RECORDATORIO 24 H[main:0]']
+  'RECORDATORIO 24 H' --main[0]--> ['IF - Toca recordatorio 1 h[main:0]']
+  'IF - Toca recordatorio 1 h' --main[0]--> ['ESPERAR A 1 H[main:0]']
+  'ESPERAR A 1 H' --main[0]--> ['RECORDATORIO 1 H[main:0]']
+  'IF - Es cita agendada' --main[0]--> ['Notificar cita nueva al encargado[main:0]']
+####################################################################################################
+TRIGGERS & ERROR HANDLING SCAN
+-- barberiaAgenteUncensored
+  TRIGGER: Webhook n8n-nodes-base.webhook
+  errorTrigger nodes: NONE
+  settings.errorWorkflow: NONE
+   'Leer agenda del rango': alwaysOutputData=True
+   'Leer ficha del cliente': alwaysOutputData=True
+   'Aplicar pausa': alwaysOutputData=True
+   'Actualizar precio': alwaysOutputData=True
+   'Leer estado del sistema': alwaysOutputData=True
+   'Leer operadores': alwaysOutputData=True
+   'Leer pausa': alwaysOutputData=True
+-- barberiaRecordatorios
+  TRIGGER: Google Sheets Trigger n8n-nodes-base.googleSheetsTrigger
+  errorTrigger nodes: NONE
+  settings.errorWorkflow: NONE
+####################################################################################################
+EXTERNAL CALL NODES
+-- barberiaAgenteUncensored
+  'Get Audio' type=n8n-nodes-base.httpRequest url=={{ $('Normalizacion').item.json.instance_server_url }}/chat/getBase64FromMediaMessage/{{ $('Normalizacion').item.json.instance_name }}
+      auth=- cred={}
+  'Transcribe a recording' type=@n8n/n8n-nodes-langchain.openAi url=-
+      auth=- cred={"openAiApi": {"id": "GtV72MoANECFbNoX", "name": "OpenAi account"}}
+  'Get Image' type=n8n-nodes-base.httpRequest url=={{ $('Normalizacion').item.json.instance_server_url }}/chat/getBase64FromMediaMessage/{{ $('Normalizacion').item.json.instance_name }}
+      auth=- cred={}
+  'Describe imagen' type=@n8n/n8n-nodes-langchain.openAi url=-
+      auth=- cred={"openAiApi": {"id": "GtV72MoANECFbNoX", "name": "OpenAi account"}}
+  'Mandar mensaje' type=n8n-nodes-base.httpRequest url=={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}
+      auth=- cred={}
+  'Consultar agenda' type=n8n-nodes-base.googleCalendarTool url=-
+      auth=- cred={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}}
+  'Agendar cita' type=n8n-nodes-base.googleCalendarTool url=-
+      auth=- cred={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}}
+  'Cancelar cita' type=n8n-nodes-base.googleCalendarTool url=-
+      auth=- cred={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}}
+  'Reagendar' type=n8n-nodes-base.googleCalendarTool url=-
+      auth=- cred={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}}
+  'Registrar en hoja de citas' type=n8n-nodes-base.googleSheetsTool url=-
+      auth=- cred={"googleSheetsOAuth2Api": {"id": "lGEYmmJh1FvqzQi9", "name": "Google Sheets account"}}
+  'Responder al operador' type=n8n-nodes-base.httpRequest url=={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}
+      auth=genericCredentialType cred={"httpHeaderAuth": {"id": "qaGW1Tvt5BqPujJ1", "name": "Evolution API"}}
+  'Leer agenda del rango' type=n8n-nodes-base.googleCalendar url=-
+      auth=- cred={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}}
+  'Crear bloqueo en calendario' type=n8n-nodes-base.googleCalendar url=-
+      auth=- cred={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}}
+  'Leer ficha del cliente' type=n8n-nodes-base.postgres url=-
+      auth=- cred={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}}
+  'Aplicar pausa' type=n8n-nodes-base.postgres url=-
+      auth=- cred={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}}
+  'Actualizar precio' type=n8n-nodes-base.postgres url=-
+      auth=- cred={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}}
+  'Leer estado del sistema' type=n8n-nodes-base.postgres url=-
+      auth=- cred={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}}
+  'Leer operadores' type=n8n-nodes-base.postgres url=-
+      auth=- cred={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}}
+  'Leer pausa' type=n8n-nodes-base.postgres url=-
+      auth=- cred={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}}
+-- barberiaRecordatorios
+  'Google Sheets Trigger' type=n8n-nodes-base.googleSheetsTrigger url=-
+      auth=- cred={"googleSheetsTriggerOAuth2Api": {"id": "cJgufKuA5Lxckkz8", "name": "Google Sheets Trigger account"}}
+  'Notificar cita nueva al encargado' type=n8n-nodes-base.httpRequest url=http://evolution_api:8080/message/sendText/hector
+
+      auth=genericCredentialType cred={"httpHeaderAuth": {"id": "qaGW1Tvt5BqPujJ1", "name": "Evolution API"}}
+  'Append or update row in sheet' type=n8n-nodes-base.googleSheets url=-
+      auth=- cred={"googleSheetsOAuth2Api": {"id": "lGEYmmJh1FvqzQi9", "name": "Google Sheets account"}}
+  'QUITAR RECORDATORIO' type=n8n-nodes-base.n8n url=-
+      auth=- cred={"n8nApi": {"id": "LBEYKKDnChQfHraH", "name": "n8n hostinger"}}
+  'OBTENER INFO DE CITA ELIMINADA' type=n8n-nodes-base.googleSheets url=-
+      auth=- cred={"googleSheetsOAuth2Api": {"id": "lGEYmmJh1FvqzQi9", "name": "Google Sheets account"}}
+  'RECORDATORIO 24 H' type=n8n-nodes-base.httpRequest url=http://evolution_api:8080/message/sendText/hector
+      auth=genericCredentialType cred={"httpHeaderAuth": {"id": "qaGW1Tvt5BqPujJ1", "name": "Evolution API"}}
+  'RECORDATORIO 1 H' type=n8n-nodes-base.httpRequest url=http://evolution_api:8080/message/sendText/hector
+      auth=genericCredentialType cred={"httpHeaderAuth": {"id": "qaGW1Tvt5BqPujJ1", "name": "Evolution API"}}
+####################################################################################################
+SECRET SCAN
+-- barberiaAgenteUncensored
+   LONG LITERAL in 'Switch' at params/rules/values[0]/conditions/conditions[0]/id: 6571be58-7ae0-4b3a-9c4d-706d062d2428...
+   LONG LITERAL in 'Switch' at params/rules/values[1]/conditions/conditions[0]/id: 98a252f3-df54-41c8-8d0f-705fee6eec87...
+   LONG LITERAL in 'Switch' at params/rules/values[2]/conditions/conditions[0]/id: ebf44caf-794d-434c-be9b-88adfc2d34a0...
+   LONG LITERAL in 'Audio Content' at params/assignments/assignments[0]/id: 6e2644e1-fe2b-4523-b3bc-3db62622315c...
+   LONG LITERAL in 'Audio Content1' at params/assignments/assignments[0]/id: 6e2644e1-fe2b-4523-b3bc-3db62622315c...
+   LONG LITERAL in 'Edit Fields2' at params/assignments/assignments[0]/id: 6070e65d-c2d1-475e-af7c-c8ff0a5b059a...
+   LONG LITERAL in 'Edit Fields' at params/assignments/assignments[0]/id: d56cc938-d653-4611-96fd-86d5eb56bf9c...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[0]/id: d9419665-41fc-43b9-aef7-d521a1ba2035...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[1]/id: c3cb8673-8006-4079-a304-c58ffc267226...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[2]/id: e462da04-7f8b-4fbe-aacd-7956666c2ede...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[3]/id: b06da722-eea2-4f28-a2d4-7bcc6592b952...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[4]/id: 5ecbe629-f4d0-4bdf-8c78-903f311bc273...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[5]/id: cbb05e7c-4912-4965-bcf4-cefd9418b39f...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[6]/id: d6fa8877-dee6-468b-a51e-8fdc36dc190f...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[7]/id: f122b51f-8a93-439e-85fb-c370e7f4f6b8...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[8]/id: e10a7e61-cffe-44fb-9b13-e0c199ebd866...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[9]/id: 1c280646-7eb8-4118-9e8d-432f04a763b7...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[10]/id: a7341820-a177-4921-aee5-0fb72a40dcdf...
+   LONG LITERAL in 'Normalizacion' at params/assignments/assignments[11]/id: fromme0001-0000-4000-8000-000000000001...
+   LONG LITERAL in 'Registrar en hoja de citas' at params/documentId/value: 1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk...
+   LONG LITERAL in 'IF - No es del bot' at params/conditions/conditions[0]/id: ifnotbot-0000-4000-8000-000000000001...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[0]/conditions/conditions[0]/id: d8c05938-a99b-409b-8534-251643cb9be2...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[1]/conditions/conditions[0]/id: b4cbf386-f511-4ea0-9ed8-4b9c855e0152...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[2]/conditions/conditions[0]/id: 79c6298b-149f-4b26-8c54-ce9b75defc87...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[3]/conditions/conditions[0]/id: eb8b752d-47cf-4e20-b61c-900f81a64f89...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[4]/conditions/conditions[0]/id: 494599ed-64a7-48f6-b94f-f4ba5c39c7a0...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[5]/conditions/conditions[0]/id: 850025f6-47f4-4903-b6c0-fe2d308ec546...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[6]/conditions/conditions[0]/id: 7b593830-8481-44f1-b9fa-0c75d409429a...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[7]/conditions/conditions[0]/id: 43b0898c-1728-41ac-820a-2f03a3025a14...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[8]/conditions/conditions[0]/id: 61971f03-83bd-4410-9d9e-e189df84105c...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[9]/conditions/conditions[0]/id: d4c3bf8c-4816-4369-b4d4-37b78e73cc62...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[10]/conditions/conditions[0]/id: 03f95dba-8bd5-49f7-ba77-548d99fbbf92...
+   LONG LITERAL in 'Router de comandos' at params/rules/values[11]/conditions/conditions[0]/id: e692d59c-1410-47c3-b8d1-c0fc791e107b...
+   LONG LITERAL in 'Armar respuesta COMANDOS' at params/assignments/assignments[0]/id: ccce2966-cc69-46db-9831-a49bab3e6adf...
+   LONG LITERAL in 'Respuesta de bloqueo' at params/assignments/assignments[0]/id: 0ec5c2ac-e9bc-4ea8-8404-92091d420ea1...
+   LONG LITERAL in 'Confirmar bloqueo' at params/assignments/assignments[0]/id: 2c11c108-d923-4673-9ce3-0fb65713b30e...
+  credentials used:
+    googleCalendarOAuth2Api|Google Calendar account  ->  6 nodes
+    googleSheetsOAuth2Api|Google Sheets account  ->  1 nodes
+    httpHeaderAuth|Evolution API  ->  2 nodes
+    openAiApi|OpenAi account  ->  2 nodes
+    openAiApi|Uncensored AI (OpenAI-compatible)  ->  1 nodes
+    postgres|Postgres account  ->  7 nodes
+-- barberiaRecordatorios
+   LONG LITERAL in 'Google Sheets Trigger' at params/documentId/value: 1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk...
+   LONG LITERAL in 'Append or update row in sheet' at params/documentId/value: 1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk...
+   LONG LITERAL in 'OBTENER INFO DE CITA ELIMINADA' at params/documentId/value: 1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk...
+   LONG LITERAL in 'IF - Toca recordatorio 24 h' at params/conditions/conditions[0]/id: 3da51018-05db-4433-bb64-b957986bc48f...
+   LONG LITERAL in 'IF - Toca recordatorio 1 h' at params/conditions/conditions[0]/id: 55510586-7114-4052-9419-a282abb2ef73...
+  credentials used:
+    googleSheetsOAuth2Api|Google Sheets account  ->  2 nodes
+    googleSheetsTriggerOAuth2Api|Google Sheets Trigger account  ->  1 nodes
+    httpHeaderAuth|Evolution API  ->  3 nodes
+    n8nApi|n8n hostinger  ->  1 nodes
+####################################################################################################
+POSITIONS
+-- barberiaAgenteUncensored
+  exact duplicate positions: none
+  x range -704..1568  y range -80..2112
+-- barberiaRecordatorios
+  exact duplicate positions: none
+  x range 0..2288  y range -32..576
+####################################################################################################
+GENERIC NODE NAMES
+-- barberiaAgenteUncensored ['Switch', 'Edit Fields2', 'Edit Fields']
+-- barberiaRecordatorios ['Code', 'Code1', 'Switch']

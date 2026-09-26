@@ -1,0 +1,24 @@
+ANCHO_VIEWPORT=768 ALTO_VIEWPORT=1024
+ORIENTACION=portrait
+DOC_scrollWidth=753 clientWidth=753 SCROLL_LATERAL=false
+N_OVERFLOW_INTERNO=1
+  OVERFLOW:DIV.kpi-v scroll=141 client=134 txt="$14,230"
+N_FUERA_VIEWPORT=0
+N_KPIS=8 COLS_VISIBLES=
+KPIS_POR_FILA=4,4
+KPI0 "Ingresos hoy"="$580" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+KPI1 "Ingresos semana"="$4,470" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+KPI2 "Ingresos mes"="$14,230" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=true kpiDesborda=false
+KPI3 "Ticket promedio hoy"="$116" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+KPI4 "Ticket promedio mes"="$140" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+KPI5 "No-shows del mes"="16" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+KPI6 "Cancelaciones del mes"="8" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+KPI7 "Proximas 7 dias"="16" kpiAncho=172.3 valorAncho=134.3 RECORTA_VALOR=false kpiDesborda=false
+N_BARRAS=30
+ALTURAS=15.7%,17.6%,31.4%,1.5%,9.8%,29.4%,5.9%,15.7%,22.7%,21.6%,1.5%,14.9%,17.6%,21.6%,23.5%,9.8%,14.1%,1.5%,14.9%,15.7%,30.6%,9%,15.7%,100%,1.5%,18.8%,94.1%,22.7%,16.9%,22.7%
+N_TABLAS=2
+TABLA0 filas=9 ancho=687.0 desborda=false
+TABLA1 filas=8 ancho=687.0 desborda=false
+N_RECORTADOS=1
+  RECORTADO DIV.kpi-v "$14,230"
+ALTURA_DOC=4813

@@ -1,0 +1,16 @@
+len systemMessage: 22857
+count '**' : 264
+count single-asterisk pairs (approx): 17
+count '━': 0
+count '╔': 0
+count '┏': 0
+count '─': 0
+mentions Paco: False
+mentions Chino: True
+mentions Pinzón: True
+mentions barbers Juan/Carlos/Miguel: ['Juan']
+mentions Esteban: False
+mentions totalVisits: False
+mentions 2h recordatorio: False
+mentions 24h: True
+mentions negrita: True

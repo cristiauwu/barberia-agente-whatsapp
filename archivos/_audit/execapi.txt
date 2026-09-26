@@ -1,0 +1,30 @@
+executions keys ['data', 'nextCursor']
+======================================================================
+EXEC 770 error barberiaAgenteUncensored 2026-09-25T13:14:19.423Z
+  lastNodeExecuted: Responder al operador
+  error.message: Bad request - please check your parameters
+  error.description: Bad Request
+  error.node: {"id": "f878bbd1-d401-417f-bb52-7108a6333f78", "name": "Responder al operador", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "retryOnFail": true, "maxTries": 3, "waitBetweenTries": 2000, 
+======================================================================
+EXEC 763 error barberiaAgenteUncensored 2026-09-25T13:09:38.802Z
+  lastNodeExecuted: Mandar mensaje
+  error.message: Bad request - please check your parameters
+  error.description: Bad Request
+  error.node: {"id": "72159321-e8a7-4644-a200-142f429171ec", "name": "Mandar mensaje", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [1472, 192], "parameters": {"curlImport": "", "method": "
+======================================================================
+EXEC 759 error barberiaAgenteUncensored 2026-09-25T13:02:59.221Z
+  lastNodeExecuted: Responder al operador
+  error.message: Bad request - please check your parameters
+  error.description: Bad Request
+  error.node: {"id": "f878bbd1-d401-417f-bb52-7108a6333f78", "name": "Responder al operador", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [272, 1744], "parameters": {"curlImport": "", "met
+======================================================================
+EXEC 758 error barberiaAgenteUncensored 2026-09-25T13:02:33.455Z
+  lastNodeExecuted: Actualizar precio
+  error.message: column "undefined" does not exist
+  error.description: Failed query: UPDATE barber_servicios
+   SET precio = undefined,
+       duracion_min = COALESCE(NULL, duracion_min),
+       actualizado_en = now()
+ WHERE clave = 'undefined'
+RETURNING clave, nombre, precio, duracion_min;
+  error.node: {"id": "299c4933-b867-452b-8f9c-dd97c27271fc", "name": "Actualizar precio", "type": "n8n-nodes-base.postgres", "typeVersion": 2.6, "alwaysOutputData": true, "position": [-192, 1792], "parameters": {"r

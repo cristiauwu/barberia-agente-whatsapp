@@ -1,0 +1,52 @@
+{
+  "citas": [
+    {
+      "id": "5270sjndptm0fbp10sjiiat7rc",
+      "jid": "5214521206246@s.whatsapp.net",
+      "nombre": "Prueba Carga",
+      "servicio": "corte desvanecido o tijera",
+      "precio": "150.00",
+      "inicio": "2026-09-25 15:00:00",
+      "fin": "2026-09-25 15:40:00",
+      "estado": "agendado"
+    },
+    {
+      "id": "auvtij2npnoe844n3df289gp70",
+      "jid": "5214521206246@s.whatsapp.net",
+      "nombre": "Cristia Ñ",
+      "servicio": "Corte de cabello dama",
+      "precio": "250.00",
+      "inicio": "2026-09-25 16:00:00",
+      "fin": "2026-09-25 16:40:00",
+      "estado": "agendado"
+    }
+  ],
+  "clientes": [
+    {
+      "jid": "5214501111805@s.whatsapp.net",
+      "nombre": "Cliente Prueba",
+      "telefono": "4501111805",
+      "visitas": "5",
+      "etiqueta": "frecuente",
+      "ticket": "NULL",
+      "no_shows": "0",
+      "cancelaciones_tardias": "0",
+      "srv": "Corte desvanecido o tijera",
+      "mkt": "false",
+      "nota": "NULL"
+    },
+    {
+      "jid": "5214521206246@s.whatsapp.net",
+      "nombre": "Cristia Ñ",
+      "telefono": "4521206246",
+      "visitas": "5",
+      "etiqueta": "frecuente",
+      "ticket": "NULL",
+      "no_shows": "0",
+      "cancelaciones_tardias": "0",
+      "srv": "Corte de cabello dama",
+      "mkt": "false",
+      "nota": "NULL"
+    }
+  ]
+}

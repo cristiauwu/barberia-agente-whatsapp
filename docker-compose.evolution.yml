@@ -1,0 +1,97 @@
+# Evolution API v2 — WhatsApp para el agente de barbería
+#
+# Uso:
+#   docker compose -f docker-compose.evolution.yml up -d
+#   docker compose -f docker-compose.evolution.yml logs -f evolution_api
+#
+# El Manager (interfaz web con el QR) queda en http://localhost:3000
+# La API queda en http://localhost:8080
+#
+# Comparte la red "barberia_barberia" con n8n, así n8n puede llamar a
+# Evolution por su nombre interno (evolution_api) sin salir a internet.
+#
+# Nombre de proyecto propio para no mezclarse con el stack de n8n.
+name: barberia-evolution
+
+services:
+  evolution_api:
+    image: evoapicloud/evolution-api:latest
+    container_name: evolution_api
+    restart: unless-stopped
+    depends_on:
+      evolution_redis:
+        condition: service_healthy
+      evolution_postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"   # solo accesible desde tu equipo
+    volumes:
+      - evolution_instances:/evolution/instances
+    env_file:
+      - .env.evolution
+    networks:
+      - evolution-net
+      - barberia-net
+
+  evolution_manager:
+    image: evoapicloud/evolution-manager:latest
+    container_name: evolution_manager
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:80"
+    volumes:
+      # La imagen oficial trae un nginx.conf inválido ("must-revalidate" en
+      # gzip_proxied) que la hace reiniciar en bucle. Se monta uno corregido.
+      - ./archivos/manager-nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+    networks:
+      - evolution-net
+
+  evolution_redis:
+    image: redis:alpine
+    container_name: evolution_redis
+    restart: unless-stopped
+    command: redis-server --port 6379 --appendonly yes
+    volumes:
+      - evolution_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - evolution-net
+
+  evolution_postgres:
+    image: postgres:15-alpine
+    container_name: evolution_postgres
+    restart: unless-stopped
+    # env_file en lugar de ${...}: así Postgres recibe POSTGRES_PASSWORD
+    # directamente y no depende de la interpolación de Compose.
+    env_file:
+      - .env.evolution
+    environment:
+      TZ: America/Mexico_City
+    volumes:
+      - evolution_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # $$ evita que Compose interprete el $ como variable suya.
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - evolution-net
+
+volumes:
+  evolution_instances:
+  evolution_redis:
+  evolution_pgdata:
+
+networks:
+  evolution-net:
+    name: evolution-net
+    driver: bridge
+  # Red compartida con n8n (creada por docker-compose.yml)
+  barberia-net:
+    name: barberia_barberia
+    external: true

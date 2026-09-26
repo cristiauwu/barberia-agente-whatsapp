@@ -1,0 +1,8 @@
+barberiaAgenteUncensored -> G:\Barberia\archivos\_audit\barberiaAgenteUncensored.json nodes: 52
+  keys: ['active', 'activeVersion', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'pinData', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId']
+  settings: {"timezone": "America/Mexico_City", "callerPolicy": "workflowsFromSameOwner", "availableInMCP": true, "executionOrder": "v1", "binaryMode": "separate"}
+  pinData: []
+barberiaRecordatorios -> G:\Barberia\archivos\_audit\barberiaRecordatorios.json nodes: 15
+  keys: ['active', 'activeVersion', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'pinData', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId']
+  settings: {"timezone": "America/Mexico_City", "callerPolicy": "workflowsFromSameOwner", "availableInMCP": true, "executionOrder": "v1", "binaryMode": "separate"}
+  pinData: []

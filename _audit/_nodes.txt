@@ -1,0 +1,118 @@
+==========================================================================================
+WORKFLOW: Barberia - Agente de citas (Uncensored AI) | nodes: 52
+==========================================================================================
+[Webhook]  type=n8n-nodes-base.webhook  disabled=None
+[AI Agent]  type=@n8n/n8n-nodes-langchain.agent  disabled=None
+[OpenAI Chat Model]  type=@n8n/n8n-nodes-langchain.lmChatOpenAi  disabled=None
+[Switch]  type=n8n-nodes-base.switch  disabled=None
+[Get Audio]  type=n8n-nodes-base.httpRequest  disabled=None
+[Convertir Audio]  type=n8n-nodes-base.convertToFile  disabled=None
+[Transcribe a recording]  type=@n8n/n8n-nodes-langchain.openAi  disabled=None
+[Audio Content]  type=n8n-nodes-base.set  disabled=None
+[Audio Content1]  type=n8n-nodes-base.set  disabled=None
+[Get Image]  type=n8n-nodes-base.httpRequest  disabled=None
+[Convertir Imagen]  type=n8n-nodes-base.convertToFile  disabled=None
+[Describe imagen]  type=@n8n/n8n-nodes-langchain.openAi  disabled=None
+[Edit Fields2]  type=n8n-nodes-base.set  disabled=None
+[Edit Fields]  type=n8n-nodes-base.set  disabled=None
+[Normalizacion]  type=n8n-nodes-base.set  disabled=None
+[Mandar mensaje]  type=n8n-nodes-base.httpRequest  disabled=None
+[Consultar agenda]  type=n8n-nodes-base.googleCalendarTool  disabled=None
+[Agendar cita]  type=n8n-nodes-base.googleCalendarTool  disabled=None
+[Cancelar cita]  type=n8n-nodes-base.googleCalendarTool  disabled=None
+[Reagendar]  type=n8n-nodes-base.googleCalendarTool  disabled=None
+[Postgres Chat Memory]  type=@n8n/n8n-nodes-langchain.memoryPostgresChat  disabled=None
+[Registrar en hoja de citas]  type=n8n-nodes-base.googleSheetsTool  disabled=None
+[Notificar al encargado]  type=@n8n/n8n-nodes-langchain.toolHttpRequest  disabled=None
+[IF - No es del bot]  type=n8n-nodes-base.if  disabled=None
+[¿Es operador?]  type=n8n-nodes-base.if  disabled=None
+[Router de comandos]  type=n8n-nodes-base.switch  disabled=None
+[Responder al operador]  type=n8n-nodes-base.httpRequest  disabled=None
+[Armar respuesta COMANDOS]  type=n8n-nodes-base.set  disabled=None
+[Preparar rango de fechas]  type=n8n-nodes-base.code  disabled=None
+[Leer agenda del rango]  type=n8n-nodes-base.googleCalendar  disabled=None
+[Formatear agenda]  type=n8n-nodes-base.code  disabled=None
+[Parsear bloqueo]  type=n8n-nodes-base.code  disabled=None
+[Crear bloqueo en calendario]  type=n8n-nodes-base.googleCalendar  disabled=None
+[Respuesta de bloqueo]  type=n8n-nodes-base.set  disabled=None
+[Buscar cliente]  type=n8n-nodes-base.code  disabled=None
+[Leer ficha del cliente]  type=n8n-nodes-base.postgres  disabled=None
+[Formatear ficha]  type=n8n-nodes-base.code  disabled=None
+[Parsear pausa]  type=n8n-nodes-base.code  disabled=None
+[Aplicar pausa]  type=n8n-nodes-base.postgres  disabled=None
+[Formatear pausa]  type=n8n-nodes-base.code  disabled=None
+[Parsear precio]  type=n8n-nodes-base.code  disabled=None
+[Actualizar precio]  type=n8n-nodes-base.postgres  disabled=None
+[Formatear precio]  type=n8n-nodes-base.code  disabled=None
+[Leer estado del sistema]  type=n8n-nodes-base.postgres  disabled=None
+[Formatear estado]  type=n8n-nodes-base.code  disabled=None
+[IF - Bloqueo invalido]  type=n8n-nodes-base.if  disabled=None
+[Confirmar bloqueo]  type=n8n-nodes-base.set  disabled=None
+[Leer operadores]  type=n8n-nodes-base.postgres  disabled=None
+[Comprobar operador]  type=n8n-nodes-base.code  disabled=None
+[Leer pausa]  type=n8n-nodes-base.postgres  disabled=None
+[Calcular pausa]  type=n8n-nodes-base.code  disabled=None
+[IF - Cliente pausado]  type=n8n-nodes-base.if  disabled=None
+
+==========================================================================================
+WORKFLOW: Barberia - Recordatorios de cita | nodes: 15
+==========================================================================================
+[Google Sheets Trigger]  type=n8n-nodes-base.googleSheetsTrigger  disabled=None
+[Code]  type=n8n-nodes-base.code  disabled=None
+[Notificar cita nueva al encargado]  type=n8n-nodes-base.httpRequest  disabled=None
+[Code1]  type=n8n-nodes-base.code  disabled=None
+[Append or update row in sheet]  type=n8n-nodes-base.googleSheets  disabled=None
+[Switch]  type=n8n-nodes-base.switch  disabled=None
+[ESPERAR A 1 H]  type=n8n-nodes-base.wait  disabled=None
+[QUITAR RECORDATORIO]  type=n8n-nodes-base.n8n  disabled=None
+[OBTENER INFO DE CITA ELIMINADA]  type=n8n-nodes-base.googleSheets  disabled=None
+[RECORDATORIO 24 H]  type=n8n-nodes-base.httpRequest  disabled=None
+[RECORDATORIO 1 H]  type=n8n-nodes-base.httpRequest  disabled=None
+[IF - Toca recordatorio 24 h]  type=n8n-nodes-base.if  disabled=None
+[IF - Toca recordatorio 1 h]  type=n8n-nodes-base.if  disabled=None
+[ESPERAR A 24 H]  type=n8n-nodes-base.wait  disabled=None
+[IF - Es cita agendada]  type=n8n-nodes-base.if  disabled=None
+
+==========================================================================================
+WORKFLOW: My workflow | nodes: 0
+==========================================================================================
+
+##########################################################################################
+PATTERN SCAN: wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json
+  ASTERISK_2: 528
+  BOX_HEAVY: 0
+  BOX_DOUBLE: 0
+  BOX_LIGHT: 0
+  SEPARATOR_DASH: 0
+  clientes_table: 4
+  scheduleTrigger: 0
+  cron: 0
+  ingreso: 0
+  revenue: 0
+  metric: 0
+##########################################################################################
+PATTERN SCAN: wf_Barberia_-_Recordatorios_de_cita.json
+  ASTERISK_2: 0
+  BOX_HEAVY: 0
+  BOX_DOUBLE: 0
+  BOX_LIGHT: 0
+  SEPARATOR_DASH: 0
+  clientes_table: 0
+  scheduleTrigger: 0
+  cron: 0
+  ingreso: 0
+  revenue: 0
+  metric: 0
+##########################################################################################
+PATTERN SCAN: wf_My_workflow.json
+  ASTERISK_2: 0
+  BOX_HEAVY: 0
+  BOX_DOUBLE: 0
+  BOX_LIGHT: 0
+  SEPARATOR_DASH: 0
+  clientes_table: 0
+  scheduleTrigger: 0
+  cron: 0
+  ingreso: 0
+  revenue: 0
+  metric: 0

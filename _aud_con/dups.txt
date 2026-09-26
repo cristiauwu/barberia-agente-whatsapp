@@ -1,0 +1,38 @@
+== PREGUNTAS CON ALTO SOLAPAMIENTO (Jaccard >= 0.5) ==
+(0.67, 23, 24, '¿Cuánto cuesta el corte?', '¿Cuánto cuesta el corte de dama?')
+(0.6, 26, 211, '¿Cuánto cuesta la barba?', '¿Cuánto dura la barba?')
+(0.6, 26, 27, '¿Cuánto cuesta la barba?', '¿Cuánto cuesta la ceja?')
+(0.6, 23, 209, '¿Cuánto cuesta el corte?', '¿Cuánto dura el corte?')
+(0.6, 17, 27, '¿Cuánto cuesta la depilación?', '¿Cuánto cuesta la ceja?')
+(0.6, 17, 26, '¿Cuánto cuesta la depilación?', '¿Cuánto cuesta la barba?')
+(0.6, 11, 20, '¿Hacen corte para dama?', '¿Hacen corte para niño?')
+(0.6, 2, 6, '¿Cuál es el teléfono?', '¿Cuál es el horario?')
+(0.5, 40, 213, '¿Qué pasa si llego tarde?', '¿Qué pasa si voy a llegar tarde?')
+
+== SINONIMOS DUPLICADOS DENTRO DE LA MISMA FILA ==
+#3 ['carro']
+#4 ['sin']
+#8 ['hora']
+#10 ['que']
+#11 ['dama']
+#13 ['ceja']
+#20 ['nino']
+#21 ['corte', 'cut']
+#23 ['corte', 'cuanto']
+#24 ['dama']
+#25 ['precios']
+#26 ['barba']
+#27 ['ceja']
+#30 ['pago']
+#32 ['cita']
+#33 ['datos']
+#34 ['antes']
+#35 ['citas']
+#37 ['a', 'domicilio']
+#40 ['tarde']
+#44 ['cita']
+#45 ['barbero']
+#46 ['barbero']
+#209 ['tarda']
+
+== SINONIMOS VACIOS ==

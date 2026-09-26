@@ -1,0 +1,1 @@
+grep -n 'getSheetById\|sheetName\|gid' /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file++++home+runner+_work+n8n+n8n+packages+nodes-base/node_modules/n8n-nodes-base/dist/nodes/Google/Sheet/v2/helpers/GoogleSheets.utils.js 2>/dev/null | head -25

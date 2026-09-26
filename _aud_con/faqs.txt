@@ -1,0 +1,289 @@
+#1   [ubicacion/contexto] p=10 act=True
+  P: ¿Dónde están ubicados?
+  R: Estamos en *Calle Pinzón #574*. Ahí mismo te atendemos. Si tienes duda para llegar, márcanos al *452-281-8144*.
+  S: direccion domicilio donde queda ubicacion llegar como llego mapa
+
+#2   [ubicacion/contexto] p=10 act=True
+  P: ¿Cuál es el teléfono?
+  R: El teléfono del local es *452-281-8144*. También puedes seguir por aquí, que contestamos igual.
+  S: telefono numero marcar llamar contacto comunicarse
+
+#3   [instalaciones/contexto] p=10 act=True
+  P: ¿Tienen estacionamiento?
+  R: No tenemos estacionamiento. Puedes dejar el coche sobre la misma calle, junto al local.
+  S: estacionamiento parking coche carro auto lugar donde dejo mi carro
+
+#4   [citas/contexto] p=5 act=True
+  P: ¿Se puede pasar sin cita?
+  R: Sí, puedes llegar directo. Pero como atiende *una sola persona*, si vienes sin cita puede que esperes. Lo más seguro es apartar tu lugar por aquí.
+  S: sin cita walk in directo llegar sin apartar espontaneo turno
+
+#5   [instalaciones/contexto] p=0 act=True
+  P: ¿Aceptan niños?
+  R: Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.
+  S: ninos infantil hijos pequenos edad menor bebe
+
+#6   [horarios/contexto] p=10 act=True
+  P: ¿Cuál es el horario?
+  R: Abrimos de *lunes a sábado de 10:00 a 20:00*. El domingo estamos cerrados.
+  S: horario abren cierran abierto cerrado a que hora atienden
+
+#7   [horarios/contexto] p=10 act=True
+  P: ¿Abren el domingo?
+  R: No, el domingo estamos cerrados. Atendemos de lunes a sábado de 10:00 a 20:00.
+  S: domingo cerrado abierto domingos fin de semana
+
+#8   [horarios/contexto] p=10 act=True
+  P: ¿Hasta qué hora puedo agendar?
+  R: Puedes agendar hasta que el servicio *termine* antes de las 20:00. Por ejemplo, un corte de 40 minutos a las 19:00 todavía alcanza; a las 19:30 ya no.
+  S: ultima cita hora limite hasta que hora tarde ultimo turno cierre
+
+#9   [horarios/propuesta] p=0 act=True
+  P: ¿Atienden en días festivos?
+  R: Los días festivos trabajamos en horario normal si cae de lunes a sábado. Si el encargado cierra ese día, aquí te lo confirmamos al agendar.
+  S: festivo feriado puente asueto dia de descanso
+
+#10  [servicios/contexto] p=10 act=True
+  P: ¿Qué servicios tienen?
+  R: Corte desvanecido o tijera $150, arreglo de barba $100, ceja $30, mascarilla $50, corte de cabello dama $250, planchado express $150, peinado $300 y depilación. ¿Cuál te aparto?
+  S: servicios catalogo que hacen que ofrecen menu carta
+
+#11  [servicios/contexto] p=10 act=True
+  P: ¿Hacen corte para dama?
+  R: Sí, el corte de cabello dama cuesta *$250* y dura 50 minutos.
+  S: dama mujer femenino corte de dama senora
+
+#12  [servicios/contexto] p=10 act=True
+  P: ¿Arreglan la barba?
+  R: Sí, el arreglo de barba cuesta *$100* y dura 20 minutos.
+  S: barba afeitar rasurar bigote perfilado
+
+#13  [servicios/contexto] p=10 act=True
+  P: ¿Hacen las cejas?
+  R: Sí, la ceja cuesta *$30* y toma unos 10 minutos.
+  S: ceja cejas perfilado de ceja
+
+#14  [servicios/contexto] p=5 act=True
+  P: ¿Qué es la mascarilla?
+  R: Es un tratamiento de *$50* que dura 20 minutos. Va muy bien para la piel después del corte.
+  S: mascarilla facial tratamiento cara piel limpieza
+
+#15  [servicios/contexto] p=10 act=True
+  P: ¿Hacen planchado?
+  R: Sí, el planchado express cuesta *$150* y dura 30 minutos.
+  S: planchado plancha alaciado liso alisar
+
+#16  [servicios/contexto] p=10 act=True
+  P: ¿Hacen peinado?
+  R: Sí, el peinado cuesta *$300* y dura 45 minutos. Es el servicio más completo para una ocasión especial.
+  S: peinado peinar evento boda fiesta especial novia
+
+#17  [servicios/contexto] p=15 act=True
+  P: ¿Cuánto cuesta la depilación?
+  R: La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.
+  S: depilacion cera depilar vello zona
+
+#18  [servicios/contexto] p=5 act=True
+  P: ¿Hacen tintes o color?
+  R: Ese servicio no lo tenemos en el catálogo. Déjame preguntarle al encargado y te confirmo en un momento.
+  S: tinte tintes tenido teñir color pintar pintado canas mechas decoloracion rubio negro cabello
+
+#19  [servicios/contexto] p=5 act=True
+  P: ¿Trabajan con máquina o navaja?
+  R: Sí, el corte desvanecido o tijera cubre esos estilos y cuesta *$150*. Dime qué estilo buscas y te digo si te lo podemos hacer.
+  S: maquina navaja desvanecido fade rasurado
+
+#20  [servicios/contexto] p=5 act=True
+  P: ¿Hacen corte para niño?
+  R: Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.
+  S: nino bebe infantil escolar corte de nino
+
+#21  [servicios/contexto] p=10 act=True
+  P: ¿Tienen un corte llamado "mod cut" o "corte clásico"?
+  R: Esos nombres no están en nuestro catálogo. Lo que sí manejamos es el corte desvanecido o tijera de *$150*. Platícame qué estilo quieres y te digo si te lo podemos hacer.
+  S: mod cut corte clasico corte laser buzz cut crew cut taper estilos nombres
+
+#22  [servicios/contexto] p=10 act=True
+  P: ¿Qué me recomiendan si es mi primera vez?
+  R: El más pedido es el *corte desvanecido o tijera*, $150. Queda bien con casi cualquier tipo de cabello y dura 40 minutos.
+  S: recomiendas recomiendan mejor corte primera vez cual me queda sugerencia
+
+#23  [precios/contexto] p=15 act=True
+  P: ¿Cuánto cuesta el corte?
+  R: El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.
+  S: cuanto cuesta el corte precio corte de pelo cuanto sale vale
+
+#24  [precios/contexto] p=15 act=True
+  P: ¿Cuánto cuesta el corte de dama?
+  R: El corte de cabello dama cuesta *$250* y dura 50 minutos.
+  S: precio corte dama mujer cuanto cuesta dama
+
+#25  [precios/contexto] p=10 act=True
+  P: ¿Me dan la lista de precios completa?
+  R: Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50, corte de dama $250, planchado express $150, peinado $300. La depilación depende de la zona. ¿Cuál te aparto?
+  S: lista de precios tarifas cuanto cuestan todos costos precios
+
+#26  [precios/contexto] p=15 act=True
+  P: ¿Cuánto cuesta la barba?
+  R: El arreglo de barba cuesta *$100* y dura 20 minutos.
+  S: precio barba cuanto cuesta barba
+
+#27  [precios/contexto] p=15 act=True
+  P: ¿Cuánto cuesta la ceja?
+  R: La ceja cuesta *$30* y dura unos 10 minutos.
+  S: precio ceja cuanto cuesta ceja
+
+#28  [pagos/contexto] p=10 act=True
+  P: ¿Hacen descuento?
+  R: Déjame preguntarle al encargado y te confirmo en un momento.
+  S: descuento rebaja promocion oferta barato mas economico precio especial
+
+#29  [pagos/contexto] p=10 act=True
+  P: ¿Cobran menos si me hago varios servicios juntos?
+  R: Déjame consultarlo con el encargado y te digo en un momento.
+  S: varios servicios juntos combo paquete precio especial descuento
+
+#30  [pagos/contexto] p=10 act=True
+  P: ¿Aceptan tarjeta?
+  R: Se puede pagar en efectivo o por *transferencia*. El pago se hace directo en el local.
+  S: tarjeta credito debito pago efectivo terminal cobrar forma de pago
+
+#31  [pagos/contexto] p=5 act=True
+  P: ¿Puedo pagar con transferencia?
+  R: Se puede pagar en efectivo o por *transferencia*. El pago se hace directo en el local.
+  S: transferencia deposito spei banco pago electronico
+
+#32  [citas/contexto] p=10 act=True
+  P: ¿Cómo agendo una cita?
+  R: Dime qué servicio quieres, qué día y a qué hora, y yo te la aparto aquí mismo.
+  S: agendar apartar reservar cita como hago para una cita
+
+#33  [citas/contexto] p=5 act=True
+  P: ¿Necesito dar mis datos para la cita?
+  R: Solo tu *nombre* y el número de WhatsApp desde el que escribes. No necesitas crear cuenta ni nada más.
+  S: datos datos personales registro cuenta nombre telefono
+
+#34  [citas/propuesta] p=5 act=True
+  P: ¿Cuánto tiempo antes debo llegar?
+  R: Con llegar unos 5 minutos antes es suficiente. Si vas a llegar tarde, avísanos por aquí.
+  S: llegar antes anticipacion cuanto tiempo antes puntualidad
+
+#35  [citas/propuesta] p=0 act=True
+  P: ¿Puedo apartar varias citas a la vez?
+  R: Sí, dime los servicios y los horarios que quieres y te los aparto. Si son muchos, mejor los vemos uno por uno para no equivocarnos.
+  S: varias citas dos citas acompanante amigo familia juntos
+
+#36  [citas/contexto] p=5 act=True
+  P: ¿Con cuánta anticipación puedo agendar?
+  R: Puedes agendar para cualquier día a partir de hoy. Si quieres una fecha muy lejana, dime el día exacto y la reviso.
+  S: anticipacion dias de antelacion hasta cuando puedo agendar futuro
+
+#37  [citas/contexto] p=5 act=True
+  P: ¿Atienden a domicilio?
+  R: No, la atención es solamente en el local, en Calle Pinzón #574.
+  S: domicilio a domicilio ir a mi casa servicio a domicilio movil
+
+#38  [politicas/contexto] p=15 act=True
+  P: ¿Puedo cancelar mi cita?
+  R: Sí. Avísame aquí y la cancelo. Lo único que pedimos es que nos avises con la mayor anticipación posible, para que ese lugar lo aproveche alguien más.
+  S: cancelar cancelacion anular quitar cita ya no puedo ir
+
+#39  [politicas/contexto] p=15 act=True
+  P: ¿Puedo cambiar mi cita de día u hora?
+  R: Sí, sin problema. Dime para qué día y hora la quieres mover y yo la reprogramo. Te confirmo si el nuevo horario está libre.
+  S: reprogramar cambiar mover reagendar otra fecha posponer
+
+#40  [politicas/contexto] p=5 act=True
+  P: ¿Qué pasa si llego tarde?
+  R: Te esperamos de *5 a 10 minutos*. Si te vas a tardar más, avísame por aquí para ver si alcanza el tiempo o movemos tu cita.
+  S: tarde llegar tarde retraso demora minutos
+
+#42  [politicas/propuesta] p=10 act=True
+  P: ¿Cuál es la política de cancelación?
+  R: Puedes cancelar o mover tu cita cuando quieras, avisándonos por aquí. No hay penalización; solo te pedimos avisar con anticipación.
+  S: politica de cancelacion reglas cancelar condiciones
+
+#43  [politicas/contexto] p=5 act=True
+  P: ¿Hay garantía si no me gusta el corte?
+  R: Déjame preguntarle al encargado y te confirmo en un momento.
+  S: garantia no me gusto quedo mal reclamacion devolucion arreglo
+
+#44  [citas/contexto] p=5 act=True
+  P: ¿Necesito cita para la ceja o la barba?
+  R: No es obligatorio, pero son servicios cortos de 10 y 20 minutos. Si vienes sin cita puede que te toque esperar. Apartar tu lugar por aquí te asegura la hora.
+  S: ceja barba cita necesito cita servicio corto rapido
+
+#45  [barbero/contexto] p=10 act=True
+  P: ¿Quién me va a atender?
+  R: Te atiende *Esteban Aguilera*. Es quien lleva la barbería.
+  S: quien atiende barbero estilista peluquero nombre del barbero
+
+#46  [barbero/contexto] p=10 act=True
+  P: ¿Puedo elegir a otro barbero?
+  R: No, en la barbería atiende *una sola persona*, Esteban Aguilera. No hay otros barberos.
+  S: otro barbero elegir barbero diferentes barberos equipo
+
+#47  [barbero/propuesta] p=0 act=True
+  P: ¿Tienen experiencia cortando este tipo de cabello?
+  R: Sí, Esteban tiene experiencia con distintos tipos de cabello. Platícame qué buscas y te dice si te lo puede hacer.
+  S: experiencia sabe cortar especialidad capacitado tipo de cabello
+
+#48  [general/contexto] p=5 act=True
+  P: ¿Dan factura?
+  R: Por el momento no manejamos facturación. Si necesitas un comprobante, dímelo y le pregunto al encargado.
+  S: factura comprobante fiscal rfc recibo
+
+#49  [general/contexto] p=0 act=True
+  P: ¿Venden productos para el cabello?
+  R: Por ahora lo que ofrecemos son los servicios de la barbería. Si te interesa algún producto en específico, pregúntale al encargado al llegar.
+  S: productos venden shampoo cera pomada gel venta
+
+#50  [general/contexto] p=5 act=True
+  P: ¿Puedo dejar una propuesta o una queja?
+  R: Claro, cuéntame y se lo paso al encargado ahora mismo. Él te escribe en un momento.
+  S: queja reclamo sugerencia propuesta comentario opinion
+
+#51  [general/contexto] p=0 act=True
+  P: ¿Tienen redes sociales?
+  R: Atendemos únicamente por WhatsApp. Aquí mismo puedes agendar y preguntar lo que necesites.
+  S: instagram facebook redes sociales tiktok pagina
+
+#52  [general/contexto] p=5 act=True
+  P: ¿Puedo dejar reservado para una boda o un evento?
+  R: Déjame consultarlo con el encargado, porque depende del día y de cuántas personas sean. Te confirmo en un momento.
+  S: boda evento grupo xv anos graduacion muchos invitados
+
+#209 [servicios/contexto] p=0 act=True
+  P: ¿Cuánto dura el corte?
+  R: El *corte desvanecido o tijera* dura *40 minutos*. Deja tiempo extra si vienes en hora pico.
+  S: duracion dura tarda tiempo minutos cuanto tarda el corte
+
+#210 [servicios/contexto] p=0 act=True
+  P: ¿Cuánto dura cada servicio?
+  R: Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.
+  S: duracion duraciones tiempo tarda minutos cada servicio cuanto
+
+#211 [servicios/contexto] p=0 act=True
+  P: ¿Cuánto dura la barba?
+  R: El *arreglo de barba* dura *20 minutos*.
+  S: duracion dura barba tarda tiempo minutos cuanto
+
+#212 [citas/contexto] p=0 act=True
+  P: ¿Puedo agendar el mismo día?
+  R: Sí, si queda hueco. Dime la hora y lo reviso al momento.
+  S: mismo dia hoy ahora urgente inmediato disponible hueco
+
+#213 [citas/contexto] p=0 act=True
+  P: ¿Qué pasa si voy a llegar tarde?
+  R: Te esperamos de *5 a 10 minutos*. Si te vas a tardar más, avísame por aquí para ver si alcanza el tiempo o movemos tu cita.
+  S: tarde retraso demora llegar puntualidad avisar
+
+#214 [general/contexto] p=0 act=True
+  P: ¿Puedo llevar a mi hijo?
+  R: Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.
+  S: nino hijo menor edad acompanante
+
+#215 [general/contexto] p=0 act=True
+  P: ¿Tienen wifi?
+  R: Sí, tenemos wifi. Pídelo al llegar y te damos la clave.
+  S: wifi internet conexion

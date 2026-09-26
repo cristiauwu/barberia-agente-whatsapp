@@ -1,0 +1,263 @@
+{
+ "js": "\n// Devuelve el dia de la semana de una fecha, calculado, no adivinado.\n//\n// El modelo pasa la fecha que viene de Google Calendar (ISO) o escrita a\n// mano (\"27 de septiembre de 2026\"), y recibe el dato ya resuelto. Asi no\n// tiene que calcular nada.\nconst TZ = 'America/Mexico_City';\nconst DIAS = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves',\n              'viernes', 'sabado'];\nconst MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',\n               'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',\n               'diciembre'];\n\nconst entrada = String(query == null ? '' : query).trim();\nif (!entrada) {\n  return 'Error: no me diste ninguna fecha. Pasame una fecha en formato ' +\n         '2026-09-27T15:00:00-06:00 o \"27 de septiembre de 2026\".';\n}\n\n// 1. Intentar el formato ISO, que es el que manda Google Calendar.\nlet d = new Date(entrada);\nlet comoSeLeyo = 'ISO';\n\n// 2. Si no es ISO, intentar \"27 de septiembre de 2026\" / \"27 septiembre\".\nif (isNaN(d.getTime())) {\n  const m = entrada.toLowerCase().match(\n    /(\\d{1,2})\\s*(?:de\\s+)?([a-záéíóú]+)?\\s*(?:de\\s+)?(\\d{4})?/);\n  if (m) {\n    const dia = parseInt(m[1], 10);\n    let mes = null;\n    if (m[2]) {\n      const idx = MESES.findIndex(function (x) {\n        return x.startsWith(m[2].substring(0, 3));\n      });\n      if (idx >= 0) mes = idx;\n    }\n    const anio = m[3] ? parseInt(m[3], 10) : new Date().getFullYear();\n    if (mes === null) mes = new Date().getMonth();\n    // mediodia: evita que un cambio de zona mueva la fecha un dia\n    d = new Date(Date.UTC(anio, mes, dia, 18, 0, 0));\n    comoSeLeyo = 'texto';\n  }\n}\n\nif (isNaN(d.getTime())) {\n  return 'Error: no pude entender \"' + entrada + '\". Usa el formato ' +\n         '2026-09-27T15:00:00-06:00.';\n}\n\n// El negocio vive en Mexico: el dia se calcula en SU zona, no en UTC.\n// Esto es lo que rompia: a las 19:00 de Mexico ya es el dia siguiente en UTC.\nconst partes = new Intl.DateTimeFormat('en-CA', {\n  timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit',\n  weekday: 'long'\n}).formatToParts(d);\n\nconst get = function (t) {\n  const p = partes.find(function (x) { return x.type === t; });\n  return p ? p.value : '';\n};\nconst anio = get('year');\nconst mes2 = parseInt(get('month'), 10);\nconst dia2 = parseInt(get('day'), 10);\n\n// El nombre del dia lo da el propio motor de fechas: no se calcula a mano.\nconst enIngles = get('weekday');\nconst ORDEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',\n               'Friday', 'Saturday'];\nconst indice = ORDEN.indexOf(enIngles);\n\nconst resultado = {\n  dia_semana: DIAS[indice],\n  fecha: anio + '-' + String(mes2).padStart(2, '0') + '-' +\n         String(dia2).padStart(2, '0'),\n  fecha_larga: DIAS[indice] + ' ' + dia2 + ' de ' + MESES[mes2 - 1] +\n               ' de ' + anio,\n  zona: TZ,\n  comoSeLeyo: comoSeLeyo\n};\n\n// Se devuelve como texto plano: es lo que el modelo sabe leer mejor.\nreturn resultado.fecha_larga + ' (' + resultado.fecha + ')';\n",
+ "casos": [
+  {
+   "id": "7d-lunes",
+   "entrada": "'2026-09-28'",
+   "esperado": "2026-09-28",
+   "nota": "lunes"
+  },
+  {
+   "id": "7d-martes",
+   "entrada": "'2026-09-29'",
+   "esperado": "2026-09-29",
+   "nota": "martes"
+  },
+  {
+   "id": "7d-miercoles",
+   "entrada": "'2026-09-30'",
+   "esperado": "2026-09-30",
+   "nota": "miercoles"
+  },
+  {
+   "id": "7d-jueves",
+   "entrada": "'2026-10-01'",
+   "esperado": "2026-10-01",
+   "nota": "jueves"
+  },
+  {
+   "id": "7d-viernes",
+   "entrada": "'2026-10-02'",
+   "esperado": "2026-10-02",
+   "nota": "viernes"
+  },
+  {
+   "id": "7d-sabado",
+   "entrada": "'2026-10-03'",
+   "esperado": "2026-10-03",
+   "nota": "sabado"
+  },
+  {
+   "id": "7d-domingo",
+   "entrada": "'2026-09-27'",
+   "esperado": "2026-09-27",
+   "nota": "domingo (el dia del fallo)"
+  },
+  {
+   "id": "tz-1900-mx-offset",
+   "entrada": "'2026-09-28T19:00:00-06:00'",
+   "esperado": "2026-09-28",
+   "nota": "19:00 Mexico con offset explicito"
+  },
+  {
+   "id": "tz-1900-mx-z",
+   "entrada": "'2026-09-29T01:00:00Z'",
+   "esperado": "2026-09-28",
+   "nota": "la MISMA cita en UTC (ya es dia 29 en UTC)"
+  },
+  {
+   "id": "tz-1900-mx-utc-off",
+   "entrada": "'2026-09-29T01:00:00+00:00'",
+   "esperado": "2026-09-28",
+   "nota": "la MISMA cita en UTC con offset +00:00"
+  },
+  {
+   "id": "tz-1859-mx",
+   "entrada": "'2026-09-28T18:59:00-06:00'",
+   "esperado": "2026-09-28",
+   "nota": "18:59 Mexico"
+  },
+  {
+   "id": "tz-2000-mx",
+   "entrada": "'2026-09-28T20:00:00-06:00'",
+   "esperado": "2026-09-28",
+   "nota": "20:00 Mexico"
+  },
+  {
+   "id": "tz-0000-utc",
+   "entrada": "'2026-09-28T06:00:00Z'",
+   "esperado": "2026-09-28",
+   "nota": "00:00 Mexico expresado en UTC"
+  },
+  {
+   "id": "mid-0000-mx",
+   "entrada": "'2026-09-28T00:00:00-06:00'",
+   "esperado": "2026-09-28",
+   "nota": "00:00:00 Mexico"
+  },
+  {
+   "id": "mid-0001-mx",
+   "entrada": "'2026-09-28T00:01:00-06:00'",
+   "esperado": "2026-09-28",
+   "nota": "00:01 Mexico"
+  },
+  {
+   "id": "mid-2359-mx",
+   "entrada": "'2026-09-28T23:59:00-06:00'",
+   "esperado": "2026-09-28",
+   "nota": "23:59 Mexico"
+  },
+  {
+   "id": "mid-2359utc",
+   "entrada": "'2026-09-29T05:59:00Z'",
+   "esperado": "2026-09-28",
+   "nota": "23:59 Mexico expresado en UTC"
+  },
+  {
+   "id": "mid-0000utc",
+   "entrada": "'2026-09-29T06:00:00Z'",
+   "esperado": "2026-09-29",
+   "nota": "00:00 del dia 29 en Mexico (en UTC ya es dia 29 tambien)"
+  },
+  {
+   "id": "mes-31ago",
+   "entrada": "'2026-08-31T10:00:00-06:00'",
+   "esperado": "2026-08-31",
+   "nota": "31 de agosto"
+  },
+  {
+   "id": "mes-01sep",
+   "entrada": "'2026-09-01T10:00:00-06:00'",
+   "esperado": "2026-09-01",
+   "nota": "1 de septiembre"
+  },
+  {
+   "id": "mes-31ago-2359",
+   "entrada": "'2026-08-31T23:59:00-06:00'",
+   "esperado": "2026-08-31",
+   "nota": "31 ago 23:59 Mexico (1 sep en UTC)"
+  },
+  {
+   "id": "mes-01sep-0000utc",
+   "entrada": "'2026-09-01T06:00:00Z'",
+   "esperado": "2026-09-01",
+   "nota": "1 sep 00:00 Mexico"
+  },
+  {
+   "id": "anio-31dic",
+   "entrada": "'2026-12-31T22:00:00-06:00'",
+   "esperado": "2026-12-31",
+   "nota": "31 dic 2026 22:00"
+  },
+  {
+   "id": "anio-31dic-utc",
+   "entrada": "'2027-01-01T04:00:00Z'",
+   "esperado": "2026-12-31",
+   "nota": "la misma, en UTC ya es 1 ene 2027"
+  },
+  {
+   "id": "anio-01ene",
+   "entrada": "'2027-01-01T00:30:00-06:00'",
+   "esperado": "2027-01-01",
+   "nota": "1 ene 2027 00:30"
+  },
+  {
+   "id": "bisiesto-2028",
+   "entrada": "'2028-02-29T12:00:00-06:00'",
+   "esperado": "2028-02-29",
+   "nota": "29 feb 2028 (bisiesto)"
+  },
+  {
+   "id": "bisiesto-2028-utc",
+   "entrada": "'2028-02-29T18:00:00Z'",
+   "esperado": "2028-02-29",
+   "nota": "29 feb 2028 mediodia Mexico en UTC"
+  },
+  {
+   "id": "iso-con-offset",
+   "entrada": "'2026-09-27T15:00:00-06:00'",
+   "esperado": "2026-09-27",
+   "nota": "ISO con offset"
+  },
+  {
+   "id": "iso-sin-offset",
+   "entrada": "'2026-09-27T15:00:00'",
+   "esperado": "2026-09-27",
+   "nota": "ISO sin offset (se interpreta en la zona del proceso)"
+  },
+  {
+   "id": "iso-sin-offset-noche",
+   "entrada": "'2026-09-27T23:00:00'",
+   "esperado": "2026-09-27",
+   "nota": "ISO sin offset a las 23:00"
+  },
+  {
+   "id": "iso-solo-fecha",
+   "entrada": "'2026-09-27'",
+   "esperado": "2026-09-27",
+   "nota": "solo YYYY-MM-DD"
+  },
+  {
+   "id": "txt-completo",
+   "entrada": "'27 de septiembre de 2026'",
+   "esperado": "2026-09-27",
+   "nota": "texto largo"
+  },
+  {
+   "id": "txt-corto",
+   "entrada": "'27 septiembre'",
+   "esperado": null,
+   "nota": "sin anio: comportamiento a documentar"
+  },
+  {
+   "id": "txt-barras",
+   "entrada": "'27/09/2026'",
+   "esperado": null,
+   "nota": "formato con barras"
+  },
+  {
+   "id": "txt-acentos",
+   "entrada": "'27 de septiembre'",
+   "esperado": null,
+   "nota": "sin anio, con mes"
+  },
+  {
+   "id": "txt-domingo",
+   "entrada": "'domingo 27 de septiembre de 2026'",
+   "esperado": null,
+   "nota": "texto con dia de la semana delante"
+  },
+  {
+   "id": "bas-vacio",
+   "entrada": "''",
+   "esperado": null,
+   "nota": "cadena vacia"
+  },
+  {
+   "id": "bas-hola",
+   "entrada": "'hola'",
+   "esperado": null,
+   "nota": "texto sin fecha"
+  },
+  {
+   "id": "bas-3213",
+   "entrada": "'32/13/2026'",
+   "esperado": null,
+   "nota": "dia y mes fuera de rango"
+  },
+  {
+   "id": "bas-null",
+   "entrada": "null",
+   "esperado": null,
+   "nota": "null"
+  },
+  {
+   "id": "bas-undefined",
+   "entrada": "undefined",
+   "esperado": null,
+   "nota": "undefined"
+  },
+  {
+   "id": "bas-9999",
+   "entrada": "'9999-99-99'",
+   "esperado": null,
+   "nota": "fecha imposible ISO"
+  },
+  {
+   "id": "bas-solo-num",
+   "entrada": "'12345'",
+   "esperado": null,
+   "nota": "solo digitos"
+  }
+ ]
+}

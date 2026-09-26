@@ -1,0 +1,31 @@
+### WORKFLOWS EN N8N
+- Barberia - Agente de citas (Uncensored AI) (id=barberiaAgenteUncensored) active=True nodos=52
+    tipos: ['@n8n/n8n-nodes-langchain.agent', '@n8n/n8n-nodes-langchain.lmChatOpenAi', '@n8n/n8n-nodes-langchain.memoryPostgresChat', '@n8n/n8n-nodes-langchain.openAi', '@n8n/n8n-nodes-langchain.toolHttpRequest', 'n8n-nodes-base.code', 'n8n-nodes-base.convertToFile', 'n8n-nodes-base.googleCalendar', 'n8n-nodes-base.googleCalendarTool', 'n8n-nodes-base.googleSheetsTool', 'n8n-nodes-base.httpRequest', 'n8n-nodes-base.if', 'n8n-nodes-base.postgres', 'n8n-nodes-base.set', 'n8n-nodes-base.switch', 'n8n-nodes-base.webhook']
+    SCHEDULE/CRON nodes: []
+- Barberia - Recordatorios de cita (id=barberiaRecordatorios) active=True nodos=15
+    tipos: ['n8n-nodes-base.code', 'n8n-nodes-base.googleSheets', 'n8n-nodes-base.googleSheetsTrigger', 'n8n-nodes-base.httpRequest', 'n8n-nodes-base.if', 'n8n-nodes-base.n8n', 'n8n-nodes-base.switch', 'n8n-nodes-base.wait']
+    SCHEDULE/CRON nodes: []
+
+### GREP GLOBAL EN WORKFLOW JSON
+  [Barberia - Agente de citas (Uncensored AI)] "list": 20
+  [Barberia - Agente de citas (Uncensored AI)] barber_clientes: 4
+  [Barberia - Agente de citas (Uncensored AI)] INSERT INTO: 2
+  [Barberia - Agente de citas (Uncensored AI)] UPDATE : 2
+  [Barberia - Agente de citas (Uncensored AI)] confirmado: 6
+  [Barberia - Agente de citas (Uncensored AI)] no_show: 6
+  [Barberia - Recordatorios de cita] "list": 12
+  [Barberia - Recordatorios de cita] UPDATE : 6
+
+### HOJAS DEL LIBRO (xlsx)
+  hojas detectadas: []
+  nº hojas: 0
+
+### CSV gid=0 ERROR: HTTP Error 400: Bad Request
+
+### CSV gid=941506024 (720 bytes)
+ID,Estatus,Nombre,Servicio,Precio del servicio,Día ,Hora,Numero celular,Execution ID
+7id628rpoav7n1hai9oidaj1n8,agendado,Juan Perez,Corte desvanecido o tijera,150,2026-09-28,15:00:00,5214501111805@s.whatsapp.net,
+ie18j9a8g700dr282gpelrhd80,agendado,Maria Lopez,Corte desvanecido o tijera,150,2026-09-29,11:00:00,5214501111805@s.whatsapp.net,
+luqlc95atsql3j5aormhkqtk48,agendado,Cristia Ñ,Corte desvanecido o tijera,150,2026-09-27,15:00:00,,
+Corte desvanecido o tijera — Prueba Cancelar,agendado,Prueba Cancelar,Corte desvanecido o tijera,150,2026-10-01,11:00:00,5214501111805@s.whatsapp.net,779
+placeholder,agendado,Prueba Formato,Corte desvanecido o tijera,150,2026-09-24,16:00:00,521450111

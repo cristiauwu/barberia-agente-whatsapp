@@ -1,0 +1,16 @@
+== ESCALACIONES (posibles efectos de mi prueba) ==
+[]
+
+== CITAS (mi prueba NO agendo nada) ==
+[(213,)]
+[]
+
+== CLIENTES de prueba ==
+[('5214501111805@s.whatsapp.net', 'Cliente Prueba', 6)]
+
+== MENSAJES DE MEMORIA n8n_chat_histories de ese JID ==
+[(784,)]
+
+== pausas / operadores (intactos) ==
+[(0,)]
+[('524521206246@s.whatsapp.net', True), ('5214521206246@s.whatsapp.net', True)]

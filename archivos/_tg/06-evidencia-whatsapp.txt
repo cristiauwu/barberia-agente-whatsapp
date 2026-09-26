@@ -1,0 +1,30 @@
+Evolution AUTHENTICATION_API_KEY presente: True (len=40)
+
+=== instancias Evolution ===
+[{"id": "f9641b53-395e-4a42-afa3-fdf1701b344b", "name": "hector", "connectionStatus": "open", "ownerJid": "5214501111805@s.whatsapp.net", "profileName": "Harfuchh", "profilePicUrl": null, "integration": "WHATSAPP-BAILEYS", "number": null, "businessId": null, "token": "09923CC7-D1BE-4B3B-B696-0ABC10FEFC2B", "clientName": "evolution_barberia", "disconnectionReasonCode": 401, "disconnectionObject": "{\"error\":{\"data\":null,\"isBoom\":true,\"isServer\":false,\"output\":{\"statusCode\":401,\"payload\":{\"statusCode\":401,\"error\":\"Unauthorized\",\"message\":\"Log out instance: hector\"},\"headers\":{}}},\"date\":\"2026-09-25T01:36:37.270Z\"}", "disconnectionAt": "2026-09-25T01:36:37.272Z", "createdAt": "2026-09-25T00:10:44.285Z", "updatedAt": "2026-09-25T01:49:09.779Z", "Chatwoot": null, "Proxy": null, "Rabbitmq": null, "Nats": null, "Sqs": null, "Websocket": null, "Setting": {"id": "cmug7g1600001mt6paii1kjk8", "rejectCall": false, "msgCall": "", "groupsIgnore": false, "alwaysOnline": false, "readMessages": false, "readStatus": false, "syncFullHistory": false, "wavoipToken": "", "createdAt": "2026-09-25T00:10:44.328Z", "updatedAt": "2026-09-25T00:10:44.328Z", "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b"}, "_count": {"Message": 575, "Contact": 9, "Chat": 19}}]
+
+=== ejecucion 838 -> nodos ejecutados ===
+  - Google Sheets Trigger
+  - Code
+  - IF - Es cita agendada
+
+=== ejecucion 800 -> nodos ejecutados ===
+  - Google Sheets Trigger
+  - Code
+  - IF - Es cita agendada
+  - Notificar cita nueva al encargado
+  - Switch
+  - Code1
+  - Append or update row in sheet
+  - IF - Toca recordatorio 24 h
+  - IF - Toca recordatorio 1 h
+  >> Aviso ejecutado. Salida:
+[[{"json": {"key": {"remoteJid": "5214521206246@s.whatsapp.net", "fromMe": true, "id": "3EB0EAA07FD510A1D85DDA"}, "pushName": "Você", "status": "PENDING", "message": {"conversation": "Nueva cita agendada:\nCliente: Prueba Formato\nServicio: Corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 24/9/2026, 4:00:00 p.m."}, "contextInfo": {"mentionedJid": [], "groupMentions": [], "ephemeralSettingTimestamp": {"low": 1790169804, "high": 0, "unsigned": false}, "disappearingMode": {"initiator": 0}}, "messageType": "conversation", "messageTimestamp": 1790342604, "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b", "source": "web"}, "pairedItem": {"item": 0}}]]
+
+=== buscar ultima ejecucion con aviso enviado ===
+  ejecucion 861 (2026-09-25T13:37:43.805Z) SI ejecuto el aviso
+   salida: [[{"json": {"key": {"remoteJid": "5214521206246@s.whatsapp.net", "fromMe": true, "id": "3EB0D7EE201EE7530B956D"}, "pushName": "Você", "status": "PENDING", "message": {"conversation": "Nueva cita agendada:\nCliente: Prueba Carga\nServicio: corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 25/9/2026, 3:00:00 p.m."}, "contextInfo": {"mentionedJid": [], "groupMentions": [], "ephemeralSettingTimestamp": {"low": 1790170664, "high": 0, "unsigned": false}, "disappearingMode": {"initiator": 0}}, "messageType": "conversation", "messageTimestamp": 1790343464, "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b", "source": "web"}, "pairedItem": {"item": 0}}]]
+  ejecucion 852 (2026-09-25T13:35:43.813Z) SI ejecuto el aviso
+   salida: [[{"json": {"key": {"remoteJid": "5214521206246@s.whatsapp.net", "fromMe": true, "id": "3EB003AA179846B3EF61D7"}, "pushName": "Você", "status": "PENDING", "message": {"conversation": "Nueva cita agendada:\nCliente: Prueba Cancelar\nServicio: Corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 15/10/2026, 11:00:00 a.m."}, "contextInfo": {"mentionedJid": [], "groupMentions": [], "ephemeralSettingTimestamp": {"low": 1790170544, "high": 0, "unsigned": false}, "disappearingMode": {"initiator": 0}}, "messageType": "conversation", "messageTimestamp": 1790343344, "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b", "source": "web"}, "pairedItem": {"item": 0}}, {"json": {"key": {"remoteJid": "5214521206246@s.whatsapp.net", "fromMe": true, "id": "3EB0B43C31AE58CAE0AAC9"}, "pushName": "V
+  ejecucion 847 (2026-09-25T13:34:43.828Z) SI ejecuto el aviso
+   salida: [[{"json": {"key": {"remoteJid": "5214521206246@s.whatsapp.net", "fromMe": true, "id": "3EB084BAF5AB1278C179E6"}, "pushName": "Você", "status": "PENDING", "message": {"conversation": "Nueva cita agendada:\nCliente: Cristia\nServicio: Peinado\nPrecio: 300\nHora y dia de la cita: 6/10/2026, 5:00:00 p.m."}, "contextInfo": {"mentionedJid": [], "groupMentions": [], "ephemeralSettingTimestamp": {"low": 1790170484, "high": 0, "unsigned": false}, "disappearingMode": {"initiator": 0}}, "messageType": "conversation", "messageTimestamp": 1790343284, "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b", "source": "web"}, "pairedItem": {"item": 0}}]]

@@ -1,0 +1,51 @@
+== ¿DONDE APARECEN LOS PRECIOS Y DURACIONES EN EL PROMPT? ==
+  150            apariciones=27  secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  250            apariciones=11  secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# CASOS ESPECIALES (cómo responder bien)', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  300            apariciones=6   secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  100            apariciones=8   secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  50             apariciones=49  secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# CASOS ESPECIALES (cómo responder bien)', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  30             apariciones=24  secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES', '# LÍMITES Y PROTECCIONES']
+  mascarilla     apariciones=8   secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  peinado        apariciones=8   secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  planchado      apariciones=6   secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  depilaci       apariciones=7   secciones=['# CATÁLOGO DE SERVICIOS (precios vigentes en MXN y', '# REGLAS DE PRECIOS Y DURACIÓN', '# CÓMO LLEVAR LA CONVERSACIÓN', '# ESTILO DE RESPUESTA', '# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  tarjeta        apariciones=1   secciones=['# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  transferencia  apariciones=1   secciones=['# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  efectivo       apariciones=0   secciones=[]
+  wifi           apariciones=1   secciones=['# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  factura        apariciones=2   secciones=['# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  5 a 10         apariciones=0   secciones=[]
+  15 minutos     apariciones=1   secciones=['# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+  redes          apariciones=2   secciones=['# CONOCIMIENTO: PREGUNTAS FRECUENTES']
+
+== SECCIONES (titulos) DEL PROMPT ==
+  # QUIÉN ERES
+  # REGLA DE ORO: ACTÚA, NO ANUNCIES
+  # DATOS DEL NEGOCIO (fuente de verdad)
+  # HORARIO DE ATENCIÓN
+  # CATÁLOGO DE SERVICIOS (precios vigentes en MXN y duración a reservar)
+  # REGLAS DE PRECIOS Y DURACIÓN
+  # CÓMO LLEVAR LA CONVERSACIÓN
+  # CASOS ESPECIALES (cómo responder bien)
+  # TUS HERRAMIENTAS Y CUÁNDO USARLAS
+  # CÓMO LOCALIZAR LA CITA DE UN CLIENTE
+  # PROCESO A — AGENDAR UNA CITA
+  # PROCESO B — REPROGRAMAR UNA CITA
+  # PROCESO C — CANCELAR UNA CITA
+  # PROCESO D — CONSULTAS, PRECIOS Y FUERA DE ALCANCE
+  # CUÁNDO USAR CADA HERRAMIENTA (resumen rápido)
+  # ESTILO DE RESPUESTA
+  # CONOCIMIENTO: PREGUNTAS FRECUENTES
+  # COMANDOS DEL DUEÑO (no son para ti)
+  # LÍMITES Y PROTECCIONES
+
+== ¿EL PROMPT DICE 'NO INVENTES'? ==
+  - La tabla es la única fuente válida de precios y duraciones. Lo que no esté ahí no se inventa: se confirma con el encargado.
+  ## FECHAS: calcula el día de la semana, no lo inventes
+  No inventes. Di qué sí tenemos y ofrece lo más cercano:
+  a mano, puedes mencionar su último servicio, pero **no lo inventes**.
+  - El día de la semana sale del ISO de **Agendar cita**. No lo inventes.
+  La depilación **no lleva precio inventado**: dice "precio según la zona" y
+  Nunca inventes un dato que no esté aquí (precios, facturación, promociones,
+  pregunta al encargado; no inventes un precio nuevo.
+  - Nunca inventes precios, duraciones, promociones ni disponibilidad.

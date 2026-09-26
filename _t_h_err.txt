@@ -1,0 +1,12 @@
+psql: warning: extra command-line argument "id," ignored
+psql: warning: extra command-line argument "left(message::text,120)" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "n8n_chat_histories" ignored
+psql: warning: extra command-line argument "WHERE" ignored
+psql: warning: extra command-line argument "session_id='5214501111805@s.whatsapp.net'" ignored
+psql: warning: extra command-line argument "ORDER" ignored
+psql: warning: extra command-line argument "BY" ignored
+psql: warning: extra command-line argument "id" ignored
+psql: warning: extra command-line argument "DESC" ignored
+psql: warning: extra command-line argument "LIMIT" ignored
+psql: warning: extra command-line argument "6;" ignored

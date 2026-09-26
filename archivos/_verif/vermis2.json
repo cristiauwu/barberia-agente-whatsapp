@@ -1,0 +1,10 @@
+{
+ "reserva2": {
+  "resp": "El horario de las *11:00 a.m.* ya está ocupado el *lunes 5 de octubre*. ¿Te parece bien a las *11:15 a.m.* o a las *10:45 a.m.*?",
+  "exec": "1180"
+ },
+ "listado": {
+  "resp": "Estas son tus citas programadas:\n\n1. *Corte desvanecido* — $150\n   *Sábado 26 de septiembre, 1:00 p.m.*\n\n2. *Ceja* — $30\n   *Lunes 5 de octubre, 11:00 a.m.*\n\n¿Te gustaría realizar algún cambio o agendar algo más?",
+  "exec": "1181"
+ }
+}

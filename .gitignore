@@ -1,0 +1,118 @@
+# ============================================================================
+#  Sistema de citas por WhatsApp — Barber Chinos
+#  Reglas de exclusión. Reescrito tras el incidente de la Fase 0.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+#  SECRETOS — nunca se publican
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.n8n-key.txt
+.n8n-key.txt
+.supabase-conn.txt
+.supabase-pass.txt
+*pass*.txt
+*clave*.txt
+*password*.txt
+
+# ---------------------------------------------------------------------------
+#  Documentos de traspaso que llevan credenciales en claro
+#  (INFRAESTRUCTURA.md contiene las 6 claves del sistema)
+# ---------------------------------------------------------------------------
+INFRAESTRUCTURA.md
+*INFRAESTRUCTURA*.md
+CREDENCIALES*.md
+
+# ---------------------------------------------------------------------------
+#  Scripts de seguridad: contienen la LISTA de claves a propósito, para
+#  poder comprobar que no se filtran. No pueden publicarse nunca.
+# ---------------------------------------------------------------------------
+_seguridad/
+
+# ---------------------------------------------------------------------------
+#  Carpetas de trabajo de los subagentes (auditorías, pruebas, volcados).
+#  Algunas llegaron a tener claves en claro dentro.
+# ---------------------------------------------------------------------------
+_audit/
+_audit*
+_aud_con/
+_rec/
+_tg/
+_carga/
+_verif*/
+_informe*/
+_evidencia*/
+_doc_*
+_t[0-9]*
+_scan*
+_probe*
+_dbg*
+_helper_*
+_obs_*
+_run.json
+_key.txt
+_r_*.txt
+_cmp_*.txt
+_t_insp*.txt
+
+# ---------------------------------------------------------------------------
+#  Panel administrativo: secretos locales y journal
+# ---------------------------------------------------------------------------
+archivos/admin/.env-admin
+archivos/admin/.db-roles.txt
+archivos/admin/.pwd-sitio.txt
+archivos/admin/.journal/
+archivos/admin/.servidor.log
+archivos/admin/.servidor.err.log
+archivos/admin/_*.html
+archivos/admin/fuentes-cache/
+
+# ---------------------------------------------------------------------------
+#  Datos de clientes en CSV (la hoja pública fue una fuga)
+# ---------------------------------------------------------------------------
+*.csv
+
+# ---------------------------------------------------------------------------
+#  Respaldos locales que llevan la configuración de la instancia
+# ---------------------------------------------------------------------------
+archivos/ANTES-*
+archivos/FIX-*
+archivos/sync-*
+archivos/RESPALDO-*
+archivos/BarberiaAgenteFLUJO-*
+archivos/_*
+archivos/*.out
+archivos/*.err
+SALIDA-*.txt
+SALIDA-*.json
+
+# ---------------------------------------------------------------------------
+#  Binarios de Docker: cientos de MB, se recrean solos, GitHub los rechaza
+# ---------------------------------------------------------------------------
+.docker/
+.docker
+docker/cli-plugins/
+*.exe
+
+# ---------------------------------------------------------------------------
+#  Python y temporales
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+node_modules/
+*.log
+
+# ---------------------------------------------------------------------------
+#  Sistema operativo y editores
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

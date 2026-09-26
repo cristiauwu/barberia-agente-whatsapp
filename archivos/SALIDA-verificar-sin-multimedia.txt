@@ -1,0 +1,86 @@
+==========================================================================
+VERIFICACION: WORKFLOW SIN AUDIO NI IMAGENES
+==========================================================================
+workflow: barberiaAgenteUncensored   nodos: 45   active=True
+
+[5] Referencias a los nodos eliminados
+  PASS  Ninguna referencia a los 8 nodos eliminados (definicion, connections ni $('Nodo'))
+          8 nombres x 3 sitios = 24 busquedas, 0 hallazgos
+  PASS  Existe el nodo de aviso 'Aviso solo texto'
+
+[6] Credencial rota de OpenAI
+  PASS  Ninguna referencia a la credencial GtV72MoANECFbNoX
+          apariciones en el JSON: 0
+  PASS  El modelo del agente conserva la credencial Uncensored AI
+          Uncensored AI (OpenAI-compatible) (KhicsxnD4N314cKC)
+
+[extra] El camino de texto quedo intacto respecto al respaldo
+  PASS  Normalizacion: solo cambiaron los 2 campos de multimedia (el resto del camino de texto sigue igual)
+          6 nodos; 0 cambios estructurales mios
+          NOTA: ['Mandar mensaje'] cambiaron respecto al respaldo por trabajo de agentes hermanos (no mio); se validan abajo.
+  PASS  El systemMessage del AI Agent es el del archivo del prompt (cambio ajeno a este trabajo, ya sincronizado)
+  PASS  Conexiones del camino de texto conservadas
+          7 pares verificados
+
+[4] Nodos huerfanos
+  PASS  Todo nodo no-trigger recibe datos (main o ai_*)
+          45 nodos revisados; 36 reciben main, 1 reciben ai_*
+  PASS  Ningun nodo no-terminal quedo sin salida
+          ok
+          nodos sin salida (todos terminales legitimos):
+            - Mandar mensaje
+            - Responder al operador
+
+[E2E] API key de Evolution leida (no se imprime).
+[E2E] JID de prueba: 5214501111805@s.whatsapp.net
+[E2E] El cliente de prueba no esta pausado.
+
+--- [1] Mensaje de TEXTO ---
+  mensaje id=VER0667ADB30D  webhook -> HTTP 200  {"message":"Workflow was started"}
+  ejecucion 1006  status=success
+  message_content_type: 'text'   message_content: ' Hola, buenas tardes. Cuanto cuesta el corte?'
+  respuesta del bot: '¡Hola! El corte desvanecido o tijera cuesta *$150* y dura 40 minutos. ¿Te gustaría agendarlo? 😊'
+  PASS  El TEXTO sigue funcionando: el bot responde igual que antes
+          status=success | respuesta='¡Hola! El corte desvanecido o tijera cuesta *$150* y dura 40 minutos. ¿Te gustaría agendarlo? 😊'
+  body de 'Mandar mensaje': number="={{ $('Normalizacion').item.json.user_number }}"  text="={{ $json.output.replace(/[ \\t]+$/gm, '') }}"
+  PASS  'Mandar mensaje' sigue enviando el texto del agente ($json.output) al numero del cliente
+          number y text apuntan a los campos correctos
+  PASS  El texto recorre el camino completo (Edit Fields -> AI Agent -> Mandar mensaje)
+          nodos ejecutados: 16
+
+--- [2] Mensaje de AUDIO ---
+  mensaje id=VERE93340F8A2  webhook -> HTTP 200  {"message":"Workflow was started"}
+  ejecucion 1008  status=success
+  message_content_type: ''   message_content: ' '
+  respuesta del bot: 'Por ahora solo puedo atender mensajes escritos. ¿Me escribes lo que necesitas? 🙏'
+  PASS  Un mensaje de AUDIO recibe respuesta sensata (no silencio, no error)
+          status=success | respuesta='Por ahora solo puedo atender mensajes escritos. ¿Me escribes lo que necesitas? 🙏' | errores=[]
+  PASS  El mensaje de audio no gasta tokens (AI Agent no corre)
+          nodos ejecutados: 12
+
+--- [3] Mensaje de IMAGEN ---
+  mensaje id=VER4E205BF77F  webhook -> HTTP 200  {"message":"Workflow was started"}
+  ejecucion 1010  status=success
+  message_content_type: ''   message_content: ' '
+  respuesta del bot: 'Por ahora solo puedo atender mensajes escritos. ¿Me escribes lo que necesitas? 🙏'
+  PASS  Un mensaje de IMAGEN recibe respuesta sensata (no silencio, no error)
+          status=success | respuesta='Por ahora solo puedo atender mensajes escritos. ¿Me escribes lo que necesitas? 🙏' | errores=[]
+  PASS  El mensaje de imagen no gasta tokens (AI Agent no corre)
+          nodos ejecutados: 12
+
+--- forma del Switch tras el cambio ---
+  PASS  El Switch solo enruta 'text' (ya no tiene salidas Audio/Imagen)
+          reglas: ['Texto']
+  PASS  Switch: Texto -> Edit Fields2 ; resto -> Aviso solo texto
+          conexiones: [['Edit Fields2'], ['Aviso solo texto']]
+  PASS  'Aviso solo texto' -> 'Mandar mensaje' (el cliente siempre recibe algo)
+
+Detalle E2E guardado en G:\Barberia\archivos\SALIDA-verificar-sin-multimedia-detalle.json
+
+[7] verify.py (comprobaciones estructurales del repo)
+  PASS  verify.py da 187/187 (>= 173) sin fallos
+          exit code 0
+
+==========================================================================
+RESUMEN: 20 de 20 comprobaciones PASARON
+==========================================================================

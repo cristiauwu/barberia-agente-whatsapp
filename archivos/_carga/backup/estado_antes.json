@@ -1,0 +1,1852 @@
+{
+  "tomado_en": "2026-09-25T18:22:15.736943-06:00",
+  "chat_histories_filas": "1072",
+  "chat_histories_sesiones": {},
+  "barber_citas": [
+    [
+      "5270sjndptm0fbp10sjiiat7rc",
+      "5214521206246@s.whatsapp.net",
+      "corte desvanecido o tijera",
+      "2026-09-25 15:00:00-06",
+      "agendado"
+    ],
+    [
+      "auvtij2npnoe844n3df289gp70",
+      "5214521206246@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-25 16:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0000",
+      "verif-cli03@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-18 10:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0001",
+      "verif-cli38@s.whatsapp.net",
+      "Planchado express",
+      "2026-08-18 14:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0002",
+      "verif-cli23@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-18 16:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0003",
+      "verif-cli27@s.whatsapp.net",
+      "Mascarilla",
+      "2026-08-18 17:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0004",
+      "verif-cli04@s.whatsapp.net",
+      "Planchado express",
+      "2026-08-18 19:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0005",
+      "verif-cli23@s.whatsapp.net",
+      "Ceja",
+      "2026-08-19 11:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0006",
+      "verif-cli48@s.whatsapp.net",
+      "Ceja",
+      "2026-08-19 12:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0007",
+      "verif-cli27@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-19 14:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0008",
+      "verif-cli15@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-19 16:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0009",
+      "verif-cli15@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-19 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0010",
+      "verif-cli13@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-20 11:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0011",
+      "verif-cli48@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-20 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0012",
+      "verif-cli42@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-08-20 14:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0013",
+      "verif-cli25@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-20 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0014",
+      "verif-cli17@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-20 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0015",
+      "verif-cli08@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-20 18:20:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0016",
+      "verif-cli24@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-21 13:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0017",
+      "verif-cli27@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-08-21 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0018",
+      "verif-cli36@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-08-21 18:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0019",
+      "verif-cli35@s.whatsapp.net",
+      "Ceja",
+      "2026-08-21 19:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0020",
+      "verif-cli27@s.whatsapp.net",
+      "Planchado express",
+      "2026-08-22 11:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0021",
+      "verif-cli19@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-22 13:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0022",
+      "verif-cli37@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-22 14:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0023",
+      "verif-cli08@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-22 17:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0024",
+      "verif-cli42@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-22 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0025",
+      "verif-cli09@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-24 10:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0026",
+      "verif-cli53@s.whatsapp.net",
+      "Mascarilla",
+      "2026-08-24 11:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0027",
+      "verif-cli14@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-24 12:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0028",
+      "verif-cli05@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-08-24 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0029",
+      "verif-cli03@s.whatsapp.net",
+      "Ceja",
+      "2026-08-24 14:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0030",
+      "verif-cli22@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-24 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0031",
+      "verif-cli11@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-08-25 11:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0032",
+      "verif-cli41@s.whatsapp.net",
+      "Ceja",
+      "2026-08-25 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0033",
+      "verif-cli23@s.whatsapp.net",
+      "Ceja",
+      "2026-08-25 14:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0034",
+      "verif-cli01@s.whatsapp.net",
+      "Ceja",
+      "2026-08-25 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0035",
+      "verif-cli04@s.whatsapp.net",
+      "Peinado",
+      "2026-08-25 17:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0036",
+      "verif-cli30@s.whatsapp.net",
+      "Planchado express",
+      "2026-08-25 19:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0037",
+      "verif-cli32@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-08-26 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0038",
+      "verif-cli50@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-26 13:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0039",
+      "verif-cli37@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-26 19:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0040",
+      "verif-cli29@s.whatsapp.net",
+      "Ceja",
+      "2026-08-27 10:10:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0041",
+      "verif-cli37@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-27 13:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0042",
+      "verif-cli36@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-27 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0043",
+      "verif-cli13@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-27 18:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0044",
+      "verif-cli44@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-28 10:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0045",
+      "verif-cli19@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-28 12:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0046",
+      "verif-cli35@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-28 15:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0047",
+      "verif-cli37@s.whatsapp.net",
+      "Ceja",
+      "2026-08-28 16:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0048",
+      "verif-cli09@s.whatsapp.net",
+      "Peinado",
+      "2026-08-29 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0049",
+      "verif-cli34@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-29 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0050",
+      "verif-cli06@s.whatsapp.net",
+      "Planchado express",
+      "2026-08-29 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0051",
+      "verif-cli41@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-29 17:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0052",
+      "verif-cli24@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-29 19:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0053",
+      "verif-cli35@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-31 11:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0054",
+      "verif-cli40@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-08-31 13:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0055",
+      "verif-cli24@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-08-31 17:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0056",
+      "verif-cli26@s.whatsapp.net",
+      "Peinado",
+      "2026-09-01 10:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0057",
+      "verif-cli32@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-01 12:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0058",
+      "verif-cli16@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-01 14:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0059",
+      "verif-cli38@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-01 15:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0060",
+      "verif-cli33@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-01 18:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0061",
+      "verif-cli23@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-02 13:10:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0062",
+      "verif-cli45@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-02 14:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0063",
+      "verif-cli49@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-02 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0064",
+      "verif-cli24@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-03 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0065",
+      "verif-cli54@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-03 13:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0066",
+      "verif-cli25@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-03 14:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0067",
+      "verif-cli28@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-03 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0068",
+      "verif-cli11@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-03 19:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0069",
+      "verif-cli24@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-04 10:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0070",
+      "verif-cli18@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-04 11:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0071",
+      "verif-cli46@s.whatsapp.net",
+      "Peinado",
+      "2026-09-04 12:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0072",
+      "verif-cli33@s.whatsapp.net",
+      "Ceja",
+      "2026-09-04 18:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0073",
+      "verif-cli07@s.whatsapp.net",
+      "Depilación",
+      "2026-09-05 12:30:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0074",
+      "verif-cli48@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-05 13:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0075",
+      "verif-cli43@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-05 14:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0076",
+      "verif-cli46@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-05 17:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0077",
+      "verif-cli42@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-05 18:20:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0078",
+      "verif-cli06@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-07 10:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0079",
+      "verif-cli03@s.whatsapp.net",
+      "Ceja",
+      "2026-09-07 11:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0080",
+      "verif-cli53@s.whatsapp.net",
+      "Depilación",
+      "2026-09-07 14:30:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0081",
+      "verif-cli29@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-07 15:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0082",
+      "verif-cli13@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-08 10:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0083",
+      "verif-cli27@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-08 13:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0084",
+      "verif-cli02@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-08 19:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0085",
+      "verif-cli18@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-09 10:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0086",
+      "verif-cli54@s.whatsapp.net",
+      "Ceja",
+      "2026-09-09 11:20:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0087",
+      "verif-cli28@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-09 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0088",
+      "verif-cli04@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-09 16:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0089",
+      "verif-cli33@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-09 17:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0090",
+      "verif-cli36@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-09 18:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0091",
+      "verif-cli26@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-10 14:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0092",
+      "verif-cli33@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-10 15:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0093",
+      "verif-cli54@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-10 16:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0094",
+      "verif-cli11@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-10 17:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0095",
+      "verif-cli27@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-10 18:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0096",
+      "verif-cli42@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-11 10:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0097",
+      "verif-cli44@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-11 14:30:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0098",
+      "verif-cli37@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-11 16:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0099",
+      "verif-cli28@s.whatsapp.net",
+      "Depilación",
+      "2026-09-11 17:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0100",
+      "verif-cli03@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-11 19:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0101",
+      "verif-cli49@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-12 10:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0102",
+      "verif-cli17@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-12 12:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0103",
+      "verif-cli28@s.whatsapp.net",
+      "Ceja",
+      "2026-09-12 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0104",
+      "verif-cli21@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-12 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0105",
+      "verif-cli36@s.whatsapp.net",
+      "Ceja",
+      "2026-09-12 18:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0106",
+      "verif-cli30@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-14 10:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0107",
+      "verif-cli46@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-14 14:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0108",
+      "verif-cli39@s.whatsapp.net",
+      "Ceja",
+      "2026-09-14 17:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0109",
+      "verif-cli22@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-14 18:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0110",
+      "verif-cli39@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-15 14:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0111",
+      "verif-cli46@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-15 15:20:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0112",
+      "verif-cli31@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-15 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0113",
+      "verif-cli14@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-16 11:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0114",
+      "verif-cli14@s.whatsapp.net",
+      "Ceja",
+      "2026-09-16 13:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0115",
+      "verif-cli04@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-16 15:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0116",
+      "verif-cli10@s.whatsapp.net",
+      "Ceja",
+      "2026-09-16 16:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0117",
+      "verif-cli53@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-16 17:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0118",
+      "verif-cli29@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-16 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0119",
+      "verif-cli52@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-17 11:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0120",
+      "verif-cli34@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-17 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0121",
+      "verif-cli14@s.whatsapp.net",
+      "Ceja",
+      "2026-09-17 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0122",
+      "verif-cli02@s.whatsapp.net",
+      "Ceja",
+      "2026-09-17 16:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0123",
+      "verif-cli29@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-17 17:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0124",
+      "verif-cli20@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-18 11:30:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0125",
+      "verif-cli44@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-18 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0126",
+      "verif-cli21@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-18 15:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0127",
+      "verif-cli38@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-19 11:10:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0128",
+      "verif-cli02@s.whatsapp.net",
+      "Ceja",
+      "2026-09-19 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0129",
+      "verif-cli44@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-19 16:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0130",
+      "verif-cli50@s.whatsapp.net",
+      "Ceja",
+      "2026-09-19 18:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0131",
+      "verif-cli31@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-21 10:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0132",
+      "verif-cli30@s.whatsapp.net",
+      "Ceja",
+      "2026-09-21 11:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0133",
+      "verif-cli04@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-21 12:30:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0134",
+      "verif-cli53@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-21 13:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0135",
+      "verif-cli00@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-21 14:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0136",
+      "verif-cli20@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-21 19:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0137",
+      "verif-cli25@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-22 11:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0138",
+      "verif-cli23@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-22 13:00:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0139",
+      "verif-cli24@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-22 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0140",
+      "verif-cli42@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-22 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0141",
+      "verif-cli04@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-22 17:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0142",
+      "verif-cli49@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-22 18:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0143",
+      "verif-cli26@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-23 11:30:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0144",
+      "verif-cli54@s.whatsapp.net",
+      "Peinado",
+      "2026-09-23 13:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0145",
+      "verif-cli26@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-23 14:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0146",
+      "verif-cli09@s.whatsapp.net",
+      "Ceja",
+      "2026-09-23 16:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0147",
+      "verif-cli21@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-23 18:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0148",
+      "verif-cli02@s.whatsapp.net",
+      "Depilación",
+      "2026-09-23 19:00:00-06",
+      "cancelado"
+    ],
+    [
+      "verif-c0149",
+      "verif-cli19@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-24 10:20:00-06",
+      "no_show"
+    ],
+    [
+      "verif-c0150",
+      "verif-cli16@s.whatsapp.net",
+      "Depilación",
+      "2026-09-24 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0151",
+      "verif-cli04@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-24 14:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0152",
+      "verif-cli13@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-24 16:20:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0153",
+      "verif-cli26@s.whatsapp.net",
+      "Depilación",
+      "2026-09-24 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0154",
+      "verif-cli08@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-24 19:10:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0155",
+      "verif-cli20@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-19 10:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0156",
+      "verif-cli48@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-19 10:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0157",
+      "verif-cli02@s.whatsapp.net",
+      "Ceja",
+      "2026-09-19 11:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0158",
+      "verif-cli39@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-19 11:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0159",
+      "verif-cli33@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-19 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0160",
+      "verif-cli25@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-19 12:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0161",
+      "verif-cli30@s.whatsapp.net",
+      "Peinado",
+      "2026-09-19 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0162",
+      "verif-cli31@s.whatsapp.net",
+      "Depilación",
+      "2026-09-19 13:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0163",
+      "verif-cli02@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-19 14:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0164",
+      "verif-cli44@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-19 14:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0165",
+      "verif-cli46@s.whatsapp.net",
+      "Ceja",
+      "2026-09-19 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0166",
+      "verif-cli32@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-19 15:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0167",
+      "verif-cli54@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-19 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0168",
+      "verif-cli45@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-19 16:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0169",
+      "verif-cli15@s.whatsapp.net",
+      "Peinado",
+      "2026-09-19 17:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0170",
+      "verif-cli12@s.whatsapp.net",
+      "Depilación",
+      "2026-09-19 17:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0171",
+      "verif-cli31@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-19 18:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0172",
+      "verif-cli45@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-19 18:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0173",
+      "verif-cli35@s.whatsapp.net",
+      "Ceja",
+      "2026-09-19 19:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0174",
+      "verif-cli01@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-19 19:30:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0175",
+      "verif-vip@s.whatsapp.net",
+      "Peinado",
+      "2026-09-22 10:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0176",
+      "verif-vip@s.whatsapp.net",
+      "Peinado",
+      "2026-09-22 11:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0177",
+      "verif-vip@s.whatsapp.net",
+      "Peinado",
+      "2026-09-22 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0178",
+      "verif-vip@s.whatsapp.net",
+      "Peinado",
+      "2026-09-22 15:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0179",
+      "verif-vip@s.whatsapp.net",
+      "Peinado",
+      "2026-09-22 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0180",
+      "verif-vip@s.whatsapp.net",
+      "Peinado",
+      "2026-09-22 17:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0181",
+      "verif-cli13@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-25 10:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0182",
+      "verif-cli08@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-25 11:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0183",
+      "verif-cli38@s.whatsapp.net",
+      "Ceja",
+      "2026-09-25 12:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0184",
+      "verif-cli34@s.whatsapp.net",
+      "Mascarilla",
+      "2026-09-25 13:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0185",
+      "verif-cli32@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-25 16:00:00-06",
+      "atendido"
+    ],
+    [
+      "verif-c0186",
+      "verif-cli28@s.whatsapp.net",
+      "Planchado express",
+      "2026-09-25 17:00:00-06",
+      "confirmado"
+    ],
+    [
+      "verif-c0187",
+      "verif-cli23@s.whatsapp.net",
+      "Peinado",
+      "2026-09-25 18:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0188",
+      "verif-cli16@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-09-26 13:00:00-06",
+      "confirmado"
+    ],
+    [
+      "verif-c0189",
+      "verif-cli18@s.whatsapp.net",
+      "Peinado",
+      "2026-09-26 16:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0190",
+      "verif-cli28@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-28 10:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0191",
+      "verif-cli04@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-28 15:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0192",
+      "verif-cli15@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-28 17:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0193",
+      "verif-cli41@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-09-29 15:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0194",
+      "verif-cli32@s.whatsapp.net",
+      "Ceja",
+      "2026-09-29 16:00:00-06",
+      "confirmado"
+    ],
+    [
+      "verif-c0195",
+      "verif-cli27@s.whatsapp.net",
+      "Ceja",
+      "2026-09-30 12:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0196",
+      "verif-cli09@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-09-30 14:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0197",
+      "verif-cli48@s.whatsapp.net",
+      "Peinado",
+      "2026-09-30 15:00:00-06",
+      "confirmado"
+    ],
+    [
+      "verif-c0198",
+      "verif-cli53@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-10-01 11:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0199",
+      "verif-cli53@s.whatsapp.net",
+      "Mascarilla",
+      "2026-10-01 12:00:00-06",
+      "confirmado"
+    ],
+    [
+      "verif-c0200",
+      "verif-cli38@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-10-01 13:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0201",
+      "verif-cli33@s.whatsapp.net",
+      "Mascarilla",
+      "2026-10-01 18:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0202",
+      "verif-cli22@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-10-02 10:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0203",
+      "verif-cli42@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-10-02 15:00:00-06",
+      "confirmado"
+    ],
+    [
+      "verif-c0204",
+      "verif-cli40@s.whatsapp.net",
+      "Corte desvanecido o tijera",
+      "2026-10-03 10:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0205",
+      "verif-cli01@s.whatsapp.net",
+      "Corte de cabello dama",
+      "2026-10-03 12:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0206",
+      "verif-cli23@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-10-03 13:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0207",
+      "verif-cli52@s.whatsapp.net",
+      "Planchado express",
+      "2026-10-03 14:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0208",
+      "verif-cli50@s.whatsapp.net",
+      "Arreglo de barba",
+      "2026-10-05 11:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0209",
+      "verif-cli11@s.whatsapp.net",
+      "Ceja",
+      "2026-10-05 13:00:00-06",
+      "agendado"
+    ],
+    [
+      "verif-c0210",
+      "verif-cli47@s.whatsapp.net",
+      "Mascarilla",
+      "2026-10-05 18:00:00-06",
+      "agendado"
+    ]
+  ],
+  "barber_clientes": [
+    [
+      "5214501111805@s.whatsapp.net",
+      "Cliente Prueba",
+      "5"
+    ],
+    [
+      "5214521206246@s.whatsapp.net",
+      "Cristia Ñ",
+      "5"
+    ],
+    [
+      "verif-cli00@s.whatsapp.net",
+      "Luis Ángel Ramírez",
+      "5"
+    ],
+    [
+      "verif-cli01@s.whatsapp.net",
+      "Jorge Antonio Mendoza",
+      "16"
+    ],
+    [
+      "verif-cli02@s.whatsapp.net",
+      "Miguel Ángel Torres",
+      "27"
+    ],
+    [
+      "verif-cli03@s.whatsapp.net",
+      "Francisco Javier Salinas",
+      "19"
+    ],
+    [
+      "verif-cli04@s.whatsapp.net",
+      "Roberto Carlos Núñez",
+      "7"
+    ],
+    [
+      "verif-cli05@s.whatsapp.net",
+      "Alejandro Vidal",
+      "15"
+    ],
+    [
+      "verif-cli06@s.whatsapp.net",
+      "Juan Pablo Escobar",
+      "22"
+    ],
+    [
+      "verif-cli07@s.whatsapp.net",
+      "Diego Armando Reyna",
+      "18"
+    ],
+    [
+      "verif-cli08@s.whatsapp.net",
+      "Ricardo Alberto Peña",
+      "17"
+    ],
+    [
+      "verif-cli09@s.whatsapp.net",
+      "Fernando Iván Castillo",
+      "28"
+    ],
+    [
+      "verif-cli10@s.whatsapp.net",
+      "Óscar Eduardo Zamora",
+      "17"
+    ],
+    [
+      "verif-cli11@s.whatsapp.net",
+      "Héctor Manuel Rivas",
+      "21"
+    ],
+    [
+      "verif-cli12@s.whatsapp.net",
+      "Gerardo Adrián Lozano",
+      "6"
+    ],
+    [
+      "verif-cli13@s.whatsapp.net",
+      "Sergio Andrés Villalobos",
+      "5"
+    ],
+    [
+      "verif-cli14@s.whatsapp.net",
+      "Raúl Alejandro Bustos",
+      "13"
+    ],
+    [
+      "verif-cli15@s.whatsapp.net",
+      "María Fernanda Quintero",
+      "14"
+    ],
+    [
+      "verif-cli16@s.whatsapp.net",
+      "Ana Sofía Delgadillo",
+      "11"
+    ],
+    [
+      "verif-cli17@s.whatsapp.net",
+      "Guadalupe Yolanda Rangel",
+      "21"
+    ],
+    [
+      "verif-cli18@s.whatsapp.net",
+      "Verónica Alejandra Ibarra",
+      "8"
+    ],
+    [
+      "verif-cli19@s.whatsapp.net",
+      "Claudia Beatriz Maldonado",
+      "2"
+    ],
+    [
+      "verif-cli20@s.whatsapp.net",
+      "María de los Ángeles Guzmán Barrera",
+      "15"
+    ],
+    [
+      "verif-cli21@s.whatsapp.net",
+      "Ana Patricia Villaseñor y Robles",
+      "26"
+    ],
+    [
+      "verif-cli22@s.whatsapp.net",
+      "Juan Carlos Domínguez Arellano III",
+      "28"
+    ],
+    [
+      "verif-cli23@s.whatsapp.net",
+      "José María Fernández de Córdova y Alcántara",
+      "1"
+    ],
+    [
+      "verif-cli24@s.whatsapp.net",
+      "Brenda Jazmín Huerta",
+      "23"
+    ],
+    [
+      "verif-cli25@s.whatsapp.net",
+      "Pedro Iván Macías",
+      "7"
+    ],
+    [
+      "verif-cli26@s.whatsapp.net",
+      "Tomás Emilio Barragán",
+      "7"
+    ],
+    [
+      "verif-cli27@s.whatsapp.net",
+      "Emiliano Zapata Ríos",
+      "23"
+    ],
+    [
+      "verif-cli28@s.whatsapp.net",
+      "Nicolás Alejandro Buenrostro",
+      "13"
+    ],
+    [
+      "verif-cli29@s.whatsapp.net",
+      "Adrián Felipe Quiroz",
+      "11"
+    ],
+    [
+      "verif-cli30@s.whatsapp.net",
+      "Cristian Eduardo Nápoles",
+      "16"
+    ],
+    [
+      "verif-cli31@s.whatsapp.net",
+      "Daniel Alberto Sepúlveda",
+      "20"
+    ],
+    [
+      "verif-cli32@s.whatsapp.net",
+      "Iván de Jesús Carrillo",
+      "24"
+    ],
+    [
+      "verif-cli33@s.whatsapp.net",
+      "Marco Tulio Esparza",
+      "27"
+    ],
+    [
+      "verif-cli34@s.whatsapp.net",
+      "Rodrigo Alonso Betancourt",
+      "14"
+    ],
+    [
+      "verif-cli35@s.whatsapp.net",
+      "Israel de la Cruz Márquez",
+      "10"
+    ],
+    [
+      "verif-cli36@s.whatsapp.net",
+      "Enrique Yamil Ponce",
+      "11"
+    ],
+    [
+      "verif-cli37@s.whatsapp.net",
+      "Gustavo Adolfo Lemus",
+      "7"
+    ],
+    [
+      "verif-cli38@s.whatsapp.net",
+      "Octavio Ramiro Fuentes",
+      "26"
+    ],
+    [
+      "verif-cli39@s.whatsapp.net",
+      "Bernardo Javier Delgado",
+      "26"
+    ],
+    [
+      "verif-cli40@s.whatsapp.net",
+      "César Augusto Lomelí",
+      "2"
+    ],
+    [
+      "verif-cli41@s.whatsapp.net",
+      "Ángel Gabriel Paredes",
+      "6"
+    ],
+    [
+      "verif-cli42@s.whatsapp.net",
+      "Salvador Uriel Ocampo",
+      "2"
+    ],
+    [
+      "verif-cli43@s.whatsapp.net",
+      "Ramón Alberto Tiscareño",
+      "18"
+    ],
+    [
+      "verif-cli44@s.whatsapp.net",
+      "Efraín Napoleón Guajardo",
+      "15"
+    ],
+    [
+      "verif-cli45@s.whatsapp.net",
+      "Martín Ricardo Covarrubias",
+      "27"
+    ],
+    [
+      "verif-cli46@s.whatsapp.net",
+      "Israel Alejandro Villanueva",
+      "19"
+    ],
+    [
+      "verif-cli47@s.whatsapp.net",
+      "Uriel Sebastián Anaya",
+      "27"
+    ],
+    [
+      "verif-cli48@s.whatsapp.net",
+      "Brayan Alexis Moreno",
+      "9"
+    ],
+    [
+      "verif-cli49@s.whatsapp.net",
+      "Kevin Yair Estrada",
+      "19"
+    ],
+    [
+      "verif-cli50@s.whatsapp.net",
+      "Jonathan Emmanuel Salcedo",
+      "10"
+    ],
+    [
+      "verif-cli51@s.whatsapp.net",
+      "Julio César Villalobos",
+      "13"
+    ],
+    [
+      "verif-cli52@s.whatsapp.net",
+      "Aldo Fabián Zamudio",
+      "22"
+    ],
+    [
+      "verif-cli53@s.whatsapp.net",
+      "Cristóbal Andrés Mejía",
+      "22"
+    ],
+    [
+      "verif-cli54@s.whatsapp.net",
+      "Rubén Darío Escalante",
+      "27"
+    ],
+    [
+      "verif-vip@s.whatsapp.net",
+      "Cliente de Gasto Altísimo (VIP histórico)",
+      "64"
+    ]
+  ],
+  "barber_pausas": [],
+  "barber_bloqueos": [],
+  "ejecuciones": "565",
+  "ejecuciones_agente": "491",
+  "conexiones_pg": "11",
+  "docker_stats": {
+    "barberia-n8n": {
+      "cpu": "0.12%",
+      "mem": "858.7MiB / 15.56GiB",
+      "mem_perc": "5.39%",
+      "net": "3.83GB / 1.22GB",
+      "block": "3.6GB / 44.7MB"
+    },
+    "barberia-postgres": {
+      "cpu": "0.19%",
+      "mem": "108.7MiB / 15.56GiB",
+      "mem_perc": "0.68%",
+      "net": "19.3MB / 366MB",
+      "block": "101MB / 17.4MB"
+    },
+    "evolution_api": {
+      "cpu": "1.19%",
+      "mem": "831.1MiB / 15.56GiB",
+      "mem_perc": "5.22%",
+      "net": "110MB / 59.2MB",
+      "block": "58.5MB / 26.6MB"
+    }
+  },
+  "sesiones": [
+    [
+      "5214501111805@s.whatsapp.net",
+      "662"
+    ],
+    [
+      "5214521206246@s.whatsapp.net",
+      "316"
+    ],
+    [
+      "5214521415196@s.whatsapp.net",
+      "38"
+    ],
+    [
+      "524521206246@s.whatsapp.net",
+      "30"
+    ],
+    [
+      "5214521253750@s.whatsapp.net",
+      "18"
+    ],
+    [
+      "5214521665055@s.whatsapp.net",
+      "4"
+    ],
+    [
+      "5215520894522@s.whatsapp.net",
+      "2"
+    ],
+    [
+      "529990001111@s.whatsapp.net",
+      "2"
+    ]
+  ]
+}

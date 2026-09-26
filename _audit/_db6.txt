@@ -1,0 +1,152 @@
+### TABLAS barber_*
+SQL: SELECT string_agg(table_name, ', ' ORDER BY table_name) FROM information_schema.tables WHERE table_schema='public' AND table_name LIKE 'barber%';
+OUT:
+barber_auditoria, barber_bloqueos, barber_citas, barber_clientes, barber_consentimiento, barber_escalaciones, barber_lista_espera, barber_operadores, barber_pausas, barber_servicios
+
+ERR: 
+
+### BUSCAR transacciones/metricas (debe vaciar)
+SQL: SELECT string_agg(table_name, ', ') FROM information_schema.tables WHERE table_schema='public' AND (table_name ILIKE '%transacc%' OR table_name ILIKE '%metric%' OR table_name ILIKE '%venta%' OR table_name ILIKE '%ingreso%');
+OUT:
+
+
+ERR: 
+
+### COLS barber_auditoria
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_auditoria';
+OUT:
+id, ts, jid, intencion, herramienta, argumentos, resultado, exito
+
+ERR: 
+
+### COLS barber_bloqueos
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_bloqueos';
+OUT:
+id, inicio, fin, motivo, creado_en
+
+ERR: 
+
+### COLS barber_citas
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_citas';
+OUT:
+id, jid, nombre, servicio, precio, inicio, fin, estado, creado_en, actualizado_en
+
+ERR: 
+
+### COLS barber_clientes
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_clientes';
+OUT:
+jid, nombre, telefono, primera_visita, visitas, ultima_visita, ticket_promedio, no_shows, cancelaciones_tardias, servicio_habitual, barbero_preferido, nota_interna, fecha_nacimiento, marketing_ok, etiqueta, creado_en
+
+ERR: 
+
+### COLS barber_consentimiento
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_consentimiento';
+OUT:
+jid, marketing_ok, ts
+
+ERR: 
+
+### COLS barber_escalaciones
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_escalaciones';
+OUT:
+id, jid, motivo, resumen, creado_en, estado, resolucion, cerrada_en
+
+ERR: 
+
+### COLS barber_lista_espera
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_lista_espera';
+OUT:
+id, jid, servicio, duracion_min, ventana_deseada, creado_en, atendido
+
+ERR: 
+
+### COLS barber_operadores
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_operadores';
+OUT:
+jid, nombre, rol, activo, creado_en
+
+ERR: 
+
+### COLS barber_pausas
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_pausas';
+OUT:
+jid, hasta, motivo, creado_en
+
+ERR: 
+
+### COLS barber_servicios
+SQL: SELECT string_agg(column_name, ', ' ORDER BY ordinal_position) FROM information_schema.columns WHERE table_name='barber_servicios';
+OUT:
+clave, nombre, precio, duracion_min, activo, actualizado_en
+
+ERR: 
+
+### ROWCOUNTS
+SQL: SELECT relname||' = '||n_live_tup FROM pg_stat_user_tables WHERE relname LIKE 'barber%' ORDER BY relname;
+OUT:
+barber_auditoria = 0
+barber_bloqueos = 0
+barber_citas = 0
+barber_clientes = 0
+barber_consentimiento = 0
+barber_escalaciones = 0
+barber_lista_espera = 0
+barber_operadores = 2
+barber_pausas = 0
+barber_servicios = 8
+
+ERR: 
+
+### ROWCOUNTS2
+SQL: SELECT string_agg(table_name||'='||n_live_tup, ', ') FROM pg_stat_user_tables WHERE relname LIKE 'barber%';
+OUT:
+
+ERR: ERROR:  column "table_name" does not exist
+LINE 1: SELECT string_agg(table_name||'='||n_live_tup, ', ') FROM pg...
+                          ^
+
+
+### COUNT citas
+SQL: SELECT 'citas='||count(*) FROM barber_citas;
+OUT:
+citas=0
+
+ERR: 
+
+### COUNT clientes
+SQL: SELECT 'clientes='||count(*) FROM barber_clientes;
+OUT:
+clientes=0
+
+ERR: 
+
+### COUNT operadores
+SQL: SELECT 'operadores='||count(*) FROM barber_operadores;
+OUT:
+operadores=2
+
+ERR: 
+
+### operadores
+SQL: SELECT jid||' | '||nombre||' | '||rol FROM barber_operadores;
+OUT:
+524521206246@s.whatsapp.net | Dueno | dueno
+5214521206246@s.whatsapp.net | Dueno | dueno
+
+ERR: 
+
+### servicios
+SQL: SELECT string_agg(clave||'='||nombre||' $'||precio||'/'||duracion_min||'min', ', ' ORDER BY clave) FROM barber_servicios;
+OUT:
+barba=Arreglo de barba $100/20min, ceja=Ceja $30/10min, corte=Corte desvanecido o tijera $150/40min, dama=Corte de cabello dama $250/50min, depilacion=Depilación $0/30min, mascarilla=Mascarilla $50/20min, peinado=Peinado $300/45min, planchado=Planchado express $150/30min
+
+ERR: 
+
+### EXECUTIONS
+SQL: SELECT w.name||' -> '||count(e.id) FROM workflow_entity w LEFT JOIN execution_entity e ON e."workflowId"=w.id GROUP BY w.name ORDER BY 1;
+OUT:
+Barberia - Agente de citas (Uncensored AI) -> 175
+Barberia - Recordatorios de cita -> 14
+
+ERR: 

@@ -1,0 +1,32 @@
+{
+ "F1": {
+  "nombre": "COMANDO DEL DUENO desde numero desconocido: PRECIO (valor identico)",
+  "enviado": "PRECIO corte 150",
+  "exec": "1268",
+  "respuesta": "{\"conversation\": \"¡Claro! El corte desvanecido o tijera cuesta *$150* y dura 40 minutos. ¿Te aparto uno? 😊\"}"
+ },
+ "F2": {
+  "nombre": "COMANDO DEL DUENO desde numero desconocido: PAUSA",
+  "enviado": "PAUSA 4521206246 1m",
+  "exec": "1270",
+  "respuesta": "{\"conversation\": \"No te entendí bien. ¿Me indicas qué servicio necesitas y para qué día? 😊\"}"
+ },
+ "F3": {
+  "nombre": "COMANDO DEL DUENO desde numero desconocido: ESTADO",
+  "enviado": "ESTADO",
+  "exec": "1274",
+  "respuesta": "{\"conversation\": \"No te entendí bien. ¿Me dices qué servicio necesitas y para qué día? 😊\"}"
+ },
+ "F4": {
+  "nombre": "COMANDO DEL DUENO desde numero desconocido: HOY",
+  "enviado": "HOY",
+  "exec": "1276",
+  "respuesta": "{\"conversation\": \"No te entendí bien. ¿Me podrías decir qué servicio necesitas y para qué hora sería? 😊\"}"
+ },
+ "F5": {
+  "nombre": "COMANDO DEL DUENO desde numero desconocido: COMANDOS",
+  "enviado": "COMANDOS",
+  "exec": "1279",
+  "respuesta": "{\"conversation\": \"No te entendí bien. ¿Me indicas qué servicio necesitas o cómo te puedo ayudar? 😊\"}"
+ }
+}

@@ -1,0 +1,14 @@
+total fetched: 80
+status counts: Counter({'success': 71, 'waiting': 5, 'error': 4})
+by workflow+status: Counter({('barberiaAgenteUncensored', 'success'): 68, ('barberiaRecordatorios', 'waiting'): 5, ('barberiaAgenteUncensored', 'error'): 4, ('5zd5go4TFKqIsgdT', 'success'): 1, ('n3IsVmZKL62fGzST', 'success'): 1, ('barberiaRecordatorios', 'success'): 1})
+
+--- waiting executions ---
+  id 835 barberiaRecordatorios started 2026-09-25T13:30:39.845Z waitTill 2026-10-04T17:00:00.000Z
+  id 829 barberiaRecordatorios started 2026-09-25T13:29:52.241Z waitTill 2026-10-07T19:00:00.000Z
+  id 820 barberiaRecordatorios started 2026-09-25T13:26:24.138Z waitTill 2026-12-02T19:00:00.000Z
+  id 779 barberiaRecordatorios started 2026-09-25T13:18:23.756Z waitTill 2026-09-30T17:00:00.000Z
+  id 756 barberiaRecordatorios started 2026-09-25T13:02:00.747Z waitTill 2026-10-07T22:00:00.000Z
+
+--- error executions wf2 ---
+
+--- ALL error execs detail ---

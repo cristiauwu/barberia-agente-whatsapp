@@ -1,0 +1,36 @@
+### Conteo exacto (Prefer: count=exact) y Content-Range por tabla
+### Si Content-Range dice N>0 y el cuerpo es []  ->  RLS esta filtrando
+  barber_clientes        HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_citas           HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_servicios       HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_operadores      HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_conocimiento    HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_pausas          HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_bloqueos        HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+  barber_escalaciones    HTTP 200  Content-Range=*/0          Content-Profile=None
+      cuerpo='[]'
+
+### Intento de listar el catalogo de tablas por /rest/v1/<tabla_inexistente>
+  HTTP 404  '{"code":"PGRST205","details":null,"hint":null,"message":"Could not find the table \'public.zzz_no_existe\' in the schema cache"}'
+
+### ¿Existe el esquema 'graphql' publico (introspection anonima)?
+  HTTP 404  '{"code":"PGRST202","details":"Searched for the function public.graphql without parameters, but no matches were found in the schema cache.","hint":null,"message":"Could not find the function public.graphql without parameters in the schema cache"}'
+
+### Cabeceras de una respuesta 200 (para ver rol/policies)
+    Content-Length: 2
+    Content-Location: /barber_servicios?limit=1&select=%2A
+    Content-Range: */*
+    Content-Type: application/json; charset=utf-8
+    Date: Sat, 26 Sep 2026 00:20:29 GMT
+    Server: cloudflare
+    content-profile: public
+    x-content-type-options: nosniff
+    x-envoy-attempt-count: 1
+    x-envoy-upstream-service-time: 6

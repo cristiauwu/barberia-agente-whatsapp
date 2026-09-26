@@ -1,0 +1,78 @@
+WORKFLOW: Barberia - Agente de citas (Uncensored AI) active= True
+  Webhook                                    webhook                   
+  AI Agent                                   agent                      MODEL=None OPTS={'systemMessage': '=# QUIÉN ERES\n\nEres **"Chino"**, el recepcionista virtual de **Barber Chinos — Peluquería & Barberí
+  OpenAI Chat Model                          lmChatOpenAi              
+  Switch                                     switch                    
+  Get Audio                                  httpRequest               
+  Convertir Audio                            convertToFile             
+  Transcribe a recording                     openAi                    
+  Audio Content                              set                       
+  Audio Content1                             set                       
+  Get Image                                  httpRequest               
+  Convertir Imagen                           convertToFile             
+  Describe imagen                            openAi                    
+  Edit Fields2                               set                       
+  Edit Fields                                set                       
+  Normalizacion                              set                       
+  Mandar mensaje                             httpRequest               
+  Consultar agenda                           googleCalendarTool         DESC=Consulta las citas ya ocupadas en el calendario de la barberia dentro 
+  Agendar cita                               googleCalendarTool         DESC=Agenda una cita nueva en el calendario. Antes de usarla confirma que e
+  Cancelar cita                              googleCalendarTool         DESC=Cancela definitivamente una cita del calendario. Requiere el ID del ev
+  Reagendar                                  googleCalendarTool         DESC=Mueve una cita existente a un horario nuevo conservando su ID. Requier
+  Postgres Chat Memory                       memoryPostgresChat         TABLE=None SESSION=customKey CONTEXT=None
+  Registrar en hoja de citas                 googleSheetsTool           DESC=
+  Notificar al encargado                     toolHttpRequest            DESC=Avisa al encargado de la barberia por WhatsApp cuando el cliente pide 
+  IF - No es del bot                         if                        
+  ¿Es operador?                              if                        
+  Router de comandos                         switch                    
+  Responder al operador                      httpRequest               
+  Armar respuesta COMANDOS                   set                       
+  Preparar rango de fechas                   code                      
+  Leer agenda del rango                      googleCalendar            
+  Formatear agenda                           code                      
+  Parsear bloqueo                            code                      
+  Crear bloqueo en calendario                googleCalendar            
+  Respuesta de bloqueo                       set                       
+  Buscar cliente                             code                      
+  Leer ficha del cliente                     postgres                  
+  Formatear ficha                            code                      
+  Parsear pausa                              code                      
+  Aplicar pausa                              postgres                  
+  Formatear pausa                            code                      
+  Parsear precio                             code                      
+  Actualizar precio                          postgres                  
+  Formatear precio                           code                      
+  Leer estado del sistema                    postgres                  
+  Formatear estado                           code                      
+  IF - Bloqueo invalido                      if                        
+  Confirmar bloqueo                          set                       
+  Leer operadores                            postgres                  
+  Comprobar operador                         code                      
+  Leer pausa                                 postgres                  
+  Calcular pausa                             code                      
+  IF - Cliente pausado                       if                        
+
+=== TABLAS BARBER ===
+  barber_citas           0 
+  barber_clientes        0 
+  barber_pausas          0 
+  barber_escalaciones    0 
+  barber_bloqueos        0 
+  barber_operadores      2 
+  barber_auditoria       0 
+
+=== n8n_chat_histories (ultimas) ===
+5214501111805@s.whatsapp.net|378|662
+5214521206246@s.whatsapp.net|204|652
+5214521665055@s.whatsapp.net|4|644
+5214521253750@s.whatsapp.net|16|632
+524521206246@s.whatsapp.net|30|556
+529990001111@s.whatsapp.net|2|538
+5214521415196@s.whatsapp.net|26|514
+5215520894522@s.whatsapp.net|2|448
+
+=== citas existentes ===
+ERROR:  column "estatus" does not exist
+LINE 1: SELECT id, estatus, dia, hora, servicio, precio, nombre FROM...
+                   ^
+HINT:  Perhaps you meant to reference the column "barber_citas.estado".

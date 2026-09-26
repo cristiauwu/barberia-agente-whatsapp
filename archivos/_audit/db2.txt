@@ -1,0 +1,35 @@
+### rows per session
+rc=0
+5214501111805@s.whatsapp.net|394
+5214521206246@s.whatsapp.net|204
+524521206246@s.whatsapp.net|30
+5214521415196@s.whatsapp.net|26
+5214521253750@s.whatsapp.net|16
+5214521665055@s.whatsapp.net|4
+5215520894522@s.whatsapp.net|2
+529990001111@s.whatsapp.net|2
+ERR:
+
+### message length stats
+rc=0
+678|218|997
+ERR:
+
+### by message type
+rc=0
+human|339|125|914
+ai|339|105|456
+ERR:
+
+### sample rows
+rc=0
+{"type": "human", "content": "Cliente: Cliente Prueba (WhatsApp 5214501111805@s.whatsapp.net)\nMensaje:   cuanto cuesta el corte de dama?", "additional_kwargs": {}, "response_metadata": {}}
+{"type": "ai", "content": "El corte de cabello para dama tiene un costo de $250 e incluye 50 minutos de atención. 😊 ¿Te gustaría agendar una cita?", "tool_calls": [], "additional_kwargs": {}, "response_metadata": {}, "invalid_tool_calls": []}
+ERR:
+
+### latest msgs of busiest session
+rc=0
+{"type": "ai", "content": "El corte desvanecido o a tijera cuesta *$150* y dura 40 minutos. ¿Te lo agendo? 😊", "tool_calls": [], "additional_kwargs": {}, "response_metadata": {}, "invalid_tool_calls": []}
+{"type": "human", "content": "Cliente: Smoke2 (WhatsApp 5214501111805@s.whatsapp.net)\nMensaje:   hola, cuanto cuesta el corte?", "additional_kwargs": {}, "response_metadata": {}}
+{"type": "ai", "content": "El corte desvanecido o a tijera cuesta *$150* y dura 40 minutos. ¿Te agendo una cita? 😊", "tool_calls": [], "additional_kwargs": {}, "response_metadata": {}, "invalid_tool_calls": []}
+ERR:

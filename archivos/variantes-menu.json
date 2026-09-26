@@ -1,0 +1,86 @@
+{
+  "A_mas_pedidos_mas_una_linea": {
+    "metricas": {
+      "caracteres": 230,
+      "lineas": 10,
+      "lineas_no_vacias": 7,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 80
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "lineas_menu": 4,
+    "ok": true
+  },
+  "B_agrupado_compacto": {
+    "metricas": {
+      "caracteres": 198,
+      "lineas": 11,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 34
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "lineas_menu": 7,
+    "ok": true
+  },
+  "C_un_servicio_por_linea": {
+    "metricas": {
+      "caracteres": 240,
+      "lineas": 12,
+      "lineas_no_vacias": 10,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 35
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "lineas_menu": 8,
+    "ok": true
+  },
+  "D_saludo_mas_8_servicios": {
+    "metricas": {
+      "caracteres": 211,
+      "lineas": 10,
+      "lineas_no_vacias": 9,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 37
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "lineas_menu": 7,
+    "ok": true
+  }
+}

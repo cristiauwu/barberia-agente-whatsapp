@@ -1,0 +1,7 @@
+CONTAINER ID   IMAGE                                  COMMAND                  CREATED        STATUS                  PORTS                                         NAMES
+f5880df60d13   evoapicloud/evolution-api:latest       "/bin/bash -c '. ./D…"   12 hours ago   Up 12 hours             127.0.0.1:8080->8080/tcp                      evolution_api
+36ddd31d6ccb   postgres:15-alpine                     "docker-entrypoint.s…"   12 hours ago   Up 12 hours (healthy)   5432/tcp                                      evolution_postgres
+b168dce4c78a   evoapicloud/evolution-manager:latest   "/bin/sh /start.sh"      14 hours ago   Up 14 hours             127.0.0.1:3000->80/tcp                        evolution_manager
+013a8d06d7b0   redis:alpine                           "docker-entrypoint.s…"   14 hours ago   Up 14 hours (healthy)   6379/tcp                                      evolution_redis
+f680fd25ab77   docker.n8n.io/n8nio/n8n:latest         "tini -- /docker-ent…"   14 hours ago   Up 14 hours             0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp   barberia-n8n
+c81d4429c88c   postgres:17-alpine                     "docker-entrypoint.s…"   14 hours ago   Up 14 hours (healthy)   5432/tcp                                      barberia-postgres

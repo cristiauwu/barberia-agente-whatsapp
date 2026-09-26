@@ -1,0 +1,122 @@
+[
+ {
+  "row_number": 2,
+  "ID": "7id628rpoav7n1hai9oidaj1n8",
+  "Estatus": "agendado",
+  "Nombre": "Juan Perez",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-09-28",
+  "Hora": "15:00:00",
+  "Numero celular": "5214501111805@s.whatsapp.net",
+  "Execution ID": ""
+ },
+ {
+  "row_number": 3,
+  "ID": "ie18j9a8g700dr282gpelrhd80",
+  "Estatus": "agendado",
+  "Nombre": "Maria Lopez",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-09-29",
+  "Hora": "11:00:00",
+  "Numero celular": "5214501111805@s.whatsapp.net",
+  "Execution ID": ""
+ },
+ {
+  "row_number": 4,
+  "ID": "luqlc95atsql3j5aormhkqtk48",
+  "Estatus": "agendado",
+  "Nombre": "Cristia Ñ",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-09-27",
+  "Hora": "15:00:00",
+  "Numero celular": "",
+  "Execution ID": ""
+ },
+ {
+  "row_number": 5,
+  "ID": "fne718ooe3tarccbd5mpbhqbts",
+  "Estatus": "agendado",
+  "Nombre": "Cristia",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-10-01",
+  "Hora": "16:00:00",
+  "Numero celular": "5214521206246@s.whatsapp.net",
+  "Execution ID": ""
+ },
+ {
+  "row_number": 6,
+  "ID": "9vf7pv2s9gdaeee7je3cs40i00",
+  "Estatus": "agendado",
+  "Nombre": "Cristia Ñ",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-09-28",
+  "Hora": "14:20:00",
+  "Numero celular": "5214521206246@s.whatsapp.net",
+  "Execution ID": 1075
+ },
+ {
+  "row_number": 7,
+  "ID": "auvtij2npnoe844n3df289gp70",
+  "Estatus": "agendado",
+  "Nombre": "Cristia Ñ",
+  "Servicio": "Corte de cabello dama",
+  "Precio del servicio": 250,
+  "Día ": "2026-09-25",
+  "Hora": "16:00:00",
+  "Numero celular": "5214521206246@s.whatsapp.net",
+  "Execution ID": 1135
+ },
+ {
+  "row_number": 8,
+  "ID": "verif-rec-t1",
+  "Estatus": "cancelado",
+  "Nombre": "Verif Rec",
+  "Servicio": "Ceja",
+  "Precio del servicio": 30,
+  "Día ": "2026-11-20",
+  "Hora": "10:00:00",
+  "Numero celular": "5214501111805@s.whatsapp.net",
+  "Execution ID": ""
+ },
+ {
+  "row_number": 9,
+  "ID": "event_id_placeholder",
+  "Estatus": "agendado",
+  "Nombre": "Prueba Confirmacion",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-09-28",
+  "Hora": "12:00:00",
+  "Numero celular": "5214501111805@s.whatsapp.net",
+  "Execution ID": 1294
+ },
+ {
+  "row_number": 10,
+  "ID": "etnmqvg4qntrgtdmri981u86l0",
+  "Estatus": "agendado",
+  "Nombre": "Cliente Prueba",
+  "Servicio": "Corte desvanecido o tijera",
+  "Precio del servicio": 150,
+  "Día ": "2026-10-01",
+  "Hora": "16:40:00",
+  "Numero celular": "5214501111805@s.whatsapp.net",
+  "Execution ID": 1298
+ },
+ {
+  "row_number": 11,
+  "ID": "verif-rec-wait-24h",
+  "Estatus": "agendado",
+  "Nombre": "Verif Wait 24h",
+  "Servicio": "Ceja",
+  "Precio del servicio": 30,
+  "Día ": "2026-10-06",
+  "Hora": "15:00:00",
+  "Numero celular": "5214501111805@s.whatsapp.net",
+  "Execution ID": 1300
+ }
+]

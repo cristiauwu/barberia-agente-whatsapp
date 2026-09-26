@@ -1,0 +1,38 @@
+### PS FULL
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe ps -a --no-trunc --format {{.ID}}|{{.Names}}|{{.State}}
+OUT:
+f5880df60d13506e2fa2d35eba4436a3e9705cc24a5735917e422324b92af9f5|evolution_api|running
+36ddd31d6ccb9b3020d19ff78d9fad694797506c474acac5cc9da3c82b2201a0|evolution_postgres|running
+b168dce4c78afc0c962c9d73e8051d5db5c01d7c0eebe6fe095c9be62bfdce93|evolution_manager|running
+013a8d06d7b0f03a73e50aad7ec3bf79e57dd91fe1d325c2465d5135ae0df5c6|evolution_redis|running
+f680fd25ab77dc4ecac8e2c8728e3bc455dc5b0ae5644ee656c950b1441f3151|barberia-n8n|running
+c81d4429c88c379dae68c04a8219d7e4fe0a617b7e022dc61c0827fa92a68389|barberia-postgres|running
+
+ERR: 
+RC:0
+
+### CONTEXT LS
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe context ls
+OUT:
+NAME              DESCRIPTION                               DOCKER ENDPOINT                             ERROR
+default           Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine              
+desktop-linux *   Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine   
+
+ERR: 
+RC:0
+
+### CONTEXT SHOW
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe context show
+OUT:
+desktop-linux
+
+ERR: 
+RC:0
+
+### VERSION
+CMD: C:\Users\kimbo\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe version --format {{.Server.Version}}
+OUT:
+29.8.0
+
+ERR: 
+RC:0

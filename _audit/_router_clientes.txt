@@ -1,0 +1,325 @@
+### ROUTER DE COMANDOS ###
+{
+ "rules": {
+  "values": [
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d8c05938-a99b-409b-8534-251643cb9be2",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "HOY",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "HOY"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "b4cbf386-f511-4ea0-9ed8-4b9c855e0152",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "MAÑANA",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "MAÑANA"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "79c6298b-149f-4b26-8c54-ce9b75defc87",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "SEMANA",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "SEMANA"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "eb8b752d-47cf-4e20-b61c-900f81a64f89",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "LIBRE",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "LIBRE"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "494599ed-64a7-48f6-b94f-f4ba5c39c7a0",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "CLIENTE",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "CLIENTE"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "850025f6-47f4-4903-b6c0-fe2d308ec546",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "BLOQUEAR",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "BLOQUEAR"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7b593830-8481-44f1-b9fa-0c75d409429a",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "CERRAR",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "CERRAR"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "43b0898c-1728-41ac-820a-2f03a3025a14",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "ABRIR",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "ABRIR"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "61971f03-83bd-4410-9d9e-e189df84105c",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "PRECIO",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "PRECIO"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d4c3bf8c-4816-4369-b4d4-37b78e73cc62",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "PAUSA",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "PAUSA"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "03f95dba-8bd5-49f7-ba77-548d99fbbf92",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "ESTADO",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "ESTADO"
+   },
+   {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "e692d59c-1410-47c3-b8d1-c0fc791e107b",
+       "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}",
+       "rightValue": "COMANDOS",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "renameOutput": true,
+    "outputKey": "COMANDOS"
+   }
+  ]
+ },
+ "options": {
+  "fallbackOutput": "extra",
+  "renameFallbackOutput": "No es comando"
+ }
+}
+
+######################################################################
+FILE wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json
+   ... to_char(cl.ultima_visita AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY') AS ultima,   cl.nota_interna,   (SELECT count(*) FROM barber_citas c     WHERE c.jid = cl.jid AND c.inicio > now()       AND c.estado IN ('agendado','confirmado')) AS futuras FROM barber_clientes cl WHERE right(regexp_replace(split_part(cl.jid,'@',1),'\\D','','g'),10)         = right('{{ $json.busqueda }}',10)    OR right(regexp_replace(cl.telefono,'\\D','','g'),10)         = right('{{ $json.busqueda }}',10) LIMIT 1;",     "options
+   ... tBetweenTries": 2000,    "position": [     -208,     2112    ],    "parameters": {     "operation": "executeQuery",     "query": "INSERT INTO barber_pausas (jid, hasta, motivo) SELECT jid, now() + interval '{{ $json.horas }} hours', 'comando del dueño' FROM barber_clientes WHERE right(regexp_replace(split_part(jid,'@',1),'\\D','','g'),10)         = right('{{ $json.numero }}',10) ON CONFLICT (jid) DO UPDATE   SET hasta = excluded.hasta, motivo = excluded.motivo RETURNING jid, hasta;",     "options": {}    }, 
+   ... to_char(cl.ultima_visita AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY') AS ultima,   cl.nota_interna,   (SELECT count(*) FROM barber_citas c     WHERE c.jid = cl.jid AND c.inicio > now()       AND c.estado IN ('agendado','confirmado')) AS futuras FROM barber_clientes cl WHERE right(regexp_replace(split_part(cl.jid,'@',1),'\\D','','g'),10)         = right('{{ $json.busqueda }}',10)    OR right(regexp_replace(cl.telefono,'\\D','','g'),10)         = right('{{ $json.busqueda }}',10) LIMIT 1;",      "option
+   ... nTries": 2000,     "position": [      -208,      2112     ],     "parameters": {      "operation": "executeQuery",      "query": "INSERT INTO barber_pausas (jid, hasta, motivo) SELECT jid, now() + interval '{{ $json.horas }} hours', 'comando del dueño' FROM barber_clientes WHERE right(regexp_replace(split_part(jid,'@',1),'\\D','','g'),10)         = right('{{ $json.numero }}',10) ON CONFLICT (jid) DO UPDATE   SET hasta = excluded.hasta, motivo = excluded.motivo RETURNING jid, hasta;",      "options": {}     }
+INSERT INTO barber_clientes occurrences: 0
+INSERT INTO any table: ['barber_pausas', 'barber_pausas']
+UPDATE any table: ['barber_servicios', 'barber_servicios']
+barber_citas occurrences: 6
+barber_ tables referenced: ['barber_citas', 'barber_clientes', 'barber_escalaciones', 'barber_operadores', 'barber_pausas', 'barber_servicios']
+######################################################################
+FILE wf_Barberia_-_Recordatorios_de_cita.json
+INSERT INTO barber_clientes occurrences: 0
+INSERT INTO any table: []
+UPDATE any table: ['row', 'row', 'row', 'row', 'row', 'row']
+barber_citas occurrences: 0
+barber_ tables referenced: []
+######################################################################
+FILE wf_My_workflow.json
+INSERT INTO barber_clientes occurrences: 0
+INSERT INTO any table: []
+UPDATE any table: []
+barber_citas occurrences: 0
+barber_ tables referenced: []

@@ -1,0 +1,113 @@
+{
+  "lista": {
+    "pregunta": "dame la lista completa de servicios",
+    "respuesta": "Claro, aquí tienes nuestra lista completa de servicios:  \n\n*Servicios y precios*  \n- Corte desvanecido o tijera — $150 (40 min)  \n- Arreglo de barba — $100 (20 min)  \n- Ceja — $30 (10 min)  \n- Mascarilla — $50 (20 min)  \n- Corte de cabello dama — $250 (50 min)  \n- Planchado express — $150 (30 min)  \n- Peinado — $300 (45 min)  \n- Depilación — 30 min, precio según la zona  \n\n¿Cuál te aparto? 💈",
+    "metricas": {
+      "caracteres": 394,
+      "lineas": 13,
+      "lineas_no_vacias": 11,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 10,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 57
+    },
+    "problemas": [
+      "dos espacios al final del renglon (no es salto en WhatsApp): 10",
+      "demasiadas lineas: 13 (>12)"
+    ]
+  },
+  "confirmacion": {
+    "pregunta": "quiero agendar un corte el jueves a las 4",
+    "respuesta": "El horario de las *4:00 p.m.* ya está ocupado ese día. ¿Te sirve a las *4:40 p.m.* o prefieres otra hora? 😊",
+    "metricas": {
+      "caracteres": 107,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 2,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 107
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  },
+  "precio": {
+    "pregunta": "cuanto cuesta el corte?",
+    "respuesta": "El *corte desvanecido o tijera* cuesta *$150* y dura 40 minutos. ¿Te lo aparto? 💈",
+    "metricas": {
+      "caracteres": 81,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 2,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 81
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  },
+  "consulta": {
+    "pregunta": "ya tengo una cita?",
+    "respuesta": "Sí, tienes una cita agendada para el *3 de noviembre a las 5:00 p.m.* con un *corte desvanecido*, que cuesta *$150*.  \n\n¿Te puedo ayudar con algo más? 😊",
+    "metricas": {
+      "caracteres": 152,
+      "lineas": 3,
+      "lineas_no_vacias": 2,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 3,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 1,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 118
+    },
+    "problemas": [
+      "dos espacios al final del renglon (no es salto en WhatsApp): 1"
+    ]
+  },
+  "confirmacion_libre": {
+    "pregunta": "quiero un corte desvanecido el martes 3 de noviembre a las 5 de la tarde",
+    "respuesta": "Listo, tu cita ya estaba apartada para el *martes 3 de noviembre a las 5:00 p.m.* con un *corte desvanecido*. ¡Te esperamos en *Calle Pinzón #574*! ✅\n\n¿Te ayudo con algo más? 😊",
+    "metricas": {
+      "caracteres": 176,
+      "lineas": 3,
+      "lineas_no_vacias": 2,
+      "emojis": 2,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 3,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 149
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  }
+}

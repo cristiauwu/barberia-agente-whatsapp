@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "G:\Barberia\archivos\_helper_n8n.py", line 54, in <module>
+    for w in (d or {}).get("data", []):
+             ^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'

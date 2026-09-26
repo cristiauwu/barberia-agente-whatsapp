@@ -1,0 +1,20 @@
+733 wf=None status=None last=Google Sheets Trigger node=None
+     msg=Could not retrieve the columns from key row | desc=
+732 wf=None status=None last=Google Sheets Trigger node=None
+     msg=Could not retrieve the columns from key row | desc=
+731 wf=None status=None last=Google Sheets Trigger node=None
+     msg=Could not retrieve the columns from key row | desc=
+722 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Column names were updated after the node's setup | desc=Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID
+720 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Column names were updated after the node's setup | desc=Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID
+703 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Forbidden - perhaps check your credentials? | desc=The caller does not have permission
+687 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Forbidden - perhaps check your credentials? | desc=The caller does not have permission
+680 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Forbidden - perhaps check your credentials? | desc=The caller does not have permission
+611 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Forbidden - perhaps check your credentials? | desc=The caller does not have permission
+596 wf=None status=None last=Append or update row in sheet node=Append or update row in sheet
+     msg=Forbidden - perhaps check your credentials? | desc=The caller does not have permission

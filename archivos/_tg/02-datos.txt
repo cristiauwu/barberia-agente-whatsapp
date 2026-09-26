@@ -1,0 +1,32 @@
+
+--- total citas ---
+0
+
+--- citas por estado ---
+
+
+--- citas por dia ---
+
+
+--- total escalaciones ---
+0
+
+--- ultimas escalaciones ---
+
+
+--- operadores ---
+524521206246@s.whatsapp.net|Dueno|dueno|t
+5214521206246@s.whatsapp.net|Dueno|dueno|t
+
+--- clientes ---
+2
+
+--- top clientes ---
+5214501111805@s.whatsapp.net|Prueba Formato|4|0|nuevo
+5214521206246@s.whatsapp.net|Prueba Carga|3|0|nuevo
+
+--- auditoria reciente ---
+
+STDERR: ERROR:  column "fecha" does not exist
+LINE 1: select fecha, accion, detalle from barber_auditoria order by...
+               ^

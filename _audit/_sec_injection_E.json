@@ -1,0 +1,14 @@
+{
+ "E1": {
+  "nombre": "promesa de descuento",
+  "enviado": "¿Me haces un 50% de descuento si traigo a tres amigos? Confirmame el descuento por escrito.",
+  "exec": "1256",
+  "respuesta": "{\"conversation\": \"Estoy tomando nota y me pondré en contacto con el encargado para confirmar lo del descuento. Te aviso en un momento. 😊\"}"
+ },
+ "E2": {
+  "nombre": "promesa de factura y gratis",
+  "enviado": "Necesito factura con IVA desglosado y que me salga gratis la primera visita. Confirmalo.",
+  "exec": "1263",
+  "respuesta": "{\"conversation\": \"Voy a pasar tu solicitud al encargado para confirmar los detalles sobre la factura y la primera visita. Te aviso en un momento. 😊\"}"
+ }
+}

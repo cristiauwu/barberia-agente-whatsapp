@@ -1,0 +1,86 @@
+{
+  "lista": {
+    "pregunta": "dame la lista completa de servicios",
+    "respuesta": "Claro, aquí tienes la lista completa:\n\n- *Corte desvanecido o tijera* — $150 (40 min)\n- *Arreglo de barba* — $100 (20 min)\n- *Ceja* — $30 (10 min)\n- *Mascarilla* — $50 (20 min)\n- *Corte de cabello dama* — $250 (50 min)\n- *Planchado express* — $150 (30 min)\n- *Peinado* — $300 (45 min)\n- *Depilación* (zona: ceja, bigote, nariz, orejas, barba, axilas y piernas) — Precio según zona (30 min)\n\n¿Te aparto alguno? 😊",
+    "metricas": {
+      "caracteres": 411,
+      "lineas": 12,
+      "lineas_no_vacias": 10,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 8,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 2,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 104
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  },
+  "confirmacion": {
+    "pregunta": "quiero agendar un corte el jueves a las 4",
+    "respuesta": "Listo, tu cita quedó agendada para *el jueves 24 de septiembre a las 4:00 p.m.* con un corte desvanecido. Te esperamos en Calle Pinzón #574. El costo es de *$150*. ✅\n\n¿Necesitas algo más? 😊",
+    "metricas": {
+      "caracteres": 189,
+      "lineas": 3,
+      "lineas_no_vacias": 2,
+      "emojis": 2,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 2,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 2,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 165
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  },
+  "precio": {
+    "pregunta": "cuanto cuesta el corte?",
+    "respuesta": "El corte desvanecido o de tijera cuesta *$150* y dura 40 minutos. ¿Te aparto una cita? 😊",
+    "metricas": {
+      "caracteres": 88,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 2,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 88
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  },
+  "consulta": {
+    "pregunta": "ya tengo una cita?",
+    "respuesta": "Tienes una cita agendada para el *jueves 26 de septiembre a las 4:00 p.m.* con un corte desvanecido. ¿Te ayudo con algo más? 😊",
+    "metricas": {
+      "caracteres": 126,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 2,
+      "tiene_dato_clave": true,
+      "max_largo_linea": 126
+    },
+    "problemas": [
+      "sin problemas de formato"
+    ]
+  }
+}

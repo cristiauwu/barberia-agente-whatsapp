@@ -1,0 +1,37 @@
+updatedAt: 2026-09-25T12:59:53.362Z createdAt: 2026-09-24T23:37:00.825Z versionCounter: 93
+- Get Audio | node keys: ['id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['bodyParameters', 'headerParameters', 'method', 'options', 'sendBody', 'sendHeaders', 'url']
+- Get Image | node keys: ['id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['bodyParameters', 'headerParameters', 'method', 'options', 'sendBody', 'sendHeaders', 'url']
+- Mandar mensaje | node keys: ['id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['bodyParameters', 'headerParameters', 'method', 'options', 'sendBody', 'sendHeaders', 'url']
+- Consultar agenda | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['calendar', 'descriptionType', 'operation', 'options', 'timeMax', 'timeMin', 'toolDescription']
+- Agendar cita | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['additionalFields', 'calendar', 'descriptionType', 'end', 'start', 'toolDescription', 'useDefaultReminders']
+- Cancelar cita | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['calendar', 'descriptionType', 'eventId', 'operation', 'options', 'toolDescription']
+- Reagendar | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['calendar', 'descriptionType', 'eventId', 'operation', 'toolDescription', 'updateFields']
+- Registrar en hoja de citas | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['columns', 'documentId', 'operation', 'options', 'sheetName']
+- Notificar al encargado | node keys: ['credentials', 'id', 'name', 'notes', 'notesInFlow', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['authentication', 'genericAuthType', 'method', 'parametersBody', 'parametersHeaders', 'sendBody', 'sendHeaders', 'toolDescription', 'url']
+- Responder al operador | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['authentication', 'genericAuthType', 'headerParameters', 'jsonBody', 'method', 'options', 'sendBody', 'sendHeaders', 'specifyBody', 'url']
+- Leer agenda del rango | node keys: ['alwaysOutputData', 'credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['calendar', 'operation', 'options', 'timeMax', 'timeMin']
+- Crear bloqueo en calendario | node keys: ['credentials', 'id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+   retryOnFail: None maxTries: None waitBetweenTries: None
+   params keys: ['additionalFields', 'calendar', 'end', 'start']

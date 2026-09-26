@@ -1,0 +1,13 @@
+=== applyDefaults anywhere === 
+=== getNodeParameters === /usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/node-helpers.js:576:export function getNodeParameters(nodePropertiesArray, nodeValues, returnDefaults, returnNoneDisplayed, node, nodeTypeDescription, options) {
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/node-helpers.js:600:        nodeValuesDisplayCheck = getNodeParameters(nodePropertiesArray, nodeValues, true, true, node, nodeTypeDescription, {
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/node-helpers.js:724:                const tempNodeParameters = getNodeParameters(nodeProperties.options, nodeValues[nodeProperties.name], returnDefaults, returnNoneDisplayed, node, nodeTypeDescription, {
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/node-helpers.js:781:                        tempValue = getNodeParameters(tempNodePropertiesArray, nodeValue, returnDefaults, returnNoneDisplayed, node, nodeTypeDescription, {
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/node-helpers.js:802:                        tempValue = getNodeParameters(tempNodePropertiesArray, itemNodeValues, returnDefaults, returnNoneDisplayed, node, nodeTypeDescription, {
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/node-helpers.js:1003:export function getNodeParametersIssues(nodePropertiesArray, node, nodeTypeDescription, pinDataNodeNames) {
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/telemetry-helpers.js:245:                getNodeParameters(stickyType.description.properties, stickyNote.parameters, true, false, stickyNote, stickyType.description) ?? {};
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/telemetry-helpers.js:469:                    const nodeParameters = getNodeParameters(nodeType.description.properties, node.parameters, true, false, node, nodeType.description);
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/telemetry-helpers.js:700:                                const nodeParameters = getNodeParameters(nodeType.description.properties, languageModelNode.parameters, true, false, languageModelNode, nodeType.description);
+/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/esm/workflow-data-proxy.js:196:        const params = NodeHelpers.getNodeParameters(nodeType.description.properties, node.parameters, true, false, node, nodeType.description);
+
+=== ctx === 

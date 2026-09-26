@@ -1,0 +1,18 @@
+G:\Barberia\features-roadmap-research.md
+    {'buttons': 1}
+G:\Barberia\Herramientas_APIs_Complementarias.md
+    {'revenue': 1, 'Transacciones': 2}
+G:\Barberia\mcp-n8n-research.md
+    {'interactive': 1}
+G:\Barberia\Mejoras_Agente_Barberia_n8n.md
+    {'interactive': 3, 'revenue': 13, 'totalRevenue': 5, 'avgTicket': 4, 'TXN-': 2, 'APT-': 5, 'Metricas_Diarias': 2, 'Transacciones': 4}
+G:\Barberia\Prompts_Optimizados_n8n.json
+    {'revenue': 27, 'totalRevenue': 6, 'avgTicket': 3}
+G:\Barberia\archivos\crear-vigilancia-fechas.py
+    {'scheduleTrigger': 1}
+G:\Barberia\archivos\probar-consultas.py
+    {'INSERT INTO barber_clientes': 1}
+G:\Barberia\archivos\test-esquema-checks.py
+    {'Transacciones': 1, 'INSERT INTO barber_clientes': 5}
+G:\Barberia\mejoras\MEJORAS-BARBERIA.md
+    {'scheduleTrigger': 3}

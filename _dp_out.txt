@@ -1,0 +1,10 @@
+PS STDOUT:
+evolution_api | Up 12 hours | evoapicloud/evolution-api:latest
+evolution_postgres | Up 12 hours (healthy) | postgres:15-alpine
+evolution_manager | Up 13 hours | evoapicloud/evolution-manager:latest
+evolution_redis | Up 13 hours (healthy) | redis:alpine
+barberia-n8n | Up 14 hours | docker.n8n.io/n8nio/n8n:latest
+barberia-postgres | Up 14 hours (healthy) | postgres:17-alpine
+
+PS STDERR:
+ 0

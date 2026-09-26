@@ -1,0 +1,44 @@
+====================================================================================================
+CASO estatus='cancelado'  objetivo=None  esperado: no debe llegar a QUITAR (bug A)
+====================================================================================================
+  append: ok
+  ejecucion nueva: 1322
+  status=None last=IF - Es cita agendada
+  nodos: ['Code', 'Google Sheets Trigger', 'IF - Es cita agendada']
+  QUITAR RECORDATORIO: NO se ejecuto
+====================================================================================================
+CASO estatus='eliminado'  objetivo=None  esperado: no debe llegar a QUITAR (bug A)
+====================================================================================================
+  append: ok
+  ejecucion nueva: 1325
+  status=None last=IF - Es cita agendada
+  nodos: ['Code', 'Google Sheets Trigger', 'IF - Es cita agendada']
+  QUITAR RECORDATORIO: NO se ejecuto
+====================================================================================================
+CASO estatus='actualizado'  objetivo=1300  esperado: debe BORRAR la ejecucion 1300
+====================================================================================================
+  objetivo 1300 ANTES: status=waiting waitTill=2026-10-06T20:00:00.000Z
+  append: ok
+  ejecucion nueva: 1329
+  status=None last=IF - Es cita agendada
+  nodos: ['Code', 'Google Sheets Trigger', 'IF - Es cita agendada']
+  QUITAR RECORDATORIO: NO se ejecuto
+  objetivo 1300 DESPUES: HTTP 401 {"message":"Unauthorized"}
+====================================================================================================
+CASO estatus='reprogramado'  objetivo=1298  esperado: debe BORRAR la ejecucion 1298
+====================================================================================================
+  objetivo 1298 ANTES: status=waiting waitTill=2026-10-01T21:40:00.000Z
+  append: ok
+  ejecucion nueva: 1331
+  status=None last=IF - Es cita agendada
+  nodos: ['Code', 'Google Sheets Trigger', 'IF - Es cita agendada']
+  QUITAR RECORDATORIO: NO se ejecuto
+  objetivo 1298 DESPUES: HTTP 401 {"message":"Unauthorized"}
+
+====================================================================================================
+RESUMEN CANCELACION
+====================================================================================================
+{"estatus": "cancelado", "objetivo": null, "ejecucion": "1322", "esperado": "no debe llegar a QUITAR (bug A)", "observado": "no ejecuto QUITAR"}
+{"estatus": "eliminado", "objetivo": null, "ejecucion": "1325", "esperado": "no debe llegar a QUITAR (bug A)", "observado": "no ejecuto QUITAR"}
+{"estatus": "actualizado", "objetivo": "1300", "ejecucion": "1329", "esperado": "debe BORRAR la ejecucion 1300", "http_objetivo": 401, "observado": "HTTP 401"}
+{"estatus": "reprogramado", "objetivo": "1298", "ejecucion": "1331", "esperado": "debe BORRAR la ejecucion 1298", "http_objetivo": 401, "observado": "HTTP 401"}

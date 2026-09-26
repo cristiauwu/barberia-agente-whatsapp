@@ -1,0 +1,544 @@
+{
+ "version": 1,
+ "startData": {},
+ "resultData": {
+  "runData": {
+   "Google Sheets Trigger": [
+    {
+     "startTime": 1790343463821,
+     "executionIndex": 0,
+     "source": [],
+     "hints": [],
+     "executionTime": 0,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "ID": "5270sjndptm0fbp10sjiiat7rc",
+          "Estatus": "agendado",
+          "Nombre": "Prueba Carga",
+          "Servicio": "corte desvanecido o tijera",
+          "Precio del servicio": 150,
+          "Día ": "2026-09-25",
+          "Hora": "15:00:00",
+          "Numero celular": "5214521206246@s.whatsapp.net",
+          "Execution ID": ""
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Code": [
+    {
+     "startTime": 1790343463821,
+     "executionIndex": 1,
+     "source": [
+      {
+       "previousNode": "Google Sheets Trigger",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 9,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "ID": "5270sjndptm0fbp10sjiiat7rc",
+          "Estatus": "agendado",
+          "Nombre": "Prueba Carga",
+          "Servicio": "corte desvanecido o tijera",
+          "Precio del servicio": 150,
+          "Día ": "2026-09-25",
+          "Hora": "15:00:00",
+          "Numero celular": "5214521206246@s.whatsapp.net",
+          "Execution ID": "",
+          "fechaISO": "2026-09-25T21:00:00.000Z",
+          "fechaLegible": "25/9/2026, 3:00:00 p.m.",
+          "recordatorio24ISO": "2026-09-24T21:00:00.000Z",
+          "recordatorio1ISO": "2026-09-25T20:00:00.000Z",
+          "recordatorio24Legible": "24/9/2026, 3:00:00 p.m.",
+          "mandar24": false,
+          "mandar1": true,
+          "recordatorioISO": "2026-09-25T20:00:00.000Z",
+          "recordatorioLegible": "25/9/2026, 2:00:00 p.m."
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "IF - Es cita agendada": [
+    {
+     "startTime": 1790343463830,
+     "executionIndex": 2,
+     "source": [
+      {
+       "previousNode": "Code",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 5,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "ID": "5270sjndptm0fbp10sjiiat7rc",
+          "Estatus": "agendado",
+          "Nombre": "Prueba Carga",
+          "Servicio": "corte desvanecido o tijera",
+          "Precio del servicio": 150,
+          "Día ": "2026-09-25",
+          "Hora": "15:00:00",
+          "Numero celular": "5214521206246@s.whatsapp.net",
+          "Execution ID": "",
+          "fechaISO": "2026-09-25T21:00:00.000Z",
+          "fechaLegible": "25/9/2026, 3:00:00 p.m.",
+          "recordatorio24ISO": "2026-09-24T21:00:00.000Z",
+          "recordatorio1ISO": "2026-09-25T20:00:00.000Z",
+          "recordatorio24Legible": "24/9/2026, 3:00:00 p.m.",
+          "mandar24": false,
+          "mandar1": true,
+          "recordatorioISO": "2026-09-25T20:00:00.000Z",
+          "recordatorioLegible": "25/9/2026, 2:00:00 p.m."
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       []
+      ]
+     }
+    }
+   ],
+   "Registrar cliente (CRM)": [
+    {
+     "startTime": 1790343463835,
+     "executionIndex": 3,
+     "source": [
+      {
+       "previousNode": "IF - Es cita agendada",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 23,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "jid": "5214521206246@s.whatsapp.net",
+          "visitas": 3
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Notificar cita nueva al encargado": [
+    {
+     "startTime": 1790343463858,
+     "executionIndex": 4,
+     "source": [
+      {
+       "previousNode": "IF - Es cita agendada",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 1845,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214521206246@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0D7EE201EE7530B956D"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Nueva cita agendada:\nCliente: Prueba Carga\nServicio: corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 25/9/2026, 3:00:00 p.m."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790170664,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790343464,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Switch": [
+    {
+     "startTime": 1790343465703,
+     "executionIndex": 5,
+     "source": [
+      {
+       "previousNode": "Notificar cita nueva al encargado",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 9,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214521206246@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0D7EE201EE7530B956D"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Nueva cita agendada:\nCliente: Prueba Carga\nServicio: corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 25/9/2026, 3:00:00 p.m."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790170664,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790343464,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       [],
+       [],
+       []
+      ]
+     }
+    }
+   ],
+   "Code1": [
+    {
+     "startTime": 1790343465712,
+     "executionIndex": 6,
+     "source": [
+      {
+       "previousNode": "Switch",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 4,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "executionId": "861"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Append or update row in sheet": [
+    {
+     "startTime": 1790343465717,
+     "executionIndex": 7,
+     "source": [
+      {
+       "previousNode": "Code1",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 749,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "Execution ID": "861",
+          "ID": "5270sjndptm0fbp10sjiiat7rc"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "IF - Toca recordatorio 24 h": [
+    {
+     "startTime": 1790343466466,
+     "executionIndex": 8,
+     "source": [
+      {
+       "previousNode": "Append or update row in sheet",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 2,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [],
+       [
+        {
+         "json": {
+          "Execution ID": "861",
+          "ID": "5270sjndptm0fbp10sjiiat7rc"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "IF - Toca recordatorio 1 h": [
+    {
+     "startTime": 1790343466468,
+     "executionIndex": 9,
+     "source": [
+      {
+       "previousNode": "IF - Toca recordatorio 24 h",
+       "previousNodeOutput": 1,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 2,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "Execution ID": "861",
+          "ID": "5270sjndptm0fbp10sjiiat7rc"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       []
+      ]
+     }
+    }
+   ],
+   "ESPERAR A 1 H": [
+    {
+     "startTime": 1790366399985,
+     "executionIndex": 0,
+     "source": [
+      {
+       "previousNode": "IF - Toca recordatorio 1 h",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 1,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "Execution ID": "861",
+          "ID": "5270sjndptm0fbp10sjiiat7rc"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "RECORDATORIO 1 H": [
+    {
+     "startTime": 1790366399986,
+     "executionIndex": 1,
+     "source": [
+      {
+       "previousNode": "ESPERAR A 1 H",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 2067,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214521206246@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB057AF157436DA74F332"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Hola Prueba Carga! ✂️\nTu cita en Barber Chinos es en 1 hora: .\nTe esperamos en Calle Pinzon #574. Si no puedes asistir, responde *NO* para confirmar tu cancelacion y liberar tu lugar."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790193601,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790366401,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Registrar cita (Postgres)": [
+    {
+     "startTime": 1790366402054,
+     "executionIndex": 2,
+     "source": [
+      {
+       "previousNode": "IF - Es cita agendada",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 53,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "id": "5270sjndptm0fbp10sjiiat7rc",
+          "estado": "agendado"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ]
+  },
+  "lastNodeExecuted": "Registrar cita (Postgres)"
+ },
+ "executionData": {
+  "contextData": {},
+  "nodeExecutionStack": [],
+  "metadata": {},
+  "waitingExecution": {},
+  "waitingExecutionSource": {},
+  "runtimeData": {
+   "version": 1,
+   "establishedAt": 1790343463793,
+   "source": "trigger",
+   "triggerNode": {
+    "name": "Google Sheets Trigger",
+    "type": "n8n-nodes-base.googleSheetsTrigger"
+   },
+   "redaction": {
+    "version": 2,
+    "production": false,
+    "manual": false
+   }
+  }
+ },
+ "resumeToken": "c94d55f0c174b79dad1dfa5cc34360eadca32bc3b0a7676ba349d83778ba43a3"
+}

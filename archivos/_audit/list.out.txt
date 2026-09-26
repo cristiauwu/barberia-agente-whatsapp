@@ -1,0 +1,4 @@
+OK keys: ['data', 'nextCursor']
+1uIUWfNl36MpJ9V8 | My workflow | nodes: 0 | active: False
+barberiaAgenteUncensored | Barberia - Agente de citas (Uncensored AI) | nodes: 52 | active: True
+barberiaRecordatorios | Barberia - Recordatorios de cita | nodes: 15 | active: True

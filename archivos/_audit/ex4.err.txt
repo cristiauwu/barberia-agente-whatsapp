@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "G:\Barberia\archivos\_audit\ex4.py", line 30, in <module>
+    d=api("/executions/%d?includeData=true"%e["id"])["data"]
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+TypeError: %d format: a real number is required, not str

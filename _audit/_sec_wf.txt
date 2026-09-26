@@ -1,0 +1,268 @@
+
+================================================================================
+### BarberiaAgenteFLUJO-1-UNCENSORED.json  (132166 bytes)
+================================================================================
+  claves de nivel raiz: ['active', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId', 'versionMetadata']
+  nodos: 48
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 17
+        ('Actualizar precio', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Agendar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Aplicar pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Cancelar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Consultar agenda', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Crear bloqueo en calendario', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer agenda del rango', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer estado del sistema', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer ficha del cliente', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer operadores', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Notificar al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OpenAI Chat Model', 'openAiApi', 'KhicsxnD4N314cKC', 'Uncensored AI (OpenAI-compatible)')
+        ('Postgres Chat Memory', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Reagendar', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Registrar en hoja de citas', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Responder al operador', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+  [3] Mandar mensaje -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://api.uncensored.com/api/v1
+        https://api.uncensored.com/api/v1/models
+  [5] pinData: ausente
+  [6] 'versionId' presente: "119cce56-03b8-460d-a3f0-a0ed62604b46"
+  [7] JID hardcodeado en nodo 'Notificar al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar al encargado': 524521206246
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+
+================================================================================
+### BarberiaAgenteFLUJO-2-RECORDATORIOS.json  (31050 bytes)
+================================================================================
+  claves de nivel raiz: ['active', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId', 'versionMetadata']
+  nodos: 17
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 9
+        ('Append or update row in sheet', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Google Sheets Trigger', 'googleSheetsTriggerOAuth2Api', 'cJgufKuA5Lxckkz8', 'Google Sheets Trigger account')
+        ('Notificar cita nueva al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OBTENER INFO DE CITA ELIMINADA', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('QUITAR RECORDATORIO', 'n8nApi', 'Se7l2GF1O4CrF9jb', 'n8n API (local)')
+        ('RECORDATORIO 1 H', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('RECORDATORIO 24 H', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('Registrar cita (Postgres)', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Registrar cliente (CRM)', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit#gid=941506024
+        https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit?usp=drivesdk
+  [5] pinData: ausente
+  [6] 'versionId' presente: "58088f63-ca44-4fe8-a844-c18ae8625999"
+  [7] JID hardcodeado en nodo 'Notificar cita nueva al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar cita nueva al encargado': 524521206246
+
+================================================================================
+### sync-barberiaAgenteUncensored.json  (106023 bytes)
+================================================================================
+  (lista)
+  nodos: 48
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 17
+        ('Actualizar precio', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Agendar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Aplicar pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Cancelar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Consultar agenda', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Crear bloqueo en calendario', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer agenda del rango', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer estado del sistema', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer ficha del cliente', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer operadores', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Notificar al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OpenAI Chat Model', 'openAiApi', 'KhicsxnD4N314cKC', 'Uncensored AI (OpenAI-compatible)')
+        ('Postgres Chat Memory', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Reagendar', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Registrar en hoja de citas', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Responder al operador', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+  [3] Mandar mensaje -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://api.uncensored.com/api/v1
+        https://api.uncensored.com/api/v1/models
+  [5] pinData: ausente
+  [7] JID hardcodeado en nodo 'Notificar al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar al encargado': 524521206246
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+
+================================================================================
+### sync-barberiaRecordatorios.json  (20516 bytes)
+================================================================================
+  (lista)
+  nodos: 17
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 9
+        ('Append or update row in sheet', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Google Sheets Trigger', 'googleSheetsTriggerOAuth2Api', 'cJgufKuA5Lxckkz8', 'Google Sheets Trigger account')
+        ('Notificar cita nueva al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OBTENER INFO DE CITA ELIMINADA', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('QUITAR RECORDATORIO', 'n8nApi', 'Se7l2GF1O4CrF9jb', 'n8n API (local)')
+        ('RECORDATORIO 1 H', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('RECORDATORIO 24 H', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('Registrar cita (Postgres)', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Registrar cliente (CRM)', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit#gid=941506024
+        https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit?usp=drivesdk
+  [5] pinData: ausente
+  [7] JID hardcodeado en nodo 'Notificar cita nueva al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar cita nueva al encargado': 524521206246
+
+================================================================================
+### Prompts_Optimizados_n8n.json  (24089 bytes)
+================================================================================
+  !! JSON no parseable: JSONDecodeError('Expecting property name enclosed in double quotes: line 45 column 32 (char 17949)')
+
+================================================================================
+### wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json  (199350 bytes)
+================================================================================
+  claves de nivel raiz: ['active', 'activeVersion', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'pinData', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId']
+  nodos: 52
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 19
+        ('Actualizar precio', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Agendar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Aplicar pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Cancelar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Consultar agenda', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Crear bloqueo en calendario', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Describe imagen', 'openAiApi', 'GtV72MoANECFbNoX', 'OpenAi account')
+        ('Leer agenda del rango', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer estado del sistema', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer ficha del cliente', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer operadores', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Notificar al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OpenAI Chat Model', 'openAiApi', 'KhicsxnD4N314cKC', 'Uncensored AI (OpenAI-compatible)')
+        ('Postgres Chat Memory', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Reagendar', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Registrar en hoja de citas', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Responder al operador', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('Transcribe a recording', 'openAiApi', 'GtV72MoANECFbNoX', 'OpenAi account')
+  [3] Get Audio -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [3] Get Image -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [3] Mandar mensaje -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://api.uncensored.com/api/v1
+        https://api.uncensored.com/api/v1/models
+  [5] pinData: ausente
+  [6] 'versionId' presente: "41438c47-a0d9-4e53-a148-db10f6d5a25b"
+  [7] JID hardcodeado en nodo 'Notificar al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar al encargado': 524521206246
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+
+================================================================================
+### wf_Barberia_-_Recordatorios_de_cita.json  (43741 bytes)
+================================================================================
+  claves de nivel raiz: ['active', 'activeVersion', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'pinData', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId']
+  nodos: 15
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 7
+        ('Append or update row in sheet', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Google Sheets Trigger', 'googleSheetsTriggerOAuth2Api', 'cJgufKuA5Lxckkz8', 'Google Sheets Trigger account')
+        ('Notificar cita nueva al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OBTENER INFO DE CITA ELIMINADA', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('QUITAR RECORDATORIO', 'n8nApi', 'Se7l2GF1O4CrF9jb', 'n8n API (local)')
+        ('RECORDATORIO 1 H', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('RECORDATORIO 24 H', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit#gid=941506024
+        https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit?usp=drivesdk
+  [5] pinData: ausente
+  [6] 'versionId' presente: "5162897c-3699-4300-84c6-ff1ea97aeca3"
+  [7] JID hardcodeado en nodo 'Notificar cita nueva al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar cita nueva al encargado': 524521206246
+
+================================================================================
+### _obs_wf_agente.json  (243711 bytes)
+================================================================================
+  claves de nivel raiz: ['active', 'activeVersion', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'pinData', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId']
+  nodos: 52
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 19
+        ('Actualizar precio', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Agendar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Aplicar pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Cancelar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Consultar agenda', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Crear bloqueo en calendario', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Describe imagen', 'openAiApi', 'GtV72MoANECFbNoX', 'OpenAi account')
+        ('Leer agenda del rango', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer estado del sistema', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer ficha del cliente', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer operadores', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Notificar al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OpenAI Chat Model', 'openAiApi', 'KhicsxnD4N314cKC', 'Uncensored AI (OpenAI-compatible)')
+        ('Postgres Chat Memory', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Reagendar', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Registrar en hoja de citas', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Responder al operador', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('Transcribe a recording', 'openAiApi', 'GtV72MoANECFbNoX', 'OpenAi account')
+  [3] Get Audio -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [3] Get Image -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [3] Mandar mensaje -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://api.uncensored.com/api/v1
+        https://api.uncensored.com/api/v1/models
+  [5] pinData: ausente
+  [6] 'versionId' presente: "5a41e049-ad68-47c7-8f9c-0b5708948b89"
+  [7] JID hardcodeado en nodo 'Notificar al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar al encargado': 524521206246
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+
+================================================================================
+### _t5_wf.json  (221103 bytes)
+================================================================================
+  claves de nivel raiz: ['active', 'activeVersion', 'activeVersionId', 'connections', 'createdAt', 'description', 'id', 'isArchived', 'meta', 'name', 'nodeGroups', 'nodes', 'pinData', 'settings', 'shared', 'sourceWorkflowId', 'staticData', 'tags', 'triggerCount', 'updatedAt', 'versionCounter', 'versionId']
+  nodos: 52
+  [1] PATRONES DE SECRETO EN CRUDO: NINGUNO
+  [2] CREDENCIALES REFERENCIADAS (id+nombre, sin secretos): 19
+        ('Actualizar precio', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Agendar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Aplicar pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Cancelar cita', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Consultar agenda', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Crear bloqueo en calendario', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Describe imagen', 'openAiApi', 'GtV72MoANECFbNoX', 'OpenAi account')
+        ('Leer agenda del rango', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Leer estado del sistema', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer ficha del cliente', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer operadores', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Leer pausa', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Notificar al encargado', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('OpenAI Chat Model', 'openAiApi', 'KhicsxnD4N314cKC', 'Uncensored AI (OpenAI-compatible)')
+        ('Postgres Chat Memory', 'postgres', 'NUrqrDWN8OsBFmgV', 'Postgres account')
+        ('Reagendar', 'googleCalendarOAuth2Api', 'I6TpcTTP1cn1tviR', 'Google Calendar account')
+        ('Registrar en hoja de citas', 'googleSheetsOAuth2Api', 'lGEYmmJh1FvqzQi9', 'Google Sheets account')
+        ('Responder al operador', 'httpHeaderAuth', 'qaGW1Tvt5BqPujJ1', 'Evolution API')
+        ('Transcribe a recording', 'openAiApi', 'GtV72MoANECFbNoX', 'OpenAi account')
+  [3] Get Audio -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [3] Get Image -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [3] Mandar mensaje -> headerParameters = {"parameters": [{"name": "apikey", "value": "={{ $('Normalizacion').item.json.instance_apikey }}"}]}
+  [4] URLs presentes (3):
+        http://evolution_api:8080/message/sendText/hector
+        https://api.uncensored.com/api/v1
+        https://api.uncensored.com/api/v1/models
+  [5] pinData: ausente
+  [6] 'versionId' presente: "8b8fd729-49fa-4636-93be-3afb37e72dfd"
+  [7] JID hardcodeado en nodo 'Notificar al encargado': 524521206246@s.whatsapp.net
+  [7] TELEFONO hardcodeado en nodo 'Notificar al encargado': 524521206246
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805
+  [7] TELEFONO hardcodeado en nodo 'Armar respuesta COMANDOS': 5214501111805

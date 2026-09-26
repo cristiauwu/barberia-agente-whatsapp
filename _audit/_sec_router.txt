@@ -1,0 +1,84 @@
+
+==========================================================================================
+### NODO: Normalizacion   (n8n-nodes-base.set)
+==========================================================================================
+-- assignments -- {"assignments": [{"id": "d9419665-41fc-43b9-aef7-d521a1ba2035", "name": "instance_server_url", "value": "={{ $json.body.server_url }}", "type": "string"}, {"id": "c3cb8673-8006-4079-a304-c58ffc267226", "name": "instance_name", "value": "={{ $json.body.instance }}", "type": "string"}, {"id": "e462da04-7f8b-4fbe-aacd-7956666c2ede", "name": "instance_apikey", "value": "={{ $json.body.apikey }}", "type": "string"}, {"id": "b06da722-eea2-4f28-a2d4-7bcc6592b952", "name": "message_id", "value": "={{ $json.body.data.key.id }}", "type": "string"}, {"id": "5ecbe629-f4d0-4bdf-8c78-903f311bc273", "name": "message_chat_id_sender", "value": "={{ $json.body.sender }}", "type": "string"}, {"id": "cbb05e7c-4912-4965-bcf4-cefd9418b39f", "name": "message_content_type", "value": "={{ $json.body.data.message.extendedTextMessage ? 'text': '' }}{{ $json.body.data.message.conversation ? 'text': '' }}", "type": "string"}, {"id": "d6fa8877-dee6-468b-a51e-8fdc36dc190f", "name": "message_content", "value": "={{ $json.body.data.message.extendedTextMessage?.text || '' }} {{ $json.body.data.message.conversation || '' }}", "type": "string"}, {"id": "f122b51f-8a93-439e-85fb-c370e7f4f6b8", "name": "message_timestamp", "value": "={{ $json.body.date_time }}", "type": "string"}, {"id": "e10a7e61-cffe-44fb-9b13-e0c199ebd866", "name": "user_name", "value": "={{ $json.body.data.pushName }}", "type": "string"}, {"id": "1c280646-7eb8-4118-9e8d-432f04a763b7", "name": "user_number", "value": "={{ $json.body.data.key.re
+-- options -- {}
+
+==========================================================================================
+### NODO: IF - No es del bot   (n8n-nodes-base.if)
+==========================================================================================
+-- conditions -- {"options": {"caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2}, "conditions": [{"id": "ifnotbot-0000-4000-8000-000000000001", "leftValue": "={{ $json.from_me }}", "rightValue": "no", "operator": {"type": "string", "operation": "equals"}}], "combinator": "and"}
+-- options -- {}
+
+==========================================================================================
+### NODO: ¿Es operador?   (n8n-nodes-base.if)
+==========================================================================================
+-- conditions -- {"options": {"caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2}, "conditions": [{"id": "esoperador0001", "leftValue": "={{ $json.es_operador }}", "rightValue": true, "operator": {"type": "boolean", "operation": "true", "singleValue": true}}], "combinator": "and"}
+-- options -- {}
+
+==========================================================================================
+### NODO: Router de comandos   (n8n-nodes-base.switch)
+==========================================================================================
+-- rules -- {"values": [{"conditions": {"options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2}, "conditions": [{"id": "d8c05938-a99b-409b-8534-251643cb9be2", "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}", "rightValue": "HOY", "operator": {"type": "string", "operation": "equals"}}], "combinator": "and"}, "renameOutput": true, "outputKey": "HOY"}, {"conditions": {"options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2}, "conditions": [{"id": "b4cbf386-f511-4ea0-9ed8-4b9c855e0152", "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}", "rightValue": "MAÑANA", "operator": {"type": "string", "operation": "equals"}}], "combinator": "and"}, "renameOutput": true, "outputKey": "MAÑANA"}, {"conditions": {"options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2}, "conditions": [{"id": "79c6298b-149f-4b26-8c54-ce9b75defc87", "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}", "rightValue": "SEMANA", "operator": {"type": "string", "operation": "equals"}}], "combinator": "and"}, "renameOutput": true, "outputKey": "SEMANA"}, {"conditions": {"options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2}, "conditions": [{"id": "eb8b752d-47cf-4e20-b61c-900f81a64f89", "leftValue": "={{ $json.message_content.trim().toUpperCase().split(' ')[0] }}", "rightValue": "LIBRE", "operator": 
+-- options -- {"fallbackOutput": "extra", "renameFallbackOutput": "No es comando"}
+
+==========================================================================================
+### NODO: Leer operadores   (n8n-nodes-base.postgres)
+==========================================================================================
+-- operation -- "executeQuery"
+-- query -- "SELECT jid FROM barber_operadores WHERE activo;"
+-- options -- {}
+
+==========================================================================================
+### NODO: Comprobar operador   (n8n-nodes-base.code)
+==========================================================================================
+-- jsCode --
+// ¿El remitente es un operador autorizado?
+// Compara por los ÚLTIMOS 10 dígitos para tolerar los dos formatos
+// mexicanos de WhatsApp (52+10 y 52+1+10).
+const item = $('Normalizacion').first().json;
+const remitente = String(item.user_number || '');
+const ultimos = s => String(s || '').replace(/\D/g, '').slice(-10);
+
+const autorizados = $input.all()
+  .map(i => i.json.jid)
+  .filter(Boolean);
+
+const esOperador = autorizados.some(j => ultimos(j) === ultimos(remitente));
+
+return [{ json: { ...item, es_operador: esOperador,
+                  operadores: autorizados } }];
+
+==========================================================================================
+### NODO: Leer pausa   (n8n-nodes-base.postgres)
+==========================================================================================
+-- operation -- "executeQuery"
+-- query -- "SELECT count(*) AS pausado,\n       coalesce(max(hasta), null) AS hasta,\n       coalesce(max(motivo), '') AS motivo\nFROM barber_pausas\nWHERE jid = '{{ $json.user_number }}'\n  AND hasta > now();"
+-- options -- {}
+
+==========================================================================================
+### NODO: Calcular pausa   (n8n-nodes-base.code)
+==========================================================================================
+-- jsCode --
+// Decide si hay que quedarse callado con este cliente.
+// La consulta devuelve count(*) = 0 o 1 y SIEMPRE una fila, así que el
+// flujo no se corta cuando el cliente no está pausado.
+const base = $('Normalizacion').first().json;
+const fila = $input.first().json || {};
+const pausado = Number(fila.pausado || 0) > 0;
+return [{ json: { ...base, pausado, hasta: fila.hasta || null } }];
+
+==========================================================================================
+### NODO: IF - Cliente pausado   (n8n-nodes-base.if)
+==========================================================================================
+-- conditions -- {"options": {"caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2}, "conditions": [{"id": "espausado0001", "leftValue": "={{ $json.pausado }}", "rightValue": true, "operator": {"type": "boolean", "operation": "true", "singleValue": true}}], "combinator": "and"}
+-- options -- {}
+
+### condiciones de IF - No es del bot: {"options": {"caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2}, "conditions": [{"id": "ifnotbot-0000-4000-8000-000000000001", "leftValue": "={{ $json.from_me }}", "rightValue": "no", "operator": {"type": "string", "operation": "equals"}}], "combinator": "and"}
+
+### condiciones de ¿Es operador?: {"options": {"caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2}, "conditions": [{"id": "esoperador0001", "leftValue": "={{ $json.es_operador }}", "rightValue": true, "operator": {"type": "boolean", "operation": "true", "singleValue": true}}], "combinator": "and"}
+
+### condiciones de Comprobar operador: null
+
+### condiciones de IF - Cliente pausado: {"options": {"caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2}, "conditions": [{"id": "espausado0001", "leftValue": "={{ $json.pausado }}", "rightValue": true, "operator": {"type": "boolean", "operation": "true", "singleValue": true}}], "combinator": "and"}

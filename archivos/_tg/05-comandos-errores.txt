@@ -1,0 +1,32 @@
+Router de comandos: 12 salidas -> ['HOY', 'MAÑANA', 'SEMANA', 'LIBRE', 'CLIENTE', 'BLOQUEAR', 'CERRAR', 'ABRIR', 'PRECIO', 'PAUSA', 'ESTADO', 'COMANDOS']
+fallback: {"fallbackOutput": "extra", "renameFallbackOutput": "No es comando"}
+
+=== ejecuciones barberiaRecordatorios ===
+  id=861 status=waiting started=2026-09-25T13:37:43.805Z last=ESPERAR A 1 H err=None
+  id=852 status=waiting started=2026-09-25T13:35:43.813Z last=ESPERAR A 24 H err=None
+  id=847 status=waiting started=2026-09-25T13:34:43.828Z last=ESPERAR A 24 H err=None
+  id=838 status=success started=2026-09-25T13:32:39.995Z last=IF - Es cita agendada err=None
+  id=835 status=waiting started=2026-09-25T13:30:39.845Z last=ESPERAR A 24 H err=None
+  id=829 status=waiting started=2026-09-25T13:29:52.241Z last=ESPERAR A 24 H err=None
+  id=820 status=waiting started=2026-09-25T13:26:24.138Z last=ESPERAR A 24 H err=None
+  id=800 status=success started=2026-09-25T13:23:23.770Z last=IF - Toca recordatorio 1 h err=None
+  id=779 status=waiting started=2026-09-25T13:18:23.756Z last=ESPERAR A 24 H err=None
+  id=756 status=waiting started=2026-09-25T13:02:00.747Z last=ESPERAR A 24 H err=None
+  id=747 status=waiting started=2026-09-25T12:53:00.889Z last=ESPERAR A 24 H err=None
+  id=733 status=error started=None last=Google Sheets Trigger err=Could not retrieve the columns from key row
+  id=732 status=error started=None last=Google Sheets Trigger err=Could not retrieve the columns from key row
+  id=731 status=error started=None last=Google Sheets Trigger err=Could not retrieve the columns from key row
+  id=722 status=error started=2026-09-25T12:32:00.723Z last=Append or update row in sheet err=Column names were updated after the node's setup
+  id=720 status=error started=2026-09-25T12:29:49.850Z last=Append or update row in sheet err=Column names were updated after the node's setup
+  id=703 status=error started=2026-09-25T12:21:50.783Z last=Append or update row in sheet err=Forbidden - perhaps check your credentials?
+  id=687 status=error started=2026-09-25T12:07:50.953Z last=Append or update row in sheet err=Forbidden - perhaps check your credentials?
+  id=680 status=error started=2026-09-25T12:06:50.833Z last=Append or update row in sheet err=Forbidden - perhaps check your credentials?
+  id=611 status=error started=2026-09-25T05:35:07.060Z last=Append or update row in sheet err=Forbidden - perhaps check your credentials?
+
+=== errores recientes barberiaAgenteUncensored ===
+  id=878 started=2026-09-25T13:41:25.713Z last=Actualizar precio err=column "undefined" does not exist
+  id=770 started=2026-09-25T13:14:19.423Z last=Responder al operador err=Bad request - please check your parameters
+  id=763 started=2026-09-25T13:09:38.802Z last=Mandar mensaje err=Bad request - please check your parameters
+  id=759 started=2026-09-25T13:02:59.221Z last=Responder al operador err=Bad request - please check your parameters
+  id=758 started=2026-09-25T13:02:33.455Z last=Actualizar precio err=column "undefined" does not exist
+  id=660 started=2026-09-25T11:56:54.936Z last=Mandar mensaje err=Bad request - please check your parameters

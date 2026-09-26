@@ -1,0 +1,20 @@
+n8n version rc 0 2.40.6 
+memory dir rc 0
+MemoryBufferWindow
+MemoryChatRetriever
+MemoryManager
+MemoryMongoDbChat
+MemoryMotorhead
+MemoryPostgresChat
+MemoryRedisChat
+MemoryXata
+MemoryZep
+descriptions.js
+descriptions.js.map
+
+ERR: 
+find PostgresChat: /usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/node-definitions/nodes/n8n-nodes-langchain/memoryPostgresChat
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/memory/MemoryPostgresChat
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/memory/MemoryPostgresChat/MemoryPostgresChat.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/memory/MemoryPostgresChat/MemoryPostgresChat.node.js.map
+ 

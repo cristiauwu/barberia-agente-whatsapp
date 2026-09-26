@@ -1,0 +1,130 @@
+==============================================================================
+ PRUEBA DE LA BASE DE CONOCIMIENTO - BARBER CHINOS
+ Búsqueda de texto completo de PostgreSQL (config 'spanish_unaccent')
+==============================================================================
+
+[0] FAQs cargadas en la tabla: 59
+[0] Extension unaccent: unaccent
+[0] Configuración de texto: public.spanish_unaccent
+[0] Índice GIN presente: 1
+
+[0] Tamaño en disco de la tabla: 208 kB (incluye el índice GIN)
+[0] Caracteres pregunta|respuesta: 16375843
+[0] Respuestas marcadas como 'propuesta' (a confirmar por el dueño): 13
+
+------------------------------------------------------------------------------
+ BATERÍA PRINCIPAL — 21 preguntas de cliente
+------------------------------------------------------------------------------
+
+ 1. [OK  ] 'Tienen estacionamiento?'
+      -> ¿Tienen estacionamiento?   [instalaciones] rank=0.7734 (108 ms)
+
+ 2. [OK  ] 'hay donde dejar el carro?'
+      -> ¿Tienen estacionamiento?   [instalaciones] rank=0.6991 (106 ms)
+      alternativas: ¿Puedo dejar una propuesta o una queja? | ¿Puedo dejar reservado para una boda o un evento?
+
+ 3. [OK  ] 'Donde estan ubicados?'
+      -> ¿Dónde están ubicados?   [ubicacion] rank=0.6079 (107 ms)
+      alternativas: ¿Tienen un corte llamado "mod cut" o "corte clásico"?
+
+ 4. [OK  ] 'cual es la direccion?'
+      -> ¿Dónde están ubicados?   [ubicacion] rank=0.6079 (102 ms)
+
+ 5. [OK  ] 'Cual es el telefono?'
+      -> ¿Cuál es el teléfono?   [ubicacion] rank=0.7734 (104 ms)
+      alternativas: ¿Necesito dar mis datos para la cita?
+
+ 6. [OK  ] 'Hasta que hora abren?'
+      -> ¿Cuál es el horario?   [horarios] rank=0.6079 (104 ms)
+      alternativas: ¿Hasta qué hora puedo agendar? | ¿Puedo cambiar mi cita de día u hora?
+
+ 7. [OK  ] 'abren el domingo?'
+      -> ¿Abren el domingo?   [horarios] rank=0.7215 (104 ms)
+      alternativas: ¿Cuál es el horario?
+
+ 8. [OK  ] 'hasta que hora puedo agendar?'
+      -> ¿Hasta qué hora puedo agendar?   [horarios] rank=0.7014 (103 ms)
+      alternativas: ¿Con cuánta anticipación puedo agendar? | ¿Puedo agendar el mismo día?
+
+ 9. [OK  ] 'cuanto cuesta el corte?'
+      -> ¿Cuánto cuesta el corte?   [precios] rank=0.8120 (103 ms)
+      alternativas: ¿Cuánto cuesta el corte de dama? | ¿Cuánto dura el corte?
+
+10. [OK  ] 'precio del corte de dama'
+      -> ¿Cuánto cuesta el corte de dama?   [precios] rank=0.7591 (103 ms)
+      alternativas: ¿Hacen corte para dama? | ¿Cuánto cuesta el corte?
+
+11. [OK  ] 'cuanto cuesta la barba?'
+      -> ¿Cuánto cuesta la barba?   [precios] rank=0.7895 (102 ms)
+      alternativas: ¿Cuánto cuesta el corte? | ¿Cuánto dura la barba?
+
+12. [OK  ] 'cuanto sale la ceja'
+      -> ¿Cuánto cuesta la ceja?   [precios] rank=0.5317 (104 ms)
+      alternativas: ¿Cuánto cuesta el corte? | ¿Cuánto dura cada servicio?
+
+13. [OK  ] 'que servicios tienen?'
+      -> ¿Qué servicios tienen?   [servicios] rank=0.7869 (102 ms)
+      alternativas: ¿Cuánto dura cada servicio? | ¿Cobran menos si me hago varios servicios juntos?
+
+14. [OK  ] 'puedo cancelar mi cita?'
+      -> ¿Puedo cancelar mi cita?   [politicas] rank=0.7644 (110 ms)
+      alternativas: ¿Puedo apartar varias citas a la vez? | ¿Se puede pasar sin cita?
+
+15. [OK  ] 'quiero mover mi cita a otro dia'
+      -> ¿Puedo cambiar mi cita de día u hora?   [politicas] rank=0.4711 (103 ms)
+      alternativas: ¿Puedo agendar el mismo día? | ¿Cómo agendo una cita?
+
+16. [OK  ] 'necesito cita para la ceja?'
+      -> ¿Necesito cita para la ceja o la barba?   [citas] rank=0.7891 (108 ms)
+      alternativas: ¿Necesito dar mis datos para la cita? | ¿Hacen las cejas?
+
+17. [OK  ] 'quien me va a atender?'
+      -> ¿Quién me va a atender?   [barbero] rank=0.6079 (101 ms)
+      alternativas: ¿Dónde están ubicados? | ¿Abren el domingo?
+
+18. [OK  ] 'hacen tinte de cabello?'
+      -> ¿Hacen tintes o color?   [servicios] rank=0.6811 (106 ms)
+      alternativas: ¿Tienen experiencia cortando este tipo de cabello? | ¿Qué servicios tienen?
+
+19. [OK  ] 'me pueden dar la lista de precios completa?'
+      -> ¿Me dan la lista de precios completa?   [precios] rank=0.4421 (106 ms)
+      alternativas: ¿Con cuánta anticipación puedo agendar? | ¿Puedo cancelar mi cita?
+
+20. [OK  ] 'cuanto cuesta la depilacion?'
+      -> ¿Cuánto cuesta la depilación?   [servicios] rank=0.6631 (103 ms)
+      alternativas: ¿Cuánto cuesta el corte? | ¿Cuánto cuesta el corte de dama?
+
+21. [OK  ] 'tienen un mod cut?'
+      -> ¿Tienen un corte llamado "mod cut" o "corte clásico"?   [servicios] rank=0.8127 (105 ms)
+
+------------------------------------------------------------------------------
+ RESULTADO: 21/21 aciertos en el primer lugar
+ Tiempo de búsqueda: mín 101 ms | máx 110 ms | media 105 ms
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+ CASOS BORDE (no deben fallar ni inventar)
+------------------------------------------------------------------------------
+
+  consulta=''                 -> vacío (correcto)
+  consulta='   '              -> vacío (correcto)
+  consulta='zzzz qqqq'        -> vacío (correcto)
+  consulta='?'                -> vacío (correcto)
+  consulta='a e i o u'        -> vacío (correcto)
+  consulta='12345'            -> vacío (correcto)
+  consulta='😀😀😀'              -> vacío (correcto)
+  consulta='jdksl fjdksl'     -> vacío (correcto)
+
+  Nota: una consulta sin palabras útiles devuelve 0 filas SIN error.
+        El bot debe caer a 'Notificar al encargado', no inventar.
+
+------------------------------------------------------------------------------
+ TAMAÑO DEL CONOCIMIENTO (comparación prompt vs búsqueda)
+------------------------------------------------------------------------------
+
+  FAQs activas y caracteres que ocuparían volcadas al prompt: 598188
+  FAQs que contienen 'estacionamiento' (búsqueda directa): 1
+
+==============================================================================
+ VEREDICTO: TODAS LAS PRUEBAS PASARON
+==============================================================================

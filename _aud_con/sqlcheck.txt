@@ -1,0 +1,101 @@
+== 1) LA TABLA SIGUE VIVA TRAS LOS INTENTOS DE INYECCION ==
+[(58,)]
+
+== 2) EJECUTAR LA INYECCION COMO PARAMETRIZADA (asi la usa n8n con $1) ==
+payload="' OR 1=1 --" -> 0 filas devueltas (SIN error)
+payload="'; DROP TABLE barber_conocimiento; --" -> 3 filas devueltas (SIN error)
+payload="1'; SELECT pg_sleep(10); --" -> 0 filas devueltas (SIN error)
+tabla tras todo: [(58,)]
+
+== 3) EXPLAIN: consulta CON resultados ==
+  Function Scan on barber_buscar_conocimiento  (cost=0.25..10.25 rows=1000 width=168) (actual time=5.102..5.102 rows=3 loops=1)
+    Buffers: shared hit=597
+  Planning Time: 0.076 ms
+  Execution Time: 5.618 ms
+
+== 4) EXPLAIN de la consulta desnuda que hace la funcion (plan del planner) ==
+  Limit  (cost=9.00..9.01 rows=3 width=12) (actual time=0.105..0.106 rows=3 loops=1)
+    Buffers: shared hit=14
+    ->  Sort  (cost=9.00..9.05 rows=18 width=12) (actual time=0.104..0.104 rows=3 loops=1)
+          Sort Key: (ts_rank(tsv, '''cort'''::tsquery)) DESC, prioridad DESC, id
+          Sort Method: top-N heapsort  Memory: 25kB
+          Buffers: shared hit=14
+          ->  Seq Scan on barber_conocimiento c  (cost=0.00..8.77 rows=18 width=12) (actual time=0.013..0.049 rows=18 loops=1)
+                Filter: (activo AND (tsv @@ '''cort'''::tsquery))
+                Rows Removed by Filter: 40
+                Buffers: shared hit=8
+  Planning:
+    Buffers: shared hit=224
+  Planning Time: 2.381 ms
+  Execution Time: 0.141 ms
+
+== 5) Forzar seqscan vs indice: probar CON enable_seqscan=off ==
+  Bitmap Heap Scan on barber_conocimiento c  (cost=8.64..16.87 rows=18 width=4)
+    Recheck Cond: (tsv @@ '''cort'''::tsquery)
+    ->  Bitmap Index Scan on barber_conocimiento_tsv_gin  (cost=0.00..8.64 rows=18 width=0)
+          Index Cond: (tsv @@ '''cort'''::tsquery)
+
+== 6) La funcion es STABLE / no volatil? ==
+[('barber_buscar_conocimiento', 's', False, False), ('barber_buscar', 's', False, False)]
+
+== 7) Definicion literal de la funcion EN VIVO ==
+CREATE OR REPLACE FUNCTION public.barber_buscar_conocimiento(p_consulta text, p_limite integer DEFAULT 3)
+ RETURNS TABLE(id integer, pregunta text, respuesta text, categoria text, origen text, rank real, coincidencias text)
+ LANGUAGE plpgsql
+ STABLE
+AS $function$
+DECLARE
+  v_orq text;
+BEGIN
+  -- Normaliza la consulta a un tsquery OR con la config sin acentos,
+  -- descartando lexemas de menos de 3 caracteres (ruido: "a", "e", "o"...).
+  SELECT array_to_string(
+           ARRAY(
+             SELECT lex
+             FROM unnest(
+                    tsvector_to_array(
+                      to_tsvector('public.spanish_unaccent', coalesce(p_consulta, ''))
+                    )
+                  ) AS lex
+             WHERE length(lex) >= 3
+           ),
+           ' | '
+         )
+    INTO v_orq;
+
+  IF v_orq IS NULL OR v_orq = '' THEN
+    RETURN;
+  END IF;
+
+  RETURN QUERY
+  SELECT c.id,
+         c.pregunta,
+         c.respuesta,
+         c.categoria,
+         c.origen,
+         ts_rank(c.tsv, to_tsquery('public.spanish_unaccent', v_orq)) AS rank,
+         v_orq AS coincidencias
+  FROM public.barber_conocimiento c
+  WHERE c.activo
+    AND c.tsv @@ to_tsquery('public.spanish_unaccent', v_orq)
+  ORDER BY rank DESC, c.prioridad DESC, c.id ASC
+  LIMIT greatest(1, least(coalesce(p_limite, 3), 20));
+END
+$function$
+
+
+== 8) config de texto en vivo ==
+[('spanish', 'pg_catalog'), ('spanish_unaccent', 'public')]
+[('hword', 'unaccent'), ('hword', 'spanish_stem'), ('hword_part', 'unaccent'), ('hword_part', 'spanish_stem'), ('word', 'unaccent'), ('word', 'spanish_stem')]
+
+== 9) unaccent funciona en ambos sentidos (prueba directa) ==
+depilacion encuentra depilación: [(True,)]
+depilación encuentra depilacion: [(True,)]
+config spanish DE FABRICA, sin acento: [(False,)]
+
+== 10) limite fuera de rango ==
+limite=0 -> c filas
+limite=-5 -> c filas
+limite=1 -> c filas
+limite=21 -> c filas
+limite=1000 -> c filas

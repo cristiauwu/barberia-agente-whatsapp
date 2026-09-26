@@ -1,0 +1,102 @@
+ANCHO_VIEWPORT=390 ALTO_VIEWPORT=844
+ORIENTACION=portrait
+DOC_scrollWidth=413 clientWidth=375 SCROLL_LATERAL=true
+N_OVERFLOW_INTERNO=11
+  OVERFLOW:HTML. scroll=413 client=375 txt="Barber Chinos - Panel del dueno
+
+/* =="
+  OVERFLOW:BODY. scroll=413 client=375 txt="Panel del negocio
+Barber Chinos
+Peluqu"
+  OVERFLOW:DIV.envoltura scroll=413 client=375 txt="Panel del negocio
+Barber Chinos
+Peluqu"
+  OVERFLOW:DIV.kpis scroll=355 client=347 txt="Ingresos hoy$1,235,350205 citas atendi"
+  OVERFLOW:DIV.kpi kpi-acento scroll=175 client=166 txt="Ingresos hoy$1,235,350205 citas atendi"
+  OVERFLOW:DIV.kpi-v scroll=159 client=134 txt="$1,235,350"
+  OVERFLOW:DIV.kpi scroll=175 client=166 txt="Ingresos semana$1,239,240228 citas ate"
+  OVERFLOW:DIV.kpi-v scroll=159 client=134 txt="$1,239,240"
+  OVERFLOW:DIV.kpi scroll=175 client=166 txt="Ingresos mes$1,249,000302 citas atendi"
+  OVERFLOW:DIV.kpi-v scroll=159 client=134 txt="$1,249,000"
+  OVERFLOW:DIV.panel scroll=398 client=345 txt="HoraClienteServicioPrecioEstado10:00Cl"
+N_FUERA_VIEWPORT=632
+  FUERA:TABLE. right=413.0 ancho=383.0 txt="HoraClienteServicioPrecioEstado10:00Cl"
+  FUERA:THEAD. right=413.0 ancho=383.0 txt="HoraClienteServicioPrecioEstado"
+  FUERA:TR. right=413.0 ancho=383.0 txt="HoraClienteServicioPrecioEstado"
+  FUERA:TH. right=413.0 ancho=96.4 txt="Estado"
+  FUERA:TBODY. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Sergio Andrés VillalobosCorte des"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+  FUERA:TD. right=413.0 ancho=96.4 txt="atendido"
+  FUERA:SPAN.pill pill-atendido right=391.4 ancho=74.7 txt="atendido"
+  FUERA:TR. right=413.0 ancho=383.0 txt="10:00Cliente de Gasto Altísimo (VIP hi"
+N_KPIS=8 COLS_VISIBLES=
+KPIS_POR_FILA=2,2,2,2
+KPI0 "Ingresos hoy"="$1,235,350" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=true kpiDesborda=true
+KPI1 "Ingresos semana"="$1,239,240" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=true kpiDesborda=true
+KPI2 "Ingresos mes"="$1,249,000" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=true kpiDesborda=true
+KPI3 "Ticket promedio hoy"="$6,026" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI4 "Ticket promedio mes"="$4,136" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI5 "No-shows del mes"="16" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI6 "Cancelaciones del mes"="8" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI7 "Proximas 7 dias"="16" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+N_BARRAS=30
+ALTURAS=1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,100%
+N_TABLAS=2
+TABLA0 filas=209 ancho=383.0 desborda=false
+TABLA1 filas=8 ancho=315.0 desborda=false
+N_RECORTADOS=3
+  RECORTADO DIV.kpi-v "$1,235,350"
+  RECORTADO DIV.kpi-v "$1,239,240"
+  RECORTADO DIV.kpi-v "$1,249,000"
+ALTURA_DOC=30765

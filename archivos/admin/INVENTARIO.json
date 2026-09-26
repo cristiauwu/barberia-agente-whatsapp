@@ -1,0 +1,4168 @@
+{
+ "workflows": [
+  {
+   "id": "5zd5go4TFKqIsgdT",
+   "nombre": "barberiaVigilancia",
+   "activo": true,
+   "n_nodos": 5,
+   "n_conexiones": 4,
+   "nodos": [
+    {
+     "nombre": "Cada 15 minutos",
+     "tipo": "n8n-nodes-base.scheduleTrigger",
+     "pos": [
+      0,
+      0
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Leer calendario",
+     "tipo": "n8n-nodes-base.googleCalendar",
+     "pos": [
+      220,
+      0
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Buscar citas pasadas",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      440,
+      0
+     ],
+     "notas": "Red de seguridad del bug de fechas: si el modelo\nagenda en el pasado, esto lo detecta en 15 min.",
+     "credenciales": []
+    },
+    {
+     "nombre": "IF - Hay citas pasadas",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      660,
+      0
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Avisar al dueño",
+     "tipo": "n8n-nodes-base.httpRequest",
+     "pos": [
+      880,
+      0
+     ],
+     "notas": "",
+     "credenciales": [
+      "Evolution API"
+     ]
+    }
+   ],
+   "conexiones": [
+    {
+     "de": "Cada 15 minutos",
+     "a": "Leer calendario",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Leer calendario",
+     "a": "Buscar citas pasadas",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Buscar citas pasadas",
+     "a": "IF - Hay citas pasadas",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Hay citas pasadas",
+     "a": "Avisar al dueño",
+     "tipo": "main",
+     "salida": 0
+    }
+   ]
+  },
+  {
+   "id": "barberiaAgenteUncensored",
+   "nombre": "Barberia - Agente de citas (Uncensored AI)",
+   "activo": true,
+   "n_nodos": 45,
+   "n_conexiones": 58,
+   "nodos": [
+    {
+     "nombre": "Webhook",
+     "tipo": "n8n-nodes-base.webhook",
+     "pos": [
+      -688,
+      208
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "AI Agent",
+     "tipo": "@n8n/n8n-nodes-langchain.agent",
+     "pos": [
+      1088,
+      192
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "OpenAI Chat Model",
+     "tipo": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+     "pos": [
+      992,
+      416
+     ],
+     "notas": "Credencial requerida: 'Uncensored AI (OpenAI-compatible)'.\nBase URL: https://api.uncensored.com/api/v1\nAPI Key: tu llave de uncensored.com (Developer Dashboard).\nHeader extra: x-api-key = tu llave (la",
+     "credenciales": [
+      "Uncensored AI (OpenAI-compatible)"
+     ]
+    },
+    {
+     "nombre": "Switch",
+     "tipo": "n8n-nodes-base.switch",
+     "pos": [
+      -48,
+      128
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Edit Fields2",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      672,
+      368
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Edit Fields",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      848,
+      192
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Normalizacion",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      -496,
+      208
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Mandar mensaje",
+     "tipo": "n8n-nodes-base.httpRequest",
+     "pos": [
+      1472,
+      192
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Consultar agenda",
+     "tipo": "n8n-nodes-base.googleCalendarTool",
+     "pos": [
+      1248,
+      592
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Agendar cita",
+     "tipo": "n8n-nodes-base.googleCalendarTool",
+     "pos": [
+      1040,
+      688
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Cancelar cita",
+     "tipo": "n8n-nodes-base.googleCalendarTool",
+     "pos": [
+      1408,
+      592
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Reagendar",
+     "tipo": "n8n-nodes-base.googleCalendarTool",
+     "pos": [
+      1568,
+      592
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Postgres Chat Memory",
+     "tipo": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+     "pos": [
+      1168,
+      400
+     ],
+     "notas": "Ventana de 12 mensajes. Sin esto, cada mensaje reenvia\nTODO el historial al modelo y el coste se dispara\n(se detectaron 618 mensajes en una sola conversacion).",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Registrar en hoja de citas",
+     "tipo": "n8n-nodes-base.googleSheetsTool",
+     "pos": [
+      1504,
+      928
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Sheets account"
+     ]
+    },
+    {
+     "nombre": "Notificar al encargado",
+     "tipo": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+     "pos": [
+      1328,
+      1120
+     ],
+     "notas": "Escala al encargado por WhatsApp con el mismo servidor Evolution del flujo. Cambia 'number' si el encargado usa otro numero.",
+     "credenciales": [
+      "Evolution API"
+     ]
+    },
+    {
+     "nombre": "IF - No es del bot",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      -336,
+      256
+     ],
+     "notas": "Corta los mensajes que envia el propio bot (fromMe=true). Sin esto el agente se responde a si mismo en bucle.",
+     "credenciales": []
+    },
+    {
+     "nombre": "¿Es operador?",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      -304,
+      128
+     ],
+     "notas": "Rama true = operador -> router de comandos.\nRama false = cliente -> flujo normal del agente.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Router de comandos",
+     "tipo": "n8n-nodes-base.switch",
+     "pos": [
+      -48,
+      448
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Responder al operador",
+     "tipo": "n8n-nodes-base.httpRequest",
+     "pos": [
+      272,
+      1744
+     ],
+     "notas": "",
+     "credenciales": [
+      "Evolution API"
+     ]
+    },
+    {
+     "nombre": "Armar respuesta COMANDOS",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      240,
+      784
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Preparar rango de fechas",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -336,
+      1440
+     ],
+     "notas": "Traduce HOY / MAÑANA / SEMANA / LIBRE al rango ISO en hora de\nMéxico (UTC-6). El offset es fijo: México no usa horario de verano.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Leer agenda del rango",
+     "tipo": "n8n-nodes-base.googleCalendar",
+     "pos": [
+      -160,
+      1440
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Formatear agenda",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      32,
+      1440
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Parsear bloqueo",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -320,
+      1216
+     ],
+     "notas": "Interpreta BLOQUEAR / CERRAR / ABRIR y deja listo el evento.\nSi el formato es inválido responde con la ayuda y marca saltar=true.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Crear bloqueo en calendario",
+     "tipo": "n8n-nodes-base.googleCalendar",
+     "pos": [
+      32,
+      1216
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Calendar account"
+     ]
+    },
+    {
+     "nombre": "Respuesta de bloqueo",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      400,
+      1360
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Buscar cliente",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -352,
+      1648
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Leer ficha del cliente",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -176,
+      1648
+     ],
+     "notas": "",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Formatear ficha",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      48,
+      1648
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Parsear pausa",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -416,
+      2112
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Aplicar pausa",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -208,
+      2112
+     ],
+     "notas": "",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Formatear pausa",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      0,
+      2112
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Parsear precio",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -384,
+      1792
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Actualizar precio",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -192,
+      1792
+     ],
+     "notas": "",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Formatear precio",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      0,
+      1792
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Leer estado del sistema",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -400,
+      1952
+     ],
+     "notas": "",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Formatear estado",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -192,
+      1952
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "IF - Bloqueo invalido",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      -144,
+      1216
+     ],
+     "notas": "Si el formato del bloqueo es inválido, responde la ayuda\ny NO llama a Calendar.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Confirmar bloqueo",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      320,
+      1088
+     ],
+     "notas": "Confirma el bloqueo ya creado en el calendario.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Leer operadores",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -704,
+      128
+     ],
+     "notas": "Fuente única de verdad de quién puede mandar comandos.\nAsí se agregan o quitan operadores sin tocar el workflow.",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Comprobar operador",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -496,
+      128
+     ],
+     "notas": "Decide si el mensaje viene de un operador. Usa los\núltimos 10 dígitos: en México un mismo número aparece\ncomo 52+10 o 52+1+10 según el caso.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Leer pausa",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -560,
+      -80
+     ],
+     "notas": "¿Este cliente está pausado ahora? Devuelve count(*) para\nque SIEMPRE haya una fila: si devolviera 0 filas, n8n\ncortaría la cadena y el bot no contestaría a nadie.",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Calcular pausa",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      -360,
+      -80
+     ],
+     "notas": "Convierte el conteo en un booleano claro.",
+     "credenciales": []
+    },
+    {
+     "nombre": "IF - Cliente pausado",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      -160,
+      -80
+     ],
+     "notas": "true  = el dueño tomó la conversación -> el bot se queda\n        callado a propósito (sin salida conectada).\nfalse = sigue el flujo normal hacia Switch.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Aviso solo texto",
+     "tipo": "n8n-nodes-base.set",
+     "pos": [
+      672,
+      576
+     ],
+     "notas": "Respuesta fija para audio, imagen y cualquier otro formato que no sea texto.\nNo pasa por el modelo: 0 tokens y nunca se queda en silencio.",
+     "credenciales": []
+    }
+   ],
+   "conexiones": [
+    {
+     "de": "Webhook",
+     "a": "Normalizacion",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "AI Agent",
+     "a": "Mandar mensaje",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "OpenAI Chat Model",
+     "a": "AI Agent",
+     "tipo": "ai_languageModel",
+     "salida": 0
+    },
+    {
+     "de": "Switch",
+     "a": "Edit Fields2",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Switch",
+     "a": "Aviso solo texto",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "Edit Fields2",
+     "a": "Edit Fields",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Edit Fields",
+     "a": "AI Agent",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Normalizacion",
+     "a": "Leer operadores",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Reagendar",
+     "a": "AI Agent",
+     "tipo": "ai_tool",
+     "salida": 0
+    },
+    {
+     "de": "Postgres Chat Memory",
+     "a": "AI Agent",
+     "tipo": "ai_memory",
+     "salida": 0
+    },
+    {
+     "de": "Notificar al encargado",
+     "a": "AI Agent",
+     "tipo": "ai_tool",
+     "salida": 0
+    },
+    {
+     "de": "Consultar agenda",
+     "a": "AI Agent",
+     "tipo": "ai_tool",
+     "salida": 0
+    },
+    {
+     "de": "Agendar cita",
+     "a": "AI Agent",
+     "tipo": "ai_tool",
+     "salida": 0
+    },
+    {
+     "de": "Cancelar cita",
+     "a": "AI Agent",
+     "tipo": "ai_tool",
+     "salida": 0
+    },
+    {
+     "de": "Registrar en hoja de citas",
+     "a": "AI Agent",
+     "tipo": "ai_tool",
+     "salida": 0
+    },
+    {
+     "de": "IF - No es del bot",
+     "a": "Leer pausa",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Preparar rango de fechas",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Preparar rango de fechas",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Preparar rango de fechas",
+     "tipo": "main",
+     "salida": 2
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Preparar rango de fechas",
+     "tipo": "main",
+     "salida": 3
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Buscar cliente",
+     "tipo": "main",
+     "salida": 4
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Parsear bloqueo",
+     "tipo": "main",
+     "salida": 5
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Parsear bloqueo",
+     "tipo": "main",
+     "salida": 6
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Parsear bloqueo",
+     "tipo": "main",
+     "salida": 7
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Parsear precio",
+     "tipo": "main",
+     "salida": 8
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Parsear pausa",
+     "tipo": "main",
+     "salida": 9
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Leer estado del sistema",
+     "tipo": "main",
+     "salida": 10
+    },
+    {
+     "de": "Router de comandos",
+     "a": "Armar respuesta COMANDOS",
+     "tipo": "main",
+     "salida": 11
+    },
+    {
+     "de": "Router de comandos",
+     "a": "IF - No es del bot",
+     "tipo": "main",
+     "salida": 12
+    },
+    {
+     "de": "¿Es operador?",
+     "a": "Router de comandos",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "¿Es operador?",
+     "a": "IF - No es del bot",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "Armar respuesta COMANDOS",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Preparar rango de fechas",
+     "a": "Leer agenda del rango",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Leer agenda del rango",
+     "a": "Formatear agenda",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Formatear agenda",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Parsear bloqueo",
+     "a": "IF - Bloqueo invalido",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Bloqueo invalido",
+     "a": "Respuesta de bloqueo",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Bloqueo invalido",
+     "a": "Crear bloqueo en calendario",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "Respuesta de bloqueo",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Crear bloqueo en calendario",
+     "a": "Confirmar bloqueo",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Confirmar bloqueo",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Buscar cliente",
+     "a": "Leer ficha del cliente",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Leer ficha del cliente",
+     "a": "Formatear ficha",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Formatear ficha",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Parsear pausa",
+     "a": "Aplicar pausa",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Aplicar pausa",
+     "a": "Formatear pausa",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Formatear pausa",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Parsear precio",
+     "a": "Actualizar precio",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Actualizar precio",
+     "a": "Formatear precio",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Formatear precio",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Leer estado del sistema",
+     "a": "Formatear estado",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Formatear estado",
+     "a": "Responder al operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Leer operadores",
+     "a": "Comprobar operador",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Comprobar operador",
+     "a": "¿Es operador?",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Leer pausa",
+     "a": "Calcular pausa",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Calcular pausa",
+     "a": "IF - Cliente pausado",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Cliente pausado",
+     "a": "Switch",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "Aviso solo texto",
+     "a": "Mandar mensaje",
+     "tipo": "main",
+     "salida": 0
+    }
+   ]
+  },
+  {
+   "id": "barberiaRecordatorios",
+   "nombre": "Barberia - Recordatorios de cita",
+   "activo": true,
+   "n_nodos": 17,
+   "n_conexiones": 18,
+   "nodos": [
+    {
+     "nombre": "Google Sheets Trigger",
+     "tipo": "n8n-nodes-base.googleSheetsTrigger",
+     "pos": [
+      0,
+      0
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Sheets Trigger account"
+     ]
+    },
+    {
+     "nombre": "Code",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      224,
+      0
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Notificar cita nueva al encargado",
+     "tipo": "n8n-nodes-base.httpRequest",
+     "pos": [
+      528,
+      272
+     ],
+     "notas": "",
+     "credenciales": [
+      "Evolution API"
+     ]
+    },
+    {
+     "nombre": "Code1",
+     "tipo": "n8n-nodes-base.code",
+     "pos": [
+      880,
+      -16
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "Append or update row in sheet",
+     "tipo": "n8n-nodes-base.googleSheets",
+     "pos": [
+      1104,
+      -16
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Sheets account"
+     ]
+    },
+    {
+     "nombre": "Switch",
+     "tipo": "n8n-nodes-base.switch",
+     "pos": [
+      640,
+      0
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "ESPERAR A 1 H",
+     "tipo": "n8n-nodes-base.wait",
+     "pos": [
+      2080,
+      272
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "QUITAR RECORDATORIO",
+     "tipo": "n8n-nodes-base.n8n",
+     "pos": [
+      448,
+      576
+     ],
+     "notas": "",
+     "credenciales": [
+      "n8n API (local)"
+     ]
+    },
+    {
+     "nombre": "OBTENER INFO DE CITA ELIMINADA",
+     "tipo": "n8n-nodes-base.googleSheets",
+     "pos": [
+      864,
+      320
+     ],
+     "notas": "",
+     "credenciales": [
+      "Google Sheets account"
+     ]
+    },
+    {
+     "nombre": "RECORDATORIO 24 H",
+     "tipo": "n8n-nodes-base.httpRequest",
+     "pos": [
+      1760,
+      -32
+     ],
+     "notas": "",
+     "credenciales": [
+      "Evolution API"
+     ]
+    },
+    {
+     "nombre": "RECORDATORIO 1 H",
+     "tipo": "n8n-nodes-base.httpRequest",
+     "pos": [
+      2288,
+      272
+     ],
+     "notas": "",
+     "credenciales": [
+      "Evolution API"
+     ]
+    },
+    {
+     "nombre": "IF - Toca recordatorio 24 h",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      1312,
+      -16
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "IF - Toca recordatorio 1 h",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      1824,
+      272
+     ],
+     "notas": "",
+     "credenciales": []
+    },
+    {
+     "nombre": "ESPERAR A 24 H",
+     "tipo": "n8n-nodes-base.wait",
+     "pos": [
+      1536,
+      -32
+     ],
+     "notas": "Espera hasta 24 h antes de la cita. Sin este nodo el mensaje saldria de inmediato.",
+     "credenciales": []
+    },
+    {
+     "nombre": "IF - Es cita agendada",
+     "tipo": "n8n-nodes-base.if",
+     "pos": [
+      304,
+      288
+     ],
+     "notas": "Solo avisa al barbero cuando la fila es una cita AGENDADA.\nEvita avisos falsos en cancelaciones y en las dos filas\nde un reagendado.",
+     "credenciales": []
+    },
+    {
+     "nombre": "Registrar cliente (CRM)",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -40,
+      220
+     ],
+     "notas": "Llena el CRM: crea o actualiza el cliente en\nbarber_clientes con cada cita nueva. Sin esto la tabla\nqueda vacía y el comando CLIENTE nunca encuentra nada.\nonError=continue: si el CRM falla, el aviso a",
+     "credenciales": [
+      "Postgres account"
+     ]
+    },
+    {
+     "nombre": "Registrar cita (Postgres)",
+     "tipo": "n8n-nodes-base.postgres",
+     "pos": [
+      -40,
+      400
+     ],
+     "notas": "Llena barber_citas desde la fila de la hoja. Sin esto\nla tabla queda vacía y los reportes no tienen datos.\nonError=continue: si falla, los recordatorios siguen.",
+     "credenciales": [
+      "Postgres account"
+     ]
+    }
+   ],
+   "conexiones": [
+    {
+     "de": "Google Sheets Trigger",
+     "a": "Code",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Code",
+     "a": "IF - Es cita agendada",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Code1",
+     "a": "Append or update row in sheet",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Append or update row in sheet",
+     "a": "IF - Toca recordatorio 24 h",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Switch",
+     "a": "Code1",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Switch",
+     "a": "OBTENER INFO DE CITA ELIMINADA",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "Switch",
+     "a": "OBTENER INFO DE CITA ELIMINADA",
+     "tipo": "main",
+     "salida": 2
+    },
+    {
+     "de": "OBTENER INFO DE CITA ELIMINADA",
+     "a": "QUITAR RECORDATORIO",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "Notificar cita nueva al encargado",
+     "a": "Switch",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Toca recordatorio 24 h",
+     "a": "ESPERAR A 24 H",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Toca recordatorio 24 h",
+     "a": "IF - Toca recordatorio 1 h",
+     "tipo": "main",
+     "salida": 1
+    },
+    {
+     "de": "ESPERAR A 24 H",
+     "a": "RECORDATORIO 24 H",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "RECORDATORIO 24 H",
+     "a": "IF - Toca recordatorio 1 h",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Toca recordatorio 1 h",
+     "a": "ESPERAR A 1 H",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "ESPERAR A 1 H",
+     "a": "RECORDATORIO 1 H",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Es cita agendada",
+     "a": "Notificar cita nueva al encargado",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Es cita agendada",
+     "a": "Registrar cliente (CRM)",
+     "tipo": "main",
+     "salida": 0
+    },
+    {
+     "de": "IF - Es cita agendada",
+     "a": "Registrar cita (Postgres)",
+     "tipo": "main",
+     "salida": 0
+    }
+   ]
+  }
+ ],
+ "tablas": [
+  {
+   "nombre": "activity_event",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "category:character varying!NOTNULL",
+    "action:character varying!NOTNULL",
+    "typeVersion:integer!NOTNULL",
+    "userId:uuid",
+    "projectId:character varying!NOTNULL",
+    "resourceType:character varying",
+    "resourceId:character varying",
+    "resourceName:text",
+    "data:json",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_background_job",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "kind:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "parentAgentId:character varying!NOTNULL",
+    "parentThreadId:character varying!NOTNULL",
+    "title:character varying!NOTNULL",
+    "subAgentId:character varying",
+    "childThreadId:character varying",
+    "childExecutionId:character varying",
+    "workflowId:character varying",
+    "timeoutAt:timestamp with time zone",
+    "result:text",
+    "error:text",
+    "settledAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "notifiedAt:timestamp with time zone",
+    "parentResourceId:character varying!NOTNULL",
+    "parentPrincipalHash:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_channel_status",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "integrationType:character varying!NOTNULL",
+    "credentialId:character varying!NOTNULL",
+    "hostId:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "errorMessage:text",
+    "attempts:integer!NOTNULL",
+    "backoffUntil:timestamp with time zone",
+    "expiresAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_chat_attachments",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying",
+    "projectId:character varying!NOTNULL",
+    "threadId:character varying!NOTNULL",
+    "resourceId:character varying",
+    "binaryDataId:text!NOTNULL",
+    "fileName:character varying!NOTNULL",
+    "mimeType:character varying!NOTNULL",
+    "fileSizeBytes:integer!NOTNULL",
+    "source:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_chat_subscriptions",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "integrationType:character varying!NOTNULL",
+    "credentialId:character varying!NOTNULL",
+    "threadId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_checkpoints",
+   "filas": "0",
+   "columnas": [
+    "runId:character varying!NOTNULL",
+    "agentId:character varying",
+    "state:text",
+    "expired:boolean!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_credential_dependency",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "credentialId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_eval_dataset",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "description:text",
+    "agentId:character varying!NOTNULL",
+    "datasetSource:character varying!NOTNULL",
+    "datasetRef:json!NOTNULL",
+    "columnMapping:json",
+    "createdById:uuid",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_eval_rating",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "resultId:character varying!NOTNULL",
+    "vote:character varying!NOTNULL",
+    "comment:text",
+    "correction:json",
+    "ratedById:uuid",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_eval_result",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "runId:character varying!NOTNULL",
+    "sourceRowId:character varying",
+    "runIndex:integer",
+    "status:character varying!NOTNULL",
+    "input:json",
+    "output:json",
+    "toolCalls:json",
+    "metrics:json",
+    "runAt:timestamp with time zone",
+    "completedAt:timestamp with time zone",
+    "errorCode:character varying",
+    "errorDetails:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_eval_run",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "datasetId:character varying!NOTNULL",
+    "agentVersionId:character varying",
+    "status:character varying!NOTNULL",
+    "runAt:timestamp with time zone",
+    "completedAt:timestamp with time zone",
+    "metrics:json",
+    "errorCode:character varying",
+    "errorDetails:json",
+    "runningInstanceId:character varying",
+    "cancelRequested:boolean!NOTNULL",
+    "createdById:uuid",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_execution",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "threadId:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "startedAt:timestamp with time zone",
+    "stoppedAt:timestamp with time zone",
+    "duration:integer!NOTNULL",
+    "userMessage:text",
+    "model:character varying",
+    "promptTokens:integer",
+    "completionTokens:integer",
+    "totalTokens:integer",
+    "cost:double precision",
+    "timeline:json",
+    "error:text",
+    "hitlStatus:character varying",
+    "source:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "storedAt:character varying!NOTNULL",
+    "attachments:json",
+    "failureSummary:json",
+    "author:json"
+   ]
+  },
+  {
+   "nombre": "agent_execution_threads",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "agentName:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "sessionNumber:integer!NOTNULL",
+    "totalPromptTokens:integer!NOTNULL",
+    "totalCompletionTokens:integer!NOTNULL",
+    "totalCost:double precision!NOTNULL",
+    "totalDuration:integer!NOTNULL",
+    "title:character varying",
+    "emoji:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "taskId:character varying",
+    "taskVersionId:character varying",
+    "parentThreadId:character varying",
+    "parentAgentId:character varying"
+   ]
+  },
+  {
+   "nombre": "agent_files",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "binaryDataId:text",
+    "fileName:character varying!NOTNULL",
+    "mimeType:character varying!NOTNULL",
+    "fileSizeBytes:integer!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "storedAt:character varying!NOTNULL",
+    "storageKey:text!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_history",
+   "filas": "0",
+   "columnas": [
+    "versionId:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "schema:json",
+    "tools:json",
+    "skills:json",
+    "publishedById:uuid",
+    "author:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_task_definition",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "objective:text!NOTNULL",
+    "cronExpression:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "timezone:character varying"
+   ]
+  },
+  {
+   "nombre": "agent_task_run_lock",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "taskId:character varying!NOTNULL",
+    "holderId:uuid!NOTNULL",
+    "heldUntil:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agent_task_snapshot",
+   "filas": "0",
+   "columnas": [
+    "versionId:character varying!NOTNULL",
+    "taskId:character varying!NOTNULL",
+    "enabled:boolean!NOTNULL",
+    "name:character varying!NOTNULL",
+    "objective:text!NOTNULL",
+    "cronExpression:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "timezone:character varying"
+   ]
+  },
+  {
+   "nombre": "agent_workflow_dependency",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "integrations:json!NOTNULL",
+    "schema:json",
+    "tools:json!NOTNULL",
+    "skills:json!NOTNULL",
+    "versionId:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "activeVersionId:character varying",
+    "availableInMCP:boolean!NOTNULL",
+    "setupCompletedAt:timestamp with time zone",
+    "revision:integer!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_memory_entries",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "content:text!NOTNULL",
+    "contentHash:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "supersededBy:character varying",
+    "embeddingModel:character varying",
+    "embedding:json",
+    "metadata:json",
+    "lastSeenAt:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_memory_entry_candidates",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "threadId:character varying!NOTNULL",
+    "sourceMessageId:character varying",
+    "runId:character varying!NOTNULL",
+    "toolCallId:character varying!NOTNULL",
+    "content:text!NOTNULL",
+    "evidenceText:text!NOTNULL",
+    "kind:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "attemptCount:smallint!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_memory_entry_locks",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "holderId:character varying!NOTNULL",
+    "heldUntil:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_memory_entry_sources",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "memoryEntryId:character varying!NOTNULL",
+    "observationId:character varying",
+    "threadId:character varying!NOTNULL",
+    "evidenceHash:character varying!NOTNULL",
+    "evidenceText:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "candidateId:character varying"
+   ]
+  },
+  {
+   "nombre": "agents_messages",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "threadId:character varying!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "role:character varying!NOTNULL",
+    "type:character varying",
+    "content:json!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_observation_cursors",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "observationScopeId:character varying!NOTNULL",
+    "lastObservedMessageId:character varying!NOTNULL",
+    "lastObservedAt:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_observation_locks",
+   "filas": "0",
+   "columnas": [
+    "agentId:character varying!NOTNULL",
+    "observationScopeId:character varying!NOTNULL",
+    "taskKind:character varying!NOTNULL",
+    "holderId:character varying!NOTNULL",
+    "heldUntil:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_observations",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "agentId:character varying!NOTNULL",
+    "observationScopeId:character varying!NOTNULL",
+    "marker:character varying!NOTNULL",
+    "text:text!NOTNULL",
+    "parentId:character varying",
+    "tokenCount:integer!NOTNULL",
+    "status:character varying!NOTNULL",
+    "supersededBy:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_resources",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "metadata:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "agents_threads",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "title:character varying",
+    "metadata:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "ai_builder_temporary_workflow",
+   "filas": "0",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "threadId:uuid!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "ai_preference",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "content:text!NOTNULL",
+    "userId:uuid",
+    "projectId:character varying",
+    "createdById:uuid",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "annotation_tag_entity",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "auth_identity",
+   "filas": "0",
+   "columnas": [
+    "userId:uuid",
+    "providerId:character varying!NOTNULL",
+    "providerType:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "auth_provider_sync_history",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "providerType:character varying!NOTNULL",
+    "runMode:text!NOTNULL",
+    "status:text!NOTNULL",
+    "startedAt:timestamp with time zone!NOTNULL",
+    "endedAt:timestamp with time zone!NOTNULL",
+    "scanned:integer!NOTNULL",
+    "created:integer!NOTNULL",
+    "updated:integer!NOTNULL",
+    "disabled:integer!NOTNULL",
+    "error:text"
+   ]
+  },
+  {
+   "nombre": "barber_auditoria",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "ts:timestamp with time zone!NOTNULL",
+    "jid:text",
+    "intencion:text",
+    "herramienta:text",
+    "argumentos:jsonb",
+    "resultado:text",
+    "exito:boolean"
+   ]
+  },
+  {
+   "nombre": "barber_bloqueos",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "inicio:timestamp with time zone",
+    "fin:timestamp with time zone",
+    "motivo:text",
+    "creado_en:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_citas",
+   "filas": "0",
+   "columnas": [
+    "id:text!NOTNULL",
+    "jid:text",
+    "nombre:text",
+    "servicio:text",
+    "precio:numeric",
+    "inicio:timestamp with time zone",
+    "fin:timestamp with time zone",
+    "estado:text",
+    "creado_en:timestamp with time zone!NOTNULL",
+    "actualizado_en:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_clientes",
+   "filas": "2",
+   "columnas": [
+    "jid:text!NOTNULL",
+    "nombre:text",
+    "telefono:text",
+    "primera_visita:timestamp without time zone",
+    "visitas:integer!NOTNULL",
+    "ultima_visita:timestamp without time zone",
+    "ticket_promedio:numeric",
+    "no_shows:integer!NOTNULL",
+    "cancelaciones_tardias:integer!NOTNULL",
+    "servicio_habitual:text",
+    "barbero_preferido:text",
+    "nota_interna:text",
+    "fecha_nacimiento:date",
+    "marketing_ok:boolean!NOTNULL",
+    "etiqueta:text",
+    "creado_en:timestamp without time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_conocimiento",
+   "filas": "58",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "pregunta:text!NOTNULL",
+    "respuesta:text!NOTNULL",
+    "categoria:text!NOTNULL",
+    "sinonimos:text!NOTNULL",
+    "prioridad:integer!NOTNULL",
+    "activo:boolean!NOTNULL",
+    "origen:text!NOTNULL",
+    "creado_en:timestamp with time zone!NOTNULL",
+    "actualizado_en:timestamp with time zone!NOTNULL",
+    "tsv:tsvector"
+   ]
+  },
+  {
+   "nombre": "barber_consentimiento",
+   "filas": "0",
+   "columnas": [
+    "jid:text!NOTNULL",
+    "marketing_ok:boolean!NOTNULL",
+    "ts:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_escalaciones",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "jid:text",
+    "motivo:text",
+    "resumen:text",
+    "creado_en:timestamp with time zone!NOTNULL",
+    "estado:text",
+    "resolucion:text",
+    "cerrada_en:timestamp with time zone"
+   ]
+  },
+  {
+   "nombre": "barber_lista_espera",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "jid:text",
+    "servicio:text",
+    "duracion_min:integer",
+    "ventana_deseada:text",
+    "creado_en:timestamp with time zone!NOTNULL",
+    "atendido:boolean!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_operadores",
+   "filas": "2",
+   "columnas": [
+    "jid:text!NOTNULL",
+    "nombre:text",
+    "rol:text",
+    "activo:boolean!NOTNULL",
+    "creado_en:timestamp without time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_pausas",
+   "filas": "0",
+   "columnas": [
+    "jid:text!NOTNULL",
+    "hasta:timestamp with time zone!NOTNULL",
+    "motivo:text",
+    "creado_en:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "barber_servicios",
+   "filas": "8",
+   "columnas": [
+    "clave:text!NOTNULL",
+    "nombre:text!NOTNULL",
+    "precio:numeric!NOTNULL",
+    "duracion_min:integer",
+    "activo:boolean!NOTNULL",
+    "actualizado_en:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "binary_data",
+   "filas": "0",
+   "columnas": [
+    "fileId:uuid!NOTNULL",
+    "sourceType:character varying!NOTNULL",
+    "sourceId:character varying!NOTNULL",
+    "data:bytea!NOTNULL",
+    "mimeType:character varying",
+    "fileName:character varying",
+    "fileSize:integer!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "chat_hub_agent_tools",
+   "filas": "0",
+   "columnas": [
+    "agentId:uuid!NOTNULL",
+    "toolId:uuid!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "chat_hub_agents",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "name:character varying!NOTNULL",
+    "description:character varying",
+    "systemPrompt:text!NOTNULL",
+    "ownerId:uuid!NOTNULL",
+    "credentialId:character varying",
+    "provider:character varying!NOTNULL",
+    "model:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "icon:json",
+    "files:json!NOTNULL",
+    "suggestedPrompts:json!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "chat_hub_messages",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "sessionId:uuid!NOTNULL",
+    "previousMessageId:uuid",
+    "revisionOfMessageId:uuid",
+    "retryOfMessageId:uuid",
+    "type:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "content:text!NOTNULL",
+    "provider:character varying",
+    "model:character varying",
+    "workflowId:character varying",
+    "executionId:integer",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "agentId:uuid",
+    "status:character varying!NOTNULL",
+    "attachments:json"
+   ]
+  },
+  {
+   "nombre": "chat_hub_session_tools",
+   "filas": "0",
+   "columnas": [
+    "sessionId:uuid!NOTNULL",
+    "toolId:uuid!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "chat_hub_sessions",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "title:character varying!NOTNULL",
+    "ownerId:uuid!NOTNULL",
+    "lastMessageAt:timestamp with time zone!NOTNULL",
+    "credentialId:character varying",
+    "provider:character varying",
+    "model:character varying",
+    "workflowId:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "agentId:uuid",
+    "agentName:character varying",
+    "type:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "chat_hub_tools",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "name:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "typeVersion:double precision!NOTNULL",
+    "ownerId:uuid!NOTNULL",
+    "definition:json!NOTNULL",
+    "enabled:boolean!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "credential_dependency",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "credentialId:character varying!NOTNULL",
+    "dependencyType:character varying!NOTNULL",
+    "dependencyId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "credentials_entity",
+   "filas": "7",
+   "columnas": [
+    "name:character varying!NOTNULL",
+    "data:text!NOTNULL",
+    "type:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "id:character varying!NOTNULL",
+    "isManaged:boolean!NOTNULL",
+    "isGlobal:boolean!NOTNULL",
+    "isResolvable:boolean!NOTNULL",
+    "resolvableAllowFallback:boolean!NOTNULL",
+    "resolverId:character varying",
+    "usageScope:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "data_table",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "data_table_column",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "index:integer!NOTNULL",
+    "dataTableId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "deployment_key",
+   "filas": "6",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "value:text!NOTNULL",
+    "algorithm:character varying",
+    "status:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "dynamic_credential_entry",
+   "filas": "0",
+   "columnas": [
+    "credential_id:character varying!NOTNULL",
+    "subject_id:character varying!NOTNULL",
+    "resolver_id:character varying!NOTNULL",
+    "data:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "dynamic_credential_resolver",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "config:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "dynamic_credential_user_entry",
+   "filas": "0",
+   "columnas": [
+    "credentialId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "resolverId:character varying!NOTNULL",
+    "data:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "evaluation_collection",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "description:text",
+    "workflowId:character varying!NOTNULL",
+    "evaluationConfigId:character varying!NOTNULL",
+    "createdById:uuid",
+    "insightsCache:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "evaluation_config",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "invalidReason:character varying",
+    "datasetSource:character varying!NOTNULL",
+    "datasetRef:json!NOTNULL",
+    "startNodeName:character varying!NOTNULL",
+    "endNodeName:character varying!NOTNULL",
+    "metrics:json!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "event_destinations",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "destination:jsonb!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "execution_annotation_tags",
+   "filas": "0",
+   "columnas": [
+    "annotationId:integer!NOTNULL",
+    "tagId:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "execution_annotations",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "executionId:integer!NOTNULL",
+    "vote:character varying",
+    "note:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "execution_data",
+   "filas": "478",
+   "columnas": [
+    "executionId:integer!NOTNULL",
+    "workflowData:json!NOTNULL",
+    "data:text!NOTNULL",
+    "workflowVersionId:character varying"
+   ]
+  },
+  {
+   "nombre": "execution_entity",
+   "filas": "478",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "finished:boolean!NOTNULL",
+    "mode:character varying!NOTNULL",
+    "retryOf:character varying",
+    "retrySuccessId:character varying",
+    "startedAt:timestamp with time zone",
+    "stoppedAt:timestamp with time zone",
+    "waitTill:timestamp with time zone",
+    "status:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "deletedAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "storedAt:character varying!NOTNULL",
+    "tracingContext:json",
+    "deduplicationKey:character varying",
+    "jsonSizeBytes:bigint!NOTNULL",
+    "workflowVersionId:character varying",
+    "binaryDataSizeBytes:bigint!NOTNULL",
+    "usedPrivateCredentials:boolean!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "execution_metadata",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "executionId:integer!NOTNULL",
+    "key:character varying!NOTNULL",
+    "value:text!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "folder",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "parentFolderId:character varying",
+    "projectId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "folder_tag",
+   "filas": "0",
+   "columnas": [
+    "folderId:character varying!NOTNULL",
+    "tagId:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "insights_by_period",
+   "filas": "32",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "metaId:integer!NOTNULL",
+    "type:integer!NOTNULL",
+    "value:bigint!NOTNULL",
+    "periodUnit:integer!NOTNULL",
+    "periodStart:timestamp with time zone"
+   ]
+  },
+  {
+   "nombre": "insights_metadata",
+   "filas": "10",
+   "columnas": [
+    "metaId:integer!NOTNULL",
+    "workflowId:character varying",
+    "projectId:character varying",
+    "workflowName:character varying!NOTNULL",
+    "projectName:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "insights_raw",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "metaId:integer!NOTNULL",
+    "type:integer!NOTNULL",
+    "value:bigint!NOTNULL",
+    "timestamp:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "installed_nodes",
+   "filas": "0",
+   "columnas": [
+    "name:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "latestVersion:double precision!NOTNULL",
+    "package:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "installed_packages",
+   "filas": "0",
+   "columnas": [
+    "packageName:character varying!NOTNULL",
+    "installedVersion:character varying!NOTNULL",
+    "authorName:character varying",
+    "authorEmail:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_checkpoints",
+   "filas": "0",
+   "columnas": [
+    "key:character varying!NOTNULL",
+    "runId:character varying",
+    "threadId:uuid!NOTNULL",
+    "resourceId:character varying",
+    "state:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "expiredAt:timestamp with time zone",
+    "hostRunId:character varying"
+   ]
+  },
+  {
+   "nombre": "instance_ai_events",
+   "filas": "0",
+   "columnas": [
+    "threadId:uuid!NOTNULL",
+    "seq:integer!NOTNULL",
+    "runId:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "payload:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_iteration_logs",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "threadId:uuid!NOTNULL",
+    "taskKey:character varying!NOTNULL",
+    "entry:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_mcp_registry_connections",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "credentialId:character varying!NOTNULL",
+    "serverSlug:character varying!NOTNULL",
+    "toolFilter:json",
+    "userId:uuid!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_messages",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "threadId:uuid!NOTNULL",
+    "content:text!NOTNULL",
+    "role:character varying!NOTNULL",
+    "type:character varying",
+    "resourceId:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_observation_cursors",
+   "filas": "0",
+   "columnas": [
+    "observationScopeId:uuid!NOTNULL",
+    "lastObservedMessageId:character varying!NOTNULL",
+    "lastObservedAt:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_observation_locks",
+   "filas": "0",
+   "columnas": [
+    "observationScopeId:uuid!NOTNULL",
+    "taskKind:character varying!NOTNULL",
+    "holderId:character varying!NOTNULL",
+    "heldUntil:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_observational_memory",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "lookupKey:character varying!NOTNULL",
+    "scope:character varying!NOTNULL",
+    "threadId:uuid",
+    "resourceId:character varying!NOTNULL",
+    "activeObservations:text!NOTNULL",
+    "originType:character varying!NOTNULL",
+    "config:text!NOTNULL",
+    "generationCount:integer!NOTNULL",
+    "lastObservedAt:timestamp with time zone",
+    "pendingMessageTokens:integer!NOTNULL",
+    "totalTokensObserved:integer!NOTNULL",
+    "observationTokenCount:integer!NOTNULL",
+    "isObserving:boolean!NOTNULL",
+    "isReflecting:boolean!NOTNULL",
+    "observedMessageIds:json",
+    "observedTimezone:character varying",
+    "bufferedObservations:text",
+    "bufferedObservationTokens:integer",
+    "bufferedMessageIds:json",
+    "bufferedReflection:text",
+    "bufferedReflectionTokens:integer",
+    "bufferedReflectionInputTokens:integer",
+    "reflectedObservationLineCount:integer",
+    "bufferedObservationChunks:json",
+    "isBufferingObservation:boolean!NOTNULL",
+    "isBufferingReflection:boolean!NOTNULL",
+    "lastBufferedAtTokens:integer!NOTNULL",
+    "lastBufferedAtTime:timestamp with time zone",
+    "metadata:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_observations",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "observationScopeId:uuid!NOTNULL",
+    "marker:character varying!NOTNULL",
+    "text:text!NOTNULL",
+    "parentId:character varying",
+    "tokenCount:integer!NOTNULL",
+    "status:character varying!NOTNULL",
+    "supersededBy:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_pending_confirmations",
+   "filas": "0",
+   "columnas": [
+    "requestId:character varying!NOTNULL",
+    "threadId:uuid!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "kind:character varying!NOTNULL",
+    "runId:character varying!NOTNULL",
+    "toolCallId:character varying",
+    "messageGroupId:character varying",
+    "checkpointKey:character varying",
+    "checkpointTaskId:character varying",
+    "expiresAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_resources",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "workingMemory:text",
+    "metadata:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_thread_grants",
+   "filas": "0",
+   "columnas": [
+    "threadId:uuid!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "grantKey:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_threads",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "title:text!NOTNULL",
+    "metadata:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "projectId:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_ai_workflow_snapshots",
+   "filas": "0",
+   "columnas": [
+    "runId:character varying!NOTNULL",
+    "workflowName:character varying!NOTNULL",
+    "resourceId:character varying",
+    "status:character varying",
+    "snapshot:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_credential_assignment",
+   "filas": "0",
+   "columnas": [
+    "credentialUseId:character varying!NOTNULL",
+    "credentialId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_monitoring_report",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "dataPoints:json!NOTNULL",
+    "status:character varying!NOTNULL",
+    "deliveredAt:timestamp with time zone",
+    "attempts:integer!NOTNULL",
+    "lastAttemptAt:timestamp with time zone",
+    "lastError:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "instance_version_history",
+   "filas": "1",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "major:integer!NOTNULL",
+    "minor:integer!NOTNULL",
+    "patch:integer!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "invalid_auth_token",
+   "filas": "0",
+   "columnas": [
+    "token:character varying!NOTNULL",
+    "expiresAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "mcp_registry_server",
+   "filas": "75",
+   "columnas": [
+    "slug:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "version:character varying!NOTNULL",
+    "registryUpdatedAt:timestamp without time zone!NOTNULL",
+    "data:json!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "migrations",
+   "filas": "270",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "timestamp:bigint!NOTNULL",
+    "name:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "n8n_chat_histories",
+   "filas": "1020",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "session_id:character varying!NOTNULL",
+    "message:jsonb!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "oauth_access_tokens",
+   "filas": "0",
+   "columnas": [
+    "token:character varying!NOTNULL",
+    "clientId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "oauth_authorization_codes",
+   "filas": "0",
+   "columnas": [
+    "code:character varying!NOTNULL",
+    "clientId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "redirectUri:character varying!NOTNULL",
+    "codeChallenge:character varying!NOTNULL",
+    "codeChallengeMethod:character varying!NOTNULL",
+    "expiresAt:bigint!NOTNULL",
+    "state:character varying",
+    "used:boolean!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "resource:character varying",
+    "scope:json!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "oauth_clients",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "redirectUris:json!NOTNULL",
+    "grantTypes:json!NOTNULL",
+    "clientSecret:character varying",
+    "clientSecretExpiresAt:bigint",
+    "tokenEndpointAuthMethod:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "isFirstParty:boolean!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "oauth_refresh_tokens",
+   "filas": "0",
+   "columnas": [
+    "token:character varying!NOTNULL",
+    "clientId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "expiresAt:bigint!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "scope:json!NOTNULL",
+    "resource:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "oauth_user_consents",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "clientId:character varying!NOTNULL",
+    "grantedAt:bigint!NOTNULL",
+    "scope:json!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "poller_state",
+   "filas": "0",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "nodeId:character varying!NOTNULL",
+    "cursor:json!NOTNULL",
+    "consecutiveErrors:integer!NOTNULL",
+    "backoffUntil:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "processed_data",
+   "filas": "0",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "context:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "value:text!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "project",
+   "filas": "1",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "icon:json",
+    "description:character varying",
+    "creatorId:uuid",
+    "customTelemetryTags:json!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "project_pool_settings",
+   "filas": "0",
+   "columnas": [
+    "projectId:character varying!NOTNULL",
+    "defaultPool:character varying",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "project_relation",
+   "filas": "1",
+   "columnas": [
+    "projectId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "role:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "project_secrets_provider_access",
+   "filas": "0",
+   "columnas": [
+    "secretsProviderConnectionId:integer!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "role:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "promotion_config",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "connectionId:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "direction:character varying!NOTNULL",
+    "settings:json!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "promotion_connection",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "providerId:character varying!NOTNULL",
+    "scope:character varying!NOTNULL",
+    "target:json!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "promotion_connection_project",
+   "filas": "0",
+   "columnas": [
+    "projectId:character varying!NOTNULL",
+    "connectionId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "promotion_provider",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "authType:character varying!NOTNULL",
+    "config:json!NOTNULL",
+    "auth:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "role",
+   "filas": "15",
+   "columnas": [
+    "slug:character varying!NOTNULL",
+    "displayName:text",
+    "description:text",
+    "roleType:text",
+    "systemRole:boolean!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "role_mapping_rule",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "expression:text!NOTNULL",
+    "role:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "order:integer!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "role_mapping_rule_project",
+   "filas": "0",
+   "columnas": [
+    "roleMappingRuleId:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "role_scope",
+   "filas": "649",
+   "columnas": [
+    "roleSlug:character varying!NOTNULL",
+    "scopeSlug:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "scheduled_job",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "name:character varying!NOTNULL",
+    "taskType:character varying!NOTNULL",
+    "payload:json!NOTNULL",
+    "kind:character varying!NOTNULL",
+    "cronExpression:character varying",
+    "timezone:character varying",
+    "intervalSeconds:integer",
+    "fireAt:timestamp with time zone",
+    "enabled:boolean!NOTNULL",
+    "nextRunAt:timestamp with time zone",
+    "lastFiredAt:timestamp with time zone",
+    "maxAttempts:integer!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "recurrenceUnit:character varying",
+    "recurrenceSize:integer",
+    "misfirePolicy:character varying!NOTNULL",
+    "misfireGraceSeconds:integer!NOTNULL",
+    "ownerType:character varying!NOTNULL",
+    "ownerId:character varying!NOTNULL",
+    "ownerMemberId:character varying",
+    "orphanedAt:timestamp with time zone"
+   ]
+  },
+  {
+   "nombre": "scheduled_task",
+   "filas": "0",
+   "columnas": [
+    "id:bigint!NOTNULL",
+    "jobId:integer!NOTNULL",
+    "taskType:character varying!NOTNULL",
+    "payload:json!NOTNULL",
+    "scheduledFor:timestamp with time zone!NOTNULL",
+    "runAt:timestamp with time zone!NOTNULL",
+    "status:character varying!NOTNULL",
+    "attempts:integer!NOTNULL",
+    "maxAttempts:integer!NOTNULL",
+    "claimedBy:character varying",
+    "leaseExpiresAt:timestamp with time zone",
+    "leaseEpoch:integer!NOTNULL",
+    "startedAt:timestamp with time zone",
+    "finishedAt:timestamp with time zone",
+    "errorMessage:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "dispatchedAt:timestamp with time zone",
+    "missedAfter:timestamp with time zone"
+   ]
+  },
+  {
+   "nombre": "scope",
+   "filas": "200",
+   "columnas": [
+    "slug:character varying!NOTNULL",
+    "displayName:text",
+    "description:text"
+   ]
+  },
+  {
+   "nombre": "secrets_provider_connection",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "providerKey:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "encryptedSettings:text!NOTNULL",
+    "isEnabled:boolean!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "settings",
+   "filas": "7",
+   "columnas": [
+    "key:character varying!NOTNULL",
+    "value:text!NOTNULL",
+    "loadOnStartup:boolean!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "shared_credentials",
+   "filas": "7",
+   "columnas": [
+    "credentialsId:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "role:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "shared_workflow",
+   "filas": "3",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "role:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "tag_entity",
+   "filas": "1",
+   "columnas": [
+    "name:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "id:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "test_case_execution",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "testRunId:character varying!NOTNULL",
+    "executionId:integer",
+    "status:character varying!NOTNULL",
+    "runAt:timestamp with time zone",
+    "completedAt:timestamp with time zone",
+    "errorCode:character varying",
+    "errorDetails:json",
+    "metrics:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "inputs:json",
+    "outputs:json",
+    "runIndex:integer"
+   ]
+  },
+  {
+   "nombre": "test_run",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "errorCode:character varying",
+    "errorDetails:json",
+    "runAt:timestamp with time zone",
+    "completedAt:timestamp with time zone",
+    "metrics:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "runningInstanceId:character varying",
+    "cancelRequested:boolean!NOTNULL",
+    "workflowVersionId:character varying",
+    "evaluationConfigId:character varying",
+    "evaluationConfigSnapshot:jsonb",
+    "collectionId:character varying"
+   ]
+  },
+  {
+   "nombre": "token_exchange_jti",
+   "filas": "0",
+   "columnas": [
+    "jti:character varying!NOTNULL",
+    "expiresAt:timestamp with time zone!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "trusted_key",
+   "filas": "0",
+   "columnas": [
+    "sourceId:character varying!NOTNULL",
+    "kid:character varying!NOTNULL",
+    "data:text!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "trusted_key_source",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "config:text!NOTNULL",
+    "status:character varying!NOTNULL",
+    "lastError:text",
+    "lastRefreshedAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "type_availability_policy",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "kind:character varying!NOTNULL",
+    "rules:json!NOTNULL",
+    "version:integer!NOTNULL",
+    "updatedBy:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "type_availability_policy_attachment",
+   "filas": "0",
+   "columnas": [
+    "scopeId:character varying!NOTNULL",
+    "policyId:character varying!NOTNULL",
+    "priority:integer!NOTNULL",
+    "isFloor:boolean!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "type_availability_policy_scope",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "kind:character varying!NOTNULL",
+    "projectId:character varying",
+    "defaultAction:character varying!NOTNULL",
+    "version:integer!NOTNULL",
+    "updatedBy:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "user",
+   "filas": "1",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "email:character varying",
+    "firstName:character varying",
+    "lastName:character varying",
+    "password:character varying",
+    "personalizationAnswers:json",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "settings:json",
+    "disabled:boolean!NOTNULL",
+    "mfaEnabled:boolean!NOTNULL",
+    "mfaSecret:text",
+    "mfaRecoveryCodes:text",
+    "lastActiveAt:date",
+    "roleSlug:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "user_api_keys",
+   "filas": "2",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "label:character varying!NOTNULL",
+    "apiKey:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "scopes:json",
+    "audience:character varying!NOTNULL",
+    "lastUsedAt:timestamp with time zone"
+   ]
+  },
+  {
+   "nombre": "user_favorites",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "resourceId:character varying!NOTNULL",
+    "resourceType:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "variables",
+   "filas": "0",
+   "columnas": [
+    "key:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "value:text",
+    "id:character varying!NOTNULL",
+    "projectId:character varying"
+   ]
+  },
+  {
+   "nombre": "webhook_entity",
+   "filas": "1",
+   "columnas": [
+    "webhookPath:character varying!NOTNULL",
+    "method:character varying!NOTNULL",
+    "node:character varying!NOTNULL",
+    "webhookId:character varying",
+    "pathLength:integer",
+    "workflowId:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_builder_session",
+   "filas": "0",
+   "columnas": [
+    "id:uuid!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL",
+    "messages:json!NOTNULL",
+    "previousSummary:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "activeVersionCardId:character varying",
+    "resumeAfterRestoreMessageId:character varying"
+   ]
+  },
+  {
+   "nombre": "workflow_dependency",
+   "filas": "192",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "workflowVersionId:integer!NOTNULL",
+    "dependencyType:character varying!NOTNULL",
+    "dependencyKey:character varying!NOTNULL",
+    "dependencyInfo:json",
+    "indexVersionId:smallint!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "publishedVersionId:character varying"
+   ]
+  },
+  {
+   "nombre": "workflow_entity",
+   "filas": "3",
+   "columnas": [
+    "name:character varying!NOTNULL",
+    "active:boolean!NOTNULL",
+    "nodes:json!NOTNULL",
+    "connections:json!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "settings:json",
+    "staticData:json",
+    "pinData:json",
+    "versionId:character!NOTNULL",
+    "triggerCount:integer!NOTNULL",
+    "id:character varying!NOTNULL",
+    "meta:json",
+    "parentFolderId:character varying",
+    "isArchived:boolean!NOTNULL",
+    "versionCounter:integer!NOTNULL",
+    "description:text",
+    "activeVersionId:character varying",
+    "nodeGroups:json!NOTNULL",
+    "sourceWorkflowId:character varying"
+   ]
+  },
+  {
+   "nombre": "workflow_history",
+   "filas": "43",
+   "columnas": [
+    "versionId:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "authors:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "nodes:json!NOTNULL",
+    "connections:json!NOTNULL",
+    "name:character varying",
+    "autosaved:boolean!NOTNULL",
+    "description:text",
+    "nodeGroups:json!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_publication_outbox",
+   "filas": "5",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "publishedVersionId:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "errorMessage:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "reason:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_publication_trigger_status",
+   "filas": "5",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "nodeId:character varying!NOTNULL",
+    "versionId:character varying!NOTNULL",
+    "status:character varying!NOTNULL",
+    "errorMessage:text",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL",
+    "triggerKind:character varying!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_publish_history",
+   "filas": "125",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "versionId:character varying",
+    "event:character varying!NOTNULL",
+    "userId:uuid",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_published_version",
+   "filas": "3",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "publishedVersionId:character varying!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_review_activity",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "workflowReviewRequestId:character varying!NOTNULL",
+    "type:character varying!NOTNULL",
+    "typeVersion:integer!NOTNULL",
+    "data:json",
+    "createdById:uuid",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_review_activity_comment",
+   "filas": "0",
+   "columnas": [
+    "id:integer!NOTNULL",
+    "activityId:integer!NOTNULL",
+    "createdById:uuid",
+    "body:text",
+    "history:json",
+    "updatedAt:timestamp with time zone",
+    "deletedAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_review_request",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "projectId:character varying!NOTNULL",
+    "state:character varying!NOTNULL",
+    "decision:character varying!NOTNULL",
+    "title:character varying!NOTNULL",
+    "description:text",
+    "createdById:uuid",
+    "updatedById:uuid",
+    "closedById:uuid",
+    "approvedAt:timestamp with time zone",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "updatedAt:timestamp with time zone!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_review_request_authors",
+   "filas": "0",
+   "columnas": [
+    "workflowReviewRequestId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_review_request_reviewers",
+   "filas": "0",
+   "columnas": [
+    "workflowReviewRequestId:character varying!NOTNULL",
+    "userId:uuid!NOTNULL"
+   ]
+  },
+  {
+   "nombre": "workflow_review_request_workflow",
+   "filas": "0",
+   "columnas": [
+    "id:character varying!NOTNULL",
+    "workflowReviewRequestId:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "workflowVersionId:character varying",
+    "baselineVersionId:character varying"
+   ]
+  },
+  {
+   "nombre": "workflow_statistics",
+   "filas": "74",
+   "columnas": [
+    "count:bigint",
+    "latestEvent:timestamp with time zone",
+    "name:character varying!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "rootCount:bigint",
+    "id:integer!NOTNULL",
+    "workflowName:character varying"
+   ]
+  },
+  {
+   "nombre": "workflow_statistics_delta",
+   "filas": "0",
+   "columnas": [
+    "id:bigint!NOTNULL",
+    "workflowId:character varying!NOTNULL",
+    "name:character varying!NOTNULL",
+    "rootCountDelta:smallint!NOTNULL",
+    "createdAt:timestamp with time zone!NOTNULL",
+    "workflowName:character varying"
+   ]
+  },
+  {
+   "nombre": "workflows_tags",
+   "filas": "2",
+   "columnas": [
+    "workflowId:character varying!NOTNULL",
+    "tagId:character varying!NOTNULL"
+   ]
+  }
+ ],
+ "indices": [
+  "IDX_activity_event_project -> CREATE INDEX \"IDX_activity_event_project\" ON public.activity_event USING btree (\"projectId\", id)",
+  "IDX_activity_event_user -> CREATE INDEX \"IDX_activity_event_user\" ON public.activity_event USING btree (\"userId\", id)",
+  "PK_c2c1e9fdda754a6bf7f664d7e04 -> CREATE UNIQUE INDEX \"PK_c2c1e9fdda754a6bf7f664d7e04\" ON public.activity_event USING btree (id)",
+  "IDX_93d62baabe9858816b5adafb44 -> CREATE INDEX \"IDX_93d62baabe9858816b5adafb44\" ON public.agent_background_job USING btree (\"parentThreadId\", status)",
+  "IDX_agent_background_job_childExecutionId -> CREATE UNIQUE INDEX \"IDX_agent_background_job_childExecutionId\" ON public.agent_background_job USING btree (\"childExecutionId\") WHERE (\"childExecutionId\" IS NOT NULL)",
+  "IDX_agent_background_job_parentThreadId -> CREATE INDEX \"IDX_agent_background_job_parentThreadId\" ON public.agent_background_job USING btree (\"parentThreadId\") WHERE ((\"settledAt\" IS NOT NULL) AND (\"notifiedAt\" IS NULL))",
+  "IDX_agent_background_job_timeoutAt -> CREATE INDEX \"IDX_agent_background_job_timeoutAt\" ON public.agent_background_job USING btree (\"timeoutAt\") WHERE ((status)::text = 'running'::text)",
+  "IDX_d46c6f00730c2ef8bcb6ee24b6 -> CREATE INDEX \"IDX_d46c6f00730c2ef8bcb6ee24b6\" ON public.agent_background_job USING btree (\"parentAgentId\")",
+  "IDX_e43e630272995a93dfeb94ab3e -> CREATE INDEX \"IDX_e43e630272995a93dfeb94ab3e\" ON public.agent_background_job USING btree (\"settledAt\")",
+  "PK_6e0db58281aa2b4c956dc0d58e9 -> CREATE UNIQUE INDEX \"PK_6e0db58281aa2b4c956dc0d58e9\" ON public.agent_background_job USING btree (id)",
+  "IDX_a7c67724df9ef3d12f6da773c1 -> CREATE INDEX \"IDX_a7c67724df9ef3d12f6da773c1\" ON public.agent_channel_status USING btree (\"expiresAt\")",
+  "IDX_c75ec632fe0b5b1905edb9cd7f -> CREATE INDEX \"IDX_c75ec632fe0b5b1905edb9cd7f\" ON public.agent_channel_status USING btree (\"hostId\")",
+  "PK_4e1ca943734d575679a56f4da90 -> CREATE UNIQUE INDEX \"PK_4e1ca943734d575679a56f4da90\" ON public.agent_channel_status USING btree (\"agentId\", \"integrationType\", \"credentialId\", \"hostId\")",
+  "IDX_6806b43c8a0d11460f0c2552eb -> CREATE INDEX \"IDX_6806b43c8a0d11460f0c2552eb\" ON public.agent_chat_attachments USING btree (\"projectId\", \"threadId\")",
+  "IDX_7e9556f25f995653997be3322b -> CREATE INDEX \"IDX_7e9556f25f995653997be3322b\" ON public.agent_chat_attachments USING btree (\"agentId\", \"threadId\")",
+  "PK_9c1250f77b41d1a0e71a3f1414a -> CREATE UNIQUE INDEX \"PK_9c1250f77b41d1a0e71a3f1414a\" ON public.agent_chat_attachments USING btree (id)",
+  "PK_76598cf91038bee1f3ac94c94bc -> CREATE UNIQUE INDEX \"PK_76598cf91038bee1f3ac94c94bc\" ON public.agent_chat_subscriptions USING btree (\"agentId\", \"integrationType\", \"credentialId\", \"threadId\")",
+  "IDX_5e31c210f896d539964bf99fe3 -> CREATE INDEX \"IDX_5e31c210f896d539964bf99fe3\" ON public.agent_checkpoints USING btree (\"agentId\")",
+  "PK_50a27cbafa6806c9b162304b5fd -> CREATE UNIQUE INDEX \"PK_50a27cbafa6806c9b162304b5fd\" ON public.agent_checkpoints USING btree (\"runId\")",
+  "IDX_fec7ee37062350d6a4a2979327 -> CREATE INDEX \"IDX_fec7ee37062350d6a4a2979327\" ON public.agent_credential_dependency USING btree (\"credentialId\")",
+  "PK_546f5d9cfaf5ea78efcc6f5d0a2 -> CREATE UNIQUE INDEX \"PK_546f5d9cfaf5ea78efcc6f5d0a2\" ON public.agent_credential_dependency USING btree (\"agentId\", \"credentialId\")",
+  "IDX_9d3a6fd750f7746de453cf4d5e -> CREATE INDEX \"IDX_9d3a6fd750f7746de453cf4d5e\" ON public.agent_eval_dataset USING btree (\"agentId\")",
+  "PK_ac887efbb3580a577f1442cfa89 -> CREATE UNIQUE INDEX \"PK_ac887efbb3580a577f1442cfa89\" ON public.agent_eval_dataset USING btree (id)",
+  "IDX_9cadae6591c64498f1b58a2cef -> CREATE INDEX \"IDX_9cadae6591c64498f1b58a2cef\" ON public.agent_eval_rating USING btree (\"resultId\")",
+  "PK_04b7709a435e0c07520ceb37393 -> CREATE UNIQUE INDEX \"PK_04b7709a435e0c07520ceb37393\" ON public.agent_eval_rating USING btree (id)",
+  "IDX_40a2d1248a6d984f442de2fac1 -> CREATE INDEX \"IDX_40a2d1248a6d984f442de2fac1\" ON public.agent_eval_result USING btree (\"runId\")",
+  "PK_d40a22dc56dc200313c1f0e41ac -> CREATE UNIQUE INDEX \"PK_d40a22dc56dc200313c1f0e41ac\" ON public.agent_eval_result USING btree (id)",
+  "IDX_39ca447735d378e365f4227abf -> CREATE INDEX \"IDX_39ca447735d378e365f4227abf\" ON public.agent_eval_run USING btree (\"datasetId\")",
+  "PK_280832ca3f1b43663cc0e25e77f -> CREATE UNIQUE INDEX \"PK_280832ca3f1b43663cc0e25e77f\" ON public.agent_eval_run USING btree (id)",
+  "IDX_63d3c3a68b9cebf05f967f0b1c -> CREATE INDEX \"IDX_63d3c3a68b9cebf05f967f0b1c\" ON public.agent_execution USING btree (\"threadId\", \"createdAt\")",
+  "IDX_agent_execution_status -> CREATE INDEX \"IDX_agent_execution_status\" ON public.agent_execution USING btree (status) WHERE ((status)::text = 'running'::text)",
+  "PK_ba438acc8532addc12d1ef17049 -> CREATE UNIQUE INDEX \"PK_ba438acc8532addc12d1ef17049\" ON public.agent_execution USING btree (id)",
+  "IDX_0468a9dc35597314e641d4722a -> CREATE INDEX \"IDX_0468a9dc35597314e641d4722a\" ON public.agent_execution_threads USING btree (\"agentId\")",
+  "IDX_0e2f8bf92a7a9c88b89670f701 -> CREATE INDEX \"IDX_0e2f8bf92a7a9c88b89670f701\" ON public.agent_execution_threads USING btree (\"projectId\")",
+  "IDX_agent_execution_threads_taskVersionId -> CREATE INDEX \"IDX_agent_execution_threads_taskVersionId\" ON public.agent_execution_threads USING btree (\"taskVersionId\")",
+  "PK_22373dbf6ba6929d8ac50093309 -> CREATE UNIQUE INDEX \"PK_22373dbf6ba6929d8ac50093309\" ON public.agent_execution_threads USING btree (id)",
+  "IDX_45dafc48fe2ce95eac30fc8ffd -> CREATE INDEX \"IDX_45dafc48fe2ce95eac30fc8ffd\" ON public.agent_files USING btree (\"agentId\", \"createdAt\")",
+  "IDX_agent_files_agentId_binaryDataId -> CREATE UNIQUE INDEX \"IDX_agent_files_agentId_binaryDataId\" ON public.agent_files USING btree (\"agentId\", \"binaryDataId\")",
+  "IDX_agent_files_agentId_fileName -> CREATE UNIQUE INDEX \"IDX_agent_files_agentId_fileName\" ON public.agent_files USING btree (\"agentId\", \"fileName\")",
+  "PK_692920e59217af7d124cd95106f -> CREATE UNIQUE INDEX \"PK_692920e59217af7d124cd95106f\" ON public.agent_files USING btree (id)",
+  "IDX_87cd5a8da20304b089ea2f83fe -> CREATE INDEX \"IDX_87cd5a8da20304b089ea2f83fe\" ON public.agent_history USING btree (\"agentId\")",
+  "PK_65ffcfe7a8e112fb826311fb092 -> CREATE UNIQUE INDEX \"PK_65ffcfe7a8e112fb826311fb092\" ON public.agent_history USING btree (\"versionId\")",
+  "IDX_f45d0535a2ed59b6c2dd6da98a -> CREATE INDEX \"IDX_f45d0535a2ed59b6c2dd6da98a\" ON public.agent_task_definition USING btree (\"agentId\")",
+  "PK_1756c11c637903e97629a7a784a -> CREATE UNIQUE INDEX \"PK_1756c11c637903e97629a7a784a\" ON public.agent_task_definition USING btree (id)",
+  "PK_f593adaf7230e964d3c25deda64 -> CREATE UNIQUE INDEX \"PK_f593adaf7230e964d3c25deda64\" ON public.agent_task_run_lock USING btree (\"agentId\", \"taskId\")",
+  "PK_2142a8bcda2360c3c5e34f82640 -> CREATE UNIQUE INDEX \"PK_2142a8bcda2360c3c5e34f82640\" ON public.agent_task_snapshot USING btree (\"versionId\", \"taskId\")",
+  "IDX_a2694df196a66064edbdbe38b9 -> CREATE INDEX \"IDX_a2694df196a66064edbdbe38b9\" ON public.agent_workflow_dependency USING btree (\"workflowId\")",
+  "PK_4b9cb5e8db0dd16bb843b76465a -> CREATE UNIQUE INDEX \"PK_4b9cb5e8db0dd16bb843b76465a\" ON public.agent_workflow_dependency USING btree (\"agentId\", \"workflowId\")",
+  "IDX_a30d560207c4071d98aa03c179 -> CREATE INDEX \"IDX_a30d560207c4071d98aa03c179\" ON public.agents USING btree (\"projectId\")",
+  "IDX_agents_projectId -> CREATE INDEX \"IDX_agents_projectId\" ON public.agents USING btree (\"projectId\")",
+  "PK_9c653f28ae19c5884d5baf6a1d9 -> CREATE UNIQUE INDEX \"PK_9c653f28ae19c5884d5baf6a1d9\" ON public.agents USING btree (id)",
+  "IDX_0edf1226b77ddc525eae493807 -> CREATE INDEX \"IDX_0edf1226b77ddc525eae493807\" ON public.agents_memory_entries USING btree (\"supersededBy\")",
+  "IDX_1443a75e59adbfb796071d6639 -> CREATE INDEX \"IDX_1443a75e59adbfb796071d6639\" ON public.agents_memory_entries USING btree (\"resourceId\")",
+  "IDX_a03e04e94bea8439dd166d4b52 -> CREATE UNIQUE INDEX \"IDX_a03e04e94bea8439dd166d4b52\" ON public.agents_memory_entries USING btree (\"agentId\", \"resourceId\", \"contentHash\")",
+  "IDX_aff2807b31eccbafe59d0474f0 -> CREATE INDEX \"IDX_aff2807b31eccbafe59d0474f0\" ON public.agents_memory_entries USING btree (\"agentId\", \"resourceId\", status, \"createdAt\", id)",
+  "PK_bfbc45dc88f66fae4e4b4a15fec -> CREATE UNIQUE INDEX \"PK_bfbc45dc88f66fae4e4b4a15fec\" ON public.agents_memory_entries USING btree (id)",
+  "IDX_5123f71435736664d2676084a8 -> CREATE INDEX \"IDX_5123f71435736664d2676084a8\" ON public.agents_memory_entry_candidates USING btree (\"resourceId\")",
+  "IDX_6dc22e132cf1a34e5bca672b99 -> CREATE INDEX \"IDX_6dc22e132cf1a34e5bca672b99\" ON public.agents_memory_entry_candidates USING btree (\"agentId\", \"resourceId\", status, \"createdAt\", id)",
+  "IDX_ac7ada75df7cc8ced228921d5a -> CREATE INDEX \"IDX_ac7ada75df7cc8ced228921d5a\" ON public.agents_memory_entry_candidates USING btree (\"threadId\")",
+  "IDX_e3e49861a5452db63b036a2561 -> CREATE UNIQUE INDEX \"IDX_e3e49861a5452db63b036a2561\" ON public.agents_memory_entry_candidates USING btree (\"agentId\", \"runId\", \"toolCallId\")",
+  "IDX_f1857f6716aa258393dd6f3324 -> CREATE INDEX \"IDX_f1857f6716aa258393dd6f3324\" ON public.agents_memory_entry_candidates USING btree (\"sourceMessageId\")",
+  "PK_d5c36484cafd23222df4c564159 -> CREATE UNIQUE INDEX \"PK_d5c36484cafd23222df4c564159\" ON public.agents_memory_entry_candidates USING btree (id)",
+  "IDX_9594c0983cfee1c8ff49b05848 -> CREATE INDEX \"IDX_9594c0983cfee1c8ff49b05848\" ON public.agents_memory_entry_locks USING btree (\"resourceId\")",
+  "PK_a8e0f570d04a174292bea104ae6 -> CREATE UNIQUE INDEX \"PK_a8e0f570d04a174292bea104ae6\" ON public.agents_memory_entry_locks USING btree (\"agentId\", \"resourceId\")",
+  "IDX_451d387a182fa8dd8002dfc3a7 -> CREATE INDEX \"IDX_451d387a182fa8dd8002dfc3a7\" ON public.agents_memory_entry_sources USING btree (\"threadId\")",
+  "IDX_a353ac251315ef0af6ad3c9f0a -> CREATE UNIQUE INDEX \"IDX_a353ac251315ef0af6ad3c9f0a\" ON public.agents_memory_entry_sources USING btree (\"memoryEntryId\", \"observationId\", \"evidenceHash\")",
+  "IDX_agents_mem_src_candidate_unique -> CREATE UNIQUE INDEX \"IDX_agents_mem_src_candidate_unique\" ON public.agents_memory_entry_sources USING btree (\"memoryEntryId\", \"candidateId\", \"evidenceHash\") WHERE (\"candidateId\" IS NOT NULL)",
+  "IDX_agents_memory_entry_sources_candidateId -> CREATE INDEX \"IDX_agents_memory_entry_sources_candidateId\" ON public.agents_memory_entry_sources USING btree (\"candidateId\")",
+  "IDX_cb7c15d22fd068a0806aa57fc0 -> CREATE INDEX \"IDX_cb7c15d22fd068a0806aa57fc0\" ON public.agents_memory_entry_sources USING btree (\"observationId\")",
+  "IDX_f9573af4ed653f13b0ba1f7b12 -> CREATE INDEX \"IDX_f9573af4ed653f13b0ba1f7b12\" ON public.agents_memory_entry_sources USING btree (\"agentId\", \"threadId\")",
+  "PK_278f05e98e74baaaa93f52b4bab -> CREATE UNIQUE INDEX \"PK_278f05e98e74baaaa93f52b4bab\" ON public.agents_memory_entry_sources USING btree (id)",
+  "IDX_agents_messages_resourceId_threadId -> CREATE INDEX \"IDX_agents_messages_resourceId_threadId\" ON public.agents_messages USING btree (\"resourceId\", \"threadId\")",
+  "IDX_agents_messages_threadId_createdAt -> CREATE INDEX \"IDX_agents_messages_threadId_createdAt\" ON public.agents_messages USING btree (\"threadId\", \"createdAt\")",
+  "IDX_fc7bf858660bfafd19181e8e35 -> CREATE INDEX \"IDX_fc7bf858660bfafd19181e8e35\" ON public.agents_messages USING btree (\"threadId\", \"createdAt\")",
+  "PK_81020dc608dfb0af1ede386d907 -> CREATE UNIQUE INDEX \"PK_81020dc608dfb0af1ede386d907\" ON public.agents_messages USING btree (id)",
+  "IDX_87aa187d27ea67eafd16490515 -> CREATE INDEX \"IDX_87aa187d27ea67eafd16490515\" ON public.agents_observation_cursors USING btree (\"observationScopeId\")",
+  "PK_eb777ac57ab872d38f8ebd19317 -> CREATE UNIQUE INDEX \"PK_eb777ac57ab872d38f8ebd19317\" ON public.agents_observation_cursors USING btree (\"agentId\", \"observationScopeId\")",
+  "IDX_6b55089892e447c2f82e5ec60e -> CREATE INDEX \"IDX_6b55089892e447c2f82e5ec60e\" ON public.agents_observation_locks USING btree (\"observationScopeId\")",
+  "PK_7e2e315162ac3d80587e15ac2c3 -> CREATE UNIQUE INDEX \"PK_7e2e315162ac3d80587e15ac2c3\" ON public.agents_observation_locks USING btree (\"agentId\", \"observationScopeId\", \"taskKind\")",
+  "IDX_07cb1e4a302629c5fa5d74d2bb -> CREATE INDEX \"IDX_07cb1e4a302629c5fa5d74d2bb\" ON public.agents_observations USING btree (\"agentId\", \"observationScopeId\", status)",
+  "IDX_127ee1078ffa952bb37b511efa -> CREATE INDEX \"IDX_127ee1078ffa952bb37b511efa\" ON public.agents_observations USING btree (\"supersededBy\")",
+  "IDX_4cfd8a70ebb0a5b0cf047dca3c -> CREATE INDEX \"IDX_4cfd8a70ebb0a5b0cf047dca3c\" ON public.agents_observations USING btree (\"observationScopeId\")",
+  "IDX_501e2d1701a10e24fb69ab5fc5 -> CREATE INDEX \"IDX_501e2d1701a10e24fb69ab5fc5\" ON public.agents_observations USING btree (\"parentId\")",
+  "PK_9ad319654d12c2649f7caf27135 -> CREATE UNIQUE INDEX \"PK_9ad319654d12c2649f7caf27135\" ON public.agents_observations USING btree (id)",
+  "PK_fa6b20b2d31a9991529dbf8ef7d -> CREATE UNIQUE INDEX \"PK_fa6b20b2d31a9991529dbf8ef7d\" ON public.agents_resources USING btree (id)",
+  "IDX_54fa1b94f34a409beafae567a4 -> CREATE INDEX \"IDX_54fa1b94f34a409beafae567a4\" ON public.agents_threads USING btree (\"resourceId\")",
+  "PK_4a3feb0a13ffe315c009cce64e5 -> CREATE UNIQUE INDEX \"PK_4a3feb0a13ffe315c009cce64e5\" ON public.agents_threads USING btree (id)",
+  "IDX_39b07732e819fb561d74c38763 -> CREATE INDEX \"IDX_39b07732e819fb561d74c38763\" ON public.ai_builder_temporary_workflow USING btree (\"threadId\")",
+  "PK_85a87a1ba0f61999fe11dc56325 -> CREATE UNIQUE INDEX \"PK_85a87a1ba0f61999fe11dc56325\" ON public.ai_builder_temporary_workflow USING btree (\"workflowId\")",
+  "IDX_4ea340a1847ad0e40a0b0360fe -> CREATE INDEX \"IDX_4ea340a1847ad0e40a0b0360fe\" ON public.ai_preference USING btree (\"projectId\")",
+  "IDX_e9059770c01bfda6062d78d9f8 -> CREATE INDEX \"IDX_e9059770c01bfda6062d78d9f8\" ON public.ai_preference USING btree (\"userId\")",
+  "PK_e7dbbeec9da3e06f6a20669e6e7 -> CREATE UNIQUE INDEX \"PK_e7dbbeec9da3e06f6a20669e6e7\" ON public.ai_preference USING btree (id)",
+  "IDX_ae51b54c4bb430cf92f48b623f -> CREATE UNIQUE INDEX \"IDX_ae51b54c4bb430cf92f48b623f\" ON public.annotation_tag_entity USING btree (name)",
+  "PK_69dfa041592c30bbc0d4b84aa00 -> CREATE UNIQUE INDEX \"PK_69dfa041592c30bbc0d4b84aa00\" ON public.annotation_tag_entity USING btree (id)",
+  "auth_identity_pkey -> CREATE UNIQUE INDEX auth_identity_pkey ON public.auth_identity USING btree (\"providerId\", \"providerType\")",
+  "auth_provider_sync_history_pkey -> CREATE UNIQUE INDEX auth_provider_sync_history_pkey ON public.auth_provider_sync_history USING btree (id)",
+  "barber_auditoria_pkey -> CREATE UNIQUE INDEX barber_auditoria_pkey ON public.barber_auditoria USING btree (id)",
+  "idx_barber_auditoria_exito -> CREATE INDEX idx_barber_auditoria_exito ON public.barber_auditoria USING btree (exito)",
+  "idx_barber_auditoria_jid -> CREATE INDEX idx_barber_auditoria_jid ON public.barber_auditoria USING btree (jid)",
+  "idx_barber_auditoria_ts -> CREATE INDEX idx_barber_auditoria_ts ON public.barber_auditoria USING btree (ts DESC)",
+  "barber_bloqueos_pkey -> CREATE UNIQUE INDEX barber_bloqueos_pkey ON public.barber_bloqueos USING btree (id)",
+  "idx_barber_bloqueos_inicio -> CREATE INDEX idx_barber_bloqueos_inicio ON public.barber_bloqueos USING btree (inicio)",
+  "barber_citas_pkey -> CREATE UNIQUE INDEX barber_citas_pkey ON public.barber_citas USING btree (id)",
+  "idx_barber_citas_estado -> CREATE INDEX idx_barber_citas_estado ON public.barber_citas USING btree (estado)",
+  "idx_barber_citas_estado_inicio -> CREATE INDEX idx_barber_citas_estado_inicio ON public.barber_citas USING btree (estado, inicio)",
+  "idx_barber_citas_inicio -> CREATE INDEX idx_barber_citas_inicio ON public.barber_citas USING btree (inicio)",
+  "idx_barber_citas_jid -> CREATE INDEX idx_barber_citas_jid ON public.barber_citas USING btree (jid)",
+  "barber_clientes_pkey -> CREATE UNIQUE INDEX barber_clientes_pkey ON public.barber_clientes USING btree (jid)",
+  "barber_conocimiento_categoria_ix -> CREATE INDEX barber_conocimiento_categoria_ix ON public.barber_conocimiento USING btree (categoria) WHERE activo",
+  "barber_conocimiento_pkey -> CREATE UNIQUE INDEX barber_conocimiento_pkey ON public.barber_conocimiento USING btree (id)",
+  "barber_conocimiento_pregunta_uk -> CREATE UNIQUE INDEX barber_conocimiento_pregunta_uk ON public.barber_conocimiento USING btree (pregunta)",
+  "barber_conocimiento_tsv_gin -> CREATE INDEX barber_conocimiento_tsv_gin ON public.barber_conocimiento USING gin (tsv)",
+  "barber_consentimiento_pkey -> CREATE UNIQUE INDEX barber_consentimiento_pkey ON public.barber_consentimiento USING btree (jid)",
+  "barber_escalaciones_pkey -> CREATE UNIQUE INDEX barber_escalaciones_pkey ON public.barber_escalaciones USING btree (id)",
+  "idx_barber_escalaciones_estado -> CREATE INDEX idx_barber_escalaciones_estado ON public.barber_escalaciones USING btree (estado)",
+  "barber_lista_espera_pkey -> CREATE UNIQUE INDEX barber_lista_espera_pkey ON public.barber_lista_espera USING btree (id)",
+  "idx_barber_lista_espera_pendiente -> CREATE INDEX idx_barber_lista_espera_pendiente ON public.barber_lista_espera USING btree (atendido, creado_en)",
+  "barber_operadores_pkey -> CREATE UNIQUE INDEX barber_operadores_pkey ON public.barber_operadores USING btree (jid)",
+  "barber_pausas_pkey -> CREATE UNIQUE INDEX barber_pausas_pkey ON public.barber_pausas USING btree (jid)",
+  "idx_barber_pausas_hasta -> CREATE INDEX idx_barber_pausas_hasta ON public.barber_pausas USING btree (hasta)",
+  "barber_servicios_pkey -> CREATE UNIQUE INDEX barber_servicios_pkey ON public.barber_servicios USING btree (clave)",
+  "IDX_56900edc3cfd16612e2ef2c6a8 -> CREATE INDEX \"IDX_56900edc3cfd16612e2ef2c6a8\" ON public.binary_data USING btree (\"sourceType\", \"sourceId\")",
+  "PK_fc3691585b39408bb0551122af6 -> CREATE UNIQUE INDEX \"PK_fc3691585b39408bb0551122af6\" ON public.binary_data USING btree (\"fileId\")",
+  "PK_cc8806fdea48297a7d497035d72 -> CREATE UNIQUE INDEX \"PK_cc8806fdea48297a7d497035d72\" ON public.chat_hub_agent_tools USING btree (\"agentId\", \"toolId\")",
+  "PK_f39a3b36bbdf0e2979ddb21cf78 -> CREATE UNIQUE INDEX \"PK_f39a3b36bbdf0e2979ddb21cf78\" ON public.chat_hub_agents USING btree (id)",
+  "IDX_chat_hub_messages_sessionId -> CREATE INDEX \"IDX_chat_hub_messages_sessionId\" ON public.chat_hub_messages USING btree (\"sessionId\")",
+  "PK_7704a5add6baed43eef835f0bfb -> CREATE UNIQUE INDEX \"PK_7704a5add6baed43eef835f0bfb\" ON public.chat_hub_messages USING btree (id)",
+  "PK_87aea76ff4c274c4a5ac838ebe3 -> CREATE UNIQUE INDEX \"PK_87aea76ff4c274c4a5ac838ebe3\" ON public.chat_hub_session_tools USING btree (\"sessionId\", \"toolId\")",
+  "IDX_chat_hub_sessions_owner_lastmsg_id -> CREATE INDEX \"IDX_chat_hub_sessions_owner_lastmsg_id\" ON public.chat_hub_sessions USING btree (\"ownerId\", \"lastMessageAt\" DESC, id)",
+  "PK_1eafef1273c70e4464fec703412 -> CREATE UNIQUE INDEX \"PK_1eafef1273c70e4464fec703412\" ON public.chat_hub_sessions USING btree (id)",
+  "IDX_4c72ebdb265d1775bf61147af0 -> CREATE UNIQUE INDEX \"IDX_4c72ebdb265d1775bf61147af0\" ON public.chat_hub_tools USING btree (\"ownerId\", name)",
+  "PK_696d26426c704fba79b2c195ef5 -> CREATE UNIQUE INDEX \"PK_696d26426c704fba79b2c195ef5\" ON public.chat_hub_tools USING btree (id)",
+  "IDX_5ec8e8c8d3539f3696cf73b43b -> CREATE INDEX \"IDX_5ec8e8c8d3539f3696cf73b43b\" ON public.credential_dependency USING btree (\"credentialId\")",
+  "IDX_91ee85fa9619dd6776725e117b -> CREATE INDEX \"IDX_91ee85fa9619dd6776725e117b\" ON public.credential_dependency USING btree (\"dependencyType\", \"dependencyId\")",
+  "IDX_credential_dependency_credentialId_dependencyType_dependenc -> CREATE UNIQUE INDEX \"IDX_credential_dependency_credentialId_dependencyType_dependenc\" ON public.credential_dependency USING btree (\"credentialId\", \"dependencyType\", \"dependencyId\")",
+  "PK_80212729ed0ffa0709417ab28f4 -> CREATE UNIQUE INDEX \"PK_80212729ed0ffa0709417ab28f4\" ON public.credential_dependency USING btree (id)",
+  "IDX_credentials_entity_is_global -> CREATE INDEX \"IDX_credentials_entity_is_global\" ON public.credentials_entity USING btree (id) WHERE (\"isGlobal\" = true)",
+  "credentials_entity_pkey -> CREATE UNIQUE INDEX credentials_entity_pkey ON public.credentials_entity USING btree (id)",
+  "idx_07fde106c0b471d8cc80a64fc8 -> CREATE INDEX idx_07fde106c0b471d8cc80a64fc8 ON public.credentials_entity USING btree (type)",
+  "pk_credentials_entity_id -> CREATE UNIQUE INDEX pk_credentials_entity_id ON public.credentials_entity USING btree (id)",
+  "PK_e226d0001b9e6097cbfe70617cb -> CREATE UNIQUE INDEX \"PK_e226d0001b9e6097cbfe70617cb\" ON public.data_table USING btree (id)",
+  "UQ_b23096ef747281ac944d28e8b0d -> CREATE UNIQUE INDEX \"UQ_b23096ef747281ac944d28e8b0d\" ON public.data_table USING btree (\"projectId\", name)",
+  "PK_673cb121ee4a8a5e27850c72c51 -> CREATE UNIQUE INDEX \"PK_673cb121ee4a8a5e27850c72c51\" ON public.data_table_column USING btree (id)",
+  "UQ_8082ec4890f892f0bc77473a123 -> CREATE UNIQUE INDEX \"UQ_8082ec4890f892f0bc77473a123\" ON public.data_table_column USING btree (\"dataTableId\", name)",
+  "IDX_deployment_key_data_encryption_active -> CREATE UNIQUE INDEX \"IDX_deployment_key_data_encryption_active\" ON public.deployment_key USING btree (type) WHERE (((status)::text = 'active'::text) AND ((type)::text = 'data_encryption'::text))",
+  "IDX_deployment_key_instance_id_active -> CREATE UNIQUE INDEX \"IDX_deployment_key_instance_id_active\" ON public.deployment_key USING btree (type) WHERE (((status)::text = 'active'::text) AND ((type)::text = 'instance.id'::text))",
+  "IDX_deployment_key_jwe_private_key_active -> CREATE UNIQUE INDEX \"IDX_deployment_key_jwe_private_key_active\" ON public.deployment_key USING btree (type, algorithm) WHERE (((status)::text = 'active'::text) AND ((type)::text = 'jwe.private-key'::text))",
+  "IDX_deployment_key_signing_binary_data_active -> CREATE UNIQUE INDEX \"IDX_deployment_key_signing_binary_data_active\" ON public.deployment_key USING btree (type) WHERE (((status)::text = 'active'::text) AND ((type)::text = 'signing.binary_data'::text))",
+  "IDX_deployment_key_signing_hmac_active -> CREATE UNIQUE INDEX \"IDX_deployment_key_signing_hmac_active\" ON public.deployment_key USING btree (type) WHERE (((status)::text = 'active'::text) AND ((type)::text = 'signing.hmac'::text))",
+  "IDX_deployment_key_signing_jwt_active -> CREATE UNIQUE INDEX \"IDX_deployment_key_signing_jwt_active\" ON public.deployment_key USING btree (type) WHERE (((status)::text = 'active'::text) AND ((type)::text = 'signing.jwt'::text))",
+  "PK_94bb7aeb5def5a0284a5fe9f9a0 -> CREATE UNIQUE INDEX \"PK_94bb7aeb5def5a0284a5fe9f9a0\" ON public.deployment_key USING btree (id)",
+  "IDX_62476b94b56d9dc7ed9ed75d3d -> CREATE INDEX \"IDX_62476b94b56d9dc7ed9ed75d3d\" ON public.dynamic_credential_entry USING btree (subject_id)",
+  "IDX_d61a12235d268a49af6a3c09c1 -> CREATE INDEX \"IDX_d61a12235d268a49af6a3c09c1\" ON public.dynamic_credential_entry USING btree (resolver_id)",
+  "PK_5135ffcabecad4727ff6b9b803d -> CREATE UNIQUE INDEX \"PK_5135ffcabecad4727ff6b9b803d\" ON public.dynamic_credential_entry USING btree (credential_id, subject_id, resolver_id)",
+  "IDX_9c9ee9df586e60bb723234e499 -> CREATE INDEX \"IDX_9c9ee9df586e60bb723234e499\" ON public.dynamic_credential_resolver USING btree (type)",
+  "PK_b76cfb088dcdaf5275e9980bb64 -> CREATE UNIQUE INDEX \"PK_b76cfb088dcdaf5275e9980bb64\" ON public.dynamic_credential_resolver USING btree (id)",
+  "IDX_6edec973a6450990977bb854c3 -> CREATE INDEX \"IDX_6edec973a6450990977bb854c3\" ON public.dynamic_credential_user_entry USING btree (\"resolverId\")",
+  "IDX_a36dc616fabc3f736bb82410a2 -> CREATE INDEX \"IDX_a36dc616fabc3f736bb82410a2\" ON public.dynamic_credential_user_entry USING btree (\"userId\")",
+  "PK_74f548e633abc66dc27c8f0ca77 -> CREATE UNIQUE INDEX \"PK_74f548e633abc66dc27c8f0ca77\" ON public.dynamic_credential_user_entry USING btree (\"credentialId\", \"userId\", \"resolverId\")",
+  "IDX_a48ce930c3bc7604894b8f0eaa -> CREATE INDEX \"IDX_a48ce930c3bc7604894b8f0eaa\" ON public.evaluation_collection USING btree (\"workflowId\")",
+  "IDX_d634a0c93fd7de68a87eab951b -> CREATE INDEX \"IDX_d634a0c93fd7de68a87eab951b\" ON public.evaluation_collection USING btree (\"evaluationConfigId\")",
+  "PK_e720b6efc1e45b878ebb0b2ca30 -> CREATE UNIQUE INDEX \"PK_e720b6efc1e45b878ebb0b2ca30\" ON public.evaluation_collection USING btree (id)",
+  "IDX_fd7542bb123074760285dc1bbf -> CREATE INDEX \"IDX_fd7542bb123074760285dc1bbf\" ON public.evaluation_config USING btree (\"workflowId\")",
+  "PK_59c14dccf8989df94070c2dcfda -> CREATE UNIQUE INDEX \"PK_59c14dccf8989df94070c2dcfda\" ON public.evaluation_config USING btree (id)",
+  "UQ_3c3c99a712e971835c52292e44c -> CREATE UNIQUE INDEX \"UQ_3c3c99a712e971835c52292e44c\" ON public.evaluation_config USING btree (\"workflowId\", name)",
+  "event_destinations_pkey -> CREATE UNIQUE INDEX event_destinations_pkey ON public.event_destinations USING btree (id)",
+  "IDX_a3697779b366e131b2bbdae297 -> CREATE INDEX \"IDX_a3697779b366e131b2bbdae297\" ON public.execution_annotation_tags USING btree (\"tagId\")",
+  "IDX_c1519757391996eb06064f0e7c -> CREATE INDEX \"IDX_c1519757391996eb06064f0e7c\" ON public.execution_annotation_tags USING btree (\"annotationId\")",
+  "PK_979ec03d31294cca484be65d11f -> CREATE UNIQUE INDEX \"PK_979ec03d31294cca484be65d11f\" ON public.execution_annotation_tags USING btree (\"annotationId\", \"tagId\")",
+  "IDX_97f863fa83c4786f1956508496 -> CREATE UNIQUE INDEX \"IDX_97f863fa83c4786f1956508496\" ON public.execution_annotations USING btree (\"executionId\")",
+  "PK_7afcf93ffa20c4252869a7c6a23 -> CREATE UNIQUE INDEX \"PK_7afcf93ffa20c4252869a7c6a23\" ON public.execution_annotations USING btree (id)",
+  "execution_data_pkey -> CREATE UNIQUE INDEX execution_data_pkey ON public.execution_data USING btree (\"executionId\")",
+  "IDX_execution_entity_deduplicationKey -> CREATE UNIQUE INDEX \"IDX_execution_entity_deduplicationKey\" ON public.execution_entity USING btree (\"deduplicationKey\") WHERE (\"deduplicationKey\" IS NOT NULL)",
+  "IDX_execution_entity_deletedAt -> CREATE INDEX \"IDX_execution_entity_deletedAt\" ON public.execution_entity USING btree (\"deletedAt\")",
+  "IDX_execution_entity_workflowId_status_id -> CREATE INDEX \"IDX_execution_entity_workflowId_status_id\" ON public.execution_entity USING btree (\"workflowId\", status, id) WHERE (\"deletedAt\" IS NULL)",
+  "idx_execution_entity_stopped_at_status_deleted_at -> CREATE INDEX idx_execution_entity_stopped_at_status_deleted_at ON public.execution_entity USING btree (\"stoppedAt\", status, \"deletedAt\") WHERE ((\"stoppedAt\" IS NOT NULL) AND (\"deletedAt\" IS NULL))",
+  "idx_execution_entity_wait_till_status_deleted_at -> CREATE INDEX idx_execution_entity_wait_till_status_deleted_at ON public.execution_entity USING btree (\"waitTill\", status, \"deletedAt\") WHERE ((\"waitTill\" IS NOT NULL) AND (\"deletedAt\" IS NULL))",
+  "idx_execution_entity_workflow_id_started_at -> CREATE INDEX idx_execution_entity_workflow_id_started_at ON public.execution_entity USING btree (\"workflowId\", \"startedAt\") WHERE ((\"startedAt\" IS NOT NULL) AND (\"deletedAt\" IS NULL))",
+  "pk_e3e63bbf986767844bbe1166d4e -> CREATE UNIQUE INDEX pk_e3e63bbf986767844bbe1166d4e ON public.execution_entity USING btree (id)",
+  "IDX_cec8eea3bf49551482ccb4933e -> CREATE UNIQUE INDEX \"IDX_cec8eea3bf49551482ccb4933e\" ON public.execution_metadata USING btree (\"executionId\", key)",
+  "PK_17a0b6284f8d626aae88e1c16e4 -> CREATE UNIQUE INDEX \"PK_17a0b6284f8d626aae88e1c16e4\" ON public.execution_metadata USING btree (id)",
+  "IDX_14f68deffaf858465715995508 -> CREATE UNIQUE INDEX \"IDX_14f68deffaf858465715995508\" ON public.folder USING btree (\"projectId\", id)",
+  "PK_6278a41a706740c94c02e288df8 -> CREATE UNIQUE INDEX \"PK_6278a41a706740c94c02e288df8\" ON public.folder USING btree (id)",
+  "PK_27e4e00852f6b06a925a4d83a3e -> CREATE UNIQUE INDEX \"PK_27e4e00852f6b06a925a4d83a3e\" ON public.folder_tag USING btree (\"folderId\", \"tagId\")",
+  "IDX_60b6a84299eeb3f671dfec7693 -> CREATE UNIQUE INDEX \"IDX_60b6a84299eeb3f671dfec7693\" ON public.insights_by_period USING btree (\"periodStart\", type, \"periodUnit\", \"metaId\")",
+  "PK_b606942249b90cc39b0265f0575 -> CREATE UNIQUE INDEX \"PK_b606942249b90cc39b0265f0575\" ON public.insights_by_period USING btree (id)",
+  "IDX_1d8ab99d5861c9388d2dc1cf73 -> CREATE UNIQUE INDEX \"IDX_1d8ab99d5861c9388d2dc1cf73\" ON public.insights_metadata USING btree (\"workflowId\")",
+  "PK_f448a94c35218b6208ce20cf5a1 -> CREATE UNIQUE INDEX \"PK_f448a94c35218b6208ce20cf5a1\" ON public.insights_metadata USING btree (\"metaId\")",
+  "IDX_insights_raw_timestamp_id -> CREATE INDEX \"IDX_insights_raw_timestamp_id\" ON public.insights_raw USING btree (\"timestamp\", id)",
+  "PK_ec15125755151e3a7e00e00014f -> CREATE UNIQUE INDEX \"PK_ec15125755151e3a7e00e00014f\" ON public.insights_raw USING btree (id)",
+  "PK_8ebd28194e4f792f96b5933423fc439df97d9689 -> CREATE UNIQUE INDEX \"PK_8ebd28194e4f792f96b5933423fc439df97d9689\" ON public.installed_nodes USING btree (name)",
+  "PK_08cc9197c39b028c1e9beca225940576fd1a5804 -> CREATE UNIQUE INDEX \"PK_08cc9197c39b028c1e9beca225940576fd1a5804\" ON public.installed_packages USING btree (\"packageName\")",
+  "IDX_2b23f3f24a70bebb990203b011 -> CREATE INDEX \"IDX_2b23f3f24a70bebb990203b011\" ON public.instance_ai_checkpoints USING btree (\"threadId\")",
+  "IDX_768189b506cc26c4fe878b87cb -> CREATE INDEX \"IDX_768189b506cc26c4fe878b87cb\" ON public.instance_ai_checkpoints USING btree (\"runId\")",
+  "IDX_be9d0eca0b19fb93d4eb74b327 -> CREATE INDEX \"IDX_be9d0eca0b19fb93d4eb74b327\" ON public.instance_ai_checkpoints USING btree (\"resourceId\")",
+  "PK_5315a45f0846d1f9d128c18a2ed -> CREATE UNIQUE INDEX \"PK_5315a45f0846d1f9d128c18a2ed\" ON public.instance_ai_checkpoints USING btree (key)",
+  "IDX_32cdd799675715fb1d2a8683e9 -> CREATE INDEX \"IDX_32cdd799675715fb1d2a8683e9\" ON public.instance_ai_events USING btree (\"threadId\", \"runId\")",
+  "PK_12489cd6197feeac2089acc7ef6 -> CREATE UNIQUE INDEX \"PK_12489cd6197feeac2089acc7ef6\" ON public.instance_ai_events USING btree (\"threadId\", seq)",
+  "IDX_02751202c9a2ad75f2d8e14f5e -> CREATE INDEX \"IDX_02751202c9a2ad75f2d8e14f5e\" ON public.instance_ai_iteration_logs USING btree (\"threadId\", \"taskKey\", \"createdAt\")",
+  "PK_21c2b214b44bc6c34a6d3551c90 -> CREATE UNIQUE INDEX \"PK_21c2b214b44bc6c34a6d3551c90\" ON public.instance_ai_iteration_logs USING btree (id)",
+  "IDX_16db3adb7b19df1ee55ff06b27 -> CREATE UNIQUE INDEX \"IDX_16db3adb7b19df1ee55ff06b27\" ON public.instance_ai_mcp_registry_connections USING btree (\"userId\", \"serverSlug\", \"credentialId\")",
+  "PK_e34e4d15d78eabbe8217e33ef03 -> CREATE UNIQUE INDEX \"PK_e34e4d15d78eabbe8217e33ef03\" ON public.instance_ai_mcp_registry_connections USING btree (id)",
+  "IDX_1eeb64cb9d66a927988de759e6 -> CREATE INDEX \"IDX_1eeb64cb9d66a927988de759e6\" ON public.instance_ai_messages USING btree (\"threadId\")",
+  "IDX_76e212c6867fbaa06bf0decd6f -> CREATE INDEX \"IDX_76e212c6867fbaa06bf0decd6f\" ON public.instance_ai_messages USING btree (\"resourceId\")",
+  "PK_156c6f287225e9befe0181bb02b -> CREATE UNIQUE INDEX \"PK_156c6f287225e9befe0181bb02b\" ON public.instance_ai_messages USING btree (id)",
+  "PK_5b6319b2e9a37c1064a72428f9a -> CREATE UNIQUE INDEX \"PK_5b6319b2e9a37c1064a72428f9a\" ON public.instance_ai_observation_cursors USING btree (\"observationScopeId\")",
+  "PK_fc491dd378b9448655c3c683f85 -> CREATE UNIQUE INDEX \"PK_fc491dd378b9448655c3c683f85\" ON public.instance_ai_observation_locks USING btree (\"observationScopeId\", \"taskKind\")",
+  "IDX_92f13cb6bc694227e069447f7b -> CREATE INDEX \"IDX_92f13cb6bc694227e069447f7b\" ON public.instance_ai_observational_memory USING btree (\"lookupKey\")",
+  "IDX_a680ac96aae02dc887bbaac512 -> CREATE UNIQUE INDEX \"IDX_a680ac96aae02dc887bbaac512\" ON public.instance_ai_observational_memory USING btree (scope, \"threadId\", \"resourceId\")",
+  "PK_7192dd00cddba039bf1d3e6a098 -> CREATE UNIQUE INDEX \"PK_7192dd00cddba039bf1d3e6a098\" ON public.instance_ai_observational_memory USING btree (id)",
+  "IDX_0d5db648188d338df7fb2a8064 -> CREATE INDEX \"IDX_0d5db648188d338df7fb2a8064\" ON public.instance_ai_observations USING btree (\"observationScopeId\", status, \"createdAt\", id)",
+  "IDX_a80e0ee839a2f10ba4b86e1999 -> CREATE INDEX \"IDX_a80e0ee839a2f10ba4b86e1999\" ON public.instance_ai_observations USING btree (\"supersededBy\")",
+  "IDX_daef2195a4a846eb70eed15e03 -> CREATE INDEX \"IDX_daef2195a4a846eb70eed15e03\" ON public.instance_ai_observations USING btree (\"parentId\")",
+  "PK_4d9b514cdf0f0b577650caf2ac2 -> CREATE UNIQUE INDEX \"PK_4d9b514cdf0f0b577650caf2ac2\" ON public.instance_ai_observations USING btree (id)",
+  "IDX_0babdf6e3b897a86fe4678355e -> CREATE INDEX \"IDX_0babdf6e3b897a86fe4678355e\" ON public.instance_ai_pending_confirmations USING btree (\"checkpointKey\")",
+  "IDX_ba67ee8dc311830a2eea89b6e9 -> CREATE INDEX \"IDX_ba67ee8dc311830a2eea89b6e9\" ON public.instance_ai_pending_confirmations USING btree (\"threadId\")",
+  "IDX_d7a4aba7440449865e2b924377 -> CREATE INDEX \"IDX_d7a4aba7440449865e2b924377\" ON public.instance_ai_pending_confirmations USING btree (\"expiresAt\")",
+  "IDX_df5fd25c8bbfd2b042602600d8 -> CREATE INDEX \"IDX_df5fd25c8bbfd2b042602600d8\" ON public.instance_ai_pending_confirmations USING btree (\"userId\")",
+  "PK_25c38179c8d45095b168adfff80 -> CREATE UNIQUE INDEX \"PK_25c38179c8d45095b168adfff80\" ON public.instance_ai_pending_confirmations USING btree (\"requestId\")",
+  "PK_45b5b0b6f715dae4292b86603d8 -> CREATE UNIQUE INDEX \"PK_45b5b0b6f715dae4292b86603d8\" ON public.instance_ai_resources USING btree (id)",
+  "IDX_401b94abf83d1ac7a841f31330 -> CREATE INDEX \"IDX_401b94abf83d1ac7a841f31330\" ON public.instance_ai_thread_grants USING btree (\"userId\")",
+  "PK_56107d26ebeabf780c5cf311d66 -> CREATE UNIQUE INDEX \"PK_56107d26ebeabf780c5cf311d66\" ON public.instance_ai_thread_grants USING btree (\"threadId\", \"userId\", \"grantKey\")",
+  "IDX_f36dea4d38fe92e0e8f44d5a56 -> CREATE INDEX \"IDX_f36dea4d38fe92e0e8f44d5a56\" ON public.instance_ai_threads USING btree (\"resourceId\")",
+  "IDX_instance_ai_threads_projectId -> CREATE INDEX \"IDX_instance_ai_threads_projectId\" ON public.instance_ai_threads USING btree (\"projectId\")",
+  "IDX_instance_ai_threads_resourceId_updatedAt_id -> CREATE INDEX \"IDX_instance_ai_threads_resourceId_updatedAt_id\" ON public.instance_ai_threads USING btree (\"resourceId\", \"updatedAt\", id)",
+  "PK_35575100e45cdedeb89ae0643e9 -> CREATE UNIQUE INDEX \"PK_35575100e45cdedeb89ae0643e9\" ON public.instance_ai_threads USING btree (id)",
+  "IDX_a371ee6b8e0ebb5635f8baa46d -> CREATE INDEX \"IDX_a371ee6b8e0ebb5635f8baa46d\" ON public.instance_ai_workflow_snapshots USING btree (\"workflowName\", status)",
+  "PK_93f2696eb321dfe1d7defe7073f -> CREATE UNIQUE INDEX \"PK_93f2696eb321dfe1d7defe7073f\" ON public.instance_ai_workflow_snapshots USING btree (\"runId\", \"workflowName\")",
+  "IDX_9626b8dc1bee96a86a3ee09d73 -> CREATE INDEX \"IDX_9626b8dc1bee96a86a3ee09d73\" ON public.instance_credential_assignment USING btree (\"credentialId\")",
+  "PK_984b0a98726485c9a330cde6b2f -> CREATE UNIQUE INDEX \"PK_984b0a98726485c9a330cde6b2f\" ON public.instance_credential_assignment USING btree (\"credentialUseId\")",
+  "PK_4a5cb8aa51c67e4f5a7eb0f9509 -> CREATE UNIQUE INDEX \"PK_4a5cb8aa51c67e4f5a7eb0f9509\" ON public.instance_monitoring_report USING btree (id)",
+  "PK_874f58cb616935bf49d9dbd67e9 -> CREATE UNIQUE INDEX \"PK_874f58cb616935bf49d9dbd67e9\" ON public.instance_version_history USING btree (id)",
+  "PK_5779069b7235b256d91f7af1a15 -> CREATE UNIQUE INDEX \"PK_5779069b7235b256d91f7af1a15\" ON public.invalid_auth_token USING btree (token)",
+  "PK_12fd89a1fb8489513b0a91f5d31 -> CREATE UNIQUE INDEX \"PK_12fd89a1fb8489513b0a91f5d31\" ON public.mcp_registry_server USING btree (slug)",
+  "PK_8c82d7f526340ab734260ea46be -> CREATE UNIQUE INDEX \"PK_8c82d7f526340ab734260ea46be\" ON public.migrations USING btree (id)",
+  "n8n_chat_histories_pkey -> CREATE UNIQUE INDEX n8n_chat_histories_pkey ON public.n8n_chat_histories USING btree (id)",
+  "PK_dcd71f96a5d5f4bf79e67d322bf -> CREATE UNIQUE INDEX \"PK_dcd71f96a5d5f4bf79e67d322bf\" ON public.oauth_access_tokens USING btree (token)",
+  "PK_fb91ab932cfbd694061501cc20f -> CREATE UNIQUE INDEX \"PK_fb91ab932cfbd694061501cc20f\" ON public.oauth_authorization_codes USING btree (code)",
+  "PK_c4759172d3431bae6f04e678e0d -> CREATE UNIQUE INDEX \"PK_c4759172d3431bae6f04e678e0d\" ON public.oauth_clients USING btree (id)",
+  "PK_74abaed0b30711b6532598b0392 -> CREATE UNIQUE INDEX \"PK_74abaed0b30711b6532598b0392\" ON public.oauth_refresh_tokens USING btree (token)",
+  "PK_85b9ada746802c8993103470f05 -> CREATE UNIQUE INDEX \"PK_85b9ada746802c8993103470f05\" ON public.oauth_user_consents USING btree (id)",
+  "UQ_083721d99ce8db4033e2958ebb4 -> CREATE UNIQUE INDEX \"UQ_083721d99ce8db4033e2958ebb4\" ON public.oauth_user_consents USING btree (\"userId\", \"clientId\")",
+  "PK_eda59336a5dd1e6a12f4d4b7287 -> CREATE UNIQUE INDEX \"PK_eda59336a5dd1e6a12f4d4b7287\" ON public.poller_state USING btree (\"workflowId\", \"nodeId\")",
+  "PK_ca04b9d8dc72de268fe07a65773 -> CREATE UNIQUE INDEX \"PK_ca04b9d8dc72de268fe07a65773\" ON public.processed_data USING btree (\"workflowId\", context)",
+  "PK_4d68b1358bb5b766d3e78f32f57 -> CREATE UNIQUE INDEX \"PK_4d68b1358bb5b766d3e78f32f57\" ON public.project USING btree (id)",
+  "PK_6f5617b5fb0db43f92e39f5b626 -> CREATE UNIQUE INDEX \"PK_6f5617b5fb0db43f92e39f5b626\" ON public.project_pool_settings USING btree (\"projectId\")",
+  "IDX_5f0643f6717905a05164090dde -> CREATE INDEX \"IDX_5f0643f6717905a05164090dde\" ON public.project_relation USING btree (\"userId\")",
+  "IDX_61448d56d61802b5dfde5cdb00 -> CREATE INDEX \"IDX_61448d56d61802b5dfde5cdb00\" ON public.project_relation USING btree (\"projectId\")",
+  "PK_1caaa312a5d7184a003be0f0cb6 -> CREATE UNIQUE INDEX \"PK_1caaa312a5d7184a003be0f0cb6\" ON public.project_relation USING btree (\"projectId\", \"userId\")",
+  "project_relation_role_idx -> CREATE INDEX project_relation_role_idx ON public.project_relation USING btree (role)",
+  "project_relation_role_project_idx -> CREATE INDEX project_relation_role_project_idx ON public.project_relation USING btree (\"projectId\", role)",
+  "PK_0402b7fcec5415246656f102f83 -> CREATE UNIQUE INDEX \"PK_0402b7fcec5415246656f102f83\" ON public.project_secrets_provider_access USING btree (\"secretsProviderConnectionId\", \"projectId\")",
+  "IDX_promotion_config_connectionId_direction -> CREATE UNIQUE INDEX \"IDX_promotion_config_connectionId_direction\" ON public.promotion_config USING btree (\"connectionId\", direction)",
+  "PK_b4d534111f62d31699e6ceb544f -> CREATE UNIQUE INDEX \"PK_b4d534111f62d31699e6ceb544f\" ON public.promotion_config USING btree (id)",
+  "IDX_9917feaa6ed5705046432b117f -> CREATE INDEX \"IDX_9917feaa6ed5705046432b117f\" ON public.promotion_connection USING btree (\"providerId\")",
+  "IDX_promotion_connection_scope -> CREATE UNIQUE INDEX \"IDX_promotion_connection_scope\" ON public.promotion_connection USING btree (scope) WHERE ((scope)::text = 'instance'::text)",
+  "PK_65cec79aba16950b45592335204 -> CREATE UNIQUE INDEX \"PK_65cec79aba16950b45592335204\" ON public.promotion_connection USING btree (id)",
+  "IDX_2c579b1068b66359de1b4d2de5 -> CREATE INDEX \"IDX_2c579b1068b66359de1b4d2de5\" ON public.promotion_connection_project USING btree (\"connectionId\")",
+  "PK_0c63d9094bf8ca78349ba860147 -> CREATE UNIQUE INDEX \"PK_0c63d9094bf8ca78349ba860147\" ON public.promotion_connection_project USING btree (\"projectId\")",
+  "PK_6e968555ff44699f59ad10be765 -> CREATE UNIQUE INDEX \"PK_6e968555ff44699f59ad10be765\" ON public.promotion_provider USING btree (id)",
+  "IDX_UniqueRoleDisplayName -> CREATE UNIQUE INDEX \"IDX_UniqueRoleDisplayName\" ON public.role USING btree (\"displayName\")",
+  "PK_35c9b140caaf6da09cfabb0d675 -> CREATE UNIQUE INDEX \"PK_35c9b140caaf6da09cfabb0d675\" ON public.role USING btree (slug)",
+  "IDX_bb66e404c35996b0d694617750 -> CREATE INDEX \"IDX_bb66e404c35996b0d694617750\" ON public.role_mapping_rule USING btree (role)",
+  "PK_d772c8ec1a89b52d31c882bc560 -> CREATE UNIQUE INDEX \"PK_d772c8ec1a89b52d31c882bc560\" ON public.role_mapping_rule USING btree (id)",
+  "UQ_b33ac896ad3099fc8de36fdc1c4 -> CREATE UNIQUE INDEX \"UQ_b33ac896ad3099fc8de36fdc1c4\" ON public.role_mapping_rule USING btree (type, \"order\")",
+  "IDX_35a78869286c65d9330d02b88f -> CREATE INDEX \"IDX_35a78869286c65d9330d02b88f\" ON public.role_mapping_rule_project USING btree (\"projectId\")",
+  "PK_198c5b5aea509d139274efcaf9a -> CREATE UNIQUE INDEX \"PK_198c5b5aea509d139274efcaf9a\" ON public.role_mapping_rule_project USING btree (\"roleMappingRuleId\", \"projectId\")",
+  "IDX_role_scope_scopeSlug -> CREATE INDEX \"IDX_role_scope_scopeSlug\" ON public.role_scope USING btree (\"scopeSlug\")",
+  "PK_role_scope -> CREATE UNIQUE INDEX \"PK_role_scope\" ON public.role_scope USING btree (\"roleSlug\", \"scopeSlug\")",
+  "IDX_scheduled_job_name -> CREATE UNIQUE INDEX \"IDX_scheduled_job_name\" ON public.scheduled_job USING btree (name)",
+  "IDX_scheduled_job_nextRunAt -> CREATE INDEX \"IDX_scheduled_job_nextRunAt\" ON public.scheduled_job USING btree (\"nextRunAt\") WHERE ((enabled = true) AND (\"nextRunAt\" IS NOT NULL))",
+  "IDX_scheduled_job_ownerType_ownerId_ownerMemberId -> CREATE INDEX \"IDX_scheduled_job_ownerType_ownerId_ownerMemberId\" ON public.scheduled_job USING btree (\"ownerType\", \"ownerId\", \"ownerMemberId\")",
+  "PK_893185383f029ca8d57bb781fa8 -> CREATE UNIQUE INDEX \"PK_893185383f029ca8d57bb781fa8\" ON public.scheduled_job USING btree (id)",
+  "IDX_scheduled_task_finishedAt -> CREATE INDEX \"IDX_scheduled_task_finishedAt\" ON public.scheduled_task USING btree (\"finishedAt\") WHERE (\"finishedAt\" IS NOT NULL)",
+  "IDX_scheduled_task_jobId_scheduledFor -> CREATE UNIQUE INDEX \"IDX_scheduled_task_jobId_scheduledFor\" ON public.scheduled_task USING btree (\"jobId\", \"scheduledFor\")",
+  "IDX_scheduled_task_leaseExpiresAt -> CREATE INDEX \"IDX_scheduled_task_leaseExpiresAt\" ON public.scheduled_task USING btree (\"leaseExpiresAt\") WHERE ((status)::text = 'running'::text)",
+  "IDX_scheduled_task_missedAfter -> CREATE INDEX \"IDX_scheduled_task_missedAfter\" ON public.scheduled_task USING btree (\"missedAfter\") WHERE (((status)::text = 'pending'::text) AND (\"missedAfter\" IS NOT NULL))",
+  "IDX_scheduled_task_runAt -> CREATE INDEX \"IDX_scheduled_task_runAt\" ON public.scheduled_task USING btree (\"runAt\") WHERE ((status)::text = 'pending'::text)",
+  "PK_d690af24e57e30594c1948af1e6 -> CREATE UNIQUE INDEX \"PK_d690af24e57e30594c1948af1e6\" ON public.scheduled_task USING btree (id)",
+  "PK_bfc45df0481abd7f355d6187da1 -> CREATE UNIQUE INDEX \"PK_bfc45df0481abd7f355d6187da1\" ON public.scope USING btree (slug)",
+  "IDX_secrets_provider_connection_providerKey -> CREATE UNIQUE INDEX \"IDX_secrets_provider_connection_providerKey\" ON public.secrets_provider_connection USING btree (\"providerKey\")",
+  "PK_4350ae85e76f9ba7df1370acb5d -> CREATE UNIQUE INDEX \"PK_4350ae85e76f9ba7df1370acb5d\" ON public.secrets_provider_connection USING btree (id)",
+  "PK_dc0fe14e6d9943f268e7b119f69ab8bd -> CREATE UNIQUE INDEX \"PK_dc0fe14e6d9943f268e7b119f69ab8bd\" ON public.settings USING btree (key)",
+  "PK_8ef3a59796a228913f251779cff -> CREATE UNIQUE INDEX \"PK_8ef3a59796a228913f251779cff\" ON public.shared_credentials USING btree (\"credentialsId\", \"projectId\")",
+  "IDX_shared_workflow_projectId -> CREATE INDEX \"IDX_shared_workflow_projectId\" ON public.shared_workflow USING btree (\"projectId\")",
+  "PK_5ba87620386b847201c9531c58f -> CREATE UNIQUE INDEX \"PK_5ba87620386b847201c9531c58f\" ON public.shared_workflow USING btree (\"workflowId\", \"projectId\")",
+  "idx_812eb05f7451ca757fb98444ce -> CREATE UNIQUE INDEX idx_812eb05f7451ca757fb98444ce ON public.tag_entity USING btree (name)",
+  "pk_tag_entity_id -> CREATE UNIQUE INDEX pk_tag_entity_id ON public.tag_entity USING btree (id)",
+  "tag_entity_pkey -> CREATE UNIQUE INDEX tag_entity_pkey ON public.tag_entity USING btree (id)",
+  "IDX_8e4b4774db42f1e6dda3452b2a -> CREATE INDEX \"IDX_8e4b4774db42f1e6dda3452b2a\" ON public.test_case_execution USING btree (\"testRunId\")",
+  "PK_90c121f77a78a6580e94b794bce -> CREATE UNIQUE INDEX \"PK_90c121f77a78a6580e94b794bce\" ON public.test_case_execution USING btree (id)",
+  "IDX_d6870d3b6e4c185d33926f423c -> CREATE INDEX \"IDX_d6870d3b6e4c185d33926f423c\" ON public.test_run USING btree (\"workflowId\")",
+  "IDX_test_run_collectionId -> CREATE INDEX \"IDX_test_run_collectionId\" ON public.test_run USING btree (\"collectionId\")",
+  "IDX_test_run_evaluationConfigId -> CREATE INDEX \"IDX_test_run_evaluationConfigId\" ON public.test_run USING btree (\"evaluationConfigId\")",
+  "PK_011c050f566e9db509a0fadb9b9 -> CREATE UNIQUE INDEX \"PK_011c050f566e9db509a0fadb9b9\" ON public.test_run USING btree (id)",
+  "PK_d8e8a6f737d530fdd2dd716e89c -> CREATE UNIQUE INDEX \"PK_d8e8a6f737d530fdd2dd716e89c\" ON public.token_exchange_jti USING btree (jti)",
+  "PK_dc7d93798f3dbb6959f974c97e1 -> CREATE UNIQUE INDEX \"PK_dc7d93798f3dbb6959f974c97e1\" ON public.trusted_key USING btree (\"sourceId\", kid)",
+  "PK_99e8908ce2c2cdccce487db7fc6 -> CREATE UNIQUE INDEX \"PK_99e8908ce2c2cdccce487db7fc6\" ON public.trusted_key_source USING btree (id)",
+  "PK_7dc9809c6d53a6b8b8a62cd7798 -> CREATE UNIQUE INDEX \"PK_7dc9809c6d53a6b8b8a62cd7798\" ON public.type_availability_policy USING btree (id)",
+  "IDX_674705e4c8a3d3eb0736f8e8ee -> CREATE INDEX \"IDX_674705e4c8a3d3eb0736f8e8ee\" ON public.type_availability_policy_attachment USING btree (\"policyId\")",
+  "PK_96c1ba2b399ed0aabb047d04f07 -> CREATE UNIQUE INDEX \"PK_96c1ba2b399ed0aabb047d04f07\" ON public.type_availability_policy_attachment USING btree (\"scopeId\", \"policyId\")",
+  "uq_type_availability_attachment_slot -> CREATE UNIQUE INDEX uq_type_availability_attachment_slot ON public.type_availability_policy_attachment USING btree (\"scopeId\", \"isFloor\", priority)",
+  "PK_26178b723c376150b45eabdb8e7 -> CREATE UNIQUE INDEX \"PK_26178b723c376150b45eabdb8e7\" ON public.type_availability_policy_scope USING btree (id)",
+  "uq_type_availability_policy_scope_instance -> CREATE UNIQUE INDEX uq_type_availability_policy_scope_instance ON public.type_availability_policy_scope USING btree (kind) WHERE (\"projectId\" IS NULL)",
+  "uq_type_availability_policy_scope_project -> CREATE UNIQUE INDEX uq_type_availability_policy_scope_project ON public.type_availability_policy_scope USING btree (kind, \"projectId\") WHERE (\"projectId\" IS NOT NULL)",
+  "PK_ea8f538c94b6e352418254ed6474a81f -> CREATE UNIQUE INDEX \"PK_ea8f538c94b6e352418254ed6474a81f\" ON public.\"user\" USING btree (id)",
+  "UQ_e12875dfb3b1d92d7d7c5377e2 -> CREATE UNIQUE INDEX \"UQ_e12875dfb3b1d92d7d7c5377e2\" ON public.\"user\" USING btree (email)",
+  "user_role_idx -> CREATE INDEX user_role_idx ON public.\"user\" USING btree (\"roleSlug\")",
+  "IDX_1ef35bac35d20bdae979d917a3 -> CREATE UNIQUE INDEX \"IDX_1ef35bac35d20bdae979d917a3\" ON public.user_api_keys USING btree (\"apiKey\")",
+  "IDX_63d7bbae72c767cf162d459fcc -> CREATE UNIQUE INDEX \"IDX_63d7bbae72c767cf162d459fcc\" ON public.user_api_keys USING btree (\"userId\", label)",
+  "PK_978fa5caa3468f463dac9d92e69 -> CREATE UNIQUE INDEX \"PK_978fa5caa3468f463dac9d92e69\" ON public.user_api_keys USING btree (id)",
+  "IDX_1d11050a381548c42c32cc25c4 -> CREATE INDEX \"IDX_1d11050a381548c42c32cc25c4\" ON public.user_favorites USING btree (\"resourceType\", \"resourceId\")",
+  "IDX_1dd5c393ad0517be3c31a7af83 -> CREATE INDEX \"IDX_1dd5c393ad0517be3c31a7af83\" ON public.user_favorites USING btree (\"userId\")",
+  "PK_6c472a19a7423cfbbf6b7c75939 -> CREATE UNIQUE INDEX \"PK_6c472a19a7423cfbbf6b7c75939\" ON public.user_favorites USING btree (id)",
+  "UQ_cf6ae658ead9ffc124723413c65 -> CREATE UNIQUE INDEX \"UQ_cf6ae658ead9ffc124723413c65\" ON public.user_favorites USING btree (\"userId\", \"resourceId\", \"resourceType\")",
+  "variables_global_key_unique -> CREATE UNIQUE INDEX variables_global_key_unique ON public.variables USING btree (key) WHERE (\"projectId\" IS NULL)",
+  "variables_pkey -> CREATE UNIQUE INDEX variables_pkey ON public.variables USING btree (id)",
+  "variables_project_key_unique -> CREATE UNIQUE INDEX variables_project_key_unique ON public.variables USING btree (\"projectId\", key) WHERE (\"projectId\" IS NOT NULL)",
+  "PK_b21ace2e13596ccd87dc9bf4ea6 -> CREATE UNIQUE INDEX \"PK_b21ace2e13596ccd87dc9bf4ea6\" ON public.webhook_entity USING btree (\"webhookPath\", method)",
+  "idx_16f4436789e804e3e1c9eeb240 -> CREATE INDEX idx_16f4436789e804e3e1c9eeb240 ON public.webhook_entity USING btree (\"webhookId\", method, \"pathLength\")",
+  "PK_e69ef0d385986e273423b0e8695 -> CREATE UNIQUE INDEX \"PK_e69ef0d385986e273423b0e8695\" ON public.workflow_builder_session USING btree (id)",
+  "UQ_ec2aa73632932d485a1d5192ce1 -> CREATE UNIQUE INDEX \"UQ_ec2aa73632932d485a1d5192ce1\" ON public.workflow_builder_session USING btree (\"workflowId\", \"userId\")",
+  "IDX_a4ff2d9b9628ea988fa9e7d0bf -> CREATE INDEX \"IDX_a4ff2d9b9628ea988fa9e7d0bf\" ON public.workflow_dependency USING btree (\"workflowId\")",
+  "IDX_e48a201071ab85d9d09119d640 -> CREATE INDEX \"IDX_e48a201071ab85d9d09119d640\" ON public.workflow_dependency USING btree (\"dependencyKey\")",
+  "IDX_e7fe1cfda990c14a445937d0b9 -> CREATE INDEX \"IDX_e7fe1cfda990c14a445937d0b9\" ON public.workflow_dependency USING btree (\"dependencyType\")",
+  "IDX_workflow_dependency_publishedVersionId -> CREATE INDEX \"IDX_workflow_dependency_publishedVersionId\" ON public.workflow_dependency USING btree (\"publishedVersionId\")",
+  "PK_52325e34cd7a2f0f67b0f3cad65 -> CREATE UNIQUE INDEX \"PK_52325e34cd7a2f0f67b0f3cad65\" ON public.workflow_dependency USING btree (id)",
+  "IDX_workflow_entity_name -> CREATE INDEX \"IDX_workflow_entity_name\" ON public.workflow_entity USING btree (name)",
+  "IDX_workflow_entity_sourceWorkflowId -> CREATE INDEX \"IDX_workflow_entity_sourceWorkflowId\" ON public.workflow_entity USING btree (\"sourceWorkflowId\") WHERE (\"sourceWorkflowId\" IS NOT NULL)",
+  "pk_workflow_entity_id -> CREATE UNIQUE INDEX pk_workflow_entity_id ON public.workflow_entity USING btree (id)",
+  "workflow_entity_pkey -> CREATE UNIQUE INDEX workflow_entity_pkey ON public.workflow_entity USING btree (id)",
+  "IDX_1e31657f5fe46816c34be7c1b4 -> CREATE INDEX \"IDX_1e31657f5fe46816c34be7c1b4\" ON public.workflow_history USING btree (\"workflowId\")",
+  "PK_b6572dd6173e4cd06fe79937b58 -> CREATE UNIQUE INDEX \"PK_b6572dd6173e4cd06fe79937b58\" ON public.workflow_history USING btree (\"versionId\")",
+  "IDX_workflow_publication_outbox_active_workflow_status -> CREATE UNIQUE INDEX \"IDX_workflow_publication_outbox_active_workflow_status\" ON public.workflow_publication_outbox USING btree (\"workflowId\", status) WHERE ((status)::text = ANY ((ARRAY['pending'::character varying, 'in_progress'::character varying])::text[]))",
+  "PK_b3e2eeee36a4bd044d56468d311 -> CREATE UNIQUE INDEX \"PK_b3e2eeee36a4bd044d56468d311\" ON public.workflow_publication_outbox USING btree (id)",
+  "PK_14aa18b83513fb92d7523909e02 -> CREATE UNIQUE INDEX \"PK_14aa18b83513fb92d7523909e02\" ON public.workflow_publication_trigger_status USING btree (\"workflowId\", \"nodeId\")",
+  "IDX_070b5de842ece9ccdda0d9738b -> CREATE INDEX \"IDX_070b5de842ece9ccdda0d9738b\" ON public.workflow_publish_history USING btree (\"workflowId\", \"versionId\")",
+  "PK_c788f7caf88e91e365c97d6d04a -> CREATE UNIQUE INDEX \"PK_c788f7caf88e91e365c97d6d04a\" ON public.workflow_publish_history USING btree (id)",
+  "PK_5c76fb7ee939fe2530374d3f75a -> CREATE UNIQUE INDEX \"PK_5c76fb7ee939fe2530374d3f75a\" ON public.workflow_published_version USING btree (\"workflowId\")",
+  "IDX_workflow_review_activity_request -> CREATE INDEX \"IDX_workflow_review_activity_request\" ON public.workflow_review_activity USING btree (\"workflowReviewRequestId\", id)",
+  "PK_f1e66ba0b645dec566057ad21e6 -> CREATE UNIQUE INDEX \"PK_f1e66ba0b645dec566057ad21e6\" ON public.workflow_review_activity USING btree (id)",
+  "IDX_workflow_review_activity_comment_activity -> CREATE INDEX \"IDX_workflow_review_activity_comment_activity\" ON public.workflow_review_activity_comment USING btree (\"activityId\", id)",
+  "PK_5a2a7dea8b7e6afa1001129da27 -> CREATE UNIQUE INDEX \"PK_5a2a7dea8b7e6afa1001129da27\" ON public.workflow_review_activity_comment USING btree (id)",
+  "IDX_workflow_review_request_project_state -> CREATE INDEX \"IDX_workflow_review_request_project_state\" ON public.workflow_review_request USING btree (\"projectId\", state)",
+  "PK_ae17b90023bcd05e003cd8f64dc -> CREATE UNIQUE INDEX \"PK_ae17b90023bcd05e003cd8f64dc\" ON public.workflow_review_request USING btree (id)",
+  "IDX_workflow_review_request_authors_user -> CREATE INDEX \"IDX_workflow_review_request_authors_user\" ON public.workflow_review_request_authors USING btree (\"userId\", \"workflowReviewRequestId\")",
+  "PK_ae197bb5135d422f6392a879e0c -> CREATE UNIQUE INDEX \"PK_ae197bb5135d422f6392a879e0c\" ON public.workflow_review_request_authors USING btree (\"workflowReviewRequestId\", \"userId\")",
+  "IDX_workflow_review_request_reviewers_user -> CREATE INDEX \"IDX_workflow_review_request_reviewers_user\" ON public.workflow_review_request_reviewers USING btree (\"userId\", \"workflowReviewRequestId\")",
+  "PK_4715c6035e0ebc4f3e8716f1e34 -> CREATE UNIQUE INDEX \"PK_4715c6035e0ebc4f3e8716f1e34\" ON public.workflow_review_request_reviewers USING btree (\"workflowReviewRequestId\", \"userId\")",
+  "IDX_workflow_review_request_workflow_workflow_request -> CREATE INDEX \"IDX_workflow_review_request_workflow_workflow_request\" ON public.workflow_review_request_workflow USING btree (\"workflowId\", \"workflowReviewRequestId\")",
+  "PK_be3bf4facb054cf2b2b116b3b9c -> CREATE UNIQUE INDEX \"PK_be3bf4facb054cf2b2b116b3b9c\" ON public.workflow_review_request_workflow USING btree (id)",
+  "UQ_workflow_review_request_workflow_request_workflow -> CREATE UNIQUE INDEX \"UQ_workflow_review_request_workflow_request_workflow\" ON public.workflow_review_request_workflow USING btree (\"workflowReviewRequestId\", \"workflowId\")",
+  "IDX_workflow_statistics_workflow_name -> CREATE UNIQUE INDEX \"IDX_workflow_statistics_workflow_name\" ON public.workflow_statistics USING btree (\"workflowId\", name)",
+  "workflow_statistics_pkey -> CREATE UNIQUE INDEX workflow_statistics_pkey ON public.workflow_statistics USING btree (id)",
+  "workflow_statistics_delta_pkey -> CREATE UNIQUE INDEX workflow_statistics_delta_pkey ON public.workflow_statistics_delta USING btree (id)",
+  "idx_workflows_tags_workflow_id -> CREATE INDEX idx_workflows_tags_workflow_id ON public.workflows_tags USING btree (\"workflowId\")",
+  "pk_workflows_tags -> CREATE UNIQUE INDEX pk_workflows_tags ON public.workflows_tags USING btree (\"workflowId\", \"tagId\")"
+ ],
+ "constraints": [
+  "CHK_agent_background_job_kind : CHECK (((kind)::text = ANY ((ARRAY['subagent'::character varying, 'workflow'::character varying])::text[])))",
+  "CHK_agent_background_job_status : CHECK (((status)::text = ANY ((ARRAY['running'::character varying, 'completed'::character varying, 'failed'::character varying, 'cancelled'::character varying])::text[])))",
+  "CHK_agent_channel_status_status : CHECK (((status)::text = ANY ((ARRAY['connected'::character varying, 'error'::character varying])::text[])))",
+  "CHK_agent_chat_subscriptions_integrationType : CHECK (((\"integrationType\")::text = ANY ((ARRAY['telegram'::character varying, 'slack'::character varying, 'linear'::character varying, 'discord'::character varying])::text[])))",
+  "CHK_agent_eval_dataset_datasetSource : CHECK (((\"datasetSource\")::text = ANY ((ARRAY['data_table'::character varying, 'google_sheets'::character varying])::text[])))",
+  "CHK_agent_eval_rating_vote : CHECK (((vote)::text = ANY ((ARRAY['up'::character varying, 'down'::character varying])::text[])))",
+  "CHK_agent_eval_result_status : CHECK (((status)::text = ANY ((ARRAY['new'::character varying, 'running'::character varying, 'success'::character varying, 'error'::character varying, 'cancelled'::character varying])::text[])))",
+  "CHK_agent_eval_run_status : CHECK (((status)::text = ANY ((ARRAY['new'::character varying, 'running'::character varying, 'completed'::character varying, 'error'::character varying, 'cancelled'::character varying])::text[])))",
+  "CHK_agent_execution_hitlStatus : CHECK (((\"hitlStatus\")::text = ANY ((ARRAY['suspended'::character varying, 'resumed'::character varying])::text[])))",
+  "CHK_agent_execution_status : CHECK (((status)::text = ANY ((ARRAY['running'::character varying, 'success'::character varying, 'error'::character varying, 'cancelled'::character varying, 'interrupted'::character varying])::text[])))",
+  "CHK_agent_execution_storedAt : CHECK (((\"storedAt\")::text = ANY ((ARRAY['db'::character varying, 'fs'::character varying, 's3'::character varying, 'az'::character varying])::text[])))",
+  "CHK_agent_files_storedAt : CHECK (((\"storedAt\")::text = ANY ((ARRAY['db'::character varying, 'fs'::character varying, 's3'::character varying, 'az'::character varying])::text[])))",
+  "CHK_agents_memory_entries_status : CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'superseded'::character varying, 'dropped'::character varying])::text[])))",
+  "CHK_agents_memory_entry_candidates_status : CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'completed'::character varying, 'failed'::character varying])::text[])))",
+  "CHK_agents_memory_entry_sources_exactly_one_source : CHECK ((((\"observationId\" IS NOT NULL) AND (\"candidateId\" IS NULL)) OR ((\"observationId\" IS NULL) AND (\"candidateId\" IS NOT NULL))))",
+  "CHK_agents_observation_locks_taskKind : CHECK (((\"taskKind\")::text = ANY ((ARRAY['observer'::character varying, 'reflector'::character varying])::text[])))",
+  "CHK_agents_observations_marker : CHECK (((marker)::text = ANY ((ARRAY['critical'::character varying, 'important'::character varying, 'info'::character varying, 'completion'::character varying])::text[])))",
+  "CHK_agents_observations_status : CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'superseded'::character varying, 'dropped'::character varying])::text[])))",
+  "CHK_ai_preference_single_target : CHECK (((\"userId\" IS NULL) OR (\"projectId\" IS NULL)))",
+  "CHK_binary_data_sourceType : CHECK (((\"sourceType\")::text = ANY ((ARRAY['execution'::character varying, 'chat_message_attachment'::character varying, 'agent_file'::character varying, 'agent_chat_attachment'::character varying])::text[])))",
+  "CHK_chat_hub_sessions_type : CHECK (((type)::text = ANY ((ARRAY['production'::character varying, 'manual'::character varying])::text[])))",
+  "CHK_credentials_entity_usageScope : CHECK (((\"usageScope\")::text = ANY ((ARRAY['project'::character varying, 'instance'::character varying])::text[])))",
+  "CHK_execution_entity_storedAt : CHECK (((\"storedAt\")::text = ANY ((ARRAY['db'::character varying, 'fs'::character varying, 's3'::character varying, 'az'::character varying])::text[])))",
+  "CHK_instance_ai_observation_locks_taskKind : CHECK (((\"taskKind\")::text = ANY ((ARRAY['observer'::character varying, 'reflector'::character varying])::text[])))",
+  "CHK_instance_ai_observations_marker : CHECK (((marker)::text = ANY ((ARRAY['critical'::character varying, 'important'::character varying, 'info'::character varying, 'completion'::character varying])::text[])))",
+  "CHK_instance_ai_observations_status : CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'superseded'::character varying, 'dropped'::character varying])::text[])))",
+  "CHK_instance_ai_pending_confirmations_kind : CHECK (((kind)::text = ANY ((ARRAY['suspended'::character varying, 'inline'::character varying])::text[])))",
+  "CHK_instance_monitoring_report_status : CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'delivered'::character varying, 'skipped_after_max_retries'::character varying])::text[])))",
+  "CHK_project_secrets_provider_access_role : CHECK (((role)::text = ANY ((ARRAY['secretsProviderConnection:owner'::character varying, 'secretsProviderConnection:user'::character varying])::text[])))",
+  "CHK_promotion_config_direction : CHECK (((direction)::text = ANY ((ARRAY['apply'::character varying, 'promote'::character varying])::text[])))",
+  "CHK_promotion_connection_scope : CHECK (((scope)::text = ANY ((ARRAY['instance'::character varying, 'projects'::character varying])::text[])))",
+  "CHK_promotion_provider_authType : CHECK (((\"authType\")::text = ANY ((ARRAY['ssh-key'::character varying, 'token'::character varying])::text[])))",
+  "CHK_promotion_provider_type : CHECK (((type)::text = 'git'::text))",
+  "CHK_scheduled_job_cron_expression : CHECK ((((kind)::text <> 'cron'::text) OR (\"cronExpression\" IS NOT NULL)))",
+  "CHK_scheduled_job_fire_at : CHECK ((((kind)::text <> 'one_off'::text) OR (\"fireAt\" IS NOT NULL)))",
+  "CHK_scheduled_job_interval_seconds : CHECK ((((kind)::text <> 'interval'::text) OR (\"intervalSeconds\" IS NOT NULL)))",
+  "CHK_scheduled_job_kind : CHECK (((kind)::text = ANY ((ARRAY['cron'::character varying, 'interval'::character varying, 'one_off'::character varying, 'recurring_cron'::character varying])::text[])))",
+  "CHK_scheduled_job_misfireGraceSeconds : CHECK ((\"misfireGraceSeconds\" > 0))",
+  "CHK_scheduled_job_misfirePolicy : CHECK (((\"misfirePolicy\")::text = ANY ((ARRAY['coalesce'::character varying, 'skip'::character varying, 'coalesce_owner'::character varying])::text[])))",
+  "CHK_scheduled_job_recurrence_size : CHECK ((\"recurrenceSize\" >= 2))",
+  "CHK_scheduled_job_recurrence_unit : CHECK (((\"recurrenceUnit\")::text = ANY ((ARRAY['hours'::character varying, 'days'::character varying, 'weeks'::character varying, 'months'::character varying])::text[])))",
+  "CHK_scheduled_job_recurring_cron : CHECK ((((kind)::text <> 'recurring_cron'::text) OR ((\"cronExpression\" IS NOT NULL) AND (\"recurrenceUnit\" IS NOT NULL) AND (\"recurrenceSize\" IS NOT NULL))))",
+  "CHK_scheduled_task_running_lease : CHECK ((((status)::text <> 'running'::text) OR (\"leaseExpiresAt\" IS NOT NULL)))",
+  "CHK_scheduled_task_status : CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'running'::character varying, 'succeeded'::character varying, 'failed'::character varying, 'missed'::character varying, 'cancelled'::character varying])::text[])))",
+  "CHK_tmp_mcp_registry_server_status : CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'deprecated'::character varying])::text[])))",
+  "CHK_type_availability_policy_scope_defaultAction : CHECK (((\"defaultAction\")::text = ANY ((ARRAY['allow'::character varying, 'deny'::character varying, 'delegate'::character varying])::text[])))",
+  "CHK_workflow_publication_outbox_reason : CHECK (((reason)::text = ANY ((ARRAY['publish'::character varying, 'startup'::character varying, 'leadership-takeover'::character varying, 'reconcile'::character varying])::text[])))",
+  "CHK_workflow_publication_outbox_status : CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'in_progress'::character varying, 'completed'::character varying, 'partial_success'::character varying, 'failed'::character varying])::text[])))",
+  "CHK_workflow_publication_trigger_status_status : CHECK (((status)::text = ANY ((ARRAY['activated'::character varying, 'failed'::character varying])::text[])))",
+  "CHK_workflow_publication_trigger_status_triggerKind : CHECK (((\"triggerKind\")::text = ANY ((ARRAY['in-memory'::character varying, 'persisted'::character varying])::text[])))",
+  "CHK_workflow_publish_history_event : CHECK (((event)::text = ANY ((ARRAY['activated'::character varying, 'deactivated'::character varying])::text[])))",
+  "CHK_workflow_review_request_decision : CHECK (((decision)::text = ANY ((ARRAY['pending'::character varying, 'changes_requested'::character varying, 'approved'::character varying])::text[])))",
+  "CHK_workflow_review_request_state : CHECK (((state)::text = ANY ((ARRAY['open'::character varying, 'closed'::character varying])::text[])))",
+  "FK_00290cdeee4d4d7db84709be936 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_0468a9dc35597314e641d4722aa : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_06a69a7032c97a763c2c7599464 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_08d6c67b7f722b0039d9d5ed620 : FOREIGN KEY (\"activeVersionId\") REFERENCES workflow_history(\"versionId\") ON DELETE RESTRICT",
+  "FK_093e44ae20f2518e97d83a95433 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_0a8057a61afabd2999608ffd0d9 : FOREIGN KEY (\"threadId\") REFERENCES agents_threads(id) ON DELETE CASCADE",
+  "FK_0babdf6e3b897a86fe4678355eb : FOREIGN KEY (\"checkpointKey\") REFERENCES instance_ai_checkpoints(key) ON DELETE CASCADE",
+  "FK_0ccf6d9ea6f44fa1c264fc2f795 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_0e2f8bf92a7a9c88b89670f701c : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_0edf1226b77ddc525eae4938079 : FOREIGN KEY (\"supersededBy\") REFERENCES agents_memory_entries(id)",
+  "FK_0f6f0f2c6d46b806fee02962ac2 : FOREIGN KEY (\"workflowVersionId\") REFERENCES workflow_history(\"versionId\") ON DELETE SET NULL",
+  "FK_103e2e5f454860b28ea05a82c74 : FOREIGN KEY (\"observationScopeId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_118709fc9fe21d3406f81665a53 : FOREIGN KEY (\"scopeId\") REFERENCES type_availability_policy_scope(id) ON DELETE CASCADE",
+  "FK_127ee1078ffa952bb37b511efad : FOREIGN KEY (\"supersededBy\") REFERENCES agents_observations(id)",
+  "FK_1443a75e59adbfb796071d66393 : FOREIGN KEY (\"resourceId\") REFERENCES agents_resources(id) ON DELETE CASCADE",
+  "FK_18e5c27d2524b1638b292904e48 : FOREIGN KEY (\"secretsProviderConnectionId\") REFERENCES secrets_provider_connection(id) ON DELETE CASCADE",
+  "FK_1acedce6690392ef1611cca8b88 : FOREIGN KEY (\"versionId\") REFERENCES agent_history(\"versionId\") ON DELETE CASCADE",
+  "FK_1d25707354d2012da256eb2ec0a : FOREIGN KEY (\"serverSlug\") REFERENCES mcp_registry_server(slug) ON DELETE CASCADE",
+  "FK_1d8ab99d5861c9388d2dc1cf733 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE SET NULL",
+  "FK_1dd5c393ad0517be3c31a7af836 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_1e31657f5fe46816c34be7c1b4b : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_1e826120e7e53ebc4681f026de8 : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE CASCADE",
+  "FK_1eeb64cb9d66a927988de759e6e : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_1f4998c8a7dec9e00a9ab15550e : FOREIGN KEY (\"revisionOfMessageId\") REFERENCES chat_hub_messages(id) ON DELETE CASCADE",
+  "FK_21d5f5a831d2e38960030bb4f60 : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_21e6c3c2d78a097478fae6aaefa : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_2375a1eda085adb16b24615b69c : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE SET NULL",
+  "FK_25c9736e7f769f3a005eef4b372 : FOREIGN KEY (\"retryOfMessageId\") REFERENCES chat_hub_messages(id) ON DELETE CASCADE",
+  "FK_2817c3a0245197b498818c447cb : FOREIGN KEY (\"updatedById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_28e981fb675e9b44ce02f0ec1dd : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_29654477f37189453b353d3f46a : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_2b23f3f24a70bebb990203b011e : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_2b53d796b3dbae91b1a9553c048 : FOREIGN KEY (\"agentId\") REFERENCES chat_hub_agents(id) ON DELETE CASCADE",
+  "FK_31d0b4c93fb85ced26f6005cda3 : FOREIGN KEY (\"executionId\") REFERENCES execution_entity(id) ON DELETE CASCADE",
+  "FK_34018c303885cd37093458e6409 : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE SET NULL",
+  "FK_35909c5576a4a6c1d6a6fb71caa : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_35a78869286c65d9330d02b88f5 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_39b07732e819fb561d74c38763f : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_39ca447735d378e365f4227abff : FOREIGN KEY (\"datasetId\") REFERENCES agent_eval_dataset(id) ON DELETE CASCADE",
+  "FK_3cd755e8ce44ee49bdf7e9222ec : FOREIGN KEY (\"activityId\") REFERENCES workflow_review_activity(id) ON DELETE CASCADE",
+  "FK_401b94abf83d1ac7a841f31330e : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_40a2d1248a6d984f442de2fac1b : FOREIGN KEY (\"runId\") REFERENCES agent_eval_run(id) ON DELETE CASCADE",
+  "FK_416f66fc846c7c442970c094ccf : FOREIGN KEY (\"credentialsId\") REFERENCES credentials_entity(id) ON DELETE CASCADE",
+  "FK_41c246c30af3d2108d93e15dd5e : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_42f6c766f9f9d2edcc15bdd6e9b : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_43e70f04c53344f82483d0570f6 : FOREIGN KEY (\"toolId\") REFERENCES chat_hub_tools(id) ON DELETE CASCADE",
+  "FK_441ba2caba11e077ce3fbfa2cd8 : FOREIGN KEY (\"ownerId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_451d387a182fa8dd8002dfc3a77 : FOREIGN KEY (\"threadId\") REFERENCES agents_threads(id) ON DELETE CASCADE",
+  "FK_4706f6223313959b7437a2b48df : FOREIGN KEY (\"memoryEntryId\") REFERENCES agents_memory_entries(id) ON DELETE CASCADE",
+  "FK_4cfd8a70ebb0a5b0cf047dca3cf : FOREIGN KEY (\"observationScopeId\") REFERENCES agents_threads(id) ON DELETE CASCADE",
+  "FK_4ea340a1847ad0e40a0b0360fe4 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_501e2d1701a10e24fb69ab5fc5f : FOREIGN KEY (\"parentId\") REFERENCES agents_observations(id)",
+  "FK_5123f71435736664d2676084a85 : FOREIGN KEY (\"resourceId\") REFERENCES agents_resources(id) ON DELETE CASCADE",
+  "FK_54ee897f442cc7393a6d6165334 : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_5b6319b2e9a37c1064a72428f9a : FOREIGN KEY (\"observationScopeId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_5c048535b2132b40dfed2e640e5 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_5c76fb7ee939fe2530374d3f75a : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE RESTRICT",
+  "FK_5e31c210f896d539964bf99fe32 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_5ec8e8c8d3539f3696cf73b43bf : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE CASCADE",
+  "FK_5f0643f6717905a05164090dde7 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_61048bf6220dd354c955a9d9379 : FOREIGN KEY (\"workflowReviewRequestId\") REFERENCES workflow_review_request(id) ON DELETE CASCADE",
+  "FK_61448d56d61802b5dfde5cdb002 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_619f5b0544bcec60c3387e82f2f : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_6414cfed98daabbfdd61a1cfbc0 : FOREIGN KEY (\"metaId\") REFERENCES insights_metadata(\"metaId\") ON DELETE CASCADE",
+  "FK_64d965bd072ea24fb6da55468cd : FOREIGN KEY (\"clientId\") REFERENCES oauth_clients(id) ON DELETE CASCADE",
+  "FK_64e92819f4b413661ed6e2c3c3d : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_6596a328affd8d4967ffb303eee : FOREIGN KEY (\"toolId\") REFERENCES chat_hub_tools(id) ON DELETE CASCADE",
+  "FK_674705e4c8a3d3eb0736f8e8eee : FOREIGN KEY (\"policyId\") REFERENCES type_availability_policy(id) ON DELETE RESTRICT",
+  "FK_6a6948884969cb4204a1975578b : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_6afb260449dd7a9b85355d4e0c9 : FOREIGN KEY (\"executionId\") REFERENCES execution_entity(id) ON DELETE SET NULL",
+  "FK_6b55089892e447c2f82e5ec60ed : FOREIGN KEY (\"observationScopeId\") REFERENCES agents_threads(id) ON DELETE CASCADE",
+  "FK_6bf94d5542661d2e1b9e0c41436 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_6e2e33741adef2a7c5d66befa4e : FOREIGN KEY (\"metaId\") REFERENCES insights_metadata(\"metaId\") ON DELETE CASCADE",
+  "FK_6eab5bd9eedabe9c54bd879fc40 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_6edec973a6450990977bb854c38 : FOREIGN KEY (\"resolverId\") REFERENCES dynamic_credential_resolver(id) ON DELETE CASCADE",
+  "FK_6f5617b5fb0db43f92e39f5b626 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_7234a36d8e49a1fa85095328845 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_73c152c542cea477208c3106193 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_73f857fc5dce682cef8a99c11dbddbc969618951 : FOREIGN KEY (package) REFERENCES installed_packages(\"packageName\") ON UPDATE CASCADE ON DELETE CASCADE",
+  "FK_78b26968132b7e5e45b75876481 : FOREIGN KEY (\"clientId\") REFERENCES oauth_clients(id) ON DELETE CASCADE",
+  "FK_7983c618db48f47bf5a4cc1e1e4 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_7a723e6aad04d88057dea6a21f4 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_7bc13b4c7e6afbfaf9be326c189 : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE SET NULL",
+  "FK_804ea52f6729e3940498bd54d78 : FOREIGN KEY (\"parentFolderId\") REFERENCES folder(id) ON DELETE CASCADE",
+  "FK_812c2852270da1247756e77f5a4 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_81d0a2584aa4e8e5e0d6aa68f32 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_85a87a1ba0f61999fe11dc56325 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_87640d646b020c3be8e16cd0fa6 : FOREIGN KEY (\"candidateId\") REFERENCES agents_memory_entry_candidates(id) ON DELETE CASCADE",
+  "FK_8771675f44c58fb40e0feb9ee35 : FOREIGN KEY (\"publishedById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_87aa187d27ea67eafd164905154 : FOREIGN KEY (\"observationScopeId\") REFERENCES agents_threads(id) ON DELETE CASCADE",
+  "FK_87cd5a8da20304b089ea2f83fec : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_8b42c08a531d76410980c639a5b : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_8bfcc6c51fd3d69b1eae8aebd49 : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_8c2938d746943dd8f608d23c891 : FOREIGN KEY (\"sourceId\") REFERENCES trusted_key_source(id) ON DELETE CASCADE",
+  "FK_8e4b4774db42f1e6dda3452b2af : FOREIGN KEY (\"testRunId\") REFERENCES test_run(id) ON DELETE CASCADE",
+  "FK_908202dbc0a9b52f669c11d730c : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_930b6e8faaf88294cef23484160 : FOREIGN KEY (\"dataTableId\") REFERENCES data_table(id) ON DELETE CASCADE",
+  "FK_940597dfe9753375309ce6aeea0 : FOREIGN KEY (\"activeVersionId\") REFERENCES agent_history(\"versionId\") ON DELETE SET NULL",
+  "FK_945ba70b342a066d1306b12ccd2 : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE CASCADE",
+  "FK_94a60854e06f2897b2e0d39edba : FOREIGN KEY (\"folderId\") REFERENCES folder(id) ON DELETE CASCADE",
+  "FK_9594c0983cfee1c8ff49b05848b : FOREIGN KEY (\"resourceId\") REFERENCES agents_resources(id) ON DELETE CASCADE",
+  "FK_97f863fa83c4786f19565084960 : FOREIGN KEY (\"executionId\") REFERENCES execution_entity(id) ON DELETE CASCADE",
+  "FK_9c61ad497dcbae499c96a6a78ba : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE SET NULL",
+  "FK_9cadae6591c64498f1b58a2cef3 : FOREIGN KEY (\"resultId\") REFERENCES agent_eval_result(id) ON DELETE CASCADE",
+  "FK_9cfac4b106553d0930a1962bea0 : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_9d3a6fd750f7746de453cf4d5ed : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_9f9293d9f552496c40e0d1a8f80 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE SET NULL",
+  "FK_a2694df196a66064edbdbe38b94 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_a30d560207c4071d98aa03c179c : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_a3697779b366e131b2bbdae2976 : FOREIGN KEY (\"tagId\") REFERENCES annotation_tag_entity(id) ON DELETE CASCADE",
+  "FK_a36dc616fabc3f736bb82410a22 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_a45ea5f27bcfdc21af9b4188560 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_a48ce930c3bc7604894b8f0eaad : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_a4ff2d9b9628ea988fa9e7d0bf8 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_a651acea2f6c97f8c4514935486 : FOREIGN KEY (\"clientId\") REFERENCES oauth_clients(id) ON DELETE CASCADE",
+  "FK_a699f3ed9fd0c1b19bc2608ac53 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_a6d1dd080958304a47a02952aab : FOREIGN KEY (credential_id) REFERENCES credentials_entity(id) ON DELETE CASCADE",
+  "FK_a80e0ee839a2f10ba4b86e19998 : FOREIGN KEY (\"supersededBy\") REFERENCES instance_ai_observations(id)",
+  "FK_a8260b0b36939c6247f385b8221 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_a9c79ab0c352aa0496c39ea56a4 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_aa8d3560484944c19bdf79ffa16 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_ac7ada75df7cc8ced228921d5a9 : FOREIGN KEY (\"threadId\") REFERENCES agents_threads(id) ON DELETE CASCADE",
+  "FK_aca4514cb500494b64356c2e164 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_acf8926098f063cdbbad8497fd1 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE SET NULL",
+  "FK_add2432fb6034cc18b6af299dce : FOREIGN KEY (\"threadId\") REFERENCES agent_execution_threads(id) ON DELETE CASCADE",
+  "FK_aeb2ce3354b55bd61c8d7e17169 : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_b388696ce4d8be7ffbe8d3e4b69 : FOREIGN KEY (\"clientId\") REFERENCES oauth_clients(id) ON DELETE CASCADE",
+  "FK_b3d0f5fe54565580bc1f5febb6e : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_b4cfbc7556d07f36ca177f5e473 : FOREIGN KEY (\"versionId\") REFERENCES workflow_history(\"versionId\") ON DELETE SET NULL",
+  "FK_b57a2862ae869aab24e54cefd48 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_b7b496d8d1a21158c65f475cd88 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_b8030b47af9213f1fd15450fb7f : FOREIGN KEY (\"ownerId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_ba29e1cc5cdba43ce7b810b3ddd : FOREIGN KEY (\"workflowReviewRequestId\") REFERENCES workflow_review_request(id) ON DELETE CASCADE",
+  "FK_ba67ee8dc311830a2eea89b6e96 : FOREIGN KEY (\"threadId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_bb66e404c35996b0d6946177501 : FOREIGN KEY (role) REFERENCES role(slug) ON UPDATE CASCADE ON DELETE CASCADE",
+  "FK_bd264b81209355b543878deedb1 : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_c01316f8c2d7101ec4fa9809267 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_c1519757391996eb06064f0e7c8 : FOREIGN KEY (\"annotationId\") REFERENCES execution_annotations(id) ON DELETE CASCADE",
+  "FK_c218d1df94adc3b169dee3cc06c : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_c255ae5087010c1ab73ac8684af : FOREIGN KEY (\"workflowReviewRequestId\") REFERENCES workflow_review_request(id) ON DELETE CASCADE",
+  "FK_c2a794257dee48af7c9abf681de : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_c38e8a57a36b880e39a52ada2e8 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_c6b99592dc96b0d836d7a21db91 : FOREIGN KEY (role) REFERENCES role(slug)",
+  "FK_cb7c15d22fd068a0806aa57fc03 : FOREIGN KEY (\"observationId\") REFERENCES agents_observations(id) ON DELETE CASCADE",
+  "FK_chat_hub_messages_agentId : FOREIGN KEY (\"agentId\") REFERENCES chat_hub_agents(id) ON DELETE SET NULL",
+  "FK_chat_hub_sessions_agentId : FOREIGN KEY (\"agentId\") REFERENCES chat_hub_agents(id) ON DELETE SET NULL",
+  "FK_d206432be97b7ed88d187479b1b : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_d46c6f00730c2ef8bcb6ee24b67 : FOREIGN KEY (\"parentAgentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_d53ef208e6055f328dd7b897e51 : FOREIGN KEY (\"closedById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_d54fc84a6c8ac91b5e0db0378a4 : FOREIGN KEY (\"observationScopeId\") REFERENCES instance_ai_threads(id) ON DELETE CASCADE",
+  "FK_d61a12235d268a49af6a3c09c13 : FOREIGN KEY (resolver_id) REFERENCES dynamic_credential_resolver(id) ON DELETE CASCADE",
+  "FK_d634a0c93fd7de68a87eab951b2 : FOREIGN KEY (\"evaluationConfigId\") REFERENCES evaluation_config(id) ON DELETE CASCADE",
+  "FK_d6870d3b6e4c185d33926f423c8 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_daa206a04983d47d0a9c34649ce : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_daef2195a4a846eb70eed15e039 : FOREIGN KEY (\"parentId\") REFERENCES instance_ai_observations(id)",
+  "FK_dc88164176283de80af47621746 : FOREIGN KEY (\"tagId\") REFERENCES tag_entity(id) ON DELETE CASCADE",
+  "FK_dd7ce4dfa09e95b36a626bd9de3 : FOREIGN KEY (\"roleMappingRuleId\") REFERENCES role_mapping_rule(id) ON DELETE CASCADE",
+  "FK_df3428a541b802d6a63ac56e330 : FOREIGN KEY (\"publishedVersionId\") REFERENCES workflow_history(\"versionId\") ON DELETE RESTRICT",
+  "FK_df5fd25c8bbfd2b042602600d8e : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_e06a7408573a3e152e673977d2c : FOREIGN KEY (\"ratedById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_e131705cbbc8fb589889b02d457 : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_e22538eb50a71a17954cd7e076c : FOREIGN KEY (\"sessionId\") REFERENCES chat_hub_sessions(id) ON DELETE CASCADE",
+  "FK_e44b652e6dc99ef1364a2d85504 : FOREIGN KEY (\"workflowReviewRequestId\") REFERENCES workflow_review_request(id) ON DELETE CASCADE",
+  "FK_e48965fac35d0f5b9e7f51d8c44 : FOREIGN KEY (\"executionId\") REFERENCES execution_entity(id) ON DELETE SET NULL",
+  "FK_e5511a5e9eab71b7e516bdc04e9 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_e5d1fa722c5a8d38ac204746662 : FOREIGN KEY (\"previousMessageId\") REFERENCES chat_hub_messages(id) ON DELETE CASCADE",
+  "FK_e649bf1295f4ed8d4299ed290f9 : FOREIGN KEY (\"sessionId\") REFERENCES chat_hub_sessions(id) ON DELETE CASCADE",
+  "FK_e79153bd179c011e779d5016796 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_e9059770c01bfda6062d78d9f8e : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_e9ecf8ede7d989fcd18790fe36a : FOREIGN KEY (\"ownerId\") REFERENCES \"user\"(id) ON DELETE CASCADE",
+  "FK_eaea92ee7bfb9c1b6cd01505d56 : FOREIGN KEY (\"roleSlug\") REFERENCES role(slug)",
+  "FK_eda9e5fa5558d3f16bc2f6c21b6 : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_ef1994db9d0ac1b6a5c89b5f729 : FOREIGN KEY (\"versionId\") REFERENCES workflow_history(\"versionId\") ON DELETE CASCADE",
+  "FK_f00b52d74fe11838e1fe086deea : FOREIGN KEY (\"taskVersionId\") REFERENCES agent_history(\"versionId\") ON DELETE SET NULL",
+  "FK_f1857f6716aa258393dd6f33243 : FOREIGN KEY (\"sourceMessageId\") REFERENCES agents_messages(id) ON DELETE SET NULL",
+  "FK_f4561f38b5a22a4f090d5cd3eae : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_f45d0535a2ed59b6c2dd6da98a0 : FOREIGN KEY (\"agentId\") REFERENCES agents(id) ON DELETE CASCADE",
+  "FK_fcf78b037a72fc7aa01ab237e08 : FOREIGN KEY (\"createdById\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "FK_fd7542bb123074760285dc1bbf3 : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_fec7ee37062350d6a4a2979327d : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE CASCADE",
+  "FK_instance_ai_threads_projectId : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_instance_credential_assignment_credential : FOREIGN KEY (\"credentialId\") REFERENCES credentials_entity(id) ON DELETE RESTRICT",
+  "FK_poller_state_workflowId : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "FK_promotion_config_connectionId : FOREIGN KEY (\"connectionId\") REFERENCES promotion_connection(id) ON DELETE CASCADE",
+  "FK_promotion_connection_project_connectionId : FOREIGN KEY (\"connectionId\") REFERENCES promotion_connection(id) ON DELETE CASCADE",
+  "FK_promotion_connection_project_projectId : FOREIGN KEY (\"projectId\") REFERENCES project(id) ON DELETE CASCADE",
+  "FK_promotion_connection_providerId : FOREIGN KEY (\"providerId\") REFERENCES promotion_provider(id) ON DELETE RESTRICT",
+  "FK_role : FOREIGN KEY (\"roleSlug\") REFERENCES role(slug) ON UPDATE CASCADE ON DELETE CASCADE",
+  "FK_scheduled_task_jobId : FOREIGN KEY (\"jobId\") REFERENCES scheduled_job(id) ON DELETE CASCADE",
+  "FK_scope : FOREIGN KEY (\"scopeSlug\") REFERENCES scope(slug) ON UPDATE CASCADE ON DELETE CASCADE",
+  "FK_test_run_collection_id : FOREIGN KEY (\"collectionId\") REFERENCES evaluation_collection(id) ON DELETE SET NULL",
+  "FK_test_run_evaluation_config_id : FOREIGN KEY (\"evaluationConfigId\") REFERENCES evaluation_config(id) ON DELETE SET NULL",
+  "FK_workflow_review_request_workflow_baselineVersionId : FOREIGN KEY (\"baselineVersionId\") REFERENCES workflow_history(\"versionId\") ON DELETE SET NULL",
+  "PK_011c050f566e9db509a0fadb9b9 : PRIMARY KEY (id)",
+  "PK_0402b7fcec5415246656f102f83 : PRIMARY KEY (\"secretsProviderConnectionId\", \"projectId\")",
+  "PK_04b7709a435e0c07520ceb37393 : PRIMARY KEY (id)",
+  "PK_08cc9197c39b028c1e9beca225940576fd1a5804 : PRIMARY KEY (\"packageName\")",
+  "PK_0c63d9094bf8ca78349ba860147 : PRIMARY KEY (\"projectId\")",
+  "PK_12489cd6197feeac2089acc7ef6 : PRIMARY KEY (\"threadId\", seq)",
+  "PK_12fd89a1fb8489513b0a91f5d31 : PRIMARY KEY (slug)",
+  "PK_14aa18b83513fb92d7523909e02 : PRIMARY KEY (\"workflowId\", \"nodeId\")",
+  "PK_156c6f287225e9befe0181bb02b : PRIMARY KEY (id)",
+  "PK_1756c11c637903e97629a7a784a : PRIMARY KEY (id)",
+  "PK_17a0b6284f8d626aae88e1c16e4 : PRIMARY KEY (id)",
+  "PK_198c5b5aea509d139274efcaf9a : PRIMARY KEY (\"roleMappingRuleId\", \"projectId\")",
+  "PK_1caaa312a5d7184a003be0f0cb6 : PRIMARY KEY (\"projectId\", \"userId\")",
+  "PK_1eafef1273c70e4464fec703412 : PRIMARY KEY (id)",
+  "PK_2142a8bcda2360c3c5e34f82640 : PRIMARY KEY (\"versionId\", \"taskId\")",
+  "PK_21c2b214b44bc6c34a6d3551c90 : PRIMARY KEY (id)",
+  "PK_22373dbf6ba6929d8ac50093309 : PRIMARY KEY (id)",
+  "PK_25c38179c8d45095b168adfff80 : PRIMARY KEY (\"requestId\")",
+  "PK_26178b723c376150b45eabdb8e7 : PRIMARY KEY (id)",
+  "PK_278f05e98e74baaaa93f52b4bab : PRIMARY KEY (id)",
+  "PK_27e4e00852f6b06a925a4d83a3e : PRIMARY KEY (\"folderId\", \"tagId\")",
+  "PK_280832ca3f1b43663cc0e25e77f : PRIMARY KEY (id)",
+  "PK_35575100e45cdedeb89ae0643e9 : PRIMARY KEY (id)",
+  "PK_35c9b140caaf6da09cfabb0d675 : PRIMARY KEY (slug)",
+  "PK_4350ae85e76f9ba7df1370acb5d : PRIMARY KEY (id)",
+  "PK_45b5b0b6f715dae4292b86603d8 : PRIMARY KEY (id)",
+  "PK_4715c6035e0ebc4f3e8716f1e34 : PRIMARY KEY (\"workflowReviewRequestId\", \"userId\")",
+  "PK_4a3feb0a13ffe315c009cce64e5 : PRIMARY KEY (id)",
+  "PK_4a5cb8aa51c67e4f5a7eb0f9509 : PRIMARY KEY (id)",
+  "PK_4b9cb5e8db0dd16bb843b76465a : PRIMARY KEY (\"agentId\", \"workflowId\")",
+  "PK_4d68b1358bb5b766d3e78f32f57 : PRIMARY KEY (id)",
+  "PK_4d9b514cdf0f0b577650caf2ac2 : PRIMARY KEY (id)",
+  "PK_4e1ca943734d575679a56f4da90 : PRIMARY KEY (\"agentId\", \"integrationType\", \"credentialId\", \"hostId\")",
+  "PK_50a27cbafa6806c9b162304b5fd : PRIMARY KEY (\"runId\")",
+  "PK_5135ffcabecad4727ff6b9b803d : PRIMARY KEY (credential_id, subject_id, resolver_id)",
+  "PK_52325e34cd7a2f0f67b0f3cad65 : PRIMARY KEY (id)",
+  "PK_5315a45f0846d1f9d128c18a2ed : PRIMARY KEY (key)",
+  "PK_546f5d9cfaf5ea78efcc6f5d0a2 : PRIMARY KEY (\"agentId\", \"credentialId\")",
+  "PK_56107d26ebeabf780c5cf311d66 : PRIMARY KEY (\"threadId\", \"userId\", \"grantKey\")",
+  "PK_5779069b7235b256d91f7af1a15 : PRIMARY KEY (token)",
+  "PK_59c14dccf8989df94070c2dcfda : PRIMARY KEY (id)",
+  "PK_5a2a7dea8b7e6afa1001129da27 : PRIMARY KEY (id)",
+  "PK_5b6319b2e9a37c1064a72428f9a : PRIMARY KEY (\"observationScopeId\")",
+  "PK_5ba87620386b847201c9531c58f : PRIMARY KEY (\"workflowId\", \"projectId\")",
+  "PK_5c76fb7ee939fe2530374d3f75a : PRIMARY KEY (\"workflowId\")",
+  "PK_6278a41a706740c94c02e288df8 : PRIMARY KEY (id)",
+  "PK_65cec79aba16950b45592335204 : PRIMARY KEY (id)",
+  "PK_65ffcfe7a8e112fb826311fb092 : PRIMARY KEY (\"versionId\")",
+  "PK_673cb121ee4a8a5e27850c72c51 : PRIMARY KEY (id)",
+  "PK_692920e59217af7d124cd95106f : PRIMARY KEY (id)",
+  "PK_696d26426c704fba79b2c195ef5 : PRIMARY KEY (id)",
+  "PK_69dfa041592c30bbc0d4b84aa00 : PRIMARY KEY (id)",
+  "PK_6c472a19a7423cfbbf6b7c75939 : PRIMARY KEY (id)",
+  "PK_6e0db58281aa2b4c956dc0d58e9 : PRIMARY KEY (id)",
+  "PK_6e968555ff44699f59ad10be765 : PRIMARY KEY (id)",
+  "PK_6f5617b5fb0db43f92e39f5b626 : PRIMARY KEY (\"projectId\")",
+  "PK_7192dd00cddba039bf1d3e6a098 : PRIMARY KEY (id)",
+  "PK_74abaed0b30711b6532598b0392 : PRIMARY KEY (token)",
+  "PK_74f548e633abc66dc27c8f0ca77 : PRIMARY KEY (\"credentialId\", \"userId\", \"resolverId\")",
+  "PK_76598cf91038bee1f3ac94c94bc : PRIMARY KEY (\"agentId\", \"integrationType\", \"credentialId\", \"threadId\")",
+  "PK_7704a5add6baed43eef835f0bfb : PRIMARY KEY (id)",
+  "PK_7afcf93ffa20c4252869a7c6a23 : PRIMARY KEY (id)",
+  "PK_7dc9809c6d53a6b8b8a62cd7798 : PRIMARY KEY (id)",
+  "PK_7e2e315162ac3d80587e15ac2c3 : PRIMARY KEY (\"agentId\", \"observationScopeId\", \"taskKind\")",
+  "PK_80212729ed0ffa0709417ab28f4 : PRIMARY KEY (id)",
+  "PK_81020dc608dfb0af1ede386d907 : PRIMARY KEY (id)",
+  "PK_85a87a1ba0f61999fe11dc56325 : PRIMARY KEY (\"workflowId\")",
+  "PK_85b9ada746802c8993103470f05 : PRIMARY KEY (id)",
+  "PK_874f58cb616935bf49d9dbd67e9 : PRIMARY KEY (id)",
+  "PK_87aea76ff4c274c4a5ac838ebe3 : PRIMARY KEY (\"sessionId\", \"toolId\")",
+  "PK_893185383f029ca8d57bb781fa8 : PRIMARY KEY (id)",
+  "PK_8c82d7f526340ab734260ea46be : PRIMARY KEY (id)",
+  "PK_8ebd28194e4f792f96b5933423fc439df97d9689 : PRIMARY KEY (name)",
+  "PK_8ef3a59796a228913f251779cff : PRIMARY KEY (\"credentialsId\", \"projectId\")",
+  "PK_90c121f77a78a6580e94b794bce : PRIMARY KEY (id)",
+  "PK_93f2696eb321dfe1d7defe7073f : PRIMARY KEY (\"runId\", \"workflowName\")",
+  "PK_94bb7aeb5def5a0284a5fe9f9a0 : PRIMARY KEY (id)",
+  "PK_96c1ba2b399ed0aabb047d04f07 : PRIMARY KEY (\"scopeId\", \"policyId\")",
+  "PK_978fa5caa3468f463dac9d92e69 : PRIMARY KEY (id)",
+  "PK_979ec03d31294cca484be65d11f : PRIMARY KEY (\"annotationId\", \"tagId\")",
+  "PK_984b0a98726485c9a330cde6b2f : PRIMARY KEY (\"credentialUseId\")",
+  "PK_99e8908ce2c2cdccce487db7fc6 : PRIMARY KEY (id)",
+  "PK_9ad319654d12c2649f7caf27135 : PRIMARY KEY (id)",
+  "PK_9c1250f77b41d1a0e71a3f1414a : PRIMARY KEY (id)",
+  "PK_9c653f28ae19c5884d5baf6a1d9 : PRIMARY KEY (id)",
+  "PK_a8e0f570d04a174292bea104ae6 : PRIMARY KEY (\"agentId\", \"resourceId\")",
+  "PK_ac887efbb3580a577f1442cfa89 : PRIMARY KEY (id)",
+  "PK_ae17b90023bcd05e003cd8f64dc : PRIMARY KEY (id)",
+  "PK_ae197bb5135d422f6392a879e0c : PRIMARY KEY (\"workflowReviewRequestId\", \"userId\")",
+  "PK_b21ace2e13596ccd87dc9bf4ea6 : PRIMARY KEY (\"webhookPath\", method)",
+  "PK_b3e2eeee36a4bd044d56468d311 : PRIMARY KEY (id)",
+  "PK_b4d534111f62d31699e6ceb544f : PRIMARY KEY (id)",
+  "PK_b606942249b90cc39b0265f0575 : PRIMARY KEY (id)",
+  "PK_b6572dd6173e4cd06fe79937b58 : PRIMARY KEY (\"versionId\")",
+  "PK_b76cfb088dcdaf5275e9980bb64 : PRIMARY KEY (id)",
+  "PK_ba438acc8532addc12d1ef17049 : PRIMARY KEY (id)",
+  "PK_be3bf4facb054cf2b2b116b3b9c : PRIMARY KEY (id)",
+  "PK_bfbc45dc88f66fae4e4b4a15fec : PRIMARY KEY (id)",
+  "PK_bfc45df0481abd7f355d6187da1 : PRIMARY KEY (slug)",
+  "PK_c2c1e9fdda754a6bf7f664d7e04 : PRIMARY KEY (id)",
+  "PK_c4759172d3431bae6f04e678e0d : PRIMARY KEY (id)",
+  "PK_c788f7caf88e91e365c97d6d04a : PRIMARY KEY (id)",
+  "PK_ca04b9d8dc72de268fe07a65773 : PRIMARY KEY (\"workflowId\", context)",
+  "PK_cc8806fdea48297a7d497035d72 : PRIMARY KEY (\"agentId\", \"toolId\")",
+  "PK_d40a22dc56dc200313c1f0e41ac : PRIMARY KEY (id)",
+  "PK_d5c36484cafd23222df4c564159 : PRIMARY KEY (id)",
+  "PK_d690af24e57e30594c1948af1e6 : PRIMARY KEY (id)",
+  "PK_d772c8ec1a89b52d31c882bc560 : PRIMARY KEY (id)",
+  "PK_d8e8a6f737d530fdd2dd716e89c : PRIMARY KEY (jti)",
+  "PK_dc0fe14e6d9943f268e7b119f69ab8bd : PRIMARY KEY (key)",
+  "PK_dc7d93798f3dbb6959f974c97e1 : PRIMARY KEY (\"sourceId\", kid)",
+  "PK_dcd71f96a5d5f4bf79e67d322bf : PRIMARY KEY (token)",
+  "PK_e226d0001b9e6097cbfe70617cb : PRIMARY KEY (id)",
+  "PK_e34e4d15d78eabbe8217e33ef03 : PRIMARY KEY (id)",
+  "PK_e69ef0d385986e273423b0e8695 : PRIMARY KEY (id)",
+  "PK_e720b6efc1e45b878ebb0b2ca30 : PRIMARY KEY (id)",
+  "PK_e7dbbeec9da3e06f6a20669e6e7 : PRIMARY KEY (id)",
+  "PK_ea8f538c94b6e352418254ed6474a81f : PRIMARY KEY (id)",
+  "PK_eb777ac57ab872d38f8ebd19317 : PRIMARY KEY (\"agentId\", \"observationScopeId\")",
+  "PK_ec15125755151e3a7e00e00014f : PRIMARY KEY (id)",
+  "PK_eda59336a5dd1e6a12f4d4b7287 : PRIMARY KEY (\"workflowId\", \"nodeId\")",
+  "PK_f1e66ba0b645dec566057ad21e6 : PRIMARY KEY (id)",
+  "PK_f39a3b36bbdf0e2979ddb21cf78 : PRIMARY KEY (id)",
+  "PK_f448a94c35218b6208ce20cf5a1 : PRIMARY KEY (\"metaId\")",
+  "PK_f593adaf7230e964d3c25deda64 : PRIMARY KEY (\"agentId\", \"taskId\")",
+  "PK_fa6b20b2d31a9991529dbf8ef7d : PRIMARY KEY (id)",
+  "PK_fb91ab932cfbd694061501cc20f : PRIMARY KEY (code)",
+  "PK_fc3691585b39408bb0551122af6 : PRIMARY KEY (\"fileId\")",
+  "PK_fc491dd378b9448655c3c683f85 : PRIMARY KEY (\"observationScopeId\", \"taskKind\")",
+  "PK_role_scope : PRIMARY KEY (\"roleSlug\", \"scopeSlug\")",
+  "UQ_083721d99ce8db4033e2958ebb4 : UNIQUE (\"userId\", \"clientId\")",
+  "UQ_3c3c99a712e971835c52292e44c : UNIQUE (\"workflowId\", name)",
+  "UQ_8082ec4890f892f0bc77473a123 : UNIQUE (\"dataTableId\", name)",
+  "UQ_b23096ef747281ac944d28e8b0d : UNIQUE (\"projectId\", name)",
+  "UQ_b33ac896ad3099fc8de36fdc1c4 : UNIQUE (type, \"order\")",
+  "UQ_cf6ae658ead9ffc124723413c65 : UNIQUE (\"userId\", \"resourceId\", \"resourceType\")",
+  "UQ_e12875dfb3b1d92d7d7c5377e2 : UNIQUE (email)",
+  "UQ_ec2aa73632932d485a1d5192ce1 : UNIQUE (\"workflowId\", \"userId\")",
+  "auth_identity_pkey : PRIMARY KEY (\"providerId\", \"providerType\")",
+  "auth_identity_userId_fkey : FOREIGN KEY (\"userId\") REFERENCES \"user\"(id)",
+  "auth_provider_sync_history_pkey : PRIMARY KEY (id)",
+  "barber_auditoria_pkey : PRIMARY KEY (id)",
+  "barber_bloqueos_pkey : PRIMARY KEY (id)",
+  "barber_bloqueos_rango_chk : CHECK (((inicio IS NULL) OR (fin IS NULL) OR (fin >= inicio)))",
+  "barber_citas_estado_chk : CHECK (((estado IS NULL) OR (estado = ANY (ARRAY['agendado'::text, 'confirmado'::text, 'atendido'::text, 'no_show'::text, 'cancelado'::text, 'reprogramado'::text]))))",
+  "barber_citas_jid_fkey : FOREIGN KEY (jid) REFERENCES barber_clientes(jid) ON UPDATE CASCADE ON DELETE SET NULL",
+  "barber_citas_pkey : PRIMARY KEY (id)",
+  "barber_citas_precio_chk : CHECK (((precio IS NULL) OR (precio >= (0)::numeric)))",
+  "barber_citas_rango_chk : CHECK (((inicio IS NULL) OR (fin IS NULL) OR (fin >= inicio)))",
+  "barber_clientes_cancel_chk : CHECK (((cancelaciones_tardias IS NULL) OR (cancelaciones_tardias >= 0)))",
+  "barber_clientes_etiqueta_chk : CHECK (((etiqueta IS NULL) OR (etiqueta = ANY (ARRAY['nuevo'::text, 'frecuente'::text, 'vip'::text, 'en_riesgo'::text, 'problematico'::text, 'consulta'::text, 'inactivo'::text]))))",
+  "barber_clientes_no_shows_chk : CHECK (((no_shows IS NULL) OR (no_shows >= 0)))",
+  "barber_clientes_pkey : PRIMARY KEY (jid)",
+  "barber_clientes_ticket_chk : CHECK (((ticket_promedio IS NULL) OR (ticket_promedio >= (0)::numeric)))",
+  "barber_clientes_visitas_chk : CHECK (((visitas IS NULL) OR (visitas >= 0)))",
+  "barber_conocimiento_origen_ck : CHECK ((origen = ANY (ARRAY['contexto'::text, 'propuesta'::text])))",
+  "barber_conocimiento_pkey : PRIMARY KEY (id)",
+  "barber_conocimiento_pregunta_uk : UNIQUE (pregunta)",
+  "barber_consentimiento_pkey : PRIMARY KEY (jid)",
+  "barber_escalaciones_estado_chk : CHECK (((estado IS NULL) OR (estado = ANY (ARRAY['abierta'::text, 'cerrada'::text]))))",
+  "barber_escalaciones_motivo_chk : CHECK (((motivo IS NULL) OR (motivo = ANY (ARRAY['descuento'::text, 'queja'::text, 'servicio_inexistente'::text, 'precio_no_listado'::text, 'error_sistema'::text, 'humano'::text]))))",
+  "barber_escalaciones_pkey : PRIMARY KEY (id)",
+  "barber_lista_espera_duracion_chk : CHECK (((duracion_min IS NULL) OR (duracion_min > 0)))",
+  "barber_lista_espera_pkey : PRIMARY KEY (id)",
+  "barber_operadores_pkey : PRIMARY KEY (jid)",
+  "barber_operadores_rol_chk : CHECK (((rol IS NULL) OR (rol = ANY (ARRAY['dueno'::text, 'barbero'::text]))))",
+  "barber_pausas_pkey : PRIMARY KEY (jid)",
+  "barber_servicios_duracion_chk : CHECK (((duracion_min IS NULL) OR (duracion_min > 0)))",
+  "barber_servicios_pkey : PRIMARY KEY (clave)",
+  "barber_servicios_precio_chk : CHECK ((precio >= (0)::numeric))",
+  "credentials_entity_pkey : PRIMARY KEY (id)",
+  "credentials_entity_resolverId_foreign : FOREIGN KEY (\"resolverId\") REFERENCES dynamic_credential_resolver(id) ON DELETE SET NULL",
+  "event_destinations_pkey : PRIMARY KEY (id)",
+  "execution_data_fk : FOREIGN KEY (\"executionId\") REFERENCES execution_entity(id) ON DELETE CASCADE",
+  "execution_data_pkey : PRIMARY KEY (\"executionId\")",
+  "fk_execution_entity_workflow_id : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "fk_webhook_entity_workflow_id : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "fk_workflow_parent_folder : FOREIGN KEY (\"parentFolderId\") REFERENCES folder(id) ON DELETE CASCADE",
+  "fk_workflows_tags_tag_id : FOREIGN KEY (\"tagId\") REFERENCES tag_entity(id) ON DELETE CASCADE",
+  "fk_workflows_tags_workflow_id : FOREIGN KEY (\"workflowId\") REFERENCES workflow_entity(id) ON DELETE CASCADE",
+  "instance_ai_checkpoints_state_tombstone_check : CHECK ((((\"expiredAt\" IS NOT NULL) AND (state IS NULL)) OR (\"expiredAt\" IS NULL)))",
+  "n8n_chat_histories_pkey : PRIMARY KEY (id)",
+  "pk_e3e63bbf986767844bbe1166d4e : PRIMARY KEY (id)",
+  "pk_workflows_tags : PRIMARY KEY (\"workflowId\", \"tagId\")",
+  "projects_creatorId_foreign : FOREIGN KEY (\"creatorId\") REFERENCES \"user\"(id) ON DELETE SET NULL",
+  "tag_entity_pkey : PRIMARY KEY (id)",
+  "variables_pkey : PRIMARY KEY (id)",
+  "variables_value_max_len : CHECK (((value IS NULL) OR (char_length(value) <= 1000)))",
+  "workflow_entity_pkey : PRIMARY KEY (id)",
+  "workflow_statistics_delta_pkey : PRIMARY KEY (id)",
+  "workflow_statistics_pkey : PRIMARY KEY (id)"
+ ]
+}

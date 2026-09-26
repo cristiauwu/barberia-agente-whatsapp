@@ -1,0 +1,342 @@
+NORMALIZACION full params:
+{
+ "assignments": {
+  "assignments": [
+   {
+    "id": "d9419665-41fc-43b9-aef7-d521a1ba2035",
+    "name": "instance_server_url",
+    "value": "={{ $json.body.server_url }}",
+    "type": "string"
+   },
+   {
+    "id": "c3cb8673-8006-4079-a304-c58ffc267226",
+    "name": "instance_name",
+    "value": "={{ $json.body.instance }}",
+    "type": "string"
+   },
+   {
+    "id": "e462da04-7f8b-4fbe-aacd-7956666c2ede",
+    "name": "instance_apikey",
+    "value": "={{ $json.body.apikey }}",
+    "type": "string"
+   },
+   {
+    "id": "b06da722-eea2-4f28-a2d4-7bcc6592b952",
+    "name": "message_id",
+    "value": "={{ $json.body.data.key.id }}",
+    "type": "string"
+   },
+   {
+    "id": "5ecbe629-f4d0-4bdf-8c78-903f311bc273",
+    "name": "message_chat_id_sender",
+    "value": "={{ $json.body.sender }}",
+    "type": "string"
+   },
+   {
+    "id": "cbb05e7c-4912-4965-bcf4-cefd9418b39f",
+    "name": "message_content_type",
+    "value": "={{ $json.body.data.message.extendedTextMessage ? 'text': '' }}{{ $json.body.data.message.conversation ? 'text': '' }}{{ $json.body.data.message.audioMessage ? 'audio': '' }}{{ $json.body.data.message.imageMessage ? 'image': '' }}",
+    "type": "string"
+   },
+   {
+    "id": "d6fa8877-dee6-468b-a51e-8fdc36dc190f",
+    "name": "message_content",
+    "value": "={{ $json.body.data.message.extendedTextMessage?.text || '' }} {{ $json.body.data.message.imageMessage?.caption || '' }} {{ $json.body.data.message.conversation || '' }}",
+    "type": "string"
+   },
+   {
+    "id": "f122b51f-8a93-439e-85fb-c370e7f4f6b8",
+    "name": "message_timestamp",
+    "value": "={{ $json.body.date_time }}",
+    "type": "string"
+   },
+   {
+    "id": "e10a7e61-cffe-44fb-9b13-e0c199ebd866",
+    "name": "user_name",
+    "value": "={{ $json.body.data.pushName }}",
+    "type": "string"
+   },
+   {
+    "id": "1c280646-7eb8-4118-9e8d-432f04a763b7",
+    "name": "user_number",
+    "value": "={{ $json.body.data.key.remoteJid }}",
+    "type": "string"
+   },
+   {
+    "id": "a7341820-a177-4921-aee5-0fb72a40dcdf",
+    "name": "session_id",
+    "value": "={{ $json.body.data.key.id }}",
+    "type": "string"
+   },
+   {
+    "id": "fromme0001-0000-4000-8000-000000000001",
+    "name": "from_me",
+    "value": "={{ $json.body.data.key.fromMe ? 'si' : 'no' }}",
+    "type": "string"
+   }
+  ]
+ },
+ "options": {}
+}
+==========================================================================================
+Notificar al encargado FULL:
+{
+ "id": "9d59ca79-94a4-4594-8611-143e7cfc985c",
+ "name": "Notificar al encargado",
+ "notesInFlow": true,
+ "notes": "Escala al encargado por WhatsApp con el mismo servidor Evolution del flujo. Cambia 'number' si el encargado usa otro numero.",
+ "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+ "typeVersion": 1.1,
+ "position": [
+  1328,
+  1120
+ ],
+ "parameters": {
+  "toolDescription": "Avisa al encargado de la barberia por WhatsApp cuando el cliente pide hablar con una persona, pide un descuento o un precio que no esta en la lista, quiere un servicio que no ofrecemos, tiene una queja, o cuando no pudiste resolver su solicitud. El texto debe resumir quien es el cliente, que pidio y su numero de WhatsApp.",
+  "method": "POST",
+  "url": "http://evolution_api:8080/message/sendText/hector",
+  "authentication": "genericCredentialType",
+  "genericAuthType": "httpHeaderAuth",
+  "sendHeaders": true,
+  "parametersHeaders": {
+   "values": []
+  },
+  "sendBody": true,
+  "parametersBody": {
+   "values": [
+    {
+     "name": "number",
+     "valueProvider": "fieldValue",
+     "value": "524521206246@s.whatsapp.net"
+    },
+    {
+     "name": "text"
+    },
+    {
+     "name": "delay",
+     "valueProvider": "fieldValue",
+     "value": "1000"
+    }
+   ]
+  }
+ },
+ "credentials": {
+  "httpHeaderAuth": {
+   "id": "qaGW1Tvt5BqPujJ1",
+   "name": "Evolution API"
+  }
+ }
+}
+==========================================================================================
+Registrar en hoja de citas FULL:
+{
+ "id": "804c71ef-2a77-442f-8c98-7a8134dbfbf5",
+ "name": "Registrar en hoja de citas",
+ "type": "n8n-nodes-base.googleSheetsTool",
+ "typeVersion": 4.6,
+ "position": [
+  1504,
+  928
+ ],
+ "parameters": {
+  "operation": "append",
+  "documentId": {
+   "__rl": true,
+   "value": "1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk",
+   "mode": "list",
+   "cachedResultName": "Citas barbería"
+  },
+  "sheetName": {
+   "__rl": true,
+   "value": "941506024",
+   "mode": "list",
+   "cachedResultName": "Hoja 1"
+  },
+  "columns": {
+   "mappingMode": "defineBelow",
+   "value": {
+    "ID": "={{ $fromAI('ID', 'ID del evento de Google Calendar que devolvio Crear evento o Consultar agenda', 'string') }}",
+    "Estatus": "={{ $fromAI('Estatus', 'agendado, actualizado o cancelado, segun la accion realizada', 'string') }}",
+    "Nombre": "={{ $fromAI('Nombre', 'Nombre del cliente', 'string') }}",
+    "Servicio": "={{ $fromAI('Servicio', 'Servicio o servicios agendados', 'string') }}",
+    "Precio del servicio": "={{ $fromAI('Precio_del_servicio', 'Precio total en MXN, solo el numero, por ejemplo 250', 'string') }}",
+    "Día ": "={{ $fromAI('Dia', 'Fecha de la cita en formato AAAA-MM-DD', 'string') }}",
+    "Hora": "={{ $fromAI('Hora', 'Hora de la cita en formato HH:MM:SS de 24 horas, por ejemplo 16:00:00', 'string') }}",
+    "Numero celular": "={{ $('Normalizacion').item.json.user_number }}"
+   },
+   "matchingColumns": [
+    "ID"
+   ],
+   "schema": [
+    {
+     "id": "ID",
+     "displayName": "ID",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Estatus",
+     "displayName": "Estatus",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Nombre",
+     "displayName": "Nombre",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Servicio",
+     "displayName": "Servicio",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Precio del servicio",
+     "displayName": "Precio del servicio",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Día ",
+     "displayName": "Día ",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Hora",
+     "displayName": "Hora",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    },
+    {
+     "id": "Numero celular",
+     "displayName": "Numero celular",
+     "required": false,
+     "defaultMatch": false,
+     "display": true,
+     "type": "string",
+     "canBeUsedToMatch": true,
+     "removed": false
+    }
+   ],
+   "attemptToConvertTypes": false,
+   "convertFieldsToString": false
+  },
+  "options": {}
+ },
+ "credentials": {
+  "googleSheetsOAuth2Api": {
+   "id": "lGEYmmJh1FvqzQi9",
+   "name": "Google Sheets account"
+  }
+ }
+}
+==========================================================================================
+Mandar mensaje FULL:
+{
+ "id": "72159321-e8a7-4644-a200-142f429171ec",
+ "name": "Mandar mensaje",
+ "type": "n8n-nodes-base.httpRequest",
+ "typeVersion": 4.2,
+ "position": [
+  1472,
+  192
+ ],
+ "parameters": {
+  "method": "POST",
+  "url": "={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}",
+  "sendHeaders": true,
+  "headerParameters": {
+   "parameters": [
+    {
+     "name": "apikey",
+     "value": "={{ $('Normalizacion').item.json.instance_apikey }}"
+    }
+   ]
+  },
+  "sendBody": true,
+  "bodyParameters": {
+   "parameters": [
+    {
+     "name": "number",
+     "value": "={{ $('Normalizacion').item.json.user_number }}"
+    },
+    {
+     "name": "text",
+     "value": "={{ $json.output }}"
+    },
+    {
+     "name": "delay",
+     "value": "={{ 1000 }}"
+    }
+   ]
+  },
+  "options": {}
+ }
+}
+==========================================================================================
+Webhook FULL:
+{
+ "id": "6c132eef-9050-43a2-82f1-5d6942bd8077",
+ "name": "Webhook",
+ "webhookId": "6dff1e56-c180-4969-ae6a-e3f08cca3ed9",
+ "type": "n8n-nodes-base.webhook",
+ "typeVersion": 2,
+ "position": [
+  -688,
+  208
+ ],
+ "parameters": {
+  "httpMethod": "POST",
+  "path": "hector",
+  "options": {}
+ }
+}
+==========================================================================================
+Workflow-level: meta/tags/staticData/description:
+  description = null
+  meta = {"templateCredsSetupCompleted": true, "instanceId": "3d9a11d3c88bab134e77a9aa584bc7b6efdab539dbcbe694a615892d2f9b7dc9"}
+  tags = [{"id": "zNuoR8CcT1phCkHM", "name": "Barber", "createdAt": "2025-07-06T16:17:16.012Z", "updatedAt": "2025-07-06T16:17:16.012Z"}]
+  staticData = null
+  triggerCount = 1
+  versionId = "390571f2-85b8-4d94-a48e-ddc01c47388f"
+  activeVersionId = "390571f2-85b8-4d94-a48e-ddc01c47388f"
+  isArchived = false
+  nodeGroups = []
+  sourceWorkflowId = null
+==========================================================================================
+ WF2 description = null
+ WF2 meta = {"templateCredsSetupCompleted": true, "instanceId": "3d9a11d3c88bab134e77a9aa584bc7b6efdab539dbcbe694a615892d2f9b7dc9"}
+ WF2 tags = [{"id": "zNuoR8CcT1phCkHM", "name": "Barber", "createdAt": "2025-07-06T16:17:16.012Z", "updatedAt": "2025-07-06T16:17:16.012Z"}]
+ WF2 staticData = {"node:Google Sheets Trigger": {"documentId": "1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk", "sheetId": 941506024, "lastIndexChecked": 4}}
+ WF2 triggerCount = 1

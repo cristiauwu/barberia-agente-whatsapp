@@ -1,0 +1,730 @@
+{
+ "version": 1,
+ "startData": {},
+ "resultData": {
+  "runData": {
+   "Google Sheets Trigger": [
+    {
+     "startTime": 1790383647192,
+     "executionIndex": 0,
+     "source": [],
+     "hints": [],
+     "executionTime": 0,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "ID": "etnmqvg4qntrgtdmri981u86l0",
+          "Estatus": "agendado",
+          "Nombre": "Cliente Prueba",
+          "Servicio": "Corte desvanecido o tijera",
+          "Precio del servicio": 150,
+          "Día ": "2026-10-01",
+          "Hora": "16:40:00",
+          "Numero celular": "5214501111805@s.whatsapp.net",
+          "Execution ID": ""
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Code": [
+    {
+     "startTime": 1790383647192,
+     "executionIndex": 1,
+     "source": [
+      {
+       "previousNode": "Google Sheets Trigger",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 11,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "ID": "etnmqvg4qntrgtdmri981u86l0",
+          "Estatus": "agendado",
+          "Nombre": "Cliente Prueba",
+          "Servicio": "Corte desvanecido o tijera",
+          "Precio del servicio": 150,
+          "Día ": "2026-10-01",
+          "Hora": "16:40:00",
+          "Numero celular": "5214501111805@s.whatsapp.net",
+          "Execution ID": "",
+          "fechaISO": "2026-10-01T22:40:00.000Z",
+          "fechaLegible": "1/10/2026, 4:40:00 p.m.",
+          "recordatorio24ISO": "2026-09-30T22:40:00.000Z",
+          "recordatorio1ISO": "2026-10-01T21:40:00.000Z",
+          "recordatorio24Legible": "30/9/2026, 4:40:00 p.m.",
+          "mandar24": true,
+          "mandar1": true,
+          "recordatorioISO": "2026-10-01T21:40:00.000Z",
+          "recordatorioLegible": "1/10/2026, 3:40:00 p.m."
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "IF - Es cita agendada": [
+    {
+     "startTime": 1790383647203,
+     "executionIndex": 2,
+     "source": [
+      {
+       "previousNode": "Code",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 6,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "ID": "etnmqvg4qntrgtdmri981u86l0",
+          "Estatus": "agendado",
+          "Nombre": "Cliente Prueba",
+          "Servicio": "Corte desvanecido o tijera",
+          "Precio del servicio": 150,
+          "Día ": "2026-10-01",
+          "Hora": "16:40:00",
+          "Numero celular": "5214501111805@s.whatsapp.net",
+          "Execution ID": "",
+          "fechaISO": "2026-10-01T22:40:00.000Z",
+          "fechaLegible": "1/10/2026, 4:40:00 p.m.",
+          "recordatorio24ISO": "2026-09-30T22:40:00.000Z",
+          "recordatorio1ISO": "2026-10-01T21:40:00.000Z",
+          "recordatorio24Legible": "30/9/2026, 4:40:00 p.m.",
+          "mandar24": true,
+          "mandar1": true,
+          "recordatorioISO": "2026-10-01T21:40:00.000Z",
+          "recordatorioLegible": "1/10/2026, 3:40:00 p.m."
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       []
+      ]
+     }
+    }
+   ],
+   "Registrar cliente (CRM)": [
+    {
+     "startTime": 1790383647209,
+     "executionIndex": 3,
+     "source": [
+      {
+       "previousNode": "IF - Es cita agendada",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 35,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "jid": "5214501111805@s.whatsapp.net",
+          "visitas": 9
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Notificar cita nueva al encargado": [
+    {
+     "startTime": 1790383647244,
+     "executionIndex": 4,
+     "source": [
+      {
+       "previousNode": "IF - Es cita agendada",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 1376,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214521206246@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0ED64C8FEE267068C68"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Nueva cita agendada:\nCliente: Cliente Prueba\nServicio: Corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 1/10/2026, 4:40:00 p.m."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790210848,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790383648,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Switch": [
+    {
+     "startTime": 1790383648621,
+     "executionIndex": 5,
+     "source": [
+      {
+       "previousNode": "Notificar cita nueva al encargado",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 15,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214521206246@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0ED64C8FEE267068C68"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Nueva cita agendada:\nCliente: Cliente Prueba\nServicio: Corte desvanecido o tijera\nPrecio: 150\nHora y dia de la cita: 1/10/2026, 4:40:00 p.m."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790210848,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790383648,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       [],
+       [],
+       []
+      ]
+     }
+    }
+   ],
+   "Code1": [
+    {
+     "startTime": 1790383648637,
+     "executionIndex": 6,
+     "source": [
+      {
+       "previousNode": "Switch",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 40,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "executionId": "1298"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "Append or update row in sheet": [
+    {
+     "startTime": 1790383648678,
+     "executionIndex": 7,
+     "source": [
+      {
+       "previousNode": "Code1",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 813,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "Execution ID": "1298",
+          "ID": "etnmqvg4qntrgtdmri981u86l0"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "IF - Toca recordatorio 24 h": [
+    {
+     "startTime": 1790383649491,
+     "executionIndex": 8,
+     "source": [
+      {
+       "previousNode": "Append or update row in sheet",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 3,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "Execution ID": "1298",
+          "ID": "etnmqvg4qntrgtdmri981u86l0"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       []
+      ]
+     }
+    }
+   ],
+   "ESPERAR A 24 H": [
+    {
+     "startTime": 1790383829349,
+     "executionIndex": 0,
+     "source": [
+      {
+       "previousNode": "IF - Toca recordatorio 24 h",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 0,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "Execution ID": "1298",
+          "ID": "etnmqvg4qntrgtdmri981u86l0"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "RECORDATORIO 24 H": [
+    {
+     "startTime": 1790383829349,
+     "executionIndex": 1,
+     "source": [
+      {
+       "previousNode": "ESPERAR A 24 H",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 1383,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214501111805@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0B2B66FECB9F1EFF3DE"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Hola Cliente Prueba! 💈\nTe recuerdo tu cita de manana en Barber Chinos:\n\nResponde *SI* para confirmar o *NO* si necesitas cambiarla."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790211030,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790383830,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ],
+   "IF - Toca recordatorio 1 h": [
+    {
+     "startTime": 1790383830732,
+     "executionIndex": 2,
+     "source": [
+      {
+       "previousNode": "RECORDATORIO 24 H",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 2,
+     "executionStatus": "success",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214501111805@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0B2B66FECB9F1EFF3DE"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Hola Cliente Prueba! 💈\nTe recuerdo tu cita de manana en Barber Chinos:\n\nResponde *SI* para confirmar o *NO* si necesitas cambiarla."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790211030,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790383830,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ],
+       []
+      ]
+     }
+    }
+   ],
+   "ESPERAR A 1 H": [
+    {
+     "startTime": 1790383830734,
+     "executionIndex": 3,
+     "source": [
+      {
+       "previousNode": "IF - Toca recordatorio 1 h",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ],
+     "hints": [],
+     "executionTime": 1,
+     "executionStatus": "waiting",
+     "data": {
+      "main": [
+       [
+        {
+         "json": {
+          "key": {
+           "remoteJid": "5214501111805@s.whatsapp.net",
+           "fromMe": true,
+           "id": "3EB0B2B66FECB9F1EFF3DE"
+          },
+          "pushName": "Você",
+          "status": "PENDING",
+          "message": {
+           "conversation": "Hola Cliente Prueba! 💈\nTe recuerdo tu cita de manana en Barber Chinos:\n\nResponde *SI* para confirmar o *NO* si necesitas cambiarla."
+          },
+          "contextInfo": {
+           "mentionedJid": [],
+           "groupMentions": [],
+           "ephemeralSettingTimestamp": {
+            "low": 1790211030,
+            "high": 0,
+            "unsigned": false
+           },
+           "disappearingMode": {
+            "initiator": 0
+           }
+          },
+          "messageType": "conversation",
+          "messageTimestamp": 1790383830,
+          "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+          "source": "web"
+         },
+         "pairedItem": {
+          "item": 0
+         }
+        }
+       ]
+      ]
+     }
+    }
+   ]
+  },
+  "lastNodeExecuted": "ESPERAR A 1 H"
+ },
+ "executionData": {
+  "contextData": {},
+  "nodeExecutionStack": [
+   {
+    "node": {
+     "id": "9576b2ff-4898-40f4-be75-fbff78b4de97",
+     "name": "ESPERAR A 1 H",
+     "webhookId": "d3819dc0-5754-4ff4-98cb-ac11b26eb5ab",
+     "type": "n8n-nodes-base.wait",
+     "typeVersion": 1.1,
+     "position": [
+      2080,
+      272
+     ],
+     "parameters": {
+      "resume": "specificTime",
+      "dateTime": "={{ $('Code').item.json.recordatorio1ISO }}"
+     }
+    },
+    "data": {
+     "main": [
+      [
+       {
+        "json": {
+         "key": {
+          "remoteJid": "5214501111805@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0B2B66FECB9F1EFF3DE"
+         },
+         "pushName": "Você",
+         "status": "PENDING",
+         "message": {
+          "conversation": "Hola Cliente Prueba! 💈\nTe recuerdo tu cita de manana en Barber Chinos:\n\nResponde *SI* para confirmar o *NO* si necesitas cambiarla."
+         },
+         "contextInfo": {
+          "mentionedJid": [],
+          "groupMentions": [],
+          "ephemeralSettingTimestamp": {
+           "low": 1790211030,
+           "high": 0,
+           "unsigned": false
+          },
+          "disappearingMode": {
+           "initiator": 0
+          }
+         },
+         "messageType": "conversation",
+         "messageTimestamp": 1790383830,
+         "instanceId": "f9641b53-395e-4a42-afa3-fdf1701b344b",
+         "source": "web"
+        },
+        "pairedItem": {
+         "item": 0
+        }
+       }
+      ]
+     ]
+    },
+    "source": {
+     "main": [
+      {
+       "previousNode": "IF - Toca recordatorio 1 h",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ]
+    }
+   },
+   {
+    "node": {
+     "id": "f9b5aeb6-00f3-4c78-b47d-311c4524d8b1",
+     "name": "Registrar cita (Postgres)",
+     "notesInFlow": true,
+     "notes": "Llena barber_citas desde la fila de la hoja. Sin esto\nla tabla queda vacía y los reportes no tienen datos.\nonError=continue: si falla, los recordatorios siguen.",
+     "type": "n8n-nodes-base.postgres",
+     "typeVersion": 2.6,
+     "alwaysOutputData": true,
+     "retryOnFail": true,
+     "maxTries": 3,
+     "waitBetweenTries": 2000,
+     "onError": "continueRegularOutput",
+     "position": [
+      -40,
+      400
+     ],
+     "parameters": {
+      "resource": "database",
+      "operation": "executeQuery",
+      "query": "INSERT INTO barber_citas\n  (id, jid, nombre, servicio, precio, inicio, fin, estado)\nSELECT\n  '{{ $json.ID }}',\n  '521' || right(regexp_replace('{{ $json['Numero celular'] }}', '\\D', '', 'g'), 10)\n    || '@s.whatsapp.net',\n  nullif(trim('{{ $json.Nombre }}'), ''),\n  nullif(trim('{{ $json.Servicio }}'), ''),\n  nullif(regexp_replace('{{ $json['Precio del servicio'] }}', '[^0-9.]', '', 'g'), '')::numeric,\n  (('{{ $json['Día '] }}' || ' ' || '{{ $json.Hora }}')::timestamp\n     AT TIME ZONE 'America/Mexico_City'),\n  (('{{ $json['Día '] }}' || ' ' || '{{ $json.Hora }}')::timestamp\n     AT TIME ZONE 'America/Mexico_City')\n    + (coalesce((SELECT duracion_min FROM barber_servicios\n                 WHERE lower(nombre) LIKE '%' || lower(split_part(\n                   '{{ $json.Servicio }}', ' ', 1)) || '%'\n                 LIMIT 1), 40) || ' minutes')::interval,\n  CASE lower(trim('{{ $json.Estatus }}'))\n    WHEN 'agendado' THEN 'agendado'\n    WHEN 'actualizado' THEN 'reprogramado'\n    WHEN 'reprogramado' THEN 'reprogramado'\n    WHEN 'cancelado' THEN 'cancelado'\n    WHEN 'eliminado' THEN 'cancelado'\n    WHEN 'confirmado' THEN 'confirmado'\n    WHEN 'atendido' THEN 'atendido'\n    WHEN 'no_show' THEN 'no_show'\n    ELSE 'agendado'\n  END\nWHERE nullif(trim('{{ $json.ID }}'), '') IS NOT NULL\n  AND '{{ $json['Día '] }}' ~ '^\\d{4}-\\d{2}-\\d{2}$'\n  AND '{{ $json.Hora }}' ~ '^\\d{2}:\\d{2}'\nON CONFLICT (id) DO UPDATE\n  SET nombre = coalesce(excluded.nombre, barber_citas.nombre),\n      servicio = coalesce(excluded.servicio, barber_citas.servicio),\n      precio = coalesce(excluded.precio, barber_citas.precio),\n      inicio = excluded.inicio,\n      fin = excluded.fin,\n      estado = excluded.estado,\n      actualizado_en = now()\nRETURNING id, estado;",
+      "options": {}
+     },
+     "credentials": {
+      "postgres": {
+       "id": "NUrqrDWN8OsBFmgV",
+       "name": "Postgres account"
+      }
+     }
+    },
+    "data": {
+     "main": [
+      [
+       {
+        "json": {
+         "ID": "etnmqvg4qntrgtdmri981u86l0",
+         "Estatus": "agendado",
+         "Nombre": "Cliente Prueba",
+         "Servicio": "Corte desvanecido o tijera",
+         "Precio del servicio": 150,
+         "Día ": "2026-10-01",
+         "Hora": "16:40:00",
+         "Numero celular": "5214501111805@s.whatsapp.net",
+         "Execution ID": "",
+         "fechaISO": "2026-10-01T22:40:00.000Z",
+         "fechaLegible": "1/10/2026, 4:40:00 p.m.",
+         "recordatorio24ISO": "2026-09-30T22:40:00.000Z",
+         "recordatorio1ISO": "2026-10-01T21:40:00.000Z",
+         "recordatorio24Legible": "30/9/2026, 4:40:00 p.m.",
+         "mandar24": true,
+         "mandar1": true,
+         "recordatorioISO": "2026-10-01T21:40:00.000Z",
+         "recordatorioLegible": "1/10/2026, 3:40:00 p.m."
+        },
+        "pairedItem": {
+         "item": 0
+        }
+       }
+      ]
+     ]
+    },
+    "source": {
+     "main": [
+      {
+       "previousNode": "IF - Es cita agendada",
+       "previousNodeOutput": 0,
+       "previousNodeRun": 0
+      }
+     ]
+    }
+   }
+  ],
+  "metadata": {},
+  "waitingExecution": {},
+  "waitingExecutionSource": {},
+  "runtimeData": {
+   "version": 1,
+   "establishedAt": 1790383647182,
+   "source": "trigger",
+   "triggerNode": {
+    "name": "Google Sheets Trigger",
+    "type": "n8n-nodes-base.googleSheetsTrigger"
+   },
+   "redaction": {
+    "version": 2,
+    "production": false,
+    "manual": false
+   }
+  }
+ },
+ "resumeToken": "127fa531c6770f621a39834c97f4e75d1b025d1920a68eec3f1efdcb2bd72e21",
+ "waitTill": "2026-10-01T21:40:00.000Z"
+}

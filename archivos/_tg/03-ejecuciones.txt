@@ -1,0 +1,33 @@
+total devueltas: 250  nextCursor=si
+
+por workflow:
+  barberiaAgenteUncensored: 225
+  5zd5go4TFKqIsgdT: 2
+  OKuQlE1nBbuPHg4Q: 3
+  barberiaRecordatorios: 20
+
+por workflow+status:
+  ('barberiaAgenteUncensored', 'success'): 218
+  ('5zd5go4TFKqIsgdT', 'success'): 2
+  ('barberiaAgenteUncensored', 'error'): 7
+  ('OKuQlE1nBbuPHg4Q', 'success'): 3
+  ('barberiaRecordatorios', 'waiting'): 9
+  ('barberiaRecordatorios', 'success'): 2
+  ('barberiaRecordatorios', 'error'): 9
+
+=== ultimas 15 ejecuciones ===
+  884 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:50:27.252Z mode=webhook
+  883 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:49:28.921Z mode=webhook
+  882 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:49:19.223Z mode=webhook
+  881 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:49:12.760Z mode=webhook
+  880 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:48:31.748Z mode=webhook
+  879 wf=5zd5go4TFKqIsgdT status=success started=2026-09-25T13:45:05.027Z mode=trigger
+  878 wf=barberiaAgenteUncensored status=error started=2026-09-25T13:41:25.713Z mode=webhook
+  877 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:41:15.673Z mode=webhook
+  876 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:41:14.918Z mode=webhook
+  875 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:39:46.455Z mode=webhook
+  874 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:39:46.444Z mode=webhook
+  873 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:39:10.021Z mode=webhook
+  871 wf=OKuQlE1nBbuPHg4Q status=success started=2026-09-25T13:39:04.558Z mode=webhook
+  870 wf=OKuQlE1nBbuPHg4Q status=success started=2026-09-25T13:39:00.033Z mode=webhook
+  869 wf=barberiaAgenteUncensored status=success started=2026-09-25T13:38:55.777Z mode=webhook

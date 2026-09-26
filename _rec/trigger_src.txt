@@ -1,0 +1,759 @@
+===== GoogleSheetsTrigger.node.js =====
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GoogleSheetsTrigger = exports.sheet = exports.document = void 0;
+const n8n_workflow_1 = require("n8n-workflow");
+const GoogleSheetsTrigger_utils_1 = require("./GoogleSheetsTrigger.utils");
+const constants_1 = require("../constants");
+const GoogleSheet_1 = require("./v2/helpers/GoogleSheet");
+const credentialTest_1 = require("./v2/methods/credentialTest");
+const listSearch_1 = require("./v2/methods/listSearch");
+const loadOptions_1 = require("./v2/methods/loadOptions");
+const transport_1 = require("./v2/transport");
+exports.document = {
+    displayName: 'Document',
+    name: 'documentId',
+    type: 'resourceLocator',
+    default: { mode: 'list', value: '' },
+    required: true,
+    modes: [
+        {
+            displayName: 'From List',
+            name: 'list',
+            type: 'list',
+            typeOptions: {
+                searchListMethod: 'spreadSheetsSearch',
+                searchable: true,
+            },
+        },
+        {
+            displayName: 'By URL',
+            name: 'url',
+            type: 'string',
+            extractValue: {
+                type: 'regex',
+                regex: constants_1.GOOGLE_DRIVE_FILE_URL_REGEX,
+            },
+            validation: [
+                {
+                    type: 'regex',
+                    properties: {
+                        regex: constants_1.GOOGLE_DRIVE_FILE_URL_REGEX,
+                        errorMessage: 'Not a valid Google Drive File URL',
+                    },
+                },
+            ],
+        },
+        {
+            displayName: 'By ID',
+            name: 'id',
+            type: 'string',
+            validation: [
+                {
+                    type: 'regex',
+                    properties: {
+                        regex: '[a-zA-Z0-9\\-_]{2,}',
+                        errorMessage: 'Not a valid Google Drive File ID',
+                    },
+                },
+            ],
+            url: '=https://docs.google.com/spreadsheets/d/{{$value}}/edit',
+        },
+    ],
+};
+exports.sheet = {
+    displayName: 'Sheet',
+    name: 'sheetName',
+    type: 'resourceLocator',
+    default: { mode: 'list', value: '' },
+    // default: '', //empty string set to progresivly reveal fields
+    required: true,
+    typeOptions: {
+        loadOptionsDependsOn: ['documentId.value'],
+    },
+    modes: [
+        {
+            displayName: 'From List',
+            name: 'list',
+            type: 'list',
+            typeOptions: {
+                searchListMethod: 'sheetsSearch',
+                searchable: false,
+            },
+        },
+        {
+            displayName: 'By URL',
+            name: 'url',
+            type: 'string',
+            extractValue: {
+                type: 'regex',
+                regex: constants_1.GOOGLE_SHEETS_SHEET_URL_REGEX,
+            },
+            validation: [
+                {
+                    type: 'regex',
+                    properties: {
+                        regex: constants_1.GOOGLE_SHEETS_SHEET_URL_REGEX,
+                        errorMessage: 'Not a valid Sheet URL',
+                    },
+                },
+            ],
+        },
+        {
+            displayName: 'By ID',
+            name: 'id',
+            type: 'string',
+            validation: [
+                {
+                    type: 'regex',
+                    properties: {
+                        regex: '((gid=)?[0-9]{1,})',
+                        errorMessage: 'Not a valid Sheet ID',
+                    },
+                },
+            ],
+        },
+    ],
+};
+class GoogleSheetsTrigger {
+    description = {
+        displayName: 'Google Sheets Trigger',
+        name: 'googleSheetsTrigger',
+        icon: 'file:googleSheets.svg',
+        group: ['trigger'],
+        version: 1,
+        subtitle: '={{($parameter["event"])}}',
+        description: 'Starts the workflow when Google Sheets events occur',
+        defaults: {
+            name: 'Google Sheets Trigger',
+        },
+        inputs: [],
+        outputs: [n8n_workflow_1.NodeConnectionTypes.Main],
+        credentials: [
+            {
+                name: 'googleApi',
+                required: true,
+                displayOptions: {
+                    show: {
+                        authentication: ['serviceAccount'],
+                    },
+                },
+                testedBy: 'googleApiCredentialTest',
+            },
+            {
+                name: 'googleSheetsTriggerOAuth2Api',
+                required: true,
+                displayOptions: {
+                    show: {
+                        authentication: ['triggerOAuth2'],
+                    },
+                },
+            },
+        ],
+        polling: true,
+        properties: [
+            // trigger shared logic with GoogleSheets node, leaving this here for compatibility
+            {
+                displayName: 'Authentication',
+                name: 'authentication',
+                type: 'options',
+                options: [
+                    {
+                        name: 'Service Account',
+                        value: 'serviceAccount',
+                    },
+                    {
+                        // eslint-disable-next-line n8n-nodes-base/node-param-display-name-miscased
+                        name: 'OAuth2 (recommended)',
+                        value: 'triggerOAuth2',
+                    },
+                ],
+                default: 'triggerOAuth2',
+            },
+            exports.document,
+            exports.sheet,
+            {
+                displayName: 'Trigger On',
+                name: 'event',
+                type: 'options',
+                description: "It will be triggered also by newly created columns (if the 'Columns to Watch' option is not set)",
+                options: [
+                    {
+                        name: 'Row Added',
+                        value: 'rowAdded',
+                    },
+                    {
+                        name: 'Row Updated',
+                        value: 'rowUpdate',
+                    },
+                    {
+                        name: 'Row Added or Updated',
+                        value: 'anyUpdate',
+                    },
+                ],
+                default: 'anyUpdate',
+                required: true,
+            },
+            {
+                displayName: 'Include in Output',
+                name: 'includeInOutput',
+                type: 'options',
+                default: 'new',
+                description: 'This option will be effective only when automatically executing the workflow',
+                options: [
+                    {
+                        name: 'New Version',
+                        value: 'new',
+                    },
+                    {
+                        name: 'Old Version',
+                        value: 'old',
+                    },
+                    {
+                        name: 'Both Versions',
+                        value: 'both',
+                    },
+                ],
+                displayOptions: {
+                    hide: {
+                        event: ['rowAdded'],
+                    },
+                },
+            },
+            {
+                displayName: 'Options',
+                name: 'options',
+                type: 'collection',
+                placeholder: 'Add option',
+                default: {},
+                options: [
+                    {
+                        displayName: 'Columns to Watch',
+                        name: 'columnsToWatch',
+                        type: 'multiOptions',
+                        description: 'Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+                        typeOptions: {
+                            loadOptionsDependsOn: ['sheetName.value'],
+                            loadOptionsMethod: 'getSheetHeaderRowAndSkipEmpty',
+                        },
+                        default: [],
+                        displayOptions: {
+                            show: {
+                                '/event': ['anyUpdate', 'rowUpdate'],
+                            },
+                        },
+                    },
+                    {
+                        displayName: 'Data Location on Sheet',
+                        name: 'dataLocationOnSheet',
+                        type: 'fixedCollection',
+                        placeholder: 'Select Range',
+                        default: { values: { rangeDefinition: 'specifyRangeA1' } },
+                        options: [
+                            {
+                                displayName: 'Values',
+                                name: 'values',
+                                values: [
+                                    {
+                                        displayName: 'Range Definition',
+                                        name: 'rangeDefinition',
+                                        type: 'options',
+                                        options: [
+                                            {
+                                                name: 'Specify Range (A1 Notation)',
+                                                value: 'specifyRangeA1',
+                                                description: 'Manually specify the data range',
+                                            },
+                                            {
+                                                name: 'Specify Range (Rows)',
+                                                value: 'specifyRange',
+                                                description: 'Manually specify the data range',
+                                            },
+                                        ],
+                                        default: '',
+                                    },
+                                    {
+                                        displayName: 'Header Row',
+                                        name: 'headerRow',
+                                        type: 'number',
+                                        typeOptions: {
+                                            minValue: 1,
+                                        },
+                                        default: 1,
+                                        description: 'Index of the row which contains the keys. Starts at 1. The incoming node data is matched to the keys for assignment. The matching is case sensitive.',
+                                        hint: 'First row is row 1',
+                                        displayOptions: {
+                                            show: {
+                                                rangeDefinition: ['specifyRange'],
+                                            },
+                                        },
+                                    },
+                                    {
+                                        displayName: 'First Data Row',
+                                        name: 'firstDataRow',
+                                        type: 'number',
+                                        typeOptions: {
+                                            minValue: 1,
+                                        },
+                                        default: 2,
+                                        description: 'Index of the first row which contains the actual data and not the keys. Starts with 1.',
+                                        hint: 'First row is row 1',
+                                        displayOptions: {
+                                            show: {
+                                                rangeDefinition: ['specifyRange'],
+                                            },
+                                        },
+                                    },
+                                    {
+                                        displayName: 'Range',
+                                        name: 'range',
+                                        type: 'string',
+                                        default: '',
+                                        placeholder: 'A:Z',
+                                        description: 'The table range to read from or to append data to. See the Google <a href="https://developers.google.com/sheets/api/guides/values#writing">documentation</a> for the details.',
+                                        hint: 'You can specify both the rows and the columns, e.g. C4:E7',
+                                        displayOptions: {
+                                            show: {
+                                                rangeDefinition: ['specifyRangeA1'],
+                                            },
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        displayName: 'Value Render',
+                        name: 'valueRender',
+                        type: 'options',
+                        options: [
+                            {
+                                name: 'Unformatted',
+                                value: 'UNFORMATTED_VALUE',
+                                description: 'Values will be calculated, but not formatted in the reply',
+                            },
+                            {
+                                name: 'Formatted',
+                                value: 'FORMATTED_VALUE',
+                                description: "Values will be formatted and calculated according to the cell's formatting (based on the spreadsheet's locale)",
+                            },
+                            {
+                                name: 'Formula',
+                                value: 'FORMULA',
+                                description: 'Values will not be calculated. The reply will include the formulas.',
+                            },
+                        ],
+                        default: 'UNFORMATTED_VALUE',
+                        description: 'Determines how values will be rendered in the output. <a href="https://developers.google.com/sheets/api/reference/rest/v4/ValueRenderOption" target="_blank">More info</a>.',
+                        displayOptions: {
+                            hide: {
+                                '/event': ['anyUpdate', 'rowUpdate'],
+                            },
+                        },
+                    },
+                    {
+                        displayName: 'DateTime Render',
+                        name: 'dateTimeRenderOption',
+                        type: 'options',
+                        options: [
+                            {
+                                name: 'Serial Number',
+                                value: 'SERIAL_NUMBER',
+                                description: 'Fields will be returned as doubles in "serial number" format (as popularized by Lotus 1-2-3)',
+                            },
+                            {
+                                name: 'Formatted String',
+                                value: 'FORMATTED_STRING',
+                                description: 'Fields will be rendered as strings in their given number format (which depends on the spreadsheet locale)',
+                            },
+                        ],
+                        default: 'SERIAL_NUMBER',
+                        description: 'Determines how dates should be rendered in the output.  <a href="https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption" target="_blank">More info</a>.',
+                        displayOptions: {
+                            hide: {
+                                '/event': ['anyUpdate', 'rowUpdate'],
+                            },
+                        },
+                    },
+                ],
+            },
+        ],
+    };
+    methods = {
+        listSearch: { spreadSheetsSearch: listSearch_1.spreadSheetsSearch, sheetsSearch: listSearch_1.sheetsSearch },
+        loadOptions: { getSheetHeaderRowAndSkipEmpty: loadOptions_1.getSheetHeaderRowAndSkipEmpty },
+        credentialTest: { googleApiCredentialTest: credentialTest_1.googleApiCredentialTest },
+    };
+    async poll() {
+        try {
+            const workflowStaticData = this.getWorkflowStaticData('node');
+            const event = this.getNodeParameter('event', 0);
+            const documentId = this.getNodeParameter('documentId', undefined, {
+                extractValue: true,
+            });
+            const sheetWithinDocument = this.getNodeParameter('sheetName', undefined, {
+                extractValue: true,
+            });
+            const { mode: sheetMode } = this.getNodeParameter('sheetName', 0);
+            const googleSheet = new GoogleSheet_1.GoogleSheet(documentId, this);
+            const { sheetId, title: sheetName } = await googleSheet.spreadsheetGetSheet(this.getNode(), sheetMode, sheetWithinDocument);
+            const options = this.getNodeParameter('options');
+            // If the documentId or sheetId changed, reset the workflow static data
+            if (this.getMode() !== 'manual' &&
+                (workflowStaticData.documentId !== documentId || workflowStaticData.sheetId !== sheetId)) {
+                workflowStaticData.documentId = documentId;
+                workflowStaticData.sheetId = sheetId;
+                workflowStaticData.lastRevision = undefined;
+                workflowStaticData.lastRevisionLink = undefined;
+                workflowStaticData.lastIndexChecked = undefined;
+            }
+            const previousRevision = workflowStaticData.lastRevision;
+            const previousRevisionLink = workflowStaticData.lastRevisionLink;
+            if (event !== 'rowAdded') {
+                let pageToken;
+                do {
+                    // Run the Drive revisions listing with the broader trigger scope
+                    // (drive.readonly). The default sheetV2 scope (drive.metadata) lists
+                    // revisions but omits exportLinks, which are required to download the
+                    // previous revision below.
+                    const { revisions, nextPageToken } = await transport_1.apiRequest.call(this, 'GET', '', undefined, {
+                        fields: 'revisions(id, exportLinks), nextPageToken',
+                        pageToken,
+                        pageSize: 1000,
+                    }, `https://www.googleapis.com/drive/v3/files/${documentId}/revisions`, {}, {}, 'sheetV2Trigger');
+                    if (nextPageToken) {
+                        pageToken = nextPageToken;
+                    }
+                    else {
+                        pageToken = undefined;
+                        const lastRevision = +revisions[revisions.length - 1].id;
+                        if (lastRevision <= previousRevision) {
+                            return null;
+                        }
+                        else {
+                            if (this.getMode() !== 'manual') {
+                                workflowStaticData.lastRevision = lastRevision;
+                                workflowStaticData.lastRevisionLink =
+                                    revisions[revisions.length - 1].exportLinks[GoogleSheetsTrigger_utils_1.BINARY_MIME_TYPE];
+                            }
+                        }
+                    }
+                } while (pageToken);
+            }
+            let range = 'A:ZZZ';
+            let keyRow = 1;
+            let startIndex = 2;
+            let rangeDefinition = '';
+            const [from, to] = range.split(':');
+            let keyRange = `${from}${keyRow}:${to}${keyRow}`;
+            let rangeToCheck = `${from}${keyRow}:${to}`;
+            if (options.dataLocationOnSheet) {
+                const locationDefine = options.dataLocationOnSheet.values;
+                rangeDefinition = locationDefine.rangeDefinition;
+                if (rangeDefinition === 'specifyRangeA1') {
+                    if (locationDefine.range === '') {
+                        throw new n8n_workflow_1.NodeOperationError(this.getNode(), "The field 'Range' is empty, please provide a range");
+                    }
+                    range = locationDefine.range;
+                }
+                if (rangeDefinition === 'specifyRange') {
+                    keyRow = parseInt(locationDefine.headerRow, 10);
+                    startIndex = parseInt(locationDefine.firstDataRow, 10);
+                }
+                const [rangeFrom, rangeTo] = range.split(':');
+                const cellDataFrom = rangeFrom.match(/([a-zA-Z]{1,10})([0-9]{0,10})/) || [];
+                const cellDataTo = rangeTo.match(/([a-zA-Z]{1,10})([0-9]{0,10})/) || [];
+                if (rangeDefinition === 'specifyRangeA1' && cellDataFrom[2] !== undefined) {
+                    keyRange = `${cellDataFrom[1]}${+cellDataFrom[2]}:${cellDataTo[1]}${+cellDataFrom[2]}`;
+                    rangeToCheck = `${cellDataFrom[1]}${+cellDataFrom[2] + 1}:${rangeTo}`;
+                }
+                else {
+                    keyRange = `${cellDataFrom[1]}${keyRow}:${cellDataTo[1]}${keyRow}`;
+                    rangeToCheck = `${cellDataFrom[1]}${keyRow}:${rangeTo}`;
+                }
+            }
+            const qs = {};
+            Object.assign(qs, options);
+            if (event === 'rowAdded') {
+                const [columns] = (await transport_1.apiRequest.call(this, 'GET', `/v4/spreadsheets/${documentId}/values/${encodeURIComponent(sheetName)}!${keyRange}`)).values || [[]];
+                if (!columns?.length) {
+                    throw new n8n_workflow_1.NodeOperationError(this.getNode(), 'Could not retrieve the columns from key row');
+                }
+                const sheetData = await googleSheet.getData(`${sheetName}!${rangeToCheck}`, options.valueRender || 'UNFORMATTED_VALUE', options.dateTimeRenderOption || 'FORMATTED_STRING');
+                if (Array.isArray(sheetData) && sheetData.length !== 0) {
+                    sheetData.splice(0, 1); // Remove header row
+                }
+                let dataStartIndex = 0;
+                if (rangeDefinition === 'specifyRange' && keyRow < startIndex) {
+                    dataStartIndex = startIndex - keyRow - 1;
+                }
+                if (this.getMode() === 'manual') {
+                    if (Array.isArray(sheetData)) {
+                        const sheetDataFromStartIndex = sheetData.slice(dataStartIndex);
+                        const returnData = (0, GoogleSheetsTrigger_utils_1.arrayOfArraysToJson)(sheetDataFromStartIndex, columns);
+                        if (Array.isArray(returnData) && returnData.length !== 0) {
+                            return [this.helpers.returnJsonArray(returnData)];
+                        }
+                    }
+                }
+                if (Array.isArray(sheetData) && this.getMode() !== 'manual') {
+                    if (workflowStaticData.lastIndexChecked === undefined) {
+                        workflowStaticData.lastIndexChecked = sheetData.length;
+                        return null;
+                    }
+                    const rowsStartIndex = Math.max(workflowStaticData.lastIndexChecked, dataStartIndex);
+                    const addedRows = sheetData?.slice(rowsStartIndex) || [];
+                    const returnData = (0, GoogleSheetsTrigger_utils_1.arrayOfArraysToJson)(addedRows, columns);
+                    workflowStaticData.lastIndexChecked = sheetData.length;
+                    if (Array.isArray(returnData) && returnData.length !== 0) {
+                        return [this.helpers.returnJsonArray(returnData)];
+                    }
+                }
+            }
+            if (event === 'anyUpdate' || event === 'rowUpdate') {
+                if (sheetName.length > 31) {
+                    throw new n8n_workflow_1.NodeOperationError(this.getNode(), 'Sheet name is too long choose a name with 31 characters or less');
+                }
+                const sheetRange = `${sheetName}!${range}`;
+                let dataStartIndex = startIndex - 1;
+                if (rangeDefinition !== 'specifyRangeA1') {
+                    dataStartIndex = keyRow < startIndex ? startIndex - 2 : startIndex - 1;
+                }
+                const currentData = (await googleSheet.getData(sheetRange, 'UNFORMATTED_VALUE', 'SERIAL_NUMBER')) || [];
+                if (previousRevision === undefined) {
+                    if (currentData.length === 0) {
+                        return [[]];
+                    }
+                    const zeroBasedKeyRow = keyRow - 1;
+                    const columns = currentData[zeroBasedKeyRow];
+                    currentData.splice(zeroBasedKeyRow, 1); // Remove key row
+                    let returnData;
+                    if (rangeDefinition !== 'specifyRangeA1') {
+                        returnData = (0, GoogleSheetsTrigger_utils_1.arrayOfArraysToJson)(currentData.slice(dataStartIndex), columns);
+                    }
+                    else {
+                        returnData = (0, GoogleSheetsTrigger_utils_1.arrayOfArraysToJson)(currentData, columns);
+                    }
+                    if (Array.isArray(returnData) && returnData.length !== 0 && this.getMode() === 'manual') {
+                        return [this.helpers.returnJsonArray(returnData)];
+                    }
+                    else {
+                        return null;
+                    }
+                }
+                const previousRevisionBinaryData = await GoogleSheetsTrigger_utils_1.getRevisionFile.call(this, previousRevisionLink);
+                const previousRevisionSheetData = (0, GoogleSheetsTrigger_utils_1.sheetBinaryToArrayOfArrays)(previousRevisionBinaryData, sheetName, rangeDefinition === 'specifyRangeA1' ? range : undefined) || [];
+                const includeInOutput = this.getNodeParameter('includeInOutput', 'new');
+                let returnData;
+                if (options.columnsToWatch) {
+                    returnData = (0, GoogleSheetsTrigger_utils_1.compareRevisions)(previousRevisionSheetData, currentData, keyRow, includeInOutput, options.columnsToWatch, dataStartIndex, event);
+                }
+                else {
+                    returnData = (0, GoogleSheetsTrigger_utils_1.compareRevisions)(previousRevisionSheetData, currentData, keyRow, includeInOutput, [], dataStartIndex, event);
+                }
+                if (Array.isArray(returnData) && returnData.length !== 0) {
+                    return [this.helpers.returnJsonArray(returnData)];
+                }
+            }
+        }
+        catch (error) {
+            if (error?.description
+                ?.toLowerCase()
+                .includes('user does not have sufficient permissions for file')) {
+                throw new n8n_workflow_1.NodeOperationError(this.getNode(), "Edit access to the document is required for the 'Row Update' and 'Row Added or Updated' triggers. Request edit access to the document's owner or select the 'Row Added' trigger in the 'Trigger On' dropdown.");
+            }
+            if (error?.error?.error?.message !== undefined &&
+                !error.error.error.message.toLocaleLowerCase().includes('unknown error') &&
+                !error.error.error.message.toLocaleLowerCase().includes('bad request')) {
+                // eslint-disable-next-line prefer-const
+                let [message, ...description] = error.error.error.message.split('. ');
+                if (message.toLowerCase() === 'access not configured') {
+                    message = 'Missing Google Drive API';
+                }
+                throw new n8n_workflow_1.NodeOperationError(this.getNode(), message, {
+                    description: description.join('.\n '),
+                });
+            }
+            throw error;
+        }
+        return null;
+    }
+}
+exports.GoogleSheetsTrigger = GoogleSheetsTrigger;
+//# sourceMappingURL=GoogleSheetsTrigger.node.js.map===== GoogleSheetsTrigger.utils.js =====
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BINARY_MIME_TYPE = void 0;
+exports.getRevisionFile = getRevisionFile;
+exports.sheetBinaryToArrayOfArrays = sheetBinaryToArrayOfArrays;
+exports.arrayOfArraysToJson = arrayOfArraysToJson;
+exports.compareRevisions = compareRevisions;
+const isEqual_1 = __importDefault(require("lodash/isEqual"));
+const zip_1 = __importDefault(require("lodash/zip"));
+const XLSX = __importStar(require("@e965/xlsx"));
+const transport_1 = require("./v2/transport");
+exports.BINARY_MIME_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+async function getRevisionFile(exportLink) {
+    const mimeType = exports.BINARY_MIME_TYPE;
+    const response = await transport_1.apiRequest.call(this, 'GET', '', undefined, { mimeType }, exportLink, undefined, {
+        resolveWithFullResponse: true,
+        encoding: null,
+        json: false,
+    }, 'sheetV2Trigger');
+    return Buffer.from(response.body);
+}
+function sheetBinaryToArrayOfArrays(data, sheetName, range) {
+    const workbook = XLSX.read(data, { type: 'buffer', sheets: [sheetName] });
+    const sheet = workbook.Sheets[sheetName];
+    const sheetData = sheet['!ref']
+        ? XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '', range })
+        : [];
+    const lastDataRowIndex = sheetData.reduce((lastRowIndex, row, rowIndex) => {
+        if (row.some((cell) => cell !== '')) {
+            return rowIndex;
+        }
+        return lastRowIndex;
+    }, 0);
+    return sheetData.slice(0, lastDataRowIndex + 1);
+}
+function arrayOfArraysToJson(sheetData, columns) {
+    const returnData = [];
+    for (let rowIndex = 0; rowIndex < sheetData.length; rowIndex++) {
+        const rowData = {};
+        for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+            const columnName = columns[columnIndex];
+            const cellValue = sheetData[rowIndex][columnIndex] || '';
+            rowData[columnName] = cellValue;
+        }
+        returnData.push(rowData);
+    }
+    return returnData;
+}
+const getSpecificColumns = (row, selectedColumns, columns) => {
+    return row ? selectedColumns.map((column) => row[columns.indexOf(column) - 1]) : [];
+};
+const extractVersionData = (data, version, triggerEvent) => {
+    if (triggerEvent === 'anyUpdate') {
+        return data.map(({ [version]: entry, rowIndex, changeType }) => entry ? [rowIndex, changeType, ...entry] : [rowIndex, changeType]);
+    }
+    return data.map(({ [version]: entry, rowIndex }) => (entry ? [rowIndex, ...entry] : [rowIndex]));
+};
+function compareRevisions(previous, current, keyRow, includeInOutput, columnsToWatch, dataStartIndex, event) {
+    const dataLength = current.length > previous.length ? current.length : previous.length;
+    const columnsRowIndex = keyRow - 1;
+    const columnsInCurrent = current[columnsRowIndex];
+    const columnsInPrevious = previous[columnsRowIndex];
+    let columns = event === 'anyUpdate' ? ['row_number', 'change_type'] : ['row_number'];
+    if (columnsInCurrent !== undefined && columnsInPrevious !== undefined) {
+        columns =
+            columnsInCurrent.length > columnsInPrevious.length
+                ? columns.concat(columnsInCurrent)
+                : columns.concat(columnsInPrevious);
+    }
+    else if (columnsInCurrent !== undefined) {
+        columns = columns.concat(columnsInCurrent);
+    }
+    else if (columnsInPrevious !== undefined) {
+        columns = columns.concat(columnsInPrevious);
+    }
+    const diffData = [];
+    for (let i = dataStartIndex; i < dataLength; i++) {
+        if (i === columnsRowIndex) {
+            continue;
+        }
+        // sheets API omits trailing empty columns, xlsx does not - so we need to pad the shorter array
+        if (Array.isArray(current[i]) && Array.isArray(previous[i])) {
+            while (current[i].length < previous[i].length) {
+                current[i].push('');
+            }
+        }
+        // if columnsToWatch is defined, only compare those columns
+        if (columnsToWatch?.length) {
+            const currentRow = getSpecificColumns(current[i], columnsToWatch, columns);
+            const previousRow = getSpecificColumns(previous[i], columnsToWatch, columns);
+            if ((0, isEqual_1.default)(currentRow, previousRow))
+                continue;
+        }
+        else {
+            if ((0, isEqual_1.default)(current[i], previous[i]))
+                continue;
+        }
+        if (event === 'rowUpdate' && (!previous[i] || previous[i].every((cell) => cell === '')))
+            continue;
+        let changeType = 'updated';
+        if (previous[i] === undefined) {
+            previous[i] = current[i].map(() => '');
+            changeType = 'added';
+        }
+        if (current[i] === undefined)
+            continue;
+        diffData.push({
+            rowIndex: i + 1,
+            previous: previous[i],
+            current: current[i],
+            changeType,
+        });
+    }
+    if (includeInOutput === 'old') {
+        return arrayOfArraysToJson(extractVersionData(diffData, 'previous', event), columns);
+    }
+    if (includeInOutput === 'both') {
+        const previousData = arrayOfArraysToJson(extractVersionData(diffData, 'previous', event), columns).map((row) => ({ previous: row }));
+        const currentData = arrayOfArraysToJson(extractVersionData(diffData, 'current', event), columns).map((row) => ({ current: row }));
+        const differences = currentData.map(({ current: currentRow }, index) => {
+            const { row_number, ...rest } = currentRow;
+            const returnData = {};
+            returnData.row_number = row_number;
+            Object.keys(rest).forEach((key) => {
+                const previousValue = previousData[index].previous[key];
+                const currentValue = currentRow[key];
+                if ((0, isEqual_1.default)(previousValue, currentValue))
+                    return;
+                returnData[key] = {
+                    previous: previousValue,
+                    current: currentValue,
+                };
+            });
+            return { differences: returnData };
+        });
+        return (0, zip_1.default)(previousData, currentData, differences).map((row) => Object.assign({}, ...row));
+    }
+    return arrayOfArraysToJson(extractVersionData(diffData, 'current', event), columns);
+}
+//# sourceMappingURL=GoogleSheetsTrigger.utils.js.map

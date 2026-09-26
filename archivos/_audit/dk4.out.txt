@@ -1,0 +1,58 @@
+=== contextWindowLengthProperty ===
+3:exports.scopedSessionHint = exports.contextWindowLengthProperty = exports.sessionKeyProperty = exports.expressionSessionKeyProperty = exports.sessionIdOption = void 0;
+4-exports.sessionIdOption = {
+5-    displayName: 'Session ID',
+6-    name: 'sessionIdType',
+7-    type: 'options',
+8-    options: [
+9-        {
+10-            name: 'Connected Chat Trigger Node',
+11-            value: 'fromInput',
+12-            description: "Looks for an input field called 'sessionId' that is coming from a directly connected Chat Trigger",
+13-        },
+14-        {
+15-            name: 'Define below',
+16-            value: 'customKey',
+17-            description: 'Use an expression to reference data in previous nodes or enter static text',
+18-        },
+19-    ],
+20-    default: 'fromInput',
+21-    builderHint: {
+22-        propertyHint: "Use 'Connected Chat Trigger Node' (fromInput) if there is a Chat Trigger node earlier in the workflow. Otherwise use 'Define below' (customKey).",
+23-    },
+--
+51:exports.contextWindowLengthProperty = {
+52-    displayName: 'Context Window Length',
+53-    name: 'contextWindowLength',
+54-    type: 'number',
+55-    default: 5,
+56-    hint: 'How many past interactions the model receives as context',
+57-};
+58-const scopedSessionHint = (minVersion) => ({
+59-    displayName: 'Session is automatically scoped only to this memory node. To share a session between different memory nodes, switch "Session ID" to "Define below" and use the same key in each node.',
+60-    name: 'scopedSessionHintNotice',
+61-    type: 'notice',
+62-    default: '',
+63-    displayOptions: {
+64-        show: {
+65-            '@version': [{ _cnd: { gte: minVersion } }],
+66-            sessionIdType: ['fromInput'],
+67-        },
+68-    },
+
+=== responsesApiEnabled ===
+---
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/vendors/OpenAi
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/vendors/OpenAi/OpenAi.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/vendors/OpenAi/openAi.dark.svg
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/vendors/OpenAi/openAi.svg
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/vendors/OpenAi/OpenAi.node.js.map
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/embeddings/EmbeddingsOpenAI
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/embeddings/EmbeddingsOpenAI/EmbeddingsOpenAi.node.js.map
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/embeddings/EmbeddingsOpenAI/openAiLight.svg
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/embeddings/EmbeddingsOpenAI/EmbeddingsOpenAi.node.js
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/embeddings/EmbeddingsOpenAI/openAiLight.dark.svg
+/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/embeddings/EmbeddingsAzureOpenAi
+/usr/local/lib/no
+=== LmChatOpenAi ===
+

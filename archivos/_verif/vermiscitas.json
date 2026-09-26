@@ -1,0 +1,28 @@
+{
+ "http": "200",
+ "exec_id": "1179",
+ "status": "success",
+ "respuesta": "Tienes la siguiente cita agendada:\n\n- *Corte desvanecido* — $150\nFecha: *Sábado 26 de septiembre*\nHora: *1:00 p.m.*\n\n¿Hay algo más en lo que pueda ayudarte? 😊",
+ "agente": "Tienes la siguiente cita agendada:  \n\n- *Corte desvanecido* — $150  \nFecha: *Sábado 26 de septiembre*  \nHora: *1:00 p.m.*  \n\n¿Hay algo más en lo que pueda ayudarte? 😊",
+ "nodos": [
+  "Webhook",
+  "Normalizacion",
+  "Leer operadores",
+  "Comprobar operador",
+  "¿Es operador?",
+  "IF - No es del bot",
+  "Leer pausa",
+  "Calcular pausa",
+  "IF - Cliente pausado",
+  "Switch",
+  "Edit Fields2",
+  "Edit Fields",
+  "Postgres Chat Memory",
+  "OpenAI Chat Model",
+  "Consultar agenda",
+  "AI Agent",
+  "IF - Respuesta no vacia",
+  "Mandar mensaje"
+ ],
+ "error_msg": null
+}

@@ -1,0 +1,11 @@
+=== VERIFICACION FINAL: workflows tras la evaluacion ===
+  5zd5go4TFKqIsgdT	barberiaVigilancia	active=True
+  barberiaAgenteUncensored	Barberia - Agente de citas (Uncensored AI)	active=True
+  barberiaRecordatorios	Barberia - Recordatorios de cita	active=True
+
+total workflows: 3
+barberiaAlertas existe? False
+nodos telegram totales: 0
+
+credenciales: 7
+telegramApi existe? False

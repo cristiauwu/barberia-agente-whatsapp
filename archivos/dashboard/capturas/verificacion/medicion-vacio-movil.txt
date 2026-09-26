@@ -1,0 +1,20 @@
+ANCHO_VIEWPORT=390 ALTO_VIEWPORT=844
+ORIENTACION=portrait
+DOC_scrollWidth=375 clientWidth=375 SCROLL_LATERAL=false
+N_OVERFLOW_INTERNO=0
+N_FUERA_VIEWPORT=0
+N_KPIS=8 COLS_VISIBLES=
+KPIS_POR_FILA=2,2,2,2
+KPI0 "Ingresos hoy"="$0" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI1 "Ingresos semana"="$0" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI2 "Ingresos mes"="$0" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI3 "Ticket promedio hoy"="—" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI4 "Ticket promedio mes"="—" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI5 "No-shows del mes"="0" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI6 "Cancelaciones del mes"="0" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI7 "Proximas 7 dias"="0" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+N_BARRAS=30
+ALTURAS=1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%,1.5%
+N_TABLAS=0
+N_RECORTADOS=0
+ALTURA_DOC=3776

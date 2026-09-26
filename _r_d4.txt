@@ -1,0 +1,228 @@
+======================================================================
+Mandar mensaje
+{
+  "id": "72159321-e8a7-4644-a200-142f429171ec",
+  "name": "Mandar mensaje",
+  "type": "n8n-nodes-base.httpRequest",
+  "typeVersion": 4.2,
+  "retryOnFail": true,
+  "maxTries": 3,
+  "waitBetweenTries": 2000,
+  "position": [
+    1472,
+    192
+  ],
+  "parameters": {
+    "method": "POST",
+    "url": "={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}",
+    "sendHeaders": true,
+    "headerParameters": {
+      "parameters": [
+        {
+          "name": "apikey",
+          "value": "={{ $('Normalizacion').item.json.instance_apikey }}"
+        }
+      ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+      "parameters": [
+        {
+          "name": "number",
+          "value": "={{ $('Normalizacion').item.json.user_number }}"
+        },
+        {
+          "name": "text",
+          "value": "={{ $json.output }}"
+        },
+        {
+          "name": "delay",
+          "value": "={{ 1000 }}"
+        }
+      ]
+    },
+    "options": {}
+  }
+}
+======================================================================
+Responder al operador
+{
+  "id": "f878bbd1-d401-417f-bb52-7108a6333f78",
+  "name": "Responder al operador",
+  "type": "n8n-nodes-base.httpRequest",
+  "typeVersion": 4.2,
+  "retryOnFail": true,
+  "maxTries": 3,
+  "waitBetweenTries": 2000,
+  "position": [
+    272,
+    1744
+  ],
+  "parameters": {
+    "method": "POST",
+    "url": "={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "sendHeaders": true,
+    "headerParameters": {
+      "parameters": []
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ number: $('Normalizacion').item.json.user_number, text: $json.respuesta, delay: 1000 }) }}",
+    "options": {}
+  },
+  "credentials": {
+    "httpHeaderAuth": {
+      "id": "qaGW1Tvt5BqPujJ1",
+      "name": "Evolution API"
+    }
+  }
+}
+======================================================================
+Normalizacion
+{
+  "id": "1002ccd9-9612-4e28-9f2f-0d4915448400",
+  "name": "Normalizacion",
+  "type": "n8n-nodes-base.set",
+  "typeVersion": 3.4,
+  "position": [
+    -496,
+    208
+  ],
+  "parameters": {
+    "assignments": {
+      "assignments": [
+        {
+          "id": "d9419665-41fc-43b9-aef7-d521a1ba2035",
+          "name": "instance_server_url",
+          "value": "={{ $json.body.server_url }}",
+          "type": "string"
+        },
+        {
+          "id": "c3cb8673-8006-4079-a304-c58ffc267226",
+          "name": "instance_name",
+          "value": "={{ $json.body.instance }}",
+          "type": "string"
+        },
+        {
+          "id": "e462da04-7f8b-4fbe-aacd-7956666c2ede",
+          "name": "instance_apikey",
+          "value": "={{ $json.body.apikey }}",
+          "type": "string"
+        },
+        {
+          "id": "b06da722-eea2-4f28-a2d4-7bcc6592b952",
+          "name": "message_id",
+          "value": "={{ $json.body.data.key.id }}",
+          "type": "string"
+        },
+        {
+          "id": "5ecbe629-f4d0-4bdf-8c78-903f311bc273",
+          "name": "message_chat_id_sender",
+          "value": "={{ $json.body.sender }}",
+          "type": "string"
+        },
+        {
+          "id": "cbb05e7c-4912-4965-bcf4-cefd9418b39f",
+          "name": "message_content_type",
+          "value": "={{ $json.body.data.message.extendedTextMessage ? 'text': '' }}{{ $json.body.data.message.conversation ? 'text': '' }}{{ $json.body.data.message.audioMessage ? 'audio': '' }}{{ $json.body.data.message.imageMessage ? 'image': '' }}",
+          "type": "string"
+        },
+        {
+          "id": "d6fa8877-dee6-468b-a51e-8fdc36dc190f",
+          "name": "message_content",
+          "value": "={{ $json.body.data.message.extendedTextMessage?.text || '' }} {{ $json.body.data.message.imageMessage?.caption || '' }} {{ $json.body.data.message.conversation || '' }}",
+          "type": "string"
+        },
+        {
+          "id": "f122b51f-8a93-439e-85fb-c370e7f4f6b8",
+          "name": "message_timestamp",
+          "value": "={{ $json.body.date_time }}",
+          "type": "string"
+        },
+        {
+          "id": "e10a7e61-cffe-44fb-9b13-e0c199ebd866",
+          "name": "user_name",
+          "value": "={{ $json.body.data.pushName }}",
+          "type": "string"
+        },
+        {
+          "id": "1c280646-7eb8-4118-9e8d-432f04a763b7",
+          "name": "user_number",
+          "value": "={{ $json.body.data.key.remoteJid }}",
+          "type": "string"
+        },
+        {
+          "id": "a7341820-a177-4921-aee5-0fb72a40dcdf",
+          "name": "session_id",
+          "value": "={{ $json.body.data.key.id }}",
+          "type": "string"
+        },
+        {
+          "id": "fromme0001-0000-4000-8000-000000000001",
+          "name": "from_me",
+          "value": "={{ $json.body.data.key.fromMe ? 'si' : 'no' }}",
+          "type": "string"
+        }
+      ]
+    },
+    "options": {}
+  }
+}
+======================================================================
+Leer estado del sistema
+{
+  "id": "f0a2d44f-3e29-40a7-a717-fb35314207fe",
+  "name": "Leer estado del sistema",
+  "type": "n8n-nodes-base.postgres",
+  "typeVersion": 2.6,
+  "alwaysOutputData": true,
+  "retryOnFail": true,
+  "maxTries": 3,
+  "waitBetweenTries": 2000,
+  "position": [
+    -400,
+    1952
+  ],
+  "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT\n  (SELECT count(*) FROM barber_citas\n    WHERE inicio >= (now() AT TIME ZONE 'America/Mexico_City')::date\n      AND inicio <  (now() AT TIME ZONE 'America/Mexico_City')::date + interval '1 day'\n      AND estado IN ('agendado','confirmado')) AS citas_hoy,\n  (SELECT count(*) FROM barber_citas\n    WHERE inicio >= now() AND inicio < now() + interval '7 days'\n      AND estado IN ('agendado','confirmado')) AS citas_semana,\n  (SELECT count(*) FROM barber_escalaciones\n    WHERE coalesce(estado,'abierta') = 'abierta') AS escalaciones,\n  (SELECT count(*) FROM barber_pausas WHERE hasta > now()) AS pausas,\n  (SELECT count(*) FROM barber_operadores WHERE activo) AS operadores;",
+    "options": {}
+  },
+  "credentials": {
+    "postgres": {
+      "id": "NUrqrDWN8OsBFmgV",
+      "name": "Postgres account"
+    }
+  }
+}
+###################################################################### 
+CONEXIONES de Mandar mensaje y Responder al operador:
+Mandar mensaje -> null
+Responder al operador -> null
+Normalizacion -> {"main": [[{"node": "Leer operadores", "type": "main", "index": 0}]]}
+###################################################################### 
+CREDENCIALES usadas en el agente:
+{
+  "openAiApi": {
+    "id": "GtV72MoANECFbNoX",
+    "name": "OpenAi account"
+  },
+  "googleCalendarOAuth2Api": {
+    "id": "I6TpcTTP1cn1tviR",
+    "name": "Google Calendar account"
+  },
+  "postgres": {
+    "id": "NUrqrDWN8OsBFmgV",
+    "name": "Postgres account"
+  },
+  "googleSheetsOAuth2Api": {
+    "id": "lGEYmmJh1FvqzQi9",
+    "name": "Google Sheets account"
+  },
+  "httpHeaderAuth": {
+    "id": "qaGW1Tvt5BqPujJ1",
+    "name": "Evolution API"
+  }
+}

@@ -1,0 +1,97 @@
+### MODEL NODE v2:
+{
+ "model": {
+  "__rl": true,
+  "value": "gpt-4o",
+  "mode": "list",
+  "cachedResultName": "gpt-4o"
+ },
+ "options": {}
+}
+### MODEL NODE v2 node keys: ['credentials', 'id', 'name', 'notes', 'notesInFlow', 'parameters', 'position', 'type', 'typeVersion']
+### MEMORY v2:
+{
+ "id": "a5684248-2a57-43f9-9393-88f3cfefd32a",
+ "name": "Postgres Chat Memory",
+ "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+ "typeVersion": 1.3,
+ "position": [
+  1168,
+  400
+ ],
+ "parameters": {
+  "sessionIdType": "customKey",
+  "sessionKey": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+ },
+ "credentials": {
+  "postgres": {
+   "id": "NUrqrDWN8OsBFmgV",
+   "name": "Postgres account"
+  }
+ }
+}
+### AI AGENT v2 options keys: ['systemMessage']
+### AI Agent v2 node keys: ['id', 'name', 'parameters', 'position', 'type', 'typeVersion']
+### systemMessage len: 29151
+### WF1 old->new: nodes added: [] removed: []
+    CHANGED: AI Agent
+    CHANGED: Actualizar precio
+    CHANGED: Agendar cita
+    CHANGED: Aplicar pausa
+    CHANGED: Cancelar cita
+    CHANGED: Consultar agenda
+    CHANGED: Crear bloqueo en calendario
+    CHANGED: Describe imagen
+    CHANGED: Get Audio
+    CHANGED: Get Image
+    CHANGED: Leer agenda del rango
+    CHANGED: Leer estado del sistema
+    CHANGED: Leer ficha del cliente
+    CHANGED: Leer operadores
+    CHANGED: Leer pausa
+    CHANGED: Mandar mensaje
+    CHANGED: Notificar al encargado
+    CHANGED: Reagendar
+    CHANGED: Registrar en hoja de citas
+    CHANGED: Responder al operador
+    CHANGED: Transcribe a recording
+### WF2 old->new: nodes added: [] removed: []
+    CHANGED: Append or update row in sheet
+    CHANGED: Notificar cita nueva al encargado
+    CHANGED: OBTENER INFO DE CITA ELIMINADA
+    CHANGED: QUITAR RECORDATORIO
+    CHANGED: RECORDATORIO 1 H
+    CHANGED: RECORDATORIO 24 H
+### WF2 Switch options: {"fallbackOutput": "extra", "renameFallbackOutput": "Otro"}
+### WF2 Code1: {"jsCode": "return [\n  {\n    json: {\n      executionId: $execution.id\n    }\n  }\n];\n"}
+### WF2 Google Sheets Trigger params: {"pollTimes": {"item": [{"mode": "everyMinute"}]}, "documentId": {"__rl": true, "value": "1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk", "mode": "list", "cachedResultName": "Citas barberia", "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit?usp=drivesdk"}, "sheetName": {"__rl": true, "value": 941506024, "mode": "list", "cachedResultName": "Hoja 1", "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk/edit#gid=941506024"}, "event": "rowAdded", "options": {}}
+### WF2 n8n node creds: {"n8nApi": {"id": "Se7l2GF1O4CrF9jb", "name": "n8n API (local)"}}
+### WF2 n8n node params: {"resource": "execution", "operation": "delete", "executionId": "={{ $json['Execution ID'] }}", "requestOptions": {}}
+### WF2 wait nodes: {"ESPERAR A 24 H": {"resume": "specificTime", "dateTime": "={{ $('Code').item.json.recordatorio24ISO }}"}, "ESPERAR A 1 H": {"resume": "specificTime", "dateTime": "={{ $('Code').item.json.recordatorio1ISO }}"}}
+### WF1 v2 connection sources: ['AI Agent', 'Actualizar precio', 'Agendar cita', 'Aplicar pausa', 'Armar respuesta COMANDOS', 'Audio Content', 'Audio Content1', 'Buscar cliente', 'Calcular pausa', 'Cancelar cita', 'Comprobar operador', 'Confirmar bloqueo', 'Consultar agenda', 'Convertir Audio', 'Convertir Imagen', 'Crear bloqueo en calendario', 'Describe imagen', 'Edit Fields', 'Edit Fields2', 'Formatear agenda', 'Formatear estado', 'Formatear ficha', 'Formatear pausa', 'Formatear precio', 'Get Audio', 'Get Image', 'IF - Bloqueo invalido', 'IF - Cliente pausado', 'IF - No es del bot', 'Leer agenda del rango', 'Leer estado del sistema', 'Leer ficha del cliente', 'Leer operadores', 'Leer pausa', 'Normalizacion', 'Notificar al encargado', 'OpenAI Chat Model', 'Parsear bloqueo', 'Parsear pausa', 'Parsear precio', 'Postgres Chat Memory', 'Preparar rango de fechas', 'Reagendar', 'Registrar en hoja de citas', 'Respuesta de bloqueo', 'Router de comandos', 'Switch', 'Transcribe a recording', 'Webhook', '¿Es operador?']
+### WF1 nodes with no outgoing AND no incoming (except triggers):
+### WF2 same:
+### WF2 Switch branches -> targets:
+    main[0] -> ['Code1']
+    main[1] -> ['OBTENER INFO DE CITA ELIMINADA']
+    main[2] -> ['OBTENER INFO DE CITA ELIMINADA']
+### WF1 Switch (wf1) branches -> targets:
+    main[0] -> ['Get Audio']
+    main[1] -> ['Get Image']
+    main[2] -> ['Edit Fields2']
+### WF1 'IF - Cliente pausado' outputs: {'main': [[], [{'node': 'Switch', 'type': 'main', 'index': 0}]]}
+### WF1 Router fallback 'No es comando' index:
+   rules: 12
+    main[0] -> ['Preparar rango de fechas']
+    main[1] -> ['Preparar rango de fechas']
+    main[2] -> ['Preparar rango de fechas']
+    main[3] -> ['Preparar rango de fechas']
+    main[4] -> ['Buscar cliente']
+    main[5] -> ['Parsear bloqueo']
+    main[6] -> ['Parsear bloqueo']
+    main[7] -> ['Parsear bloqueo']
+    main[8] -> ['Parsear precio']
+    main[9] -> ['Parsear pausa']
+    main[10] -> ['Leer estado del sistema']
+    main[11] -> ['Armar respuesta COMANDOS']
+    main[12] -> ['IF - No es del bot']

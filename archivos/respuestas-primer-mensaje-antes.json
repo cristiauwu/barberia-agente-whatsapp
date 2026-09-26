@@ -1,0 +1,140 @@
+{
+  "hola": {
+    "pregunta": "hola",
+    "respuesta": "¡Hola! ¿Te agendo una cita o quieres ver precios primero? 💈",
+    "metricas": {
+      "caracteres": 59,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 0,
+      "preguntas": 1,
+      "max_largo_linea": 59
+    },
+    "ejecucion": "884",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "buenas_tardes": {
+    "pregunta": "buenas tardes",
+    "respuesta": "¡Hola! Buenas tardes 💈 ¿Cómo te ayudo hoy? ¿Te agendo una cita o te doy información sobre precios y servicios?",
+    "metricas": {
+      "caracteres": 110,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 2,
+      "max_largo_linea": 110
+    },
+    "ejecucion": "885",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "servicios": {
+    "pregunta": "que servicios tienen?",
+    "respuesta": "Claro 💈 Los más pedidos:\n\n- Corte desvanecido o tijera — $150 (40 min)  \n- Arreglo de barba — $100 (20 min)  \n- Corte de cabello dama — $250 (50 min)  \n\nTambién hay ceja $30, mascarilla $50 y peinado $300. ¿Cuál te aparto?",
+    "metricas": {
+      "caracteres": 222,
+      "lineas": 7,
+      "lineas_no_vacias": 5,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 3,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 69
+    },
+    "ejecucion": "886",
+    "problemas": [
+      "dos espacios al final del renglon: 3"
+    ],
+    "es_menu": false
+  },
+  "cita": {
+    "pregunta": "quiero una cita",
+    "respuesta": "¡Hola! Claro que sí 💈 ¿Qué servicio te gustaría agendar y para qué día?",
+    "metricas": {
+      "caracteres": 71,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 71
+    },
+    "ejecucion": "887",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "precio_corte": {
+    "pregunta": "cuanto cuesta el corte?",
+    "respuesta": "¡Hola! El corte desvanecido o de tijera cuesta *$150* y dura 40 minutos. ¿Te lo aparto? 💈",
+    "metricas": {
+      "caracteres": 89,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 1,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 1,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 1,
+      "max_largo_linea": 89
+    },
+    "ejecucion": "888",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  },
+  "informes": {
+    "pregunta": "Buenos días, quisiera informes",
+    "respuesta": "¡Hola! Buenos días 💈 ¿Qué te gustaría saber? Tenemos cortes, arreglos de barba, cejas y más. Si buscas algo en específico, dime y te paso el precio. 😊 ¿Te agendo una cita?",
+    "metricas": {
+      "caracteres": 171,
+      "lineas": 1,
+      "lineas_no_vacias": 1,
+      "emojis": 2,
+      "asteriscos_dobles": 0,
+      "negritas_validas": 0,
+      "caracteres_marco_ascii": 0,
+      "separadores_largos": 0,
+      "espacios_finales_dobles": 0,
+      "lineas_mayores_60": 1,
+      "preguntas": 2,
+      "max_largo_linea": 171
+    },
+    "ejecucion": "890",
+    "problemas": [
+      "sin problemas de formato"
+    ],
+    "es_menu": false
+  }
+}

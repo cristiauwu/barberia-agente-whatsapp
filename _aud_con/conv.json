@@ -1,0 +1,98 @@
+[
+ [
+  "faq",
+  "hola, cuanto cuesta el corte?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB053D55950498294E71D\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"¡Hola! El corte desvanecido o tijera cuesta *$150*. Si es corte de dama, cuesta *$250*. ¿Te reservo una cita? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209788, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382588, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "buenas, tienen estacionamiento?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0C9491BCA8831535752\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"No tenemos estacionamiento propio, pero puedes dejar tu coche sobre la misma calle, junto al local. Si vienes en hora pico, te recomiendo llegar con unos minutos de anticipación. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209809, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382609, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "a que hora abren?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB028F23ACDF9832016D4\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Abrimos de *lunes a sábado a las 10:00 a.m.* y cerramos a las 8:00 p.m. Los domingos estamos cerrados. ¿Te aparto una cita? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209831, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382631, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "quien me va a atender?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0E548F67AA7B7511EAC\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Te atiende *Esteban Aguilera*, quien lleva la barbería. ¿Te agendo una cita? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209852, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382652, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "puedo pagar con tarjeta?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0F9599BB95F2239587F\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"El pago se hace directo en el local. Si necesitas confirmar un método de pago en particular, el encargado te lo puede indicar al llegar. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209874, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382674, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "tienen wifi?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB08765FF673AEB76D116\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Déjame confirmarlo con el encargado y te aviso en un momento. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209905, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382705, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "dan factura?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0505E9BD7E2D11CC1D4\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Déjame confirmarlo con el encargado y te aviso en un momento. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209927, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382727, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "puedo llevar a mi hijo?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0FDDB841ABC4109C3EA\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"¡Claro! Puedes traer a tu hijo para cortarse el cabello. Se atiende igual que a cualquier cliente. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209949, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382749, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "que pasa si llego tarde?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0A43899616BCDA69FBE\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Te esperamos. Si te retrasas más de 15 minutos, puede que atendamos a alguien más primero, pero avísanos por aquí y vemos cómo ajustarlo. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209970, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382770, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "faq",
+  "donde estan ubicados?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB02E9433881016FA6BF9\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Estamos en *Calle Pinzón #574*. ¿Te reservo una cita? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790209992, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382792, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "hueco",
+  "hay estacionamiento para motos y bicicletas?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB00AC41CFBD9A57473DC\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"No contamos con estacionamiento propio, pero puedes dejar tu moto o bicicleta en la misma calle, junto al local. Si vienes en hora pico, te recomiendo llegar con unos minutos de anticipación para encontrar lugar. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790210013, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382813, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "hueco",
+  "tienen servicio a domicilio los domingos?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0A748144EAEBF665942\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"No, no contamos con servicio a domicilio, y los domingos el negocio está cerrado. Si te parece, puedo agendar tu cita en el local para cualquier día de lunes a sábado, entre *10:00 a.m. y 8:00 p.m.*. ¿Te interesa? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790210034, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382834, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "hueco",
+  "me pueden hacer un corte estilo mohicano con rayas?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0D426BF9252306BCD15\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"El corte desvanecido o tijera de *$150* incluye estilos personalizados como el mohicano. Las rayas también se pueden hacer. Platícame un poco más de cómo lo quieres, y te ayudamos a definirlo. ¿Te aparto tu cita? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790210056, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382856, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "hueco",
+  "hacen descuento a estudiantes?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB0E57D917E76B97265A1\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"Por el momento, no manejamos descuentos para estudiantes. Si necesitas algún servicio, dime cuál y para qué día, y con gusto te aparto tu lugar. 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790210076, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382876, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "precio",
+  "cuanto cuesta el peinado?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB05F70885561C52CE66B\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"¿Qué servicio te gustaría agendar para el viernes? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790210099, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382899, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ],
+ [
+  "precio",
+  "cuanto cuesta la mascarilla?",
+  "{\"key\": {\"remoteJid\": \"5214501111805@s.whatsapp.net\", \"fromMe\": true, \"id\": \"3EB04C84E2B1F84B963D14\"}, \"pushName\": \"Você\", \"status\": \"PENDING\", \"message\": {\"conversation\": \"La mascarilla cuesta *$50* y dura 20 minutos. ¿Te la aparto? 😊\"}, \"contextInfo\": {\"mentionedJid\": [], \"groupMentions\": [], \"ephemeralSettingTimestamp\": {\"low\": 1790210118, \"high\": 0, \"unsigned\": false}, \"disappearingMode\": {\"initiator\": 0}}, \"messageType\": \"conversation\", \"messageTimestamp\": 1790382918, \"instanceId\": \"f9641b53-395e-4a42-afa3-fdf1701b344b\", \"source\": \"web\"}",
+  "success"
+ ]
+]

@@ -1,0 +1,74 @@
+=== workflow staticData ===
+{
+ "node:Google Sheets Trigger": {
+  "documentId": "1lvSVFWU2ApvK7p5BsFHI68Icur46P6hI8o8r9ozhBfk",
+  "sheetId": 941506024,
+  "lastIndexChecked": 7
+ }
+}
+
+=== scanning 30 executions for errors ===
+--- 1195 status=None last=Google Sheets Trigger
+      ERR node=None msg='The connection cannot be established, this usually occurs due to an incorrect host (domain) value' desc=None http=None cause='getaddrinfo ENOTFOUND sheets.googleapis.com'
+--- 1194 status=None last=Google Sheets Trigger
+      ERR node=None msg='The connection cannot be established, this usually occurs due to an incorrect host (domain) value' desc=None http=None cause='getaddrinfo ENOTFOUND sheets.googleapis.com'
+--- 1192 status=None last=Google Sheets Trigger
+      ERR node=None msg='The connection cannot be established, this usually occurs due to an incorrect host (domain) value' desc=None http=None cause='getaddrinfo ENOTFOUND sheets.googleapis.com'
+--- 1191 status=None last=Google Sheets Trigger
+      ERR node=None msg='The connection cannot be established, this usually occurs due to an incorrect host (domain) value' desc=None http=None cause='getaddrinfo ENOTFOUND sheets.googleapis.com'
+--- 1190 status=None last=Google Sheets Trigger
+      ERR node=None msg='The DNS server returned an error, perhaps the server is offline' desc=None http=None cause='getaddrinfo EAI_AGAIN sheets.googleapis.com'
+--- 1171 status=None last=ESPERAR A 1 H
+--- 1135 status=None last=Registrar cita (Postgres)
+--- 1075 status=None last=ESPERAR A 24 H
+--- 861 status=None last=Registrar cita (Postgres)
+--- 852 status=None last=ESPERAR A 24 H
+--- 847 status=None last=ESPERAR A 24 H
+--- 838 status=None last=IF - Es cita agendada
+--- 835 status=None last=ESPERAR A 24 H
+--- 829 status=None last=ESPERAR A 24 H
+--- 820 status=None last=ESPERAR A 24 H
+--- 800 status=None last=IF - Toca recordatorio 1 h
+--- 779 status=None last=ESPERAR A 24 H
+      ERR node=None msg='The execution was cancelled manually' desc=None http=None cause='None'
+--- 756 status=None last=ESPERAR A 24 H
+--- 747 status=None last=ESPERAR A 24 H
+--- 733 status=None last=Google Sheets Trigger
+      ERR node=None msg='Could not retrieve the columns from key row' desc=None http=None cause='Could not retrieve the columns from key row'
+--- 732 status=None last=Google Sheets Trigger
+      ERR node=None msg='Could not retrieve the columns from key row' desc=None http=None cause='Could not retrieve the columns from key row'
+--- 731 status=None last=Google Sheets Trigger
+      ERR node=None msg='Could not retrieve the columns from key row' desc=None http=None cause='Could not retrieve the columns from key row'
+--- 722 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg="Column names were updated after the node's setup" desc="Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID" http=None cause='None'
+      ERR node=Append or update row in sheet msg="Column names were updated after the node's setup" desc="Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID" http=None cause=None
+--- 720 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg="Column names were updated after the node's setup" desc="Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID" http=None cause='None'
+      ERR node=Append or update row in sheet msg="Column names were updated after the node's setup" desc="Refresh the columns list in the 'Column to Match On' parameter. Missing columns: Execution ID" http=None cause=None
+--- 703 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause='None'
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause=None
+--- 687 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause='None'
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause=None
+--- 680 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause='None'
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause=None
+--- 611 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause='None'
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause=None
+--- 599 status=None last=IF - Es cita agendada
+--- 596 status=None last=Append or update row in sheet
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause='None'
+      ERR node=Append or update row in sheet msg='Forbidden - perhaps check your credentials?' desc='The caller does not have permission' http=403 cause=None
+
+=== PATTERN SEARCH across all execution JSON ===
+  'Missing columns': FOUND
+  'does not have permission': FOUND
+  'Forbidden': FOUND
+  'ENOTFOUND': FOUND
+  'invalid_grant': not found
+  'Execution ID': FOUND
+  'waitTill': FOUND
+  'Cannot read': not found
+  'duplicate key': not found

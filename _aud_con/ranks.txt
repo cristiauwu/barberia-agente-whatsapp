@@ -1,0 +1,71 @@
+q='cuanto cuesta el peinado'
+   1. #23   rank=0.5336 prio=15 ¿Cuánto cuesta el corte?                      
+        'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+   2. #24   rank=0.5111 prio=15 ¿Cuánto cuesta el corte de dama?              
+        'El corte de cabello dama cuesta *$250* y dura 50 minutos.'
+   3. #26   rank=0.5111 prio=15 ¿Cuánto cuesta la barba?                      
+        'El arreglo de barba cuesta *$100* y dura 20 minutos.'
+   4. #27   rank=0.5111 prio=15 ¿Cuánto cuesta la ceja?                       
+        'La ceja cuesta *$30* y dura unos 10 minutos.'
+   5. #25   rank=0.4458 prio=10 ¿Me dan la lista de precios completa?         
+        'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50,'
+
+q='cuanto cuesta la mascarilla'
+   1. #23   rank=0.5336 prio=15 ¿Cuánto cuesta el corte?                      
+        'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+   2. #24   rank=0.5111 prio=15 ¿Cuánto cuesta el corte de dama?              
+        'El corte de cabello dama cuesta *$250* y dura 50 minutos.'
+   3. #26   rank=0.5111 prio=15 ¿Cuánto cuesta la barba?                      
+        'El arreglo de barba cuesta *$100* y dura 20 minutos.'
+   4. #27   rank=0.5111 prio=15 ¿Cuánto cuesta la ceja?                       
+        'La ceja cuesta *$30* y dura unos 10 minutos.'
+   5. #25   rank=0.4458 prio=10 ¿Me dan la lista de precios completa?         
+        'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50,'
+
+q='cuanto cuesta el planchado'
+   1. #23   rank=0.5336 prio=15 ¿Cuánto cuesta el corte?                      
+        'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+   2. #24   rank=0.5111 prio=15 ¿Cuánto cuesta el corte de dama?              
+        'El corte de cabello dama cuesta *$250* y dura 50 minutos.'
+   3. #26   rank=0.5111 prio=15 ¿Cuánto cuesta la barba?                      
+        'El arreglo de barba cuesta *$100* y dura 20 minutos.'
+   4. #27   rank=0.5111 prio=15 ¿Cuánto cuesta la ceja?                       
+        'La ceja cuesta *$30* y dura unos 10 minutos.'
+   5. #25   rank=0.4458 prio=10 ¿Me dan la lista de precios completa?         
+        'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50,'
+
+q='cuanto cuesta el corte'
+   1. #23   rank=0.8120 prio=15 ¿Cuánto cuesta el corte?                      
+        'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+   2. #24   rank=0.7689 prio=15 ¿Cuánto cuesta el corte de dama?              
+        'El corte de cabello dama cuesta *$250* y dura 50 minutos.'
+   3. #209  rank=0.5111 prio=0 ¿Cuánto dura el corte?                        
+        'El *corte desvanecido o tijera* dura *40 minutos*. Deja tiempo extra s'
+   4. #26   rank=0.5111 prio=15 ¿Cuánto cuesta la barba?                      
+        'El arreglo de barba cuesta *$100* y dura 20 minutos.'
+   5. #27   rank=0.5111 prio=15 ¿Cuánto cuesta la ceja?                       
+        'La ceja cuesta *$30* y dura unos 10 minutos.'
+
+q='cuanto cuesta el peinado express'
+   1. #23   rank=0.4002 prio=15 ¿Cuánto cuesta el corte?                      
+        'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+   2. #24   rank=0.3833 prio=15 ¿Cuánto cuesta el corte de dama?              
+        'El corte de cabello dama cuesta *$250* y dura 50 minutos.'
+   3. #26   rank=0.3833 prio=15 ¿Cuánto cuesta la barba?                      
+        'El arreglo de barba cuesta *$100* y dura 20 minutos.'
+   4. #27   rank=0.3833 prio=15 ¿Cuánto cuesta la ceja?                       
+        'La ceja cuesta *$30* y dura unos 10 minutos.'
+   5. #25   rank=0.3648 prio=10 ¿Me dan la lista de precios completa?         
+        'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50,'
+
+q='precio peinado'
+   1. #25   rank=0.4821 prio=10 ¿Me dan la lista de precios completa?         
+        'Corte desvanecido o tijera $150, barba $100, ceja $30, mascarilla $50,'
+   2. #16   rank=0.4175 prio=10 ¿Hacen peinado?                               
+        'Sí, el peinado cuesta *$300* y dura 45 minutos. Es el servicio más com'
+   3. #23   rank=0.3344 prio=15 ¿Cuánto cuesta el corte?                      
+        'El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.'
+   4. #24   rank=0.3344 prio=15 ¿Cuánto cuesta el corte de dama?              
+        'El corte de cabello dama cuesta *$250* y dura 50 minutos.'
+   5. #26   rank=0.3344 prio=15 ¿Cuánto cuesta la barba?                      
+        'El arreglo de barba cuesta *$100* y dura 20 minutos.'

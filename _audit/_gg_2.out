@@ -1,0 +1,4 @@
+HEAD:archivos/SUPABASE-GUIA.md:17:| ¿Qué falta? | La **secret key** (`sb_secret_...`) o pegar el SQL a mano. |
+HEAD:archivos/SUPABASE-GUIA.md:234:**secret key** y empieza por `sb_secret_...`. La tabla de equivalencias oficial
+HEAD:archivos/SUPABASE-GUIA.md:240:| **secret** (`sb_secret_...`) — la que falta | solo en servidores | **Sí** |
+HEAD:archivos/SUPABASE-GUIA.md:590:copiar la que empieza por **`sb_secret_...`**.

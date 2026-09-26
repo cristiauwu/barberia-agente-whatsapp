@@ -1,0 +1,18 @@
+=== execution_data cols ===
+executionId
+workflowData
+data
+workflowVersionId
+
+=== exec 770 data ===
+770|[{"version":1,"startData":"1","resultData":"2","executionData":"3","resumeToken":"4"},{},{"error":"5","runData":"6","lastNodeExecuted":"7"},{"contextData":"8","nodeExecutionStack":"9","metadata":"10","waitingExecution":"11","waitingExecutionSource":"12","runtimeData":"13"},"d7c510920eaae48a11f3f57bb93b3f6830f9d4add9601e411ed2e7151b0b8b52",{"level":"14","shouldReport":true,"description":"15","tags"
+ 
+=== execution_data rows ===
+211
+
+=== error snippets ===
+819|[{"version":1,"startData":"1","resultData":"2","executionData":"3","resumeToken":"4"},{},{"runData":"5","lastNodeExecuted":"6"},{"contextData":"7","nodeExecutionStack":"8","metadata":"9","waitingExecution":"10","waitingExecutionSource":"11","runtimeData":"12"},"d9f8bfdda7aa9c2b3ade87d2b95b3955f1f91bad12ca2245520ab0d95775a281",{"Webhook":"13","Normalizacion":"14","Leer operadores":"15","Comprobar operador":"16","¿Es operador?":"17","Router de comandos":"18","IF - No es del bot":"19","Leer pausa"
+818|[{"version":1,"startData":"1","resultData":"2","executionData":"3","resumeToken":"4"},{},{"runData":"5","lastNodeExecuted":"6"},{"contextData":"7","nodeExecutionStack":"8","metadata":"9","waitingExecution":"10","waitingExecutionSource":"11","runtimeData":"12"},"55d6871ff2e0f6e342765476e9ca2e8059abc3ff2eee8c5f1afac1b77b8c8e76",{"Webhook":"13","Normalizacion":"14","Leer operadores":"15","Comprobar operador":"16","¿Es operador?":"17","IF - No es del bot":"18","Leer pausa":"19","Calcular pausa":"20
+817|[{"version":1,"startData":"1","resultData":"2","executionData":"3","resumeToken":"4"},{},{"runData":"5","lastNodeExecuted":"6"},{"contextData":"7","nodeExecutionStack":"8","metadata":"9","waitingExecution":"10","waitingExecutionSource":"11","runtimeData":"12"},"19dc83e83251e313de573b5af84b2eb969135722dcfc34fa9176bc50c1dddaac",{"Webhook":"13","Normalizacion":"14","Leer operadores":"15","Comprobar operador":"16","¿Es operador?":"17","IF - No es del bot":"18","Leer pausa":"19","Calcular pausa":"20
+816|[{"version":1,"startData":"1","resultData":"2","executionData":"3","resumeToken":"4"},{},{"runData":"5","lastNodeExecuted":"6"},{"contextData":"7","nodeExecutionStack":"8","metadata":"9","waitingExecution":"10","waitingExecutionSource":"11","runtimeData":"12"},"61c1453fc6ab2b343187a054a3fb6e3482de98bf10fe603456191628eb9d14a5",{"Webhook":"13","Normalizacion":"14","Leer operadores":"15","Comprobar operador":"16","¿Es operador?":"17","IF - No es del bot":"18","Leer pausa":"19","Calcular pausa":"20
+815|[{"version":1,"startData":"1","resultData":"2","executionData":"3","resumeToken":"4"},{},{"runData":"5","lastNodeExecuted":"6"},{"contextData":"7","nodeExecutionStack":"8","metadata":"9","waitingExecution":"10","waitingExecutionSource":"11","runtimeData":"12"},"907948fc54974101f72403f45efb51cb53efc91a368bd15820e0adc215e3c4cf",{"Webhook":"13","Normalizacion":"14","Leer operadores":"15","Comprobar operador":"16","¿Es operador?":"17","IF - No es del bot":"18","Leer pausa":"19","Calcular pausa":"20

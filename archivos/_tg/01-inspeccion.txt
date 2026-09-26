@@ -1,0 +1,99 @@
+=== WORKFLOWS ===
+5zd5go4TFKqIsgdT	barberiaVigilancia	active=True
+OKuQlE1nBbuPHg4Q	_verif-e2e-lectura-calendario	active=True
+barberiaAgenteUncensored	Barberia - Agente de citas (Uncensored AI)	active=True
+barberiaRecordatorios	Barberia - Recordatorios de cita	active=True
+
+=== 5zd5go4TFKqIsgdT | barberiaVigilancia | active=True | nodes=5 ===
+  - Cada 15 minutos  [n8n-nodes-base.scheduleTrigger]  disabled=None
+  - Leer calendario  [n8n-nodes-base.googleCalendar]  disabled=None
+  - Buscar citas pasadas  [n8n-nodes-base.code]  disabled=None
+  - IF - Hay citas pasadas  [n8n-nodes-base.if]  disabled=None
+  - Avisar al dueño  [n8n-nodes-base.httpRequest]  disabled=None
+
+=== OKuQlE1nBbuPHg4Q | _verif-e2e-lectura-calendario | active=True | nodes=3 ===
+  - Webhook  [n8n-nodes-base.webhook]  disabled=None
+  - Listar  [n8n-nodes-base.googleCalendar]  disabled=None
+  - Resumir  [n8n-nodes-base.code]  disabled=None
+
+=== barberiaAgenteUncensored | Barberia - Agente de citas (Uncensored AI) | active=True | nodes=52 ===
+  - Webhook  [n8n-nodes-base.webhook]  disabled=None
+  - AI Agent  [@n8n/n8n-nodes-langchain.agent]  disabled=None
+  - OpenAI Chat Model  [@n8n/n8n-nodes-langchain.lmChatOpenAi]  disabled=None
+  - Switch  [n8n-nodes-base.switch]  disabled=None
+  - Get Audio  [n8n-nodes-base.httpRequest]  disabled=None
+  - Convertir Audio  [n8n-nodes-base.convertToFile]  disabled=None
+  - Transcribe a recording  [@n8n/n8n-nodes-langchain.openAi]  disabled=None
+  - Audio Content  [n8n-nodes-base.set]  disabled=None
+  - Audio Content1  [n8n-nodes-base.set]  disabled=None
+  - Get Image  [n8n-nodes-base.httpRequest]  disabled=None
+  - Convertir Imagen  [n8n-nodes-base.convertToFile]  disabled=None
+  - Describe imagen  [@n8n/n8n-nodes-langchain.openAi]  disabled=None
+  - Edit Fields2  [n8n-nodes-base.set]  disabled=None
+  - Edit Fields  [n8n-nodes-base.set]  disabled=None
+  - Normalizacion  [n8n-nodes-base.set]  disabled=None
+  - Mandar mensaje  [n8n-nodes-base.httpRequest]  disabled=None
+  - Consultar agenda  [n8n-nodes-base.googleCalendarTool]  disabled=None
+  - Agendar cita  [n8n-nodes-base.googleCalendarTool]  disabled=None
+  - Cancelar cita  [n8n-nodes-base.googleCalendarTool]  disabled=None
+  - Reagendar  [n8n-nodes-base.googleCalendarTool]  disabled=None
+  - Postgres Chat Memory  [@n8n/n8n-nodes-langchain.memoryPostgresChat]  disabled=None
+  - Registrar en hoja de citas  [n8n-nodes-base.googleSheetsTool]  disabled=None
+  - Notificar al encargado  [@n8n/n8n-nodes-langchain.toolHttpRequest]  disabled=None
+  - IF - No es del bot  [n8n-nodes-base.if]  disabled=None
+  - ¿Es operador?  [n8n-nodes-base.if]  disabled=None
+  - Router de comandos  [n8n-nodes-base.switch]  disabled=None
+  - Responder al operador  [n8n-nodes-base.httpRequest]  disabled=None
+  - Armar respuesta COMANDOS  [n8n-nodes-base.set]  disabled=None
+  - Preparar rango de fechas  [n8n-nodes-base.code]  disabled=None
+  - Leer agenda del rango  [n8n-nodes-base.googleCalendar]  disabled=None
+  - Formatear agenda  [n8n-nodes-base.code]  disabled=None
+  - Parsear bloqueo  [n8n-nodes-base.code]  disabled=None
+  - Crear bloqueo en calendario  [n8n-nodes-base.googleCalendar]  disabled=None
+  - Respuesta de bloqueo  [n8n-nodes-base.set]  disabled=None
+  - Buscar cliente  [n8n-nodes-base.code]  disabled=None
+  - Leer ficha del cliente  [n8n-nodes-base.postgres]  disabled=None
+  - Formatear ficha  [n8n-nodes-base.code]  disabled=None
+  - Parsear pausa  [n8n-nodes-base.code]  disabled=None
+  - Aplicar pausa  [n8n-nodes-base.postgres]  disabled=None
+  - Formatear pausa  [n8n-nodes-base.code]  disabled=None
+  - Parsear precio  [n8n-nodes-base.code]  disabled=None
+  - Actualizar precio  [n8n-nodes-base.postgres]  disabled=None
+  - Formatear precio  [n8n-nodes-base.code]  disabled=None
+  - Leer estado del sistema  [n8n-nodes-base.postgres]  disabled=None
+  - Formatear estado  [n8n-nodes-base.code]  disabled=None
+  - IF - Bloqueo invalido  [n8n-nodes-base.if]  disabled=None
+  - Confirmar bloqueo  [n8n-nodes-base.set]  disabled=None
+  - Leer operadores  [n8n-nodes-base.postgres]  disabled=None
+  - Comprobar operador  [n8n-nodes-base.code]  disabled=None
+  - Leer pausa  [n8n-nodes-base.postgres]  disabled=None
+  - Calcular pausa  [n8n-nodes-base.code]  disabled=None
+  - IF - Cliente pausado  [n8n-nodes-base.if]  disabled=None
+
+=== barberiaRecordatorios | Barberia - Recordatorios de cita | active=True | nodes=17 ===
+  - Google Sheets Trigger  [n8n-nodes-base.googleSheetsTrigger]  disabled=None
+  - Code  [n8n-nodes-base.code]  disabled=None
+  - Notificar cita nueva al encargado  [n8n-nodes-base.httpRequest]  disabled=None
+  - Code1  [n8n-nodes-base.code]  disabled=None
+  - Append or update row in sheet  [n8n-nodes-base.googleSheets]  disabled=None
+  - Switch  [n8n-nodes-base.switch]  disabled=None
+  - ESPERAR A 1 H  [n8n-nodes-base.wait]  disabled=None
+  - QUITAR RECORDATORIO  [n8n-nodes-base.n8n]  disabled=None
+  - OBTENER INFO DE CITA ELIMINADA  [n8n-nodes-base.googleSheets]  disabled=None
+  - RECORDATORIO 24 H  [n8n-nodes-base.httpRequest]  disabled=None
+  - RECORDATORIO 1 H  [n8n-nodes-base.httpRequest]  disabled=None
+  - IF - Toca recordatorio 24 h  [n8n-nodes-base.if]  disabled=None
+  - IF - Toca recordatorio 1 h  [n8n-nodes-base.if]  disabled=None
+  - ESPERAR A 24 H  [n8n-nodes-base.wait]  disabled=None
+  - IF - Es cita agendada  [n8n-nodes-base.if]  disabled=None
+  - Registrar cliente (CRM)  [n8n-nodes-base.postgres]  disabled=None
+  - Registrar cita (Postgres)  [n8n-nodes-base.postgres]  disabled=None
+
+=== CREDENCIALES ===
+Se7l2GF1O4CrF9jb	n8n API (local)	n8nApi
+qaGW1Tvt5BqPujJ1	Evolution API	httpHeaderAuth
+cJgufKuA5Lxckkz8	Google Sheets Trigger account	googleSheetsTriggerOAuth2Api
+KhicsxnD4N314cKC	Uncensored AI (OpenAI-compatible)	openAiApi
+NUrqrDWN8OsBFmgV	Postgres account	postgres
+lGEYmmJh1FvqzQi9	Google Sheets account	googleSheetsOAuth2Api
+I6TpcTTP1cn1tviR	Google Calendar account	googleCalendarOAuth2Api

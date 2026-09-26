@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "G:\Barberia\_audit_dump2.py", line 60, in <module>
+    print("\n".join(res3))
+    ~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\kimbo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2501' in position 93: character maps to <undefined>

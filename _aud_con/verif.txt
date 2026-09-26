@@ -1,0 +1,11 @@
+== ARCHIVO DEL REPO: prompt-sistema-agente-barberia.txt ==
+caracteres: 42630
+  ENCONTRADA: - **¿Cobran si no llego a mi cita?** No cobramos por no llegar. Solo te pedimos que nos avises para liberar el lugar.
+  (si no hay lineas arriba, el archivo NO tiene esa FAQ)
+
+== PROMPT VIVO (n8n) ==
+caracteres: 42629
+  ENCONTRADA: - **¿Cobran si no llego a mi cita?** No cobramos por no llegar. Solo te pedimos que nos avises para liberar el lugar.
+
+== SEED del SQL: entradas en orden ==
+total entradas: 0

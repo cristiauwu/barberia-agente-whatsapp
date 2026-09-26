@@ -1,0 +1,48 @@
+== ¿EL DATO SIGUE EN EL PROMPT FUERA DEL BLOQUE DE FAQs? ==
+  direccion Calle Pinzón #574      bloque=True  FUERA-del-bloque=True  OK
+  telefono 452-281-8144            bloque=False FUERA-del-bloque=True  OK
+  horario 10:00 a 20:00            bloque=True  FUERA-del-bloque=True  OK
+  domingo cerrado                  bloque=True  FUERA-del-bloque=True  OK
+  precio corte $150                bloque=True  FUERA-del-bloque=True  OK
+  precio barba $100                bloque=True  FUERA-del-bloque=True  OK
+  precio ceja $30                  bloque=True  FUERA-del-bloque=True  OK
+  precio dama $250                 bloque=True  FUERA-del-bloque=True  OK
+  precio peinado $300              bloque=True  FUERA-del-bloque=True  OK
+  precio mascarilla $50            bloque=True  FUERA-del-bloque=True  OK
+  duracion 40 min corte            bloque=True  FUERA-del-bloque=True  OK
+  depilacion                       bloque=True  FUERA-del-bloque=True  OK
+  mascarilla                       bloque=True  FUERA-del-bloque=True  OK
+  planchado                        bloque=True  FUERA-del-bloque=True  OK
+
+== LITERAL: lineas del prompt que contradicen la BD ==
+#3
+  PROMPT: - **¿Tienen estacionamiento?** No tenemos estacionamiento propio. Hay lugar para dejar el coche sobre la misma calle, junto al local. Si vienes en hora pico, llega con unos minutos de anticipación.
+#5
+  PROMPT: - **¿Aceptan niños?** ¡Claro! Puedes traer a tu hijo a cortarse el cabello. Se atiende igual que a cualquier cliente.
+#20
+  PROMPT: - **¿Hacen corte para niño?** Sí, se hace con el mismo corte desvanecido o tijera de *$150*. Para los más chicos suele ser más rápido.
+#30
+  PROMPT: - **¿Aceptan tarjeta?** El pago se hace directo en el local. Si necesitas confirmar un método de pago en particular, el encargado te lo dice al llegar.
+#31
+  PROMPT: - **¿Puedo pagar con transferencia?** El pago se hace directo en el local. Si necesitas confirmar un método en particular, el encargado te lo dice al llegar.
+#34
+  PROMPT: - **¿Cuánto tiempo antes debo llegar?** Con llegar *5 minutos antes* es suficiente. Así arrancamos puntuales.
+#40
+  PROMPT: - **¿Qué pasa si llego tarde?** Te esperamos. Si te retrasas más de 15 minutos puede que se atienda a alguien más primero, así que avísanos por aquí si vas a llegar tarde.
+#48
+  PROMPT: - **¿Dan factura?** Déjame preguntarle al encargado y te confirmo en un momento.
+#51
+  PROMPT: - **¿Tienen redes sociales?** Déjame preguntarle al encargado y te confirmo en un momento.
+#213
+  PROMPT: - **¿Qué pasa si voy a llegar tarde?** Avísame por aquí. Si te pasas mucho del horario puede que tenga que recortar el servicio o mover tu cita.
+#214
+  PROMPT: - **¿Puedo llevar a mi hijo?** Sí, sin problema. El corte para niño se hace con el mismo corte desvanecido o tijera de *$150*.
+#215
+  PROMPT: - **¿Tienen wifi?** Te confirmo ese dato con el encargado en un momento.
+
+== LA FAQ QUE EL DUENO MANDO BORRAR SIGUE EN EL PROMPT ==
+  - **¿Cobran menos si me hago varios servicios juntos?** Déjame consultarlo con el encargado y te digo en un momento.
+  - **¿Cobran si no llego a mi cita?** No cobramos por no llegar. Solo te pedimos que nos avises para liberar el lugar.
+
+== CONFIRMAR QUE LA FILA 41 FUE BORRADA ==
+[]

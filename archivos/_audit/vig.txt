@@ -1,0 +1,9 @@
+=== barberiaVigilancia ===
+name: barberiaVigilancia active: True nodes: 5
+  - Cada 15 minutos n8n-nodes-base.scheduleTrigger 
+  - Leer calendario n8n-nodes-base.googleCalendar 
+  - Buscar citas pasadas n8n-nodes-base.code 
+  - IF - Hay citas pasadas n8n-nodes-base.if 
+  - Avisar al dueño n8n-nodes-base.httpRequest 
+barberiaAgenteUncensored settings.errorWorkflow: NONE
+barberiaRecordatorios settings.errorWorkflow: NONE

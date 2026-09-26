@@ -1,0 +1,70 @@
+=== node-execution-context getNodeParameter ===
+267:    getNodeParameter(parameterName, fallbackValue, options) {
+268-        const itemIndex = 0;
+269:        return this._getNodeParameter(parameterName, itemIndex, fallbackValue, options);
+270-    }
+271:    _getNodeParameter(parameterName, itemIndex, fallbackValue, options) {
+272-        const { workflow, node, mode, runExecutionData, runIndex, connectionInputData, executeData } = this;
+273-        const nodeType = workflow.nodeTypes.getByNameAndVersion(node.type, node.typeVersion);
+274-        const value = (0, get_1.default)(node.parameters, parameterName, fallbackValue);
+275-        if (value === undefined) {
+276-            throw new n8n_workflow_1.UserError(`Could not get parameter "${parameterName}"`, {
+277-                extra: { parameterName },
+278-            });
+279-        }
+280-        if (options?.rawExpressions) {
+281-            return value;
+282-        }
+283-        const { additionalKeys } = this;
+284-        let returnData;
+285-        try {
+286-            returnData = workflow.expression.getParameterValue(value, runExecutionData, runIndex, itemIndex, node.name, connectionInputData, mode, additionalKeys, executeData, false, {}, options?.contextNode?.name);
+287-            (0, cleanup_parameter_data_1.cleanupParameterData)(returnData);
+288-        }
+289-        catch (e) {
+290-            if (e instanceof n8n_workflow_1.ExpressionError &&
+291-                node.continueOnFail &&
+292-                node.type === 'n8n-nodes-base.set') {
+293-                returnData = [{ name: undefined, value: undefined }];
+294-            }
+295-            else {
+296-                if (e.context)
+297-                    e.context.parameter = parameterName;
+298-                Object.defineProperty(e, 'cause', {
+299-                    value,
+300-                    writable: true,
+301-                    enumerable: true,
+
+=== supply-data-context ===
+46:        this.getNodeParameter = ((parameterName, itemIndex, fallbackValue, options) => this._getNodeParameter(parameterName, itemIndex, fallbackValue, options));
+47-    }
+48-    cloneWith(replacements) {
+49-        const context = new SupplyDataContext(this.workflow, this.node, this.additionalData, this.mode, this.runExecutionData, replacements.runIndex, this.connectionInputData, {}, this.connectionType, this.executeData, this.closeFunctions, this.abortSignal, this.parentNode);
+50-        context.addInputData(n8n_workflow_1.NodeConnectionTypes.AiTool, replacements.inputData);
+51-        return context;
+52-    }
+53-    async getInputConnectionData(connectionType, itemIndex) {
+54-        return await get_input_connection_data_1.getInputConnectionData.call(this, this.workflow, this.runExecutionData, this.runIndex, this.connectionInputData, this.inputData, this.additionalData, this.executeData, this.mode, this.closeFunctions, connectionType, itemIndex, this.abortSignal);
+55-    }
+56-    getInputData(inputIndex = 0, connectionType = this.connectionType) {
+57-        if (!this.inputData.hasOwnProperty(connectionType)) {
+58-            return [];
+59-        }
+60-        return super.getInputItems(inputIndex, connectionType) ?? [];
+61-    }
+62-    getNextRunIndex() {
+63-        const nodeName = this.node.name;
+64-        return this.runExecutionData.resultData.runData[nodeName]?.length ?? 0;
+65-    }
+66-    isToolExecution() {
+67-        return this.connectionType === n8n_workflow_1.NodeConnectionTypes.AiTool;
+68-    }
+69-    addInputData(connectionType, data, runIndex) {
+70-        const nodeName = this.node.name;
+71-        const currentNodeRunIndex = this.getNextRunIndex();
+72-        this.addExecutionDataFunctions('input', data, connectionType, nodeName, currentNodeRunIndex, undefined, runIndex).catch((error) => {
+73-            this.logger.warn(`There was a problem logging input data of node "${nodeName}": ${error.message}`);
+74-        });
+75-        return { index: currentNodeRunIndex };
+76-    }
+

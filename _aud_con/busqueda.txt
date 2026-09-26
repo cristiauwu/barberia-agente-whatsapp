@@ -1,0 +1,132 @@
+==============================================================================
+AUDITORIA DE LA BUSQUEDA  barber_buscar_conocimiento(texto, limite)
+==============================================================================
+OK   q='q precio tiene el corte'                     esperado=#23  primero=#23   ¿Cuánto cuesta el corte?
+OK   q='cuanto vale la barba'                        esperado=#26  primero=#26   ¿Cuánto cuesta la barba?
+OK   q='hacen cita pa hoy'                           esperado=#212 primero=#212  ¿Puedo agendar el mismo día?
+OK   q='donde estan ubicados'                        esperado=#1   primero=#1    ¿Dónde están ubicados?
+OK   q='a que hora abren'                            esperado=#6   primero=#6    ¿Cuál es el horario?
+FALLA q='kual es el orario'                           esperado=#6   primero=#None (SIN RESULTADO)
+        aceptables=[6] nota=faltas de ortografia
+FALLA q='tienen estoacionamiento'                     esperado=#3   primero=#None (SIN RESULTADO)
+        aceptables=[3] nota=falta de ortografia
+FALLA q='q dias abren'                                esperado=#6   primero=#9    ¿Atienden en días festivos?
+        aceptables=[6, 7] nota=
+        >> # ¿Atienden en días festivos? (propuesta) rank=0.3192
+        >> # ¿Cuál es el horario? (contexto) rank=0.3040
+        >> # ¿Abren el domingo? (contexto) rank=0.3040
+OK   q='abren domingo'                               esperado=#7   primero=#7    ¿Abren el domingo?
+OK   q='cuanto cuesta el corte'                      esperado=#23  primero=#23   ¿Cuánto cuesta el corte?
+OK   q='cuanto cuesta el corte de dama'              esperado=#24  primero=#24   ¿Cuánto cuesta el corte de dama?
+OK   q='cuanto cuesta la ceja'                       esperado=#27  primero=#27   ¿Cuánto cuesta la ceja?
+OK   q='cuanto cuesta la depilacion'                 esperado=#17  primero=#17   ¿Cuánto cuesta la depilación?
+OK   q='cuanto cuesta la depilación'                 esperado=#17  primero=#17   ¿Cuánto cuesta la depilación?
+OK   q='depilacion'                                  esperado=#17  primero=#17   ¿Cuánto cuesta la depilación?
+OK   q='depilación'                                  esperado=#17  primero=#17   ¿Cuánto cuesta la depilación?
+OK   q='DEPILACION'                                  esperado=#17  primero=#17   ¿Cuánto cuesta la depilación?
+FALLA q='depilasion'                                  esperado=#17  primero=#None (SIN RESULTADO)
+        aceptables=[17] nota=falta de ortografia s/c
+OK   q='me dan la lista de precios'                  esperado=#25  primero=#25   ¿Me dan la lista de precios completa?
+OK   q='precio de todo'                              esperado=#25  primero=#25   ¿Me dan la lista de precios completa?
+OK   q='que servicios tienen'                        esperado=#10  primero=#10   ¿Qué servicios tienen?
+OK   q='hacen tinte'                                 esperado=#18  primero=#18   ¿Hacen tintes o color?
+FALLA q='me pueden pintar el pelo'                    esperado=#18  primero=#36   ¿Con cuánta anticipación puedo agendar?
+        aceptables=[18] nota=sinonimo
+        >> # ¿Con cuánta anticipación puedo agendar? (contexto) rank=0.2578
+        >> # ¿Puedo cancelar mi cita? (contexto) rank=0.2533
+        >> # ¿Hacen tintes o color? (contexto) rank=0.2533
+OK   q='hacen planchado'                             esperado=#15  primero=#15   ¿Hacen planchado?
+OK   q='hacen peinado'                               esperado=#16  primero=#16   ¿Hacen peinado?
+OK   q='hacen las cejas'                             esperado=#13  primero=#13   ¿Hacen las cejas?
+OK   q='arreglan la barba'                           esperado=#12  primero=#12   ¿Arreglan la barba?
+OK   q='corte para dama'                             esperado=#11  primero=#24   ¿Cuánto cuesta el corte de dama?
+OK   q='corte para nino'                             esperado=#20  primero=#20   ¿Hacen corte para niño?
+OK   q='corte para niño'                             esperado=#20  primero=#20   ¿Hacen corte para niño?
+OK   q='puedo llevar a mi hijo'                      esperado=#214 primero=#214  ¿Puedo llevar a mi hijo?
+OK   q='aceptan ninos'                               esperado=#5   primero=#5    ¿Aceptan niños?
+OK   q='cuanto tarda un corte'                       esperado=#209 primero=#209  ¿Cuánto dura el corte?
+OK   q='cuanto dura el corte'                        esperado=#209 primero=#209  ¿Cuánto dura el corte?
+OK   q='cuanto dura cada servicio'                   esperado=#210 primero=#210  ¿Cuánto dura cada servicio?
+OK   q='cuanto dura la barba'                        esperado=#211 primero=#211  ¿Cuánto dura la barba?
+OK   q='duracion del peinado'                        esperado=#210 primero=#210  ¿Cuánto dura cada servicio?
+OK   q='aceptan tarjeta'                             esperado=#30  primero=#30   ¿Aceptan tarjeta?
+OK   q='puedo pagar con transferencia'               esperado=#31  primero=#31   ¿Puedo pagar con transferencia?
+OK   q='se puede pagar con efectivo'                 esperado=#30  primero=#30   ¿Aceptan tarjeta?
+OK   q='como pago'                                   esperado=#30  primero=#30   ¿Aceptan tarjeta?
+OK   q='dan factura'                                 esperado=#48  primero=#48   ¿Dan factura?
+OK   q='necesito factura'                            esperado=#48  primero=#48   ¿Dan factura?
+OK   q='hay descuento'                               esperado=#28  primero=#28   ¿Hacen descuento?
+OK   q='me hacen precio si llevo a mi amigo'         esperado=#29  primero=#28   ¿Hacen descuento?
+OK   q='puedo cancelar mi cita'                      esperado=#38  primero=#38   ¿Puedo cancelar mi cita?
+OK   q='quiero mover mi cita'                        esperado=#39  primero=#39   ¿Puedo cambiar mi cita de día u hora?
+OK   q='puedo reprogramar'                           esperado=#39  primero=#39   ¿Puedo cambiar mi cita de día u hora?
+OK   q='que pasa si llego tarde'                     esperado=#40  primero=#40   ¿Qué pasa si llego tarde?
+FALLA q='cobran si no llego'                          esperado=#42  primero=#34   ¿Cuánto tiempo antes debo llegar?
+        aceptables=[38, 42] nota=HUECO real en BD
+        >> # ¿Cuánto tiempo antes debo llegar? (propuesta) rank=0.3905
+        >> # ¿Dónde están ubicados? (contexto) rank=0.3867
+        >> # ¿Qué pasa si llego tarde? (contexto) rank=0.3800
+OK   q='hay garantia'                                esperado=#43  primero=#43   ¿Hay garantía si no me gusta el corte?
+OK   q='tienen wifi'                                 esperado=#215 primero=#215  ¿Tienen wifi?
+OK   q='hay wifi'                                    esperado=#215 primero=#215  ¿Tienen wifi?
+OK   q='tienen instagram'                            esperado=#51  primero=#51   ¿Tienen redes sociales?
+OK   q='venden shampoo'                              esperado=#49  primero=#49   ¿Venden productos para el cabello?
+OK   q='puedo poner una queja'                       esperado=#50  primero=#50   ¿Puedo dejar una propuesta o una queja?
+OK   q='quien me atiende'                            esperado=#45  primero=#45   ¿Quién me va a atender?
+FALLA q='hay otro barbero'                            esperado=#46  primero=#26   ¿Cuánto cuesta la barba?
+        aceptables=[46] nota=
+        >> # ¿Cuánto cuesta la barba? (contexto) rank=0.8351
+        >> # ¿Arreglan la barba? (contexto) rank=0.7734
+        >> # ¿Cuánto dura la barba? (contexto) rank=0.7734
+OK   q='atienden a domicilio'                        esperado=#37  primero=#37   ¿Atienden a domicilio?
+FALLA q='puedo ir sin cita'                           esperado=#4   primero=#38   ¿Puedo cancelar mi cita?
+        aceptables=[4, 44] nota=
+        >> # ¿Puedo cancelar mi cita? (contexto) rank=0.7599
+        >> # ¿Puedo apartar varias citas a la vez? (propuesta) rank=0.7253
+        >> # ¿Se puede pasar sin cita? (contexto) rank=0.7232
+OK   q='necesito cita para la ceja'                  esperado=#44  primero=#44   ¿Necesito cita para la ceja o la barba?
+OK   q='hasta que hora puedo agendar'                esperado=#8   primero=#8    ¿Hasta qué hora puedo agendar?
+OK   q='atienden en dias festivos'                   esperado=#9   primero=#9    ¿Atienden en días festivos?
+OK   q='puedo agendar el mismo dia'                  esperado=#212 primero=#212  ¿Puedo agendar el mismo día?
+OK   q='con cuanto tiempo de anticipacion agendo'    esperado=#36  primero=#36   ¿Con cuánta anticipación puedo agendar?
+OK   q='cuanto tiempo antes debo llegar'             esperado=#34  primero=#34   ¿Cuánto tiempo antes debo llegar?
+OK   q='cual es la politica de cancelacion'          esperado=#42  primero=#42   ¿Cuál es la política de cancelación?
+OK   q='puedo apartar dos citas'                     esperado=#35  primero=#35   ¿Puedo apartar varias citas a la vez?
+OK   q='cual es el telefono'                         esperado=#2   primero=#2    ¿Cuál es el teléfono?
+OK   q='cual es el horario'                          esperado=#6   primero=#6    ¿Cuál es el horario?
+FALLA q='prefiero un bob'                             esperado=#21  primero=#None (SIN RESULTADO)
+        aceptables=[10, 21] nota=estilo fuera de catalogo
+OK   q='que es la mascarilla'                        esperado=#14  primero=#14   ¿Qué es la mascarilla?
+OK   q='trabajan con maquina o navaja'               esperado=#19  primero=#19   ¿Trabajan con máquina o navaja?
+OK   q='que me recomiendas si es mi primera vez'     esperado=#22  primero=#22   ¿Qué me recomiendan si es mi primera vez?
+OK   q='tienen evento para boda'                     esperado=#52  primero=#52   ¿Puedo dejar reservado para una boda o un evento?
+
+RESULTADO: 66/75 aciertan la FAQ correcta como PRIMER resultado = 88.0%
+
+==============================================================================
+CASOS BORDE (deben dar 0 filas SIN error)
+==============================================================================
+OK       cadena vacia                               filas=0 err=ninguno
+OK       solo espacios                              filas=0 err=ninguno
+OK       solo signo                                 filas=0 err=ninguno
+OK       solo signo                                 filas=0 err=ninguno
+OK       solo numeros                               filas=0 err=ninguno
+OK       un digito                                  filas=0 err=ninguno
+OK       solo emojis                                filas=0 err=ninguno
+OK       emojis barberia                            filas=0 err=ninguno
+OK       una letra                                  filas=0 err=ninguno
+OK       puntos                                     filas=0 err=ninguno
+OK       500 caracteres de basura + comilla         filas=0 err=ninguno
+OK       480 caracteres repetidos                   filas=0 err=ninguno
+OK       intento de inyeccion SQL                   filas=0 err=ninguno
+REVISAR  intento DROP TABLE                         filas=3 err=ninguno
+         -> ¿Cuánto cuesta la barba?
+         -> ¿Arreglan la barba?
+         -> ¿Cuánto dura la barba?
+OK       comodin LIKE                               filas=0 err=ninguno
+OK       simbolos                                   filas=0 err=ninguno
+REVISAR  NUL                                        filas=0 err=DataError: PostgreSQL text fields cannot contain NUL (0x00) bytes
+OK       solo palabras vacias                       filas=0 err=ninguno
+OK       html                                       filas=0 err=ninguno
+
+casos borde sin error y con 0 filas: 17/19

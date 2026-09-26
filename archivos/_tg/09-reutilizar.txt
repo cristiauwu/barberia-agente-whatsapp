@@ -1,0 +1,78 @@
+
+=== Consultar agenda [n8n-nodes-base.googleCalendarTool] v1.3 creds={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}} ===
+{
+  "descriptionType": "manual",
+  "toolDescription": "Consulta las citas ya ocupadas en el calendario de la barberia dentro de un rango de fechas. Usala SIEMPRE antes de agendar o reprogramar, para no empalmar dos citas. Devuelve los eventos con su ID, resumen, descripcion, inicio y fin.",
+  "operation": "getAll",
+  "calendar": {
+    "__rl": true,
+    "value": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+    "mode": "list",
+    "cachedResultName": "BARBER"
+  },
+  "timeMin": "={{ $fromAI('After', 'Inicio del rango a consultar en ISO 8601 con offset -06:00, por ejemplo 2026-05-14T00:00:00-06:00', 'string') }}",
+  "timeMax": "={{ $fromAI('Before', 'Fin del rango a consultar en ISO 8601 con offset -06:00, por ejemplo 2026-05-14T23:59:59-06:00. Consulta el dia completo.', 'string') }}",
+  "options": {}
+}
+
+=== Responder al operador [n8n-nodes-base.httpRequest] v4.2 creds={"httpHeaderAuth": {"id": "qaGW1Tvt5BqPujJ1", "name": "Evolution API"}} ===
+{
+  "method": "POST",
+  "url": "={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}",
+  "authentication": "genericCredentialType",
+  "genericAuthType": "httpHeaderAuth",
+  "sendHeaders": true,
+  "headerParameters": {
+    "parameters": []
+  },
+  "sendBody": true,
+  "specifyBody": "json",
+  "jsonBody": "={{ JSON.stringify({ number: $('Normalizacion').item.json.user_number, text: $json.respuesta, delay: 1000 }) }}",
+  "options": {}
+}
+
+=== Preparar rango de fechas [n8n-nodes-base.code] v2 creds=null ===
+{
+  "jsCode": "// Calcula el rango a consultar en hora de MEXICO (UTC-6 fijo).\n//\n// OJO: el comando se saca del MENSAJE, no de un campo `comando`. El Router\n// enruta por el texto y no añade campos; leer item.comando devolvía\n// undefined y todo caía en 'HOY' por defecto.\nconst TZ = 'America/Mexico_City';\nconst item = $input.first().json;\nconst texto = String(item.message_content || '').trim();\nconst comando = (texto.split(/\\s+/)[0] || 'HOY').toUpperCase();\n\nfunction fechaMexico(d) {\n  return new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(d);\n}\nfunction sumarDias(f, n) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const t = Date.UTC(a, m - 1, dd) + n * 86400000;\n  const g = new Date(t);\n  return `${g.getUTCFullYear()}-${String(g.getUTCMonth() + 1).padStart(2, '0')}-${String(g.getUTCDate()).padStart(2, '0')}`;\n}\nconst DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];\nconst MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',\n               'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];\nfunction fechaCorta(f) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const wd = new Date(Date.UTC(a, m - 1, dd)).getUTCDay();\n  return `${DIAS[wd]} ${dd} de ${MESES[m - 1]}`;\n}\n\nconst ahora = new Date();\nconst hoy = fechaMexico(ahora);\nlet desde = hoy, hasta = hoy, titulo = '';\n\nif (comando === 'SEMANA') {\n  hasta = sumarDias(hoy, 7);\n  titulo = `los próximos 7 días (desde ${fechaCorta(hoy)})`;\n} else if (comando === 'LIBRE') {\n  hasta = sumarDias(hoy, 2);\n  titulo = 'hoy y los siguientes 2 días';\n} else if (comando === 'MAÑANA' || comando === 'MANANA') {\n  desde = sumarDias(hoy, 1); hasta = desde;\n  titulo = `mañana, ${fechaCorta(desde)}`;\n} else if (comando === 'HOY') {\n  titulo = `hoy, ${fechaCorta(hoy)}`;\n} else {\n  // Por si LIBRE/SEMANA llegan con otro alias\n  titulo = `hoy, ${fechaCorta(hoy)}`;\n}\n\nreturn [{ json: {\n  comando,\n  desde, hasta, titulo,\n  esRango: desde !== hasta,\n  timeMin: `${desde}T00:00:00-06:00`,\n  timeMax: `${hasta}T23:59:00-06:00`,\n  ahoraISO: ahora.toISOString(),\n} }];"
+}
+
+=== Leer agenda del rango [n8n-nodes-base.googleCalendar] v1.3 creds={"googleCalendarOAuth2Api": {"id": "I6TpcTTP1cn1tviR", "name": "Google Calendar account"}} ===
+{
+  "operation": "getAll",
+  "calendar": {
+    "__rl": true,
+    "value": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+    "mode": "list",
+    "cachedResultName": "BARBER"
+  },
+  "timeMin": "={{ $json.timeMin }}",
+  "timeMax": "={{ $json.timeMax }}",
+  "options": {
+    "orderBy": "startTime"
+  }
+}
+
+=== Formatear agenda [n8n-nodes-base.code] v2 creds=null ===
+{
+  "jsCode": "// Arma la respuesta de WhatsApp con la agenda o los huecos.\n//\n// ORDEN IMPORTANTE: el comando LIBRE se evalúa PRIMERO, antes de cualquier\n// comprobación sobre las citas. Antes estaba dentro del bloque de \"no hay\n// citas\" y nunca llegaba a ejecutarse.\nconst TZ = 'America/Mexico_City';\nconst entrada = $('Preparar rango de fechas').first().json;\nconst todos = $input.all().map(i => i.json);\n\nconst DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];\nconst MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',\n               'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];\n\nfunction a12h(min) {\n  const h = Math.floor(min / 60), m = min % 60;\n  const suf = h < 12 ? 'a.m.' : 'p.m.';\n  const h12 = h % 12 === 0 ? 12 : h % 12;\n  return `${h12}:${String(m).padStart(2, '0')} ${suf}`;\n}\nfunction minutos(dt) {\n  const m = /T(\\d{2}):(\\d{2})/.exec(dt || '');\n  return m ? Number(m[1]) * 60 + Number(m[2]) : null;\n}\nfunction fechaDe(dt) {\n  const m = /^(\\d{4}-\\d{2}-\\d{2})/.exec(dt || '');\n  return m ? m[1] : null;\n}\nfunction fechaCorta(f) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const wd = new Date(Date.UTC(a, m - 1, dd)).getUTCDay();\n  return `${DIAS[wd]} ${dd} de ${MESES[m - 1]}`;\n}\nfunction sumarDias(f, n) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const t = Date.UTC(a, m - 1, dd) + n * 86400000;\n  const g = new Date(t);\n  return `${g.getUTCFullYear()}-${String(g.getUTCMonth() + 1).padStart(2, '0')}-${String(g.getUTCDate()).padStart(2, '0')}`;\n}\nfunction nombreCliente(e) {\n  const m = /Nombre:\\s*([^\\n]+)/i.exec(e.desc);\n  if (m) return m[1].trim();\n  const partes = e.resumen.split(/\\s+[—–-]\\s+/);\n  return partes.length > 1 ? partes[partes.length - 1].trim() : e.resumen;\n}\nfunction servicio(e) {\n  const partes = e.resumen.split(/\\s+[—–-]\\s+/);\n  return partes.length > 1 ? partes[0].trim() : '';\n}\nfunction precio(e) {\n  const m = /\\$\\s*(\\d+)|Precio\\s*:\\s*(\\d+)/i.exec(e.desc);\n  return m ? Number(m[1] || m[2]) : null;\n}\n\n// Normaliza los eventos del calendario\nconst eventos = todos.filter(e => e && (e.summary || e.start))\n  .map(e => {\n    const dt = e.start ? (e.start.dateTime || e.start.date || '') : '';\n    return {\n      ini: e.start && e.start.date && !e.start.dateTime ? -1 : minutos(dt),\n      fin: e.end ? minutos(e.end.dateTime || e.end.date || '') : null,\n      fecha: fechaDe(dt),\n      resumen: e.summary || '',\n      desc: e.description || '',\n    };\n  })\n  .filter(e => e.ini !== null && e.ini >= 0 && e.fecha)\n  .sort((a, b) => (a.fecha + String(a.ini).padStart(4, '0'))\n        .localeCompare(b.fecha + String(b.ini).padStart(4, '0')));\n\nconst ahora = new Date(entrada.ahoraISO);\nconst AHOY = new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(ahora);\nconst pA = {};\nfor (const { type, value } of new Intl.DateTimeFormat('en-CA',\n  { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false })\n  .formatToParts(ahora)) pA[type] = value;\nconst ahoraMin = Number(pA.hour === '24' ? '0' : pA.hour) * 60 + Number(pA.minute);\n\n// ------------------------------------------------------------------\n// 1. LIBRE -> huecos disponibles. PRIMERO, siempre.\n// ------------------------------------------------------------------\nif (entrada.comando === 'LIBRE') {\n  const dur = 40;                      // duración de referencia\n  const AP = 10 * 60, CI = 20 * 60;    // 10:00 a 20:00\n  const porFecha = {};\n  for (const e of eventos) (porFecha[e.fecha] = porFecha[e.fecha] || []).push(e);\n\n  const l = [`*Huecos disponibles (${dur} min)*`];\n  let total = 0;\n\n  for (let f = entrada.desde; f <= entrada.hasta; f = sumarDias(f, 1)) {\n    const dow = new Date(f + 'T12:00:00Z').getUTCDay();\n    if (dow === 0) continue;                       // domingo, cerrado\n    const ocupados = porFecha[f] || [];\n    const libres = [];\n    for (let t = AP; t + dur <= CI; t += 30) {\n      const fin = t + dur;\n      const choca = ocupados.some(e => e.fin !== null &&\n        t < e.fin + 10 && e.ini - 10 < fin);\n      if (choca) continue;\n      if (f === AHOY && t <= ahoraMin) continue;\n      libres.push(t);\n      if (libres.length >= 8) break;\n    }\n    total += libres.length;\n    l.push('');\n    l.push(`*${f === AHOY ? 'Hoy' : fechaCorta(f)}*`);\n    l.push(libres.length ? libres.map(a12h).join(', ') : 'Sin huecos libres.');\n  }\n\n  l.push('');\n  l.push(total ? `Total: *${total} huecos* disponibles.`\n               : 'No hay huecos en el periodo.');\n  return [{ json: { respuesta: l.join('\\n') } }];\n}\n\n// ------------------------------------------------------------------\n// 2. Sin citas -> decirlo\n// ------------------------------------------------------------------\nconst lineas = [`*Agenda de ${entrada.titulo}*`];\nif (!eventos.length) {\n  lineas.push('');\n  lineas.push('No hay citas agendadas en ese periodo.');\n  return [{ json: { respuesta: lineas.join('\\n') } }];\n}\n\n// ------------------------------------------------------------------\n// 3. Rango de varios días -> agrupar por día\n// ------------------------------------------------------------------\nif (entrada.esRango) {\n  const porDia = {};\n  for (const e of eventos) (porDia[e.fecha] = porDia[e.fecha] || []).push(e);\n  let totalP = 0, conPrecio = 0;\n  for (const f of Object.keys(porDia).sort()) {\n    lineas.push('');\n    lineas.push(`*${fechaCorta(f)}*`);\n    for (const e of porDia[f]) {\n      const pr = precio(e);\n      if (pr !== null) { totalP += pr; conPrecio++; }\n      let x = `${a12h(e.ini)} ${nombreCliente(e)}`;\n      const sv = servicio(e);\n      if (sv) x += ` — ${sv}`;\n      lineas.push(x);\n    }\n  }\n  lineas.push('');\n  lineas.push(`*${eventos.length} cita${eventos.length === 1 ? '' : 's'} en el periodo` +\n    (conPrecio ? ` · $${totalP} estimado` : '') + '*');\n  return [{ json: { respuesta: lineas.join('\\n') } }
+
+=== Leer estado del sistema [n8n-nodes-base.postgres] v2.6 creds={"postgres": {"id": "NUrqrDWN8OsBFmgV", "name": "Postgres account"}} ===
+{
+  "operation": "executeQuery",
+  "query": "SELECT\n  (SELECT count(*) FROM barber_citas\n    WHERE inicio >= (now() AT TIME ZONE 'America/Mexico_City')::date\n      AND inicio <  (now() AT TIME ZONE 'America/Mexico_City')::date + interval '1 day'\n      AND estado IN ('agendado','confirmado')) AS citas_hoy,\n  (SELECT count(*) FROM barber_citas\n    WHERE inicio >= now() AND inicio < now() + interval '7 days'\n      AND estado IN ('agendado','confirmado')) AS citas_semana,\n  (SELECT count(*) FROM barber_escalaciones\n    WHERE coalesce(estado,'abierta') = 'abierta') AS escalaciones,\n  (SELECT count(*) FROM barber_pausas WHERE hasta > now()) AS pausas,\n  (SELECT count(*) FROM barber_operadores WHERE activo) AS operadores;",
+  "options": {}
+}
+
+=== Formatear estado [n8n-nodes-base.code] v2 creds=null ===
+{
+  "jsCode": "// Salud del sistema en formato WhatsApp.\nconst e = $input.first().json;\nconst l = ['*Estado del sistema*', ''];\nl.push(`Citas hoy: ${e.citas_hoy || 0}`);\nl.push(`Citas esta semana: ${e.citas_semana || 0}`);\nl.push(`Escalaciones abiertas: ${e.escalaciones || 0}`);\nl.push(`Pausas activas: ${e.pausas || 0}`);\nl.push(`Operadores: ${e.operadores || 0}`);\nl.push('');\nl.push('Bot activo ✅');\nreturn [{ json: { respuesta: l.join('\\n') } }];"
+}
+
+=== credencial Evolution (estructura) ===
+Se7l2GF1O4CrF9jb | n8n API (local) | n8nApi
+qaGW1Tvt5BqPujJ1 | Evolution API | httpHeaderAuth
+cJgufKuA5Lxckkz8 | Google Sheets Trigger account | googleSheetsTriggerOAuth2Api
+KhicsxnD4N314cKC | Uncensored AI (OpenAI-compatible) | openAiApi
+NUrqrDWN8OsBFmgV | Postgres account | postgres
+lGEYmmJh1FvqzQi9 | Google Sheets account | googleSheetsOAuth2Api
+I6TpcTTP1cn1tviR | Google Calendar account | googleCalendarOAuth2Api

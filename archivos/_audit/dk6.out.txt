@@ -1,0 +1,10 @@
+=== memory contextWindowLength usage ===
+110 /usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/dist/nodes/memory/MemoryPostgresChat/MemoryPostgresChat.node.js
+63:                    ...descriptions_1.contextWindowLengthProperty,
+74:    async supplyData(itemIndex) {
+96:            : { k: this.getNodeParameter('contextWindowLength', itemIndex) };
+
+=== responsesApiEnabled in common.js ===
+
+=== detail ===
+

@@ -1,0 +1,228 @@
+======================================================================
+n8n-nodes-base.webhook v 2 | Webhook
+{
+  "id": "6c132eef-9050-43a2-82f1-5d6942bd8077",
+  "name": "Webhook",
+  "webhookId": "6dff1e56-c180-4969-ae6a-e3f08cca3ed9",
+  "type": "n8n-nodes-base.webhook",
+  "typeVersion": 2,
+  "position": [
+    -688,
+    208
+  ],
+  "parameters": {
+    "httpMethod": "POST",
+    "path": "hector",
+    "options": {}
+  }
+}
+======================================================================
+n8n-nodes-base.switch v 3.2 | Switch
+{
+  "id": "8f2f4d35-d700-42f0-9bca-81ad9087a501",
+  "name": "Switch",
+  "type": "n8n-nodes-base.switch",
+  "typeVersion": 3.2,
+  "position": [
+    -48,
+    128
+  ],
+  "parameters": {
+    "rules": {
+      "values": [
+        {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "leftValue": "={{ $json.message_content_type }}",
+                "rightValue": "audio",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                },
+                "id": "6571be58-7ae0-4b3a-9c4d-706d062d2428"
+              }
+            ],
+            "combinator": "and"
+          },
+          "renameOutput": true,
+          "outputKey": "Audio"
+        },
+        {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "98a252f3-df54-41c8-8d0f-705fee6eec87",
+                "leftValue": "={{ $json.message_content_type }}",
+                "rightValue": "image",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "renameOutput": true,
+          "outputKey": "Imagen"
+        },
+        {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "ebf44caf-794d-434c-be9b-88adfc2d34a0",
+                "leftValue": "={{ $json.message_content_type }}",
+                "rightValue": "text",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "renameOutput": true,
+          "outputKey": "Texto"
+        }
+      ]
+    },
+    "options": {
+      "fallbackOutput": "extra",
+      "renameFallbackOutput": "Otro"
+    }
+  }
+}
+======================================================================
+n8n-nodes-base.httpRequest v 4.2 | Get Audio
+{
+  "id": "9cbd1050-9d18-45d0-aa56-8228ef560c65",
+  "name": "Get Audio",
+  "type": "n8n-nodes-base.httpRequest",
+  "typeVersion": 4.2,
+  "alwaysOutputData": true,
+  "retryOnFail": true,
+  "maxTries": 3,
+  "waitBetweenTries": 2000,
+  "onError": "continueRegularOutput",
+  "position": [
+    144,
+    0
+  ],
+  "parameters": {
+    "method": "POST",
+    "url": "={{ $('Normalizacion').item.json.instance_server_url }}/chat/getBase64FromMediaMessage/{{ $('Normalizacion').item.json.instance_name }}",
+    "sendHeaders": true,
+    "headerParameters": {
+      "parameters": [
+        {
+          "name": "apikey",
+          "value": "={{ $('Normalizacion').item.json.instance_apikey }}"
+        }
+      ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+      "parameters": [
+        {
+          "name": "message.key.id",
+          "value": "={{ $('Normalizacion').item.json.message_id }}"
+        },
+        {
+          "name": "convertToMp4",
+          "value": "={{ Boolean(false) }}"
+        }
+      ]
+    },
+    "options": {}
+  }
+}
+======================================================================
+n8n-nodes-base.code v 2 | Preparar rango de fechas
+{
+  "id": "741105b7-02e5-4552-88ac-b3c22cbd2f6c",
+  "name": "Preparar rango de fechas",
+  "notesInFlow": true,
+  "notes": "Traduce HOY / MAÑANA / SEMANA / LIBRE al rango ISO en hora de\nMéxico (UTC-6). El offset es fijo: México no usa horario de verano.",
+  "type": "n8n-nodes-base.code",
+  "typeVersion": 2,
+  "position": [
+    -336,
+    1440
+  ],
+  "parameters": {
+    "jsCode": "// Calcula el rango a consultar en hora de MEXICO (UTC-6 fijo).\n//\n// OJO: el comando se saca del MENSAJE, no de un campo `comando`. El Router\n// enruta por el texto y no añade campos; leer item.comando devolvía\n// undefined y todo caía en 'HOY' por defecto.\nconst TZ = 'America/Mexico_City';\nconst item = $input.first().json;\nconst texto = String(item.message_content || '').trim();\nconst comando = (texto.split(/\\s+/)[0] || 'HOY').toUpperCase();\n\nfunction fechaMexico(d) {\n  return new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(d);\n}\nfunction sumarDias(f, n) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const t = Date.UTC(a, m - 1, dd) + n * 86400000;\n  const g = new Date(t);\n  return `${g.getUTCFullYear()}-${String(g.getUTCMonth() + 1).padStart(2, '0')}-${String(g.getUTCDate()).padStart(2, '0')}`;\n}\nconst DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];\nconst MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',\n               'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];\nfunction fechaCorta(f) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const wd = new Date(Date.UTC(a, m - 1, dd)).getUTCDay();\n  return `${DIAS[wd]} ${dd} de ${MESES[m - 1]}`;\n}\n\nconst ahora = new Date();\nconst hoy = fechaMexico(ahora);\nlet desde = hoy, hasta = hoy, titulo = '';\n\nif (comando === 'SEMANA') {\n  hasta = sumarDias(hoy, 7);\n  titulo = `los próximos 7 días (desde ${fechaCorta(hoy)})`;\n} else if (comando === 'LIBRE') {\n  hasta = sumarDias(hoy, 2);\n  titulo = 'hoy y los siguientes 2 días';\n} else if (comando === 'MAÑANA' || comando === 'MANANA') {\n  desde = sumarDias(hoy, 1); hasta = desde;\n  titulo = `mañana, ${fechaCorta(desde)}`;\n} else if (comando === 'HOY') {\n  titulo = `hoy, ${fechaCorta(hoy)}`;\n} else {\n  // Por si LIBRE/SEMANA llegan con otro alias\n  titulo = `hoy, ${fechaCorta(hoy)}`;\n}\n\nreturn [{ json: {\n  comando,\n  desde, hasta, titulo,\n  esRango: desde !== hasta,\n  timeMin: `${desde}T00:00:00-06:00`,\n  timeMax: `${hasta}T23:59:00-06:00`,\n  ahoraISO: ahora.toISOString(),\n} }];"
+  }
+}
+======================================================================
+n8n-nodes-base.postgres v 2.6 | Leer ficha del cliente
+{
+  "id": "43a3360f-1027-41a1-acaf-79b8831d5e1c",
+  "name": "Leer ficha del cliente",
+  "type": "n8n-nodes-base.postgres",
+  "typeVersion": 2.6,
+  "alwaysOutputData": true,
+  "retryOnFail": true,
+  "maxTries": 3,
+  "waitBetweenTries": 2000,
+  "position": [
+    -176,
+    1648
+  ],
+  "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT\n  cl.nombre,\n  cl.etiqueta,\n  cl.visitas,\n  cl.no_shows,\n  cl.ticket_promedio,\n  cl.servicio_habitual,\n  to_char(cl.ultima_visita AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY') AS ultima,\n  cl.nota_interna,\n  (SELECT count(*) FROM barber_citas c\n    WHERE c.jid = cl.jid AND c.inicio > now()\n      AND c.estado IN ('agendado','confirmado')) AS futuras\nFROM barber_clientes cl\nWHERE right(regexp_replace(split_part(cl.jid,'@',1),'\\D','','g'),10)\n        = right('{{ $json.busqueda }}',10)\n   OR right(regexp_replace(cl.telefono,'\\D','','g'),10)\n        = right('{{ $json.busqueda }}',10)\nLIMIT 1;",
+    "options": {}
+  },
+  "credentials": {
+    "postgres": {
+      "id": "NUrqrDWN8OsBFmgV",
+      "name": "Postgres account"
+    }
+  }
+}
+######################################################################
+SETTINGS del agente:
+{
+  "timezone": "America/Mexico_City",
+  "callerPolicy": "workflowsFromSameOwner",
+  "availableInMCP": true,
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+}
+######################################################################
+RECORDATORIOS nodos:
+  n8n-nodes-base.googleSheetsTrigger v 1 | Google Sheets Trigger
+  n8n-nodes-base.code v 2 | Code
+  n8n-nodes-base.httpRequest v 4.2 | Notificar cita nueva al encargado
+  n8n-nodes-base.code v 2 | Code1
+  n8n-nodes-base.googleSheets v 4.6 | Append or update row in sheet
+  n8n-nodes-base.switch v 3.2 | Switch
+  n8n-nodes-base.wait v 1.1 | ESPERAR A 1 H
+  n8n-nodes-base.n8n v 1 | QUITAR RECORDATORIO
+  n8n-nodes-base.googleSheets v 4.6 | OBTENER INFO DE CITA ELIMINADA
+  n8n-nodes-base.httpRequest v 4.2 | RECORDATORIO 24 H
+  n8n-nodes-base.httpRequest v 4.2 | RECORDATORIO 1 H
+  n8n-nodes-base.if v 2.2 | IF - Toca recordatorio 24 h
+  n8n-nodes-base.if v 2.2 | IF - Toca recordatorio 1 h
+  n8n-nodes-base.wait v 1.1 | ESPERAR A 24 H
+  n8n-nodes-base.if v 2.2 | IF - Es cita agendada

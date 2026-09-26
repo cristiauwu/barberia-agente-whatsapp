@@ -1,0 +1,8 @@
+==========================================================================
+QUITAR PROCESAMIENTO DE AUDIO E IMAGENES
+==========================================================================
+workflow: barberiaAgenteUncensored  (Barberia - Agente de citas (Uncensored AI))
+nodos antes: 45   activo: True
+
+[IDEMPOTENTE] El workflow YA esta sin multimedia y con el nodo
+  'Aviso solo texto'. No toco nada (no reescribo el respaldo).

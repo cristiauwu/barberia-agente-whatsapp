@@ -1,0 +1,16 @@
+find n8n-nodes-base: 
+nodos disponibles: '' err='find: /proc/tty/driver: Permission denied\nfind: /root: Permission denied'
+
+=== mensajes fromMe (bot->dueno) por dia ===
+fecha | fromMe(bool) | count
+  2026-09-25  fromMe=True  150
+
+mensajes del bot por hora UTC:
+  01h  ######################## (24)
+  02h  ###### (6)
+  05h  ################## (18)
+  06h  ########## (10)
+  07h  ################# (17)
+  11h  ###### (6)
+  12h  ################################ (32)
+  13h  ##################################### (37)

@@ -1,0 +1,56 @@
+ANCHO_VIEWPORT=390 ALTO_VIEWPORT=844
+ORIENTACION=portrait
+DOC_scrollWidth=409 clientWidth=375 SCROLL_LATERAL=true
+N_OVERFLOW_INTERNO=4
+  OVERFLOW:HTML. scroll=409 client=375 txt="Barber Chinos - Panel del dueno
+
+/* =="
+  OVERFLOW:BODY. scroll=409 client=375 txt="Panel del negocio
+Barber Chinos
+Peluqu"
+  OVERFLOW:DIV.envoltura scroll=409 client=375 txt="Panel del negocio
+Barber Chinos
+Peluqu"
+  OVERFLOW:DIV.panel scroll=394 client=345 txt="HoraClienteServicioPrecioEstado10:00Se"
+N_FUERA_VIEWPORT=24
+  FUERA:TABLE. right=408.7 ancho=378.7 txt="HoraClienteServicioPrecioEstado10:00Se"
+  FUERA:THEAD. right=408.7 ancho=378.7 txt="HoraClienteServicioPrecioEstado"
+  FUERA:TR. right=408.7 ancho=378.7 txt="HoraClienteServicioPrecioEstado"
+  FUERA:TH. right=408.7 ancho=96.4 txt="Estado"
+  FUERA:TBODY. right=408.7 ancho=378.7 txt="10:00Sergio Andrés VillalobosCorte des"
+  FUERA:TR. right=408.7 ancho=378.7 txt="10:00Sergio Andrés VillalobosCorte des"
+  FUERA:TD. right=408.7 ancho=96.4 txt="atendido"
+  FUERA:TR. right=408.7 ancho=378.7 txt="11:00Ricardo Alberto PeñaArreglo de ba"
+  FUERA:TD. right=408.7 ancho=96.4 txt="atendido"
+  FUERA:TR. right=408.7 ancho=378.7 txt="12:00Octavio Ramiro FuentesCeja$30aten"
+  FUERA:TD. right=408.7 ancho=96.4 txt="atendido"
+  FUERA:TR. right=408.7 ancho=378.7 txt="13:00Rodrigo Alonso BetancourtMascaril"
+  FUERA:TD. right=408.7 ancho=96.4 txt="atendido"
+  FUERA:TR. right=408.7 ancho=378.7 txt="15:00Prueba Cargacorte desvanecido o t"
+  FUERA:TD. right=408.7 ancho=96.4 txt="agendado"
+  FUERA:TR. right=408.7 ancho=378.7 txt="16:00Cristia ÑCorte de cabello dama$25"
+  FUERA:TD. right=408.7 ancho=96.4 txt="agendado"
+  FUERA:TR. right=408.7 ancho=378.7 txt="16:00Iván de Jesús CarrilloCorte de ca"
+  FUERA:TD. right=408.7 ancho=96.4 txt="atendido"
+  FUERA:TR. right=408.7 ancho=378.7 txt="17:00Nicolás Alejandro BuenrostroPlanc"
+  FUERA:TD. right=408.7 ancho=96.4 txt="confirmado"
+  FUERA:SPAN.pill pill-confirmado right=400.7 ancho=88.4 txt="confirmado"
+  FUERA:TR. right=408.7 ancho=378.7 txt="18:00José María Fernández de Córdova y"
+  FUERA:TD. right=408.7 ancho=96.4 txt="agendado"
+N_KPIS=8 COLS_VISIBLES=
+KPIS_POR_FILA=2,2,2,2
+KPI0 "Ingresos hoy"="$580" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI1 "Ingresos semana"="$4,470" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI2 "Ingresos mes"="$14,230" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI3 "Ticket promedio hoy"="$116" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI4 "Ticket promedio mes"="$140" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI5 "No-shows del mes"="16" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI6 "Cancelaciones del mes"="8" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+KPI7 "Proximas 7 dias"="16" kpiAncho=167.5 valorAncho=133.5 RECORTA_VALOR=false kpiDesborda=false
+N_BARRAS=30
+ALTURAS=15.7%,17.6%,31.4%,1.5%,9.8%,29.4%,5.9%,15.7%,22.7%,21.6%,1.5%,14.9%,17.6%,21.6%,23.5%,9.8%,14.1%,1.5%,14.9%,15.7%,30.6%,9%,15.7%,100%,1.5%,18.8%,94.1%,22.7%,16.9%,22.7%
+N_TABLAS=2
+TABLA0 filas=9 ancho=378.7 desborda=false
+TABLA1 filas=8 ancho=315.0 desborda=false
+N_RECORTADOS=0
+ALTURA_DOC=5759

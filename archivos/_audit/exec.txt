@@ -1,0 +1,19 @@
+=== recent executions (agent) ===
+
+ERROR:  column "started_at" does not exist
+LINE 1: SELECT id, status, started_at, stopped_at, left(retryOf,0) F...
+                           ^
+HINT:  Perhaps you meant to reference the column "execut
+=== status counts agent ===
+error|6
+success|182
+running|3
+
+=== status counts recordatorios ===
+waiting|3
+error|10
+success|2
+
+=== errorWorkflow configured per workflow ===
+
+=== stored memory node params (from DB) ===

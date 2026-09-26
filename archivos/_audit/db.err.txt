@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "G:\Barberia\archivos\_audit\db.py", line 30, in <module>
+    W(o); W(e[:300])
+    ~^^^
+  File "G:\Barberia\archivos\_audit\db.py", line 11, in W
+    line=" ".join(str(x) for x in a); out.append(line); print(line)
+                                                        ~~~~~^^^^^^
+  File "C:\Users\kimbo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f60a' in position 363: character maps to <undefined>

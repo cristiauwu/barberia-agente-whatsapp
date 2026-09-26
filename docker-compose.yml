@@ -1,0 +1,83 @@
+# n8n + Postgres para el agente de barbería "Barber Chinos"
+#
+# Uso:
+#   docker compose up -d      # arrancar
+#   docker compose logs -f n8n
+#   docker compose down       # detener (conserva datos)
+#
+# La llave de Uncensored AI NO va aquí: se pega en la interfaz de n8n
+# (Credentials -> Uncensored AI). Así no queda escrita en disco.
+
+services:
+  postgres:
+    # n8n 2.40 avisa que Postgres 16 está fuera del rango soportado.
+    image: postgres:17-alpine
+    container_name: barberia-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TZ: America/Mexico_City
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      # Publicado SOLO en loopback: el panel administrativo corre en el
+      # host y necesita conectarse. Con 127.0.0.1 por delante, Postgres
+      # NO queda expuesto a la red local ni a internet.
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - barberia
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: barberia-n8n
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "5678:5678"
+    environment:
+      # --- Identidad y seguridad ---
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      N8N_HOST: ${N8N_HOST}
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: ${WEBHOOK_URL}
+      N8N_EDITOR_BASE_URL: ${WEBHOOK_URL}
+      # --- Zona horaria del negocio ---
+      GENERIC_TIMEZONE: America/Mexico_City
+      TZ: America/Mexico_City
+      N8N_DEFAULT_LOCALE: es
+      # --- Acceso al Postgres interno (memoria del agente) ---
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+      # --- Comportamiento útil para este agente ---
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_RUNNERS_ENABLED: "true"
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      N8N_COMMUNITY_PACKAGES_ENABLED: "true"
+      N8N_PAYLOAD_SIZE_MAX: "32"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./archivos:/files
+    networks:
+      - barberia
+
+volumes:
+  n8n_data:
+  postgres_data:
+
+networks:
+  barberia:
+    driver: bridge

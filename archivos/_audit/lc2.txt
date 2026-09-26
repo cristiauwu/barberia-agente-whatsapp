@@ -1,0 +1,26 @@
+=== attempt2 ===
+
+ERR: node:internal/modules/cjs/loader:1573
+  throw err;
+  ^
+
+Error: Cannot find module '/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+n8n-nodes-langchain@file++++home+runner+_work+n8n+n8n+packages+@n8n+nodes-langchain/node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/classic/memory'
+Require stack:
+- /home/node/[eval]
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)
+    at Module._load (node:internal/modules/cjs/loader:1346:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1679:12)
+    at require (node:internal/modules/helpers:196:16)
+    at [eval]:1:28
+    at runScriptInThisContext (node:internal/vm:219:10) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/home/node/[eval]' ]
+}
+
+Node.js v26.7.0
+
+pnpm langchain: /usr/local/lib/node_modules/n8n/node_modules/.pnpm/@langchain+classic@1.0.27_@aws-sdk+credential-provider-node@3.972.80_@langchain+core@1._14b3f3765668e79e293f0c902e361733

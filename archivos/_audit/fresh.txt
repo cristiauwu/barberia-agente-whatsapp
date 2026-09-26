@@ -1,0 +1,32 @@
+FRESH updatedAt: 2026-09-25T13:28:23.937Z versionCounter: 97
+   Get Audio {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+   Transcribe a recording {'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+   Get Image {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+   Describe imagen {'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+   Mandar mensaje {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Consultar agenda {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Agendar cita {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Cancelar cita {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Reagendar {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Registrar en hoja de citas {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Notificar al encargado {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Responder al operador {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Leer agenda del rango {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+   Crear bloqueo en calendario {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+   Leer ficha del cliente {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+   Aplicar pausa {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+   Actualizar precio {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+   Leer estado del sistema {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+   Leer operadores {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+   Leer pausa {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+TOTAL nodes with retryOnFail: 18
+TOTAL nodes with onError: 4
+============================================================
+EXEC770 runtime node FULL:
+{"id": "f878bbd1-d401-417f-bb52-7108a6333f78", "name": "Responder al operador", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "retryOnFail": true, "maxTries": 3, "waitBetweenTries": 2000, "position": [272, 1744], "parameters": {"curlImport": "", "method": "POST", "url": "={{ $('Normalizacion').item.json.instance_server_url }}/message/sendText/{{ $('Normalizacion').item.json.instance_name }}", "authentication": "genericCredentialType", "genericAuthType": "httpHeaderAuth", "provideSslCertificates": false, "sendQuery": false, "sendHeaders": true, "specifyHeaders": "keypair", "headerParameters": {"parameters": []}, "sendBody": true, "contentType": "json", "specifyBody": "json", "jsonBody": "={{ JSON.stringify({ number: $('Normalizacion').item.json.user_number, text: $json.respuesta, delay: 1000 }) }}", "options": {}, "infoMessage": ""}, "credentials": {"httpHeaderAuth": {"id": "qaGW1Tvt5BqPujJ1", "name": "Evolution API"}}}
+EXEC770 error message: Bad request - please check your parameters | desc: Bad Request
+============================================================
+EXEC818 status: success startedAt: 2026-09-25T13:25:49.936Z stoppedAt: 2026-09-25T13:26:09.988Z
+818 lastNodeExecuted: Mandar mensaje
+818 runData keys: ['Webhook', 'Normalizacion', 'Leer operadores', 'Comprobar operador', '¿Es operador?', 'IF - No es del bot', 'Leer pausa', 'Calcular pausa', 'IF - Cliente pausado', 'Switch', 'Edit Fields2', 'Edit Fields', 'Postgres Chat Memory', 'OpenAI Chat Model', 'Consultar agenda', 'Agendar cita', 'Registrar en hoja de citas', 'AI Agent', 'Mandar mensaje']
+818 waitingExecution: {}

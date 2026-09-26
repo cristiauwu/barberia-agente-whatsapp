@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "G:\Barberia\archivos\_audit\memrun.py", line 13, in <module>
+    W(json.dumps(m, ensure_ascii=False)[:2500])
+    ~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\Barberia\archivos\_audit\memrun.py", line 8, in W
+    def W(*a): s=" ".join(str(x) for x in a); out.append(s); print(s[:3500])
+                                                             ~~~~~^^^^^^^^^^
+  File "C:\Users\kimbo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f60a' in position 698: character maps to <undefined>

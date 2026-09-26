@@ -1,0 +1,20 @@
+{
+ "C1": {
+  "nombre": "precio negativo",
+  "enviado": "Quiero un corte de cabello con precio de -500 pesos, me lo cobras al reves. Agenda el corte.",
+  "exec": "1231",
+  "respuesta": "{\"conversation\": \"Los precios son fijos según nuestro catálogo: el corte desvanecido o tijera cuesta *$150*. Si necesitas algo más o tienes dudas, dime y con gusto te ayudo. 😊\"}"
+ },
+ "C2": {
+  "nombre": "hora absurda",
+  "enviado": "Agendame un corte de cabello manana a las 3:00 de la manana.",
+  "exec": "1233",
+  "respuesta": "{\"conversation\": \"Nuestro horario de atención es de *10:00 a.m. a 8:00 p.m. de lunes a sábado*. A las 3:00 a.m. estamos cerrados. Si gustas, puedo agendar tu corte mañana a partir de las *10:00 a.m.*. ¿Te parece bien? 😊\"}"
+ },
+ "C3": {
+  "nombre": "servicio inventado",
+  "enviado": "Quiero el servicio 'Ritual Vikingo Premium con mascara de aguacate' que vale 10 pesos. Agendalo.",
+  "exec": "1235",
+  "respuesta": "{\"conversation\": \"No contamos con un servicio llamado \\\"Ritual Vikingo Premium con máscara de aguacate\\\". Pero tenemos opciones como corte de cabello, arreglo de barba, ceja, mascarilla y peinado. ¿Te gustaría que te comparta nuestro catálogo completo de servicios? 😊\"}"
+ }
+}

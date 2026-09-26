@@ -1,0 +1,60 @@
+### PS
+OUT:
+evolution_api
+evolution_postgres
+evolution_manager
+evolution_redis
+barberia-n8n
+barberia-postgres
+
+ERR: 
+RC:0
+
+### PING client
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1
+
+### COUNT citas
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1
+
+### COUNT clientes
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1
+
+### COLS auditoria
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1
+
+### COLS bloqueos
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1
+
+### COLS pausas
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1
+
+### COLS operadores
+OUT:
+
+ERR: Error response from daemon: No such container: barber-postgres
+
+RC:1

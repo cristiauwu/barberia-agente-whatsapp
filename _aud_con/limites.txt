@@ -1,0 +1,36 @@
+== limite fuera de rango (count de filas reales) ==
+limite=0     -> 1 filas
+limite=-5    -> 1 filas
+limite=1     -> 1 filas
+limite=3     -> 3 filas
+limite=21    -> 18 filas
+limite=1000  -> 18 filas
+limite=20    -> 18 filas
+
+== limite NULL ==
+limite=NULL -> 3 filas
+
+== consulta NULL ==
+consulta=NULL -> 0 filas
+
+== la funcion FUNCIONA con la funcion VIEJA barber_buscar? ==
+barber_buscar('cuanto cuesta el corte') -> [('¿Cuánto cuesta el corte?', 0.83843285)]
+barber_buscar('tienen wifi') -> [('¿Tienen wifi?', 0.80381477)]
+barber_buscar('dan factura') -> [('¿Dan factura?', 0.6991162)]
+
+== 'depilasion' / 'estoacionamiento': por que fallan ==
+'depilasion'         -> lexemas ['depilasion']
+'depilacion'         -> lexemas ['depilacion']
+'estoacionamiento'   -> lexemas ['estoacion']
+'estacionamiento'    -> lexemas ['estacion']
+'orario'             -> lexemas ['orari']
+'horario'            -> lexemas ['horari']
+'kual'               -> lexemas ['kual']
+'cual'               -> lexemas []
+
+== lexemas que la BD guarda para las palabras clave ==
+'depilación'         -> lexemas ['depilacion']
+'estacionamiento'    -> lexemas ['estacion']
+'horario'            -> lexemas ['horari']
+'ubicación'          -> lexemas ['ubicacion']
+'barba'              -> lexemas ['barb']

@@ -1,0 +1,37 @@
+Ejecucion base: 1267
+==========================================================================================
+
+##########################################################################################
+### F1 - COMANDO DEL DUENO desde numero desconocido: PRECIO (valor identico)
+>>> ENVIADO: PRECIO corte 150
+    webhook HTTP: 200
+<<< RESPUESTA (exec 1268):
+{"conversation": "¡Claro! El corte desvanecido o tijera cuesta *$150* y dura 40 minutos. ¿Te aparto uno? 😊"}
+
+##########################################################################################
+### F2 - COMANDO DEL DUENO desde numero desconocido: PAUSA
+>>> ENVIADO: PAUSA 4521206246 1m
+    webhook HTTP: 200
+<<< RESPUESTA (exec 1270):
+{"conversation": "No te entendí bien. ¿Me indicas qué servicio necesitas y para qué día? 😊"}
+
+##########################################################################################
+### F3 - COMANDO DEL DUENO desde numero desconocido: ESTADO
+>>> ENVIADO: ESTADO
+    webhook HTTP: 200
+<<< RESPUESTA (exec 1274):
+{"conversation": "No te entendí bien. ¿Me dices qué servicio necesitas y para qué día? 😊"}
+
+##########################################################################################
+### F4 - COMANDO DEL DUENO desde numero desconocido: HOY
+>>> ENVIADO: HOY
+    webhook HTTP: 200
+<<< RESPUESTA (exec 1276):
+{"conversation": "No te entendí bien. ¿Me podrías decir qué servicio necesitas y para qué hora sería? 😊"}
+
+##########################################################################################
+### F5 - COMANDO DEL DUENO desde numero desconocido: COMANDOS
+>>> ENVIADO: COMANDOS
+    webhook HTTP: 200
+<<< RESPUESTA (exec 1279):
+{"conversation": "No te entendí bien. ¿Me indicas qué servicio necesitas o cómo te puedo ayudar? 😊"}

@@ -1,0 +1,66 @@
+{
+  "citas": [
+    {
+      "id": "5270sjndptm0fbp10sjiiat7rc",
+      "jid": "5214521206246@s.whatsapp.net",
+      "nombre": "Prueba Carga",
+      "servicio": "corte desvanecido o tijera",
+      "precio": "150.00",
+      "inicio": "2026-09-25T15:00:00.000 -06",
+      "fin": "2026-09-25T15:40:00.000 -06",
+      "estado": "agendado",
+      "creado_en": "2026-09-25T14:00:02.087 -06",
+      "actualizado_en": "2026-09-25T14:00:02.087 -06"
+    },
+    {
+      "id": "auvtij2npnoe844n3df289gp70",
+      "jid": "5214521206246@s.whatsapp.net",
+      "nombre": "Cristia Ñ",
+      "servicio": "Corte de cabello dama",
+      "precio": "250.00",
+      "inicio": "2026-09-25T16:00:00.000 -06",
+      "fin": "2026-09-25T16:40:00.000 -06",
+      "estado": "agendado",
+      "creado_en": "2026-09-25T16:29:45.935 -06",
+      "actualizado_en": "2026-09-25T16:29:45.935 -06"
+    }
+  ],
+  "clientes": [
+    {
+      "jid": "5214501111805@s.whatsapp.net",
+      "nombre": "Verif Upsert",
+      "telefono": "4501111805",
+      "primera_visita": "2026-09-25T07:29:52.299",
+      "visitas": "12",
+      "ultima_visita": "2026-09-25T19:08:55.819",
+      "ticket_promedio": "",
+      "no_shows": "0",
+      "cancelaciones_tardias": "0",
+      "servicio_habitual": "Ceja",
+      "barbero_preferido": "",
+      "nota_interna": "",
+      "fecha_nacimiento": "",
+      "marketing_ok": "false",
+      "etiqueta": "frecuente",
+      "creado_en": "2026-09-25T07:29:52.299"
+    },
+    {
+      "jid": "5214521206246@s.whatsapp.net",
+      "nombre": "Cristia Ñ",
+      "telefono": "4521206246",
+      "primera_visita": "2026-09-25T07:29:52.299",
+      "visitas": "5",
+      "ultima_visita": "2026-09-25T16:29:43.933",
+      "ticket_promedio": "",
+      "no_shows": "0",
+      "cancelaciones_tardias": "0",
+      "servicio_habitual": "Corte de cabello dama",
+      "barbero_preferido": "",
+      "nota_interna": "",
+      "fecha_nacimiento": "",
+      "marketing_ok": "false",
+      "etiqueta": "frecuente",
+      "creado_en": "2026-09-25T07:29:52.299"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+  BarberiaAgenteFLUJO-1-UNCENSORED.json
+     nodos: 45  conexiones: 43
+     clave del vendedor: no
+     servidor del vendedor: no
+  BarberiaAgenteFLUJO-2-RECORDATORIOS.json
+     nodos: 17  conexiones: 14
+     clave del vendedor: no
+     servidor del vendedor: no
+
+=== VERIFICACION: el Switch en el ARCHIVO ===
+  Agendado     acepta ['agendado']
+  Cancelado    acepta ['cancelado', 'eliminado']
+  Actualizado  acepta ['actualizado', 'reprogramado']

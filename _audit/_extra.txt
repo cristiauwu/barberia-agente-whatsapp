@@ -1,0 +1,74 @@
+### RETRY / ERROR HANDLING
+  [Barberia - Agente de citas (Uncensored AI)] Get Audio: retryOnFail=True continueOnFail=None onError=continueRegularOutput
+  [Barberia - Agente de citas (Uncensored AI)] Transcribe a recording: retryOnFail=None continueOnFail=None onError=continueRegularOutput
+  [Barberia - Agente de citas (Uncensored AI)] Get Image: retryOnFail=True continueOnFail=None onError=continueRegularOutput
+  [Barberia - Agente de citas (Uncensored AI)] Describe imagen: retryOnFail=None continueOnFail=None onError=continueRegularOutput
+  [Barberia - Agente de citas (Uncensored AI)] Mandar mensaje: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Consultar agenda: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Agendar cita: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Cancelar cita: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Reagendar: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Registrar en hoja de citas: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Notificar al encargado: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Responder al operador: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Leer agenda del rango: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Crear bloqueo en calendario: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Leer ficha del cliente: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Aplicar pausa: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Actualizar precio: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Leer estado del sistema: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Leer operadores: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Agente de citas (Uncensored AI)] Leer pausa: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Recordatorios de cita] Notificar cita nueva al encargado: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Recordatorios de cita] Append or update row in sheet: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Recordatorios de cita] OBTENER INFO DE CITA ELIMINADA: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Recordatorios de cita] RECORDATORIO 24 H: retryOnFail=True continueOnFail=None onError=None
+  [Barberia - Recordatorios de cita] RECORDATORIO 1 H: retryOnFail=True continueOnFail=None onError=None
+  (si no aparece nada, ningún nodo tiene retry/onError configurado)
+
+### NODOS CON onError / retry (parametros)
+  [Barberia - Agente de citas (Uncensored AI)] Get Audio: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Get Audio: onError presente
+  [Barberia - Agente de citas (Uncensored AI)] Transcribe a recording: onError presente
+  [Barberia - Agente de citas (Uncensored AI)] Get Image: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Get Image: onError presente
+  [Barberia - Agente de citas (Uncensored AI)] Describe imagen: onError presente
+  [Barberia - Agente de citas (Uncensored AI)] Mandar mensaje: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Consultar agenda: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Agendar cita: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Cancelar cita: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Reagendar: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Registrar en hoja de citas: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Notificar al encargado: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Responder al operador: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Leer agenda del rango: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Crear bloqueo en calendario: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Leer ficha del cliente: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Aplicar pausa: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Actualizar precio: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Leer estado del sistema: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Leer operadores: retryOnFail presente
+  [Barberia - Agente de citas (Uncensored AI)] Leer pausa: retryOnFail presente
+  [Barberia - Recordatorios de cita] Notificar cita nueva al encargado: retryOnFail presente
+  [Barberia - Recordatorios de cita] Append or update row in sheet: retryOnFail presente
+  [Barberia - Recordatorios de cita] OBTENER INFO DE CITA ELIMINADA: retryOnFail presente
+  [Barberia - Recordatorios de cita] RECORDATORIO 24 H: retryOnFail presente
+  [Barberia - Recordatorios de cita] RECORDATORIO 1 H: retryOnFail presente
+
+### NOMBRES BARBERO / ESTEBAN / GALERIA / IMAGEN
+  Esteban: []
+  Aguilera: []
+  galer: []
+  imageUrl: []
+  imagen: ['wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json=22']
+  Imagen: ['wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json=22']
+  barbero: ['wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json=2', 'wf_Barberia_-_Recordatorios_de_cita.json=2']
+  barber: ['wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json=60', 'wf_Barberia_-_Recordatorios_de_cita.json=18']
+  Juan: ['wf_Barberia_-_Agente_de_citas_(Uncensored_AI).json=4', 'wf_Barberia_-_Recordatorios_de_cita.json=2', 'wf_My_workflow.json=1']
+  Carlos: []
+  Miguel: []
+
+### CREDENCIALES REFERENCIADAS (solo metadatos)
+  Barberia - Agente de citas (Uncensored AI): {'openAiApi': ['OpenAi account', 'Uncensored AI (OpenAI-compatible)'], 'googleCalendarOAuth2Api': ['Google Calendar account'], 'postgres': ['Postgres account'], 'googleSheetsOAuth2Api': ['Google Sheets account'], 'httpHeaderAuth': ['Evolution API']}
+  Barberia - Recordatorios de cita: {'googleSheetsTriggerOAuth2Api': ['Google Sheets Trigger account'], 'httpHeaderAuth': ['Evolution API'], 'googleSheetsOAuth2Api': ['Google Sheets account'], 'n8nApi': ['n8n API (local)']}
+  My workflow: {}

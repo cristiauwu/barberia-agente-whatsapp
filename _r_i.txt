@@ -1,0 +1,224 @@
+=== TABLAS rc 0 ===
+activity_event
+agent_background_job
+agent_channel_status
+agent_chat_attachments
+agent_chat_subscriptions
+agent_checkpoints
+agent_credential_dependency
+agent_eval_dataset
+agent_eval_rating
+agent_eval_result
+agent_eval_run
+agent_execution
+agent_execution_threads
+agent_files
+agent_history
+agent_task_definition
+agent_task_run_lock
+agent_task_snapshot
+agent_workflow_dependency
+agents
+agents_memory_entries
+agents_memory_entry_candidates
+agents_memory_entry_locks
+agents_memory_entry_sources
+agents_messages
+agents_observation_cursors
+agents_observation_locks
+agents_observations
+agents_resources
+agents_threads
+ai_builder_temporary_workflow
+ai_preference
+annotation_tag_entity
+auth_identity
+auth_provider_sync_history
+barber_auditoria
+barber_bloqueos
+barber_citas
+barber_clientes
+barber_consentimiento
+barber_escalaciones
+barber_lista_espera
+barber_operadores
+barber_pausas
+barber_servicios
+binary_data
+chat_hub_agent_tools
+chat_hub_agents
+chat_hub_messages
+chat_hub_session_tools
+chat_hub_sessions
+chat_hub_tools
+credential_dependency
+credentials_entity
+data_table
+data_table_column
+deployment_key
+dynamic_credential_entry
+dynamic_credential_resolver
+dynamic_credential_user_entry
+evaluation_collection
+evaluation_config
+event_destinations
+execution_annotation_tags
+execution_annotations
+execution_data
+execution_entity
+execution_metadata
+folder
+folder_tag
+insights_by_period
+insights_metadata
+insights_raw
+installed_nodes
+installed_packages
+instance_ai_checkpoints
+instance_ai_events
+instance_ai_iteration_logs
+instance_ai_mcp_registry_connections
+instance_ai_messages
+instance_ai_observation_cursors
+instance_ai_observation_locks
+instance_ai_observational_memory
+instance_ai_observations
+instance_ai_pending_confirmations
+instance_ai_resources
+instance_ai_thread_grants
+instance_ai_threads
+instance_ai_workflow_snapshots
+instance_credential_assignment
+instance_monitoring_report
+instance_version_history
+invalid_auth_token
+mcp_registry_server
+migrations
+n8n_chat_histories
+oauth_access_tokens
+oauth_authorization_codes
+oauth_clients
+oauth_refresh_tokens
+oauth_user_consents
+poller_state
+processed_data
+project
+project_pool_settings
+project_relation
+project_secrets_provider_access
+promotion_config
+promotion_connection
+promotion_connection_project
+promotion_provider
+role
+role_mapping_rule
+role_mapping_rule_project
+role_scope
+scheduled_job
+scheduled_task
+scope
+secrets_provider_connection
+settings
+shared_credentials
+shared_workflow
+tag_entity
+test_case_execution
+test_run
+token_exchange_jti
+trusted_key
+trusted_key_source
+type_availability_policy
+type_availability_policy_attachment
+type_availability_policy_scope
+user
+user_api_keys
+user_favorites
+variables
+webhook_entity
+workflow_builder_session
+workflow_dependency
+workflow_entity
+workflow_history
+workflow_publication_outbox
+workflow_publication_trigger_status
+workflow_publish_history
+workflow_published_version
+workflow_review_activity
+workflow_review_activity_comment
+workflow_review_request
+workflow_review_request_authors
+workflow_review_request_reviewers
+workflow_review_request_workflow
+workflow_statistics
+workflow_statistics_delta
+workflows_tags
+
+ERR: 
+=== barber_citas rc=0 ===
+id text null=NO
+jid text null=YES
+nombre text null=YES
+servicio text null=YES
+precio numeric null=YES
+inicio timestamp with time zone null=YES
+fin timestamp with time zone null=YES
+estado text null=YES
+creado_en timestamp with time zone null=NO
+actualizado_en timestamp with time zone null=NO
+
+=== barber_clientes rc=0 ===
+jid text null=NO
+nombre text null=YES
+telefono text null=YES
+primera_visita timestamp without time zone null=YES
+visitas integer null=NO
+ultima_visita timestamp without time zone null=YES
+ticket_promedio numeric null=YES
+no_shows integer null=NO
+cancelaciones_tardias integer null=NO
+servicio_habitual text null=YES
+barbero_preferido text null=YES
+nota_interna text null=YES
+fecha_nacimiento date null=YES
+marketing_ok boolean null=NO
+etiqueta text null=YES
+creado_en timestamp without time zone null=NO
+
+=== barber_servicios rc=0 ===
+clave text null=NO
+nombre text null=NO
+precio numeric null=NO
+duracion_min integer null=YES
+activo boolean null=NO
+actualizado_en timestamp with time zone null=NO
+
+=== barber_operadores rc=0 ===
+jid text null=NO
+nombre text null=YES
+rol text null=YES
+activo boolean null=NO
+creado_en timestamp without time zone null=NO
+
+=== barber_metricas_diarias rc=0 ===
+(no existe)
+=== SERVICIOS ===
+barba|Arreglo de barba|100|20|t
+ceja|Ceja|30|10|t
+corte|Corte desvanecido o tijera|150|40|t
+dama|Corte de cabello dama|250|50|t
+depilacion|Depilación|0|30|t
+mascarilla|Mascarilla|50|20|t
+peinado|Peinado|300|45|t
+planchado|Planchado express|150|30|t
+
+=== ESTADOS CITAS ===
+
+=== OPERADORES ===
+524521206246@s.whatsapp.net|Dueno|dueno|t
+5214521206246@s.whatsapp.net|Dueno|dueno|t
+
+=== TOTAL CITAS ===
+0
+
+0
+

@@ -1,0 +1,94 @@
+################################################################################
+# 1. Rutas SIN autenticacion
+################################################################################
+  GET /                                      -> HTTP 200   len=4000   <!doctype html> <html lang="es" data-tema="claro"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-w
+  GET /admin                                 -> HTTP 200   len=4000   <!doctype html> <html lang="es" data-tema="claro"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-w
+  GET /admin/                                -> HTTP 200   len=4000   <!doctype html> <html lang="es" data-tema="claro"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-w
+  GET /api/admin/sesion                      -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/resumen                     -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/clientes                    -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/citas                       -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/reportes                    -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/servicios                   -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/version                     -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /api/admin/../.env-admin               -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /../../.env-admin                      -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /archivos/admin/.env-admin             -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /.env                                  -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /../.env                               -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /archivos/admin/.pwd-sitio.txt         -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /api/admin/mensajes                    -> HTTP 401   len=78     {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET /dashboard.html                        -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /index.html                            -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+  GET /favicon.ico                           -> HTTP 404   len=78     {"ok": false, "error": {"code": "NOT_FOUND", "message": "Ruta no encontrada"}}
+
+################################################################################
+# 2. Errores: ¿se filtra DSN, ruta o traza?
+################################################################################
+  POST   /api/admin/login                           -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  POST   /api/admin/login                           -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  POST   /api/admin/login                           -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  POST   /api/admin/login                           -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  POST   /api/admin/login                           -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  GET    /api/admin/clientes?page=abc               -> HTTP 401   LEAK=False
+       {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET    /api/admin/clientes?page=99999999999999999 -> HTTP 401   LEAK=False
+       {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET    /api/admin/clientes?buscar=aaaaaaaaaaaaaaa -> HTTP 401   LEAK=False
+       {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET    /api/admin/citas?fecha=2026-13-99          -> HTTP 401   LEAK=False
+       {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+  GET    /api/admin/citas?fecha=' OR 1=1--          -> HTTP None  LEAK=False
+       ERR InvalidURL('URL can\'t contain control characters. "/api/admin/citas?fecha=\' OR 1=1--" (found at least \' \')')
+  POST   /api/admin/servicios/precio                -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  POST   /api/admin/mensajes                        -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  POST   /api/admin/logout                          -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+  DELETE /api/admin/clientes                        -> HTTP 501   LEAK=False
+       <!DOCTYPE HTML> <html lang="en">     <head>         <meta charset="utf-8">         <title>Error response</title>     </head>     <body>         <h1>Error response</h1>         <p>Error code: 501</p>         <p>Message: Unsupported method ('DELETE').</p>         <p>Error code explanation: 501 - Server does not support this operation.</p>     </body> </html> 
+  POST   /api/admin/noexiste                        -> HTTP 403   LEAK=False
+       {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+
+################################################################################
+# 3. Cookies de sesion
+################################################################################
+  POST login (password incorrecta) -> HTTP 403
+  Set-Cookie: None
+  cuerpo: {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+
+################################################################################
+# 4. Cabeceras de seguridad y CSRF/Host/Origin
+################################################################################
+  Cache-Control: no-store
+  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'
+  Content-Type: text/html; charset=utf-8
+  Referrer-Policy: no-referrer
+  Server: BarberAdmin 
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+
+  -- Host invalido --
+  GET /api/admin/sesion con Host: evil.example.com -> HTTP 403  {"ok": false, "error": {"code": "HOST_INVALID", "message": "Host inválido"}}
+
+  -- Origin invalido en POST --
+  POST /api/admin/logout con Origin malo -> HTTP 403  {"ok": false, "error": {"code": "ORIGIN_INVALID", "message": "Origen inválido"}}
+
+  -- Cookie de sesion inventada --
+  GET /api/admin/resumen con cookie inventada -> HTTP 401  {"ok": false, "error": {"code": "AUTH_REQUIRED", "message": "Inicia sesión"}}
+
+################################################################################
+# 5. Metodos peligrosos
+################################################################################
+  PUT     /api/admin/clientes -> HTTP 501
+  PATCH   /api/admin/clientes -> HTTP 501
+  DELETE  /api/admin/clientes -> HTTP 501
+  HEAD    /api/admin/clientes -> HTTP 501
+  OPTIONS /api/admin/clientes -> HTTP 501
+  TRACE   /api/admin/clientes -> HTTP 501

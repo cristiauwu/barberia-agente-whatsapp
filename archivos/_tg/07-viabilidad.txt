@@ -1,0 +1,17 @@
+=== CONECTIVIDAD api.telegram.org ===
+host -> HTTP 200 body=<!DOCTYPE html>
+<html class="" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <title>Bots: An introduction for developers</title>
+    <meta name="viewport" content="width=device-width, in
+n8n container -> rc=0 out='<!DOCTYPE html>\n<html class="" data-theme="light">\n  <head>\n    <meta charset="utf-8">\n    <title>Bots: An introduction for developers</title>\n    <meta name="viewport" content="width=device-width, in' err=''
+getMe fake -> HTTP Error 404: Not Found body=b'{"ok":false,"error_code":404,"description":"Not Found"}'
+
+n8n version: rc=0 out=2.40.6 err=
+nodo telegram: out='' err=''
+
+=== conteo de mensajes (Evolution) ===
+5214521206246@s.whatsapp.net: 50 mensajes recuperados  err=None
+524521206246@s.whatsapp.net: 0 mensajes recuperados  err=None
+5214501111805@s.whatsapp.net: 50 mensajes recuperados  err=None

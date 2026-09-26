@@ -1,0 +1,46 @@
+### AHORA
+2026-09-25 07:25:42.695068-06
+
+ERR:
+
+### TRIGGERS
+trg_barber_citas_touch | barber_citas
+workflow_version_increment | workflow_entity
+
+ERR:
+
+### TRIGGERS info
+barber_citas.trg_barber_citas_touch, workflow_entity.workflow_version_increment
+
+ERR:
+
+### total execuciones
+208
+
+ERR:
+
+### workflows
+barberiaRecordatorios | Barberia - Recordatorios de cita | true
+barberiaAgenteUncensored | Barberia - Agente de citas (Uncensored AI) | true
+
+ERR:
+
+### ultimas execuciones
+817 | running | 2026-09-25 07:25:39.911-06 | barberiaAgenteUncensored
+816 | running | 2026-09-25 07:25:37.735-06 | barberiaAgenteUncensored
+815 | success | 2026-09-25 07:25:20.961-06 | barberiaAgenteUncensored
+814 | success | 2026-09-25 07:25:20.949-06 | barberiaAgenteUncensored
+813 | success | 2026-09-25 07:25:20.948-06 | barberiaAgenteUncensored
+812 | success | 2026-09-25 07:25:20.937-06 | barberiaAgenteUncensored
+
+ERR:
+
+### exec recordatorios
+15
+
+ERR:
+
+### exec agente
+193
+
+ERR:

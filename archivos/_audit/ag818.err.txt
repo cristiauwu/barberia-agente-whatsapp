@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "G:\Barberia\archivos\_audit\ag818.py", line 13, in <module>
+    W(json.dumps({k:(type(v).__name__) for k,v in ag.items()}, ensure_ascii=False))
+                                                  ^^^^^^^^
+AttributeError: 'list' object has no attribute 'items'

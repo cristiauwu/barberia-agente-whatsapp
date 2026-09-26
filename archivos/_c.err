@@ -1,0 +1,13 @@
+psql: warning: extra command-line argument "count(*)" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "barber_citas;" ignored
+psql: warning: extra command-line argument "SELECT" ignored
+psql: warning: extra command-line argument "*" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "barber_citas" ignored
+psql: warning: extra command-line argument "ORDER" ignored
+psql: warning: extra command-line argument "BY" ignored
+psql: warning: extra command-line argument "1" ignored
+psql: warning: extra command-line argument "DESC" ignored
+psql: warning: extra command-line argument "LIMIT" ignored
+psql: warning: extra command-line argument "8;" ignored

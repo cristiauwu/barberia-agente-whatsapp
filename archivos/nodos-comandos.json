@@ -1,0 +1,346 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// Calcula el rango a consultar en hora de MEXICO (UTC-6 fijo).\n// OJO: si se usara la hora del servidor (UTC), a las 22:00 de Mexico\n// \"HOY\" devolveria el dia siguiente.\nconst TZ = 'America/Mexico_City';\nconst item = $input.first().json;\nconst comando = String(item.comando || 'HOY').toUpperCase();\n\nfunction fechaMexico(d) {\n  return new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(d);\n}\nfunction sumarDias(f, n) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const t = Date.UTC(a, m - 1, dd) + n * 86400000;\n  const g = new Date(t);\n  return `${g.getUTCFullYear()}-${String(g.getUTCMonth() + 1).padStart(2, '0')}-${String(g.getUTCDate()).padStart(2, '0')}`;\n}\nfunction fechaCorta(f) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];\n  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];\n  const wd = new Date(Date.UTC(a, m - 1, dd)).getUTCDay();\n  return `${dias[wd]} ${dd} de ${meses[m - 1]}`;\n}\n\nconst ahora = new Date();\nconst hoy = fechaMexico(ahora);\nlet desde = hoy, hasta = hoy, titulo = '';\n\nif (comando === 'HOY') {\n  titulo = `hoy, ${fechaCorta(hoy)}`;\n} else if (comando === 'MAÑANA' || comando === 'MANANA') {\n  desde = sumarDias(hoy, 1); hasta = desde;\n  titulo = `mañana, ${fechaCorta(desde)}`;\n} else if (comando === 'SEMANA') {\n  hasta = sumarDias(hoy, 7);\n  titulo = `los próximos 7 días (desde ${fechaCorta(hoy)})`;\n} else if (comando === 'LIBRE') {\n  hasta = sumarDias(hoy, 2);\n  titulo = 'hoy y los siguientes 2 días';\n}\n\nreturn [{ json: {\n  comando,\n  desde, hasta, titulo,\n  timeMin: `${desde}T00:00:00-06:00`,\n  timeMax: `${hasta}T23:59:00-06:00`,\n  ahoraISO: ahora.toISOString(),\n} }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        560
+      ],
+      "id": "8d6807a9-92ec-437e-b028-95c08f06c57a",
+      "name": "Preparar rango de fechas",
+      "notes": "Traduce HOY / MAÑANA / SEMANA / LIBRE al rango ISO en hora de\nMéxico (UTC-6). El offset es fijo: México no usa horario de verano.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "BARBER"
+        },
+        "returnAll": false,
+        "limit": 50,
+        "timeMin": "={{ $json.timeMin }}",
+        "timeMax": "={{ $json.timeMax }}",
+        "options": {
+          "singleEvents": true,
+          "orderBy": "startTime"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        560
+      ],
+      "id": "7522e6cc-1c26-41c6-8e9d-e782f225ef87",
+      "name": "Leer agenda del rango",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "I6TpcTTP1cn1tviR",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Arma la respuesta de WhatsApp con la agenda del rango.\nconst TZ = 'America/Mexico_City';\nconst entrada = $('Preparar rango de fechas').first().json;\nconst todos = $input.all().map(i => i.json);\n\nfunction a12h(min) {\n  const h = Math.floor(min / 60), m = min % 60;\n  const suf = h < 12 ? 'a.m.' : 'p.m.';\n  const h12 = h % 12 === 0 ? 12 : h % 12;\n  return `${h12}:${String(m).padStart(2, '0')} ${suf}`;\n}\nfunction minutos(dt) {\n  const m = /T(\\d{2}):(\\d{2})/.exec(dt || '');\n  return m ? Number(m[1]) * 60 + Number(m[2]) : null;\n}\nfunction esTodoElDia(s) { return !!(s && s.date && !s.dateTime); }\n\n// Google Calendar puede devolver los eventos vacios (dia sin citas)\nconst eventos = todos.filter(e => e && (e.summary || e.start))\n  .map(e => ({\n    ini: e.start ? (esTodoElDia(e.start) ? -1 : minutos(e.start.dateTime)) : null,\n    fin: e.end ? minutos(e.end.dateTime) : null,\n    resumen: e.summary || '',\n    desc: e.description || '',\n  }))\n  .filter(e => e.ini !== null && e.ini >= 0)\n  .sort((a, b) => a.ini - b.ini);\n\nfunction nombreCliente(e) {\n  const m = /Nombre:\\s*([^\\n]+)/i.exec(e.desc);\n  if (m) return m[1].trim();\n  const partes = e.resumen.split(/\\s+[—–-]\\s+/);\n  return partes.length > 1 ? partes[partes.length - 1].trim() : e.resumen;\n}\nfunction servicio(e) {\n  const partes = e.resumen.split(/\\s+[—–-]\\s+/);\n  return partes.length > 1 ? partes[0].trim() : '';\n}\nfunction precio(e) {\n  const m = /\\$\\s*(\\d+)|Precio\\s*:\\s*(\\d+)/i.exec(e.desc);\n  return m ? Number(m[1] || m[2]) : null;\n}\n\nconst lineas = [`*Agenda de ${entrada.titulo}*`];\nif (!eventos.length) {\n  lineas.push('');\n  lineas.push('No hay citas agendadas.');\n} else {\n  let total = 0, conPrecio = 0;\n  for (const e of eventos) {\n    const cli = nombreCliente(e);\n    const sv = servicio(e);\n    const pr = precio(e);\n    if (pr !== null) { total += pr; conPrecio++; }\n    let l = `${a12h(e.ini)} ${cli}`;\n    if (sv) l += ` — ${sv}`;\n    if (pr !== null) l += ` · $${pr}`;\n    lineas.push(l);\n  }\n  lineas.push('');\n  lineas.push(`*${eventos.length} cita${eventos.length === 1 ? '' : 's'}` +\n    (conPrecio ? ` · $${total} estimado` : '') + '*');\n\n  // Huecos libres: solo tiene sentido si el rango es de un dia\n  if (entrada.desde === entrada.hasta) {\n    const dur = 40, AP = 600, CI = 1200;\n    const ahora = new Date(entrada.ahoraISO);\n    const p = {};\n    for (const { type, value } of new Intl.DateTimeFormat('en-CA',\n      { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false })\n      .formatToParts(ahora)) p[type] = value;\n    const ahoraMin = Number(p.hour === '24' ? '0' : p.hour) * 60 + Number(p.minute);\n    const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(ahora);\n    const libres = [];\n    for (let t = AP; t + dur <= CI; t += 30) {\n      const fin = t + dur;\n      const choca = eventos.some(e => e.fin !== null &&\n        t < e.fin + 10 && e.ini - 10 < fin);\n      if (choca) continue;\n      if (entrada.desde === hoy && t <= ahoraMin) continue;\n      libres.push(t);\n      if (libres.length >= 6) break;\n    }\n    lineas.push(libres.length\n      ? `Huecos: ${libres.map(a12h).join(', ')}`\n      : 'Sin huecos disponibles ese día.');\n  }\n}\n\nreturn [{ json: { respuesta: lineas.join('\\n') } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        560
+      ],
+      "id": "1a904c62-0b19-4416-b87d-2f4a0e9e7fd9",
+      "name": "Formatear agenda"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Interpreta BLOQUEAR / CERRAR / ABRIR y prepara el evento de Calendar.\nconst item = $input.first().json;\nconst texto = String(item.message_content || '').trim();\nconst partes = texto.split(/\\s+/);\nconst comando = (partes[0] || '').toUpperCase();\nconst resto = partes.slice(1);\n\nconst TZ = 'America/Mexico_City';\nfunction fechaMexico(d) {\n  return new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(d);\n}\nfunction sumarDias(f, n) {\n  const [a, m, dd] = f.split('-').map(Number);\n  const t = Date.UTC(a, m - 1, dd) + n * 86400000;\n  const g = new Date(t);\n  return `${g.getUTCFullYear()}-${String(g.getUTCMonth() + 1).padStart(2, '0')}-${String(g.getUTCDate()).padStart(2, '0')}`;\n}\nconst MESES = { ene: 1, feb: 2, mar: 3, abr: 4, may: 5, jun: 6,\n                jul: 7, ago: 8, sep: 9, oct: 10, nov: 11, dic: 12 };\nconst ahora = new Date();\nconst hoy = fechaMexico(ahora);\n\nfunction fallo(msg) {\n  return [{ json: { ...item, respuesta: msg, saltar: true } }];\n}\n\nif (comando === 'BLOQUEAR') {\n  let fecha = hoy, idx = 0;\n  if (resto[0] && /^\\d{4}-\\d{2}-\\d{2}$/.test(resto[0])) { fecha = resto[0]; idx = 1; }\n  const rango = resto[idx];\n  if (!rango || !/^\\d{1,2}:\\d{2}-\\d{1,2}:\\d{2}$/.test(rango)) {\n    return fallo('Formato: *BLOQUEAR 14:00-15:30 motivo*');\n  }\n  const [d, h] = rango.split('-');\n  const aMin = s => { const [a, b] = s.split(':').map(Number); return a * 60 + b; };\n  if (aMin(h) <= aMin(d)) {\n    return fallo('La hora final debe ser mayor que la inicial.');\n  }\n  const motivo = resto.slice(idx + 1).join(' ') || 'ocupado';\n  return [{ json: { ...item, comando, saltar: false, accion: 'crear',\n    fecha, inicioISO: `${fecha}T${d.padStart(5, '0')}:00-06:00`,\n    finISO: `${fecha}T${h.padStart(5, '0')}:00-06:00`,\n    summary: `Bloqueado: ${motivo}`,\n    description: 'Bloqueo creado por el dueño desde WhatsApp',\n    ok_msg: `Listo. Bloqueé *${d} a ${h}* (${motivo}).` } }];\n}\n\nif (comando === 'CERRAR' || comando === 'ABRIR') {\n  const arg = resto.join(' ').trim();\n  if (!arg) return fallo(`Formato: *${comando} 24 dic*`);\n  let fecha = null;\n  if (/^\\d{4}-\\d{2}-\\d{2}$/.test(arg)) fecha = arg;\n  else if (/^hoy$/i.test(arg)) fecha = hoy;\n  else if (/^mañana$/i.test(arg)) fecha = sumarDias(hoy, 1);\n  else {\n    const m = /^(\\d{1,2})\\s+([a-záéíóú]{3,})$/i.exec(arg);\n    if (m) {\n      const mes = MESES[m[2].slice(0, 3).toLowerCase()];\n      const dia = Number(m[1]);\n      if (mes) {\n        const p = {};\n        for (const { type, value } of new Intl.DateTimeFormat('en-CA',\n          { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' })\n          .formatToParts(ahora)) p[type] = value;\n        let anio = Number(p.year);\n        if (mes < Number(p.month) || (mes === Number(p.month) && dia < Number(p.day))) anio++;\n        fecha = `${anio}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;\n      }\n    }\n  }\n  if (!fecha) return fallo('No entendí la fecha. Ejemplo: *CERRAR 24 dic*');\n  const esCerrar = comando === 'CERRAR';\n  return [{ json: { ...item, comando, saltar: false, accion: 'crear',\n    fecha,\n    inicioISO: `${fecha}T00:00:00-06:00`,\n    finISO: `${fecha}T23:59:00-06:00`,\n    summary: esCerrar ? 'CERRADO' : 'ABIERTO',\n    description: esCerrar ? 'Día cerrado desde WhatsApp' : 'Día reabierto desde WhatsApp',\n    ok_msg: esCerrar\n      ? `Listo. Marqué el *${fecha}* como cerrado.`\n      : `Listo. El *${fecha}* vuelve a estar abierto.` } }];\n}\n\nreturn fallo('Comando de bloqueo no reconocido.');"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        760
+      ],
+      "id": "246ebf9c-2d60-4b43-8deb-f3ec70660be9",
+      "name": "Parsear bloqueo",
+      "notes": "Interpreta BLOQUEAR / CERRAR / ABRIR y deja listo el evento.\nSi el formato es inválido responde con la ayuda y marca saltar=true.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "calendar": {
+          "__rl": true,
+          "value": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "BARBER"
+        },
+        "start": "={{ $json.inicioISO }}",
+        "end": "={{ $json.finISO }}",
+        "additionalFields": {
+          "summary": "={{ $json.summary }}",
+          "description": "={{ $json.description }}"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        760
+      ],
+      "id": "03a7b65c-0919-4ce6-aeed-aa23ddc911b9",
+      "name": "Crear bloqueo en calendario",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "I6TpcTTP1cn1tviR",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "536c06cd-35e0-405b-9d88-f132d3b34af8",
+              "name": "respuesta",
+              "value": "={{ $json.ok_msg }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -120,
+        760
+      ],
+      "id": "864ecef6-d45a-4785-bc42-93abec310ae6",
+      "name": "Respuesta de bloqueo"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extrae el numero a buscar del comando CLIENTE.\nconst item = $input.first().json;\nconst partes = String(item.message_content || '').trim().split(/\\s+/);\nconst busqueda = (partes[1] || '').replace(/\\D/g, '');\nreturn [{ json: { ...item, busqueda, busquedaOk: busqueda.length >= 6 } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        960
+      ],
+      "id": "0ea72e15-f6d3-4237-8db3-642dc6dd1534",
+      "name": "Buscar cliente"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT\n  cl.nombre,\n  cl.etiqueta,\n  cl.visitas,\n  cl.no_shows,\n  cl.ticket_promedio,\n  cl.servicio_habitual,\n  to_char(cl.ultima_visita AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY') AS ultima,\n  cl.nota_interna,\n  (SELECT count(*) FROM barber_citas c\n    WHERE c.jid = cl.jid AND c.inicio > now()\n      AND c.estado IN ('agendado','confirmado')) AS futuras\nFROM barber_clientes cl\nWHERE right(regexp_replace(split_part(cl.jid,'@',1),'\\D','','g'),10)\n        = right('{{ $json.busqueda }}',10)\n   OR right(regexp_replace(cl.telefono,'\\D','','g'),10)\n        = right('{{ $json.busqueda }}',10)\nLIMIT 1;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -320,
+        960
+      ],
+      "id": "490e2f24-fc25-45c6-8c7a-acabeb9ab082",
+      "name": "Leer ficha del cliente",
+      "credentials": {
+        "postgres": {
+          "id": "NUrqrDWN8OsBFmgV",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Arma la ficha del cliente en formato WhatsApp.\nconst item = $('Buscar cliente').first().json;\nconst filas = $input.all().map(i => i.json).filter(f => f && f.nombre);\n\nif (!item.busquedaOk) {\n  return [{ json: { respuesta: 'Formato: *CLIENTE 4521206246*' } }];\n}\nif (!filas.length) {\n  return [{ json: { respuesta: `No encontré ninguna ficha para el *${item.busqueda}*.\\n\\nEse número no ha agendado con nosotros.` } }];\n}\nconst c = filas[0];\nconst l = [`*${c.nombre}*`];\nif (c.etiqueta) l.push(`Etiqueta: ${c.etiqueta}`);\nl.push(`Visitas: ${c.visitas || 0}`);\nif (Number(c.no_shows) > 0) l.push(`No-shows: ${c.no_shows}`);\nif (c.ticket_promedio) l.push(`Ticket promedio: $${Math.round(c.ticket_promedio)}`);\nif (c.servicio_habitual) l.push(`Suele pedir: ${c.servicio_habitual}`);\nif (c.ultima) l.push(`Última visita: ${c.ultima}`);\nl.push(`Citas próximas: ${c.futuras || 0}`);\nif (c.nota_interna) l.push(`Nota: ${c.nota_interna}`);\nreturn [{ json: { respuesta: l.join('\\n') } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        960
+      ],
+      "id": "a48e0bc3-50c1-4941-93e7-90160aee72fc",
+      "name": "Formatear ficha"
+    },
+    {
+      "parameters": {
+        "jsCode": "// PAUSA 4521206246 2h  ->  deja de contestarle ese cliente.\nconst item = $input.first().json;\nconst partes = String(item.message_content || '').trim().split(/\\s+/);\nconst numero = (partes[1] || '').replace(/\\D/g, '');\nconst horasTxt = (partes[2] || '').toLowerCase();\nconst m = /^(\\d{1,2})h?$/.exec(horasTxt);\nconst horas = m ? Number(m[1]) : null;\n\nif (numero.length < 6 || horas === null || horas <= 0 || horas > 72) {\n  return [{ json: { ...item, pausaOk: false,\n    respuesta: 'Formato: *PAUSA 4521206246 2h* (de 1 a 72 horas)' } }];\n}\nreturn [{ json: { ...item, pausaOk: true, numero, horas } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        1160
+      ],
+      "id": "7b69f895-f93e-4c3e-8821-2c66ae3a5f1d",
+      "name": "Parsear pausa"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO barber_pausas (jid, hasta, motivo)\nSELECT jid, now() + interval '{{ $json.horas }} hours', 'comando del dueño'\nFROM barber_clientes\nWHERE right(regexp_replace(split_part(jid,'@',1),'\\D','','g'),10)\n        = right('{{ $json.numero }}',10)\nON CONFLICT (jid) DO UPDATE\n  SET hasta = excluded.hasta, motivo = excluded.motivo\nRETURNING jid, hasta;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -320,
+        1160
+      ],
+      "id": "d0fa45f0-edbb-44bc-a7bc-4c76bdb42d7d",
+      "name": "Aplicar pausa",
+      "credentials": {
+        "postgres": {
+          "id": "NUrqrDWN8OsBFmgV",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Confirma la pausa o avisa si el cliente no existe.\nconst item = $('Parsear pausa').first().json;\nif (!item.pausaOk) return [{ json: { respuesta: item.respuesta } }];\n\nconst filas = $input.all().map(i => i.json).filter(f => f && f.jid);\nif (!filas.length) {\n  return [{ json: { respuesta: `No encontré un cliente con el número *${item.numero}*.\\n\\nLa pausa solo aplica a clientes que ya existen en el sistema.` } }];\n}\nconst hasta = new Date(filas[0].hasta);\nconst hora = new Intl.DateTimeFormat('es-MX', {\n  timeZone: 'America/Mexico_City', hour: '2-digit', minute: '2-digit', hour12: true }).format(hasta);\nreturn [{ json: { respuesta: `Pausado por *${item.horas} h*.\\n\\nEl bot no le contestará hasta las *${hora}*.\\n\\nReanuda solo.` } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        1160
+      ],
+      "id": "abbc37bd-39eb-46be-88cc-4d74812dc505",
+      "name": "Formatear pausa"
+    },
+    {
+      "parameters": {
+        "jsCode": "// PRECIO ceja 40  -> actualiza el catálogo.\nconst item = $input.first().json;\nconst partes = String(item.message_content || '').trim().split(/\\s+/);\nconst clave = (partes[1] || '').toLowerCase();\nconst precio = Number(partes[2]);\nconst duracion = partes[3] ? Number(partes[3]) : null;\n\nif (!clave || !partes[2] || Number.isNaN(precio) || precio < 0) {\n  return [{ json: { ...item, precioOk: false,\n    respuesta: 'Formato: *PRECIO ceja 40*' } }];\n}\nreturn [{ json: { ...item, precioOk: true, clave, precio, duracion } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        1360
+      ],
+      "id": "904da2eb-3a46-481b-a336-d7d3746298c8",
+      "name": "Parsear precio"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE barber_servicios\n   SET precio = {{ $json.precio }},\n       duracion_min = COALESCE({{ $json.duracion || 'NULL' }}, duracion_min),\n       actualizado_en = now()\n WHERE clave = '{{ $json.clave }}'\nRETURNING clave, nombre, precio, duracion_min;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -320,
+        1360
+      ],
+      "id": "475c2c3b-b0c1-4b1c-a6bd-ab565d4d9eed",
+      "name": "Actualizar precio",
+      "credentials": {
+        "postgres": {
+          "id": "NUrqrDWN8OsBFmgV",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Confirma el cambio de precio, o lista el catálogo si la clave no existe.\nconst item = $('Parsear precio').first().json;\nconst filas = $input.all().map(i => i.json).filter(f => f && f.clave);\n\nif (!item.precioOk) return [{ json: { respuesta: item.respuesta } }];\nif (!filas.length) {\n  return [{ json: { respuesta: `No tengo un servicio con la clave *${item.clave}*.\\n\\nClaves válidas: corte, barba, ceja, mascarilla, dama, planchado, peinado, depilacion.` } }];\n}\nconst s = filas[0];\nlet r = `Listo. *${s.nombre}* ahora cuesta *$${Math.round(s.precio)}*.`;\nif (s.duracion_min) r += `\\nDuración: ${s.duracion_min} min.`;\nreturn [{ json: { respuesta: r } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        1360
+      ],
+      "id": "506ed0b8-92fd-4ca8-9ac6-40e77cd26110",
+      "name": "Formatear precio"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT\n  (SELECT count(*) FROM barber_citas\n    WHERE inicio >= (now() AT TIME ZONE 'America/Mexico_City')::date\n      AND inicio <  (now() AT TIME ZONE 'America/Mexico_City')::date + interval '1 day'\n      AND estado IN ('agendado','confirmado')) AS citas_hoy,\n  (SELECT count(*) FROM barber_citas\n    WHERE inicio >= now() AND inicio < now() + interval '7 days'\n      AND estado IN ('agendado','confirmado')) AS citas_semana,\n  (SELECT count(*) FROM barber_escalaciones\n    WHERE coalesce(estado,'abierta') = 'abierta') AS escalaciones,\n  (SELECT count(*) FROM barber_pausas WHERE hasta > now()) AS pausas,\n  (SELECT count(*) FROM barber_operadores WHERE activo) AS operadores;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -320,
+        1560
+      ],
+      "id": "318980e1-85c7-44d7-bf21-380d04b0bcc7",
+      "name": "Leer estado del sistema",
+      "credentials": {
+        "postgres": {
+          "id": "NUrqrDWN8OsBFmgV",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Salud del sistema en formato WhatsApp.\nconst e = $input.first().json;\nconst l = ['*Estado del sistema*', ''];\nl.push(`Citas hoy: ${e.citas_hoy || 0}`);\nl.push(`Citas esta semana: ${e.citas_semana || 0}`);\nl.push(`Escalaciones abiertas: ${e.escalaciones || 0}`);\nl.push(`Pausas activas: ${e.pausas || 0}`);\nl.push(`Operadores: ${e.operadores || 0}`);\nl.push('');\nl.push('Bot activo ✅');\nreturn [{ json: { respuesta: l.join('\\n') } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        1560
+      ],
+      "id": "774bcdbf-b9f4-4c3c-86bc-8aace96dcc85",
+      "name": "Formatear estado"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "saltarchk0001",
+              "leftValue": "={{ $json.saltar }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -320,
+        660
+      ],
+      "id": "948c1a80-4902-4d15-b08d-6b76cd0b0640",
+      "name": "IF - Bloqueo invalido",
+      "notes": "Si el formato del bloqueo es inválido, responde la ayuda\ny NO llama a Calendar.",
+      "notesInFlow": true
+    }
+  ]
+}

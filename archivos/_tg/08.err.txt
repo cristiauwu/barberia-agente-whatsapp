@@ -1,0 +1,4 @@
+G:\Barberia\archivos\_tg\08-volumen.py:45: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+  d = datetime.datetime.utcfromtimestamp(int(ts)).strftime("%Y-%m-%d")
+G:\Barberia\archivos\_tg\08-volumen.py:48: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+  horas[datetime.datetime.utcfromtimestamp(int(ts)).strftime("%H")] += 1

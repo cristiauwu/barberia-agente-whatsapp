@@ -1,0 +1,89 @@
+[
+ {
+  "id": "1281",
+  "status": null,
+  "startedAt": null,
+  "entrada": " Agéndame un corte el 30 de septiembre a las 3",
+  "respuesta": "Listo, tu cita quedó apartada:\n\n*Corte desvanecido* — *$150*  \nMiércoles 30 de septiembre, *3:00 p.m.*  \nCalle Pinzón #574  \n\nTe esperamos. ✅",
+  "enviado": "Listo, tu cita quedó apartada:\n\n*Corte desvanecido* — *$150*\nMiércoles 30 de septiembre, *3:00 p.m.*\nCalle Pinzón #574\n\nTe esperamos. ✅",
+  "herramientas": {
+   "Consultar agenda": {
+    "response": []
+   },
+   "Agendar cita": {
+    "response": [
+     {
+      "id": "mfako9a08epskn3irbr3rq4g4o",
+      "summary": "Corte desvanecido — Cliente Prueba",
+      "start": {
+       "dateTime": "2026-09-30T15:00:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "end": {
+       "dateTime": "2026-09-30T15:40:00-06:00",
+       "timeZone": "America/Mexico_City"
+      },
+      "creator": {
+       "email": "crir627@gmail.com"
+      },
+      "organizer": {
+       "email": "b5e08030160a7cead790f900fafd3728792af6d2eac8a22b1dedb7844c09143c@group.calendar.google.com",
+       "displayName": "BARBER",
+       "self": true
+      },
+      "description": "Nombre: Cliente Prueba, Servicio: Corte desvanecido, Precio: $150, WhatsApp: 5214501111805",
+      "created": "2026-09-26T00:38:52.000Z",
+      "updated": "2026-09-26T00:38:52.106Z",
+      "etag": "\"3580766264213246\"",
+      "eventType": "default",
+      "htmlLink": "https://www.google.com/calendar/event?eid=bWZha285YTA4ZXBza24zaXJicjNycTRnNG8gYjVlMDgwMzAxNjBhN2NlYWQ3OTBmOTAwZmFmZDM3Mjg3OTJhZjZkMmVhYzhhMjJiMWRlZGI3ODQ0YzA5MTQzY0Bn",
+      "iCalUID": "mfako9a08epskn3irbr3rq4g4o@google.com",
+      "kind": "calendar#event",
+      "reminders": {
+       "useDefault": true
+      },
+      "sequence": 0,
+      "status": "confirmed"
+     }
+    ]
+   },
+   "Registrar en hoja de citas": {
+    "response": [
+     {
+      "ID": "mfako9a08epskn3irbr3rq4g4o",
+      "Estatus": "agendado",
+      "Nombre": "Cliente Prueba",
+      "Servicio": "Corte desvanecido",
+      "Precio del servicio": "150",
+      "Día ": "2026-09-30",
+      "Hora": "15:00:00",
+      "Numero celular": "5214501111805@s.whatsapp.net"
+     }
+    ]
+   }
+  },
+  "error": "null",
+  "nodos": [
+   "Webhook",
+   "Normalizacion",
+   "Leer operadores",
+   "Comprobar operador",
+   "¿Es operador?",
+   "IF - No es del bot",
+   "Leer pausa",
+   "Calcular pausa",
+   "IF - Cliente pausado",
+   "Switch",
+   "Edit Fields2",
+   "Edit Fields",
+   "Postgres Chat Memory",
+   "OpenAI Chat Model",
+   "Consultar agenda",
+   "Agendar cita",
+   "Registrar en hoja de citas",
+   "AI Agent",
+   "IF - Respuesta no vacia",
+   "Mandar mensaje"
+  ]
+ }
+]

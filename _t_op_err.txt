@@ -1,0 +1,12 @@
+psql: warning: extra command-line argument "jid," ignored
+psql: warning: extra command-line argument "nombre" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "barber_operadores;" ignored
+psql: warning: extra command-line argument "SELECT" ignored
+psql: warning: extra command-line argument "session_id," ignored
+psql: warning: extra command-line argument "count(*)" ignored
+psql: warning: extra command-line argument "FROM" ignored
+psql: warning: extra command-line argument "n8n_chat_histories" ignored
+psql: warning: extra command-line argument "GROUP" ignored
+psql: warning: extra command-line argument "BY" ignored
+psql: warning: extra command-line argument "session_id;" ignored

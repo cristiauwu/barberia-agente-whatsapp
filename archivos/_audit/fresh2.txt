@@ -1,0 +1,39 @@
+======================================================================
+barberiaAgenteUncensored updatedAt: 2026-09-25T13:28:23.937Z versionCounter: 97 nodes: 52
+    Get Audio {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+    Transcribe a recording {'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+    Get Image {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+    Describe imagen {'onError': 'continueRegularOutput', 'alwaysOutputData': True}
+    Mandar mensaje {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Consultar agenda {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Agendar cita {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Cancelar cita {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Reagendar {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Registrar en hoja de citas {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Notificar al encargado {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Responder al operador {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Leer agenda del rango {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+    Crear bloqueo en calendario {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Leer ficha del cliente {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+    Aplicar pausa {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+    Actualizar precio {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+    Leer estado del sistema {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+    Leer operadores {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+    Leer pausa {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000, 'alwaysOutputData': True}
+  retryOnFail count: 18
+  onError count: 4
+  errorTrigger: []
+  settings: {"timezone": "America/Mexico_City", "callerPolicy": "workflowsFromSameOwner", "availableInMCP": true, "executionOrder": "v1", "binaryMode": "separate"}
+  pinData: {}
+======================================================================
+barberiaRecordatorios updatedAt: 2026-09-25T13:14:19.318Z versionCounter: 51 nodes: 15
+    Notificar cita nueva al encargado {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    Append or update row in sheet {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    OBTENER INFO DE CITA ELIMINADA {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    RECORDATORIO 24 H {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+    RECORDATORIO 1 H {'retryOnFail': True, 'maxTries': 3, 'waitBetweenTries': 2000}
+  retryOnFail count: 5
+  onError count: 0
+  errorTrigger: []
+  settings: {"timezone": "America/Mexico_City", "callerPolicy": "workflowsFromSameOwner", "availableInMCP": true, "executionOrder": "v1", "binaryMode": "separate"}
+  pinData: {}

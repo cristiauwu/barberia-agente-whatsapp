@@ -1,0 +1,88 @@
+== A)¿QUE ESTA EN EL PROMPT Y NO EN LA BASE? ==
+[prompt #35] '¿Cobran si no llego a mi cita?'
+    respuesta prompt: 'No cobramos por no llegar. Solo te pedimos que nos avises para liberar el lugar.'
+
+
+== B) ¿QUE ESTA EN LA BASE Y NO EN EL PROMPT? ==
+#1   [contexto] ¿Dónde están ubicados?
+      R: Estamos en *Calle Pinzón #574*. Ahí mismo te atendemos. Si tienes duda para llegar, márcanos al *452-281-8144*.
+#2   [contexto] ¿Cuál es el teléfono?
+      R: El teléfono del local es *452-281-8144*. También puedes seguir por aquí, que contestamos igual.
+#8   [contexto] ¿Hasta qué hora puedo agendar?
+      R: Puedes agendar hasta que el servicio *termine* antes de las 20:00. Por ejemplo, un corte de 40 minutos a las 19:00 todavía alcanza; a las 19:30 ya no.
+#10  [contexto] ¿Qué servicios tienen?
+      R: Corte desvanecido o tijera $150, arreglo de barba $100, ceja $30, mascarilla $50, corte de cabello dama $250, planchado express $150, peinado $300 y depilación. ¿Cuál te aparto?
+#17  [contexto] ¿Cuánto cuesta la depilación?
+      R: La depilación dura 30 minutos y el precio depende de la zona. Dime qué zona quieres y con gusto te lo confirmo.
+#23  [contexto] ¿Cuánto cuesta el corte?
+      R: El corte desvanecido o tijera cuesta *$150* y dura 40 minutos.
+#24  [contexto] ¿Cuánto cuesta el corte de dama?
+      R: El corte de cabello dama cuesta *$250* y dura 50 minutos.
+#26  [contexto] ¿Cuánto cuesta la barba?
+      R: El arreglo de barba cuesta *$100* y dura 20 minutos.
+#27  [contexto] ¿Cuánto cuesta la ceja?
+      R: La ceja cuesta *$30* y dura unos 10 minutos.
+#32  [contexto] ¿Cómo agendo una cita?
+      R: Dime qué servicio quieres, qué día y a qué hora, y yo te la aparto aquí mismo.
+#209 [contexto] ¿Cuánto dura el corte?
+      R: El *corte desvanecido o tijera* dura *40 minutos*. Deja tiempo extra si vienes en hora pico.
+#210 [contexto] ¿Cuánto dura cada servicio?
+      R: Corte 40 min · Barba 20 min · Ceja 10 min · Mascarilla 20 min · Dama 50 min · Planchado 30 min · Peinado 45 min · Depilación 30 min.
+#211 [contexto] ¿Cuánto dura la barba?
+      R: El *arreglo de barba* dura *20 minutos*.
+
+== C) COINCIDEN EN TEXTO PERO DIFIERE LA RESPUESTA ==
+#3 ¿Tienen estacionamiento?
+   BD    : 'No tenemos estacionamiento. Puedes dejar el coche sobre la misma calle, junto al local.'
+   PROMPT: 'No tenemos estacionamiento propio. Hay lugar para dejar el coche sobre la misma calle, junto al local. Si vienes en hora pico, llega con unos minutos de anticipación.'
+
+#5 ¿Aceptan niños?
+   BD    : 'Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.'
+   PROMPT: '¡Claro! Puedes traer a tu hijo a cortarse el cabello. Se atiende igual que a cualquier cliente.'
+
+#20 ¿Hacen corte para niño?
+   BD    : 'Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.'
+   PROMPT: 'Sí, se hace con el mismo corte desvanecido o tijera de *$150*. Para los más chicos suele ser más rápido.'
+
+#30 ¿Aceptan tarjeta?
+   BD    : 'Se puede pagar en efectivo o por *transferencia*. El pago se hace directo en el local.'
+   PROMPT: 'El pago se hace directo en el local. Si necesitas confirmar un método de pago en particular, el encargado te lo dice al llegar.'
+
+#31 ¿Puedo pagar con transferencia?
+   BD    : 'Se puede pagar en efectivo o por *transferencia*. El pago se hace directo en el local.'
+   PROMPT: 'El pago se hace directo en el local. Si necesitas confirmar un método en particular, el encargado te lo dice al llegar.'
+
+#34 ¿Cuánto tiempo antes debo llegar?
+   BD    : 'Con llegar unos 5 minutos antes es suficiente. Si vas a llegar tarde, avísanos por aquí.'
+   PROMPT: 'Con llegar *5 minutos antes* es suficiente. Así arrancamos puntuales.'
+
+#213 ¿Qué pasa si voy a llegar tarde?
+   BD    : 'Te esperamos de *5 a 10 minutos*. Si te vas a tardar más, avísame por aquí para ver si alcanza el tiempo o movemos tu cita.'
+   PROMPT: 'Avísame por aquí. Si te pasas mucho del horario puede que tenga que recortar el servicio o mover tu cita.'
+
+#40 ¿Qué pasa si llego tarde?
+   BD    : 'Te esperamos de *5 a 10 minutos*. Si te vas a tardar más, avísame por aquí para ver si alcanza el tiempo o movemos tu cita.'
+   PROMPT: 'Te esperamos. Si te retrasas más de 15 minutos puede que se atienda a alguien más primero, así que avísanos por aquí si vas a llegar tarde.'
+
+#48 ¿Dan factura?
+   BD    : 'Por el momento no manejamos facturación. Si necesitas un comprobante, dímelo y le pregunto al encargado.'
+   PROMPT: 'Déjame preguntarle al encargado y te confirmo en un momento.'
+
+#51 ¿Tienen redes sociales?
+   BD    : 'Atendemos únicamente por WhatsApp. Aquí mismo puedes agendar y preguntar lo que necesites.'
+   PROMPT: 'Déjame preguntarle al encargado y te confirmo en un momento.'
+
+#214 ¿Puedo llevar a mi hijo?
+   BD    : 'Sí, puedes traer a tu hijo. Se le hace el mismo corte desvanecido o tijera de *$150*.'
+   PROMPT: 'Sí, sin problema. El corte para niño se hace con el mismo corte desvanecido o tijera de *$150*.'
+
+#215 ¿Tienen wifi?
+   BD    : 'Sí, tenemos wifi. Pídelo al llegar y te damos la clave.'
+   PROMPT: 'Te confirmo ese dato con el encargado en un momento.'
+
+== D) RESUMEN ==
+filas BD: 58
+items prompt: 46
+en prompt y en BD (texto igual): 45
+solo en el prompt: 1
+solo en la BD: 13

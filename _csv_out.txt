@@ -1,0 +1,6 @@
+bytes: 602
+ID,Estatus,Nombre,Servicio,Precio del servicio,Día ,Hora,Numero celular,Execution ID
+7id628rpoav7n1hai9oidaj1n8,agendado,Juan Perez,Corte desvanecido o tijera,150,2026-09-28,15:00:00,5214501111805@s.whatsapp.net,
+ie18j9a8g700dr282gpelrhd80,agendado,Maria Lopez,Corte desvanecido o tijera,150,2026-09-29,11:00:00,5214501111805@s.whatsapp.net,
+luqlc95atsql3j5aormhkqtk48,agendado,Cristia Ñ,Corte desvanecido o tijera,150,2026-09-27,15:00:00,,
+Corte desvanecido o tijera — Prueba Cancelar,agendado,Prueba Cancelar,Corte desvanecido o tijera,150,2026-10-01,11:00:00,5214501111805@s.whatsapp.net,779
